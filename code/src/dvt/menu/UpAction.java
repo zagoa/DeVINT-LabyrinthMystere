@@ -1,4 +1,4 @@
-package dvt.menu;
+package src.dvt.menu;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;

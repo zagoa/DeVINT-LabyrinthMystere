@@ -1,6 +1,6 @@
-package dvt.devint;
+package src.dvt.devint;
 
-import static dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
+import static src.dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
 
 public abstract class Jeu extends Fenetre {
     private static final long serialVersionUID = 1L;

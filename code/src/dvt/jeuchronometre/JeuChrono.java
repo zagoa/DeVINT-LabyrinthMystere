@@ -1,26 +1,26 @@
-package dvt.jeuchronometre;
+package src.dvt.jeuchronometre;
 
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static dvt.devint.ConstantesDevint.*;
-import static dvt.jeuchronometre.ConstantesJeu.*;
-import dvt.jeuchronometre.Action;
-import dvt.score.Score;
+import static src.dvt.devint.ConstantesDevint.*;
+import static src.dvt.jeuchronometre.ConstantesJeu.*;
+import src.dvt.jeuchronometre.Action;
+import src.dvt.score.Score;
 
 /**
  * Permet de gerer le jeu et la fenetre qui contient le jeu
  * @author Justal Kevin
  */
-public class JeuChrono extends dvt.devint.Jeu {
+public class JeuChrono extends src.dvt.devint.Jeu {
     private static final long serialVersionUID = 1L;
     // composants graphiques
     private JPanel world;
     private JLabel info;
     
-    // éléments du modèle
+    // ï¿½lï¿½ments du modï¿½le
     private transient Chronometer ch;
     private int count;
     private boolean pressed;
@@ -43,8 +43,8 @@ public class JeuChrono extends dvt.devint.Jeu {
 
         this.add(world);
         
-        // on gère à la fois le Down et le Up pour qu'on ne puisse pas tricher
-        // ça ne compte pas si on laisse la touche espace appuyée
+        // on gï¿½re ï¿½ la fois le Down et le Up pour qu'on ne puisse pas tricher
+        // ï¿½a ne compte pas si on laisse la touche espace appuyï¿½e
         // si on appuie sur espace, value est true (cf classe Action)
         addControlDown(KeyEvent.VK_SPACE, new Action(this, true));
         // si on relache sur espace, value est false (cf classe Action)

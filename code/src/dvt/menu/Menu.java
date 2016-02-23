@@ -1,4 +1,4 @@
-package dvt.menu;
+package src.dvt.menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,10 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static dvt.devint.ConstantesDevint.*;
-import static dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
-import static dvt.menu.ConstantesMenu.*;
-import dvt.devint.Fenetre;
+import static src.dvt.devint.ConstantesDevint.*;
+import static src.dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
+import static src.dvt.menu.ConstantesMenu.*;
+import src.dvt.devint.Fenetre;
 
 /**
  * Permet de gerer le menu et la fenetre qui contient le menu
@@ -85,21 +85,14 @@ public class Menu extends Fenetre {
 				this.setVisible(false);
 				this.getSIVOX().stop();
     			switch (gameChoice) {
-    			case 6:
-    				new dvt.newjeu.NewJeu().loop();
-    				break;
     			case 4:
-    				new dvt.score.Score().loop();
+    				new src.dvt.score.Score().loop();
     				break;
-     			case 1:
-    				new dvt.jeumultijoueur.JeuMulti().loop();
-    				break;
+
     			case 2:
-    				new dvt.jeuchronometre.JeuChrono().loop();
+    				new src.dvt.jeuchronometre.JeuChrono().loop();
      				break;
-    			case 3:
-    				new dvt.jeuquizz.JeuQuizz().loop();
-    				break;
+
     			default:
     				break;
     			}

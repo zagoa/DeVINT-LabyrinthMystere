@@ -1,8 +1,8 @@
-package dvt.devint;
+package src.dvt.devint;
 
 import java.awt.event.ActionEvent;
 
-import static dvt.devint.ConstantesDevint.*;
+import static src.dvt.devint.ConstantesDevint.*;
 
 import javax.swing.AbstractAction;
 

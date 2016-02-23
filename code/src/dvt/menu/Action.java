@@ -1,4 +1,4 @@
-package dvt.menu;
+package src.dvt.menu;
 
 import java.awt.event.ActionEvent;
 
@@ -15,7 +15,7 @@ public class Action extends AbstractAction {
 
     /**
      * L'objet qui sera cree lors de l'appuie sur une touche
-     * @param jeu2 La fenetre ou se trouve le lien entre la touche et l'action
+     * @param menu La fenetre ou se trouve le lien entre la touche et l'action
      * @param choice La valeur que l'on souhaite modifie
      */ 
     public Action(Menu menu, int choice) {

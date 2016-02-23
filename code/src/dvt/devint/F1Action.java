@@ -1,10 +1,10 @@
-package dvt.devint;
+package src.dvt.devint;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import static dvt.devint.ConstantesDevint.*;
+import static src.dvt.devint.ConstantesDevint.*;
 
 /**
  * Permet de gerer l'action pour la touche "F1"

@@ -1,4 +1,4 @@
-package dvt.devint;
+package src.dvt.devint;
 
 /**
  * L'ensemble des constantes pour le projet entier

@@ -1,4 +1,4 @@
-package dvt.jeuchronometre;
+package src.dvt.jeuchronometre;
 
 /**
  * Permet de creer et gerer un chronometre

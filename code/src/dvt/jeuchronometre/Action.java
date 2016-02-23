@@ -1,4 +1,4 @@
-package dvt.jeuchronometre;
+package src.dvt.jeuchronometre;
 
 import java.awt.event.ActionEvent;
 
