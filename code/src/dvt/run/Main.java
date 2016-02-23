@@ -1,8 +1,8 @@
-package src.dvt.run;
+package dvt.run;
 
 import java.net.MalformedURLException;
 
-import src.dvt.menu.Menu;
+import dvt.menu.Menu;
 
 /**
  * Permet de lancer le jeu

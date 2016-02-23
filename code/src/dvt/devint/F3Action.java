@@ -1,4 +1,4 @@
-package src.dvt.devint;
+package dvt.devint;
 
 import java.awt.event.ActionEvent;
 

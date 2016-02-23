@@ -1,4 +1,4 @@
- package src.dvt.devint;
+ package dvt.devint;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,11 +13,11 @@ import javax.swing.KeyStroke;
 import javax.swing.border.LineBorder;
 
 import t2s.SIVOXDevint;
-import static src.dvt.devint.ConstantesDevint.*;
-import static src.dvt.menu.ConstantesMenu.BORDURE_SELECTED_DEFAULT;
-import static src.dvt.menu.ConstantesMenu.BORDURE_SIZE_SELECTED_DEFAULT;
-import static src.dvt.menu.ConstantesMenu.BORDURE_SIZE_UNSELECTED_DEFAULT;
-import static src.dvt.menu.ConstantesMenu.BORDURE_UNSELECTED_DEFAULT;
+import static dvt.devint.ConstantesDevint.*;
+import static dvt.menu.ConstantesMenu.BORDURE_SELECTED_DEFAULT;
+import static dvt.menu.ConstantesMenu.BORDURE_SIZE_SELECTED_DEFAULT;
+import static dvt.menu.ConstantesMenu.BORDURE_SIZE_UNSELECTED_DEFAULT;
+import static dvt.menu.ConstantesMenu.BORDURE_UNSELECTED_DEFAULT;
 
 /**
  * Permet de fixer l'ensemble des des methodes pour toutes les fenetres cree.

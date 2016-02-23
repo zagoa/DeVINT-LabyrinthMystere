@@ -1,4 +1,4 @@
-package src.dvt.menu;
+package dvt.menu;
 
 import java.awt.Color;
 

@@ -1,4 +1,4 @@
-package src.dvt.jeuchronometre;
+package dvt.jeuchronometre;
 
 /**
  * Permet de rassembler l'ensemble des constanstes du jeu dans une classe

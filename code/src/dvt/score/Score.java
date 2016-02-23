@@ -1,6 +1,6 @@
-package src.dvt.score;
+package dvt.score;
 
-import static src.dvt.devint.ConstantesDevint.*;
+import static dvt.devint.ConstantesDevint.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
  * Cette classe permet d'ecrire et de lire le fichier score.
  * @author Justal Kevin
  */
-public class Score extends src.dvt.devint.Jeu  {
+public class Score extends dvt.devint.Jeu  {
     ArrayList<PlayerScore> listPlayerScore;
     private static final long serialVersionUID = 1L;
     private JPanel world;

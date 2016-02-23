@@ -1,20 +1,20 @@
-package src.dvt.jeuchronometre;
+package dvt.jeuchronometre;
 
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static src.dvt.devint.ConstantesDevint.*;
-import static src.dvt.jeuchronometre.ConstantesJeu.*;
-import src.dvt.jeuchronometre.Action;
-import src.dvt.score.Score;
+import static dvt.devint.ConstantesDevint.*;
+import static dvt.jeuchronometre.ConstantesJeu.*;
+import dvt.jeuchronometre.Action;
+import dvt.score.Score;
 
 /**
  * Permet de gerer le jeu et la fenetre qui contient le jeu
  * @author Justal Kevin
  */
-public class JeuChrono extends src.dvt.devint.Jeu {
+public class JeuChrono extends dvt.devint.Jeu {
     private static final long serialVersionUID = 1L;
     // composants graphiques
     private JPanel world;
