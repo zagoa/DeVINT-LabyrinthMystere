@@ -9,8 +9,8 @@ public class Tray {
 
 
     public Tray() {
-        for (int i = 0; i < nbCase; i++) {
-            for (int j = 0; j < nbCase; j++) {
+        for (int i = 1; i < nbCase; i++) {
+            for (int j = 1; j < nbCase; j++) {
                 plateau[i][j] = new Tile(i, j);
 
             }

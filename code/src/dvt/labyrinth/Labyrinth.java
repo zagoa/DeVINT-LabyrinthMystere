@@ -16,9 +16,9 @@ public class Labyrinth extends Jeu{
     @Override
     public void init() {
         world = new JPanel();
-        tray = new JLabel(new Tray());
         tray.setVisible(true);
         world.setBackground(getBackground());
+
 
 
 
