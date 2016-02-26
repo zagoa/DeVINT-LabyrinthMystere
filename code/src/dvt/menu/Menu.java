@@ -51,13 +51,9 @@ public class Menu extends Fenetre {
         addLabel(TITLE_GAME);
         
         // les options possibles
-        addMenu("Jeu", new Action(this, (6)));
-        addMenu("Multi joueur", new Action(this, 1));
-        addMenu("Chrono", new Action(this, 2));
-        addMenu("Quizz", new Action(this, 3));
-        addMenu("Score Jeu 2", new Action(this, 4));
-        addMenu("Quitter", new Action(this, (5)));
-        addMenu("Jeu", new Action(this, (6)));
+        addMenu("Labyrinth Mystère",new Action(this,1));
+        addMenu("Score", new Action(this,4));
+        addMenu("Quitter", new Action(this, 5));
 
         
         
@@ -90,7 +86,8 @@ public class Menu extends Fenetre {
     				break;
 
     			case 2:
-    				new dvt.jeuchronometre.JeuChrono().loop();
+                    //TODO mettre le chemin pour labyrinth
+    				//new dvt.labyrinth;
      				break;
 
     			default:
