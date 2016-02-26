@@ -1,7 +1,9 @@
 package dvt.labyrinth;
 
 
-public class Pawn extends Item{
+import dvt.labyrinth.model.Item;
+
+public class Pawn extends Item {
     String name;
     String image;
     int x;

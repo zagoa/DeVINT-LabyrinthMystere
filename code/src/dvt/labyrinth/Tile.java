@@ -1,5 +1,7 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.model.Item;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,7 +22,6 @@ public class Tile {
         this.tile = new JPanel();
         tile.setSize(new Dimension(50, 50));
         tile.setLocation(x,y);
-        tile.setBackground(Color.blue); //TODO mettre des couleurs
 
     }
     public JPanel getTile() {
