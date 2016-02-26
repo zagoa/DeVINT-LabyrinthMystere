@@ -1,3 +1,4 @@
+
 # Compiled source #
 ###################
 *.com
@@ -42,4 +43,4 @@ Thumbs.db
 #########
 VocalyzeSIVOX/
 
-./.idea
+/.idea

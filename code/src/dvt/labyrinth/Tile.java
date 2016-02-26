@@ -1,5 +1,7 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.model.Item;
+
 import javax.swing.*;
 import java.awt.*;
 
