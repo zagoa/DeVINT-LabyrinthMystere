@@ -9,18 +9,24 @@ import javax.swing.*;
  */
 public class Labyrinth extends Jeu{
     private JPanel world;
-    private JLabel tray;
+    private JLabel envi;
+
 
 
 
     @Override
     public void init() {
         world = new JPanel();
-        tray.setVisible(true);
+        envi.setVisible(true);
         world.setBackground(getBackground());
+        Tile tile[][] = (new Tray()).getPlateau();
 
+        for(int i = 0;i<18; i++){
+            for(int j = 0;i<18; j++){
+            world.add(tile[i][j].getTile());
+            }
 
-
+        }
 
     }
 

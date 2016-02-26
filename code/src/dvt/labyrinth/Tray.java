@@ -11,11 +11,16 @@ public class Tray {
     public Tray() {
         for (int i = 1; i < nbCase; i++) {
             for (int j = 1; j < nbCase; j++) {
-                plateau[i][j] = new Tile(i, j);
+                plateau[i][j] = new Tile(i, j,null);
 
             }
         }
 
+    }
+
+
+    public Tile[][] getPlateau() {
+        return plateau;
     }
 
 
