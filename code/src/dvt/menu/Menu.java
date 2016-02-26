@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import static dvt.devint.ConstantesDevint.*;
-import static dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
 import static dvt.menu.ConstantesMenu.*;
 import dvt.devint.Fenetre;
 
@@ -100,7 +99,7 @@ public class Menu extends Fenetre {
     		gameChoice = 0;
             
             try {
-                timeLoop = (lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000;
+                timeLoop = (lastLoopTime - System.nanoTime() + 1000000000L/60) / 1000000;
                 if(timeLoop>0) {
                     Thread.sleep(timeLoop);
                 }
