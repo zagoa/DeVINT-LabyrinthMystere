@@ -85,10 +85,9 @@ public class Menu extends Fenetre {
     				new dvt.score.Score().loop();
     				break;
 
-    			case 2:
-                    //TODO mettre le chemin pour labyrinth
-    				//new dvt.labyrinth;
-     				break;
+    			case 1:
+    				new dvt.labyrinth.Menu().loop();
+    				break;
 
     			default:
     				break;
