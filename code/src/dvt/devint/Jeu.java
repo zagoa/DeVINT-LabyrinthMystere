@@ -1,9 +1,9 @@
 package dvt.devint;
 
-import static dvt.jeuchronometre.ConstantesJeu.OPTIMAL_TIME;
-
 public abstract class Jeu extends Fenetre {
     private static final long serialVersionUID = 1L;
+
+    private static final int OPTIMAL_TIME = 500;
 
     /**
      * Permet de creer et initialiser la fenetre de jeu
