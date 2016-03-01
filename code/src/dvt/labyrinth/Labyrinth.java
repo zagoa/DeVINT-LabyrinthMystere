@@ -17,12 +17,12 @@ public class Labyrinth extends Jeu{
     @Override
     public void init() {
         world = new JPanel();
-        envi.setVisible(true);
         world.setBackground(getBackground());
-        Tile tile[][] = (new Tray()).getPlateau();
+        Tray tray = new Tray();
+        Tile tile[][] = tray.getPlateau();
 
-        for(int i = 0;i<18; i++){
-            for(int j = 0;i<18; j++){
+        for(int i = 0;i<17; i++){
+            for(int j = 0;i<17; j++){
             world.add(tile[i][j].getTile());
             }
 

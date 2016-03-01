@@ -36,7 +36,7 @@ public abstract class Jeu extends Fenetre {
             render();
 
             try {
-                timeLoop = (lastLoopTime - System.nanoTime() ) / 1000000;
+                timeLoop = (lastLoopTime - System.nanoTime() + 1000000000L/60) / 1000000;
                 if(timeLoop>0) {
                     Thread.sleep(timeLoop);
                 }
