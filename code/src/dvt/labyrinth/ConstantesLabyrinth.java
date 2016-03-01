@@ -12,6 +12,7 @@ public class ConstantesLabyrinth {
     public static final String QUIT = "Quitter";
     public static final String IMAGEPATH = "../ressources/images/";
     public static final String SOUNDPATH = "../ressources/sons/";
+    public static final String IMAGEEXT = ".jpg";
 
     public static final int MARGE_LEFT_RIGHT = 80;
     public static final int MARGE_TOP_BOT = 3;

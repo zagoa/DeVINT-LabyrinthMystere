@@ -19,10 +19,10 @@ public class Wall extends Item{
         this.y1 = y1;
         this.y2 = y2;
         if(y1 == y2){
-            item = new JLabel(new ImageIcon(IMAGEPATH + "murHorizontal.png"));
+            item = new JLabel(new ImageIcon(IMAGEPATH + "murHorizontal" + IMAGEEXT));
         }
         else{
-            item = new JLabel(new ImageIcon(IMAGEPATH + "murVertical.png"));
+            item = new JLabel(new ImageIcon(IMAGEPATH + "murVertical" + IMAGEEXT));
         }
     }
 
