@@ -3,7 +3,10 @@ package dvt.labyrinth;
 import dvt.devint.Jeu;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Arnaud on 26/02/2016.
@@ -15,25 +18,47 @@ public class Labyrinth extends Jeu{
     public void init() {
         world = new JPanel();
         world.setBackground(getBackground());
+
+        this.add(world);
+
+        GridLayout layout = new GridLayout(9,9);
+        world.setLayout(new GridLayout(9,9));
+
+
         Tray tray = new Tray();
         Tile tile[][] = tray.getTray();
 
-        for (int i = 0; i < 17; i++) {
-            for (int j = 0; j < 17; j++) {
-                JLabel graphic = new JLabel();
-                world.add(graphic);
-                graphic.setLocation(tile[i][j].getX(), tile[i][j].getY());
-                
-                if (i % 2 == 0 || j % 2 == 0) {
-                    graphic.setPreferredSize(new Dimension(70,70));
-                    graphic.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.black));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                JPanel gui = new JPanel();
+                gui.setBackground(Color.green);
+                gui.setPreferredSize(new Dimension(300,50));
+                gui.setBorder(new LineBorder(Color.blue, 10));
 
-                } else {
-                    graphic.setPreferredSize(new Dimension(70,70));
-                    graphic.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.green));
+                final int wJ = j;
+                final int hI = i;
 
-                }
+                gui.addMouseListener( new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent me) {
+                        int w = gui.getWidth();
+                        int h = gui.getHeight();
+                        int x = me.getPoint().x-wJ*w;
+                        int y = me.getPoint().y-hI*h;
 
+                        boolean inBorder =
+                                (x < 10 || y < 10
+                                || x > w-10 || y > h-10);
+
+                        if (inBorder) {
+                            System.out.println(me.getPoint());
+                        } else {
+                            System.out.println("Ignore!");
+                        }
+                    }
+                });
+
+                world.add(gui);
             }
 
 
