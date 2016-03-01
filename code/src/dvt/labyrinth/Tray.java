@@ -14,13 +14,7 @@ public class Tray {
         tray = new Tile[17][17];
         for (int i = 0; i < nbCase; i++) {
             for (int j = 0; j < nbCase; j++) {
-                tray[i][j] = new Tile(i,j,null,false);
-                if(i%2 ==0 || j%2 ==0){
-                    tray[i][j].getTile().setBackground(Color.black);
-                }else {
-                    tray[i][j].getTile().setBackground(Color.green);
-
-                }
+                tray[i][j] = new Tile(i, j,null);
 
             }
         }
@@ -28,7 +22,7 @@ public class Tray {
     }
 
 
-    public Tile[][] getPlateau() {
+    public Tile[][] getTray() {
         return tray;
     }
 

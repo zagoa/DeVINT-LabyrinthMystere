@@ -1,4 +1,4 @@
-package dvt.menu;
+package dvt.labyrinth.menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,16 +7,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import static dvt.devint.ConstantesDevint.*;
-import static dvt.menu.ConstantesMenu.*;
+import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.devint.Fenetre;
 
 /**
- * Permet de gerer le menu et la fenetre qui contient le menu
+ * Menu inspiré du menu principal.
  * @author Justal Kevin
  */
 public class Menu extends Fenetre {
@@ -31,12 +29,11 @@ public class Menu extends Fenetre {
     private int gameChoice;
 
     /**
-     * Le constructeur du menu<br />
+     * Le constructeur du menu
      * Permet de construire un Menu avec tout les composants
      */
     public Menu() {
-        listeBoutton = new ArrayList<JButton>();
-//        this.getSIVOX().playWav(ACCUEIL_SON);
+        listeBoutton = new ArrayList<>();
 
         GridBagLayout layoutMenu = new GridBagLayout();
         c.fill = GridBagConstraints.BOTH;
@@ -48,15 +45,15 @@ public class Menu extends Fenetre {
         menuPrincipal.setLayout(layoutMenu);
 
         addLabel(TITLE_GAME);
-        
-        // les options possibles
-        addMenu("Labyrinth Mystère",new Action(this,1));
-        addMenu("Score", new Action(this,4));
-        addMenu("Quitter", new Action(this, 5));
 
-        
-        
-        // la gestion des touches directionnelles haut et bas 
+        // les options possibles
+        addMenu(ONEPLAYER,new ActionMenu(this,1));
+        addMenu(TWOPLAYERS, new ActionMenu(this,2));
+        addMenu(HELP, new ActionMenu(this, 3));
+        addMenu(QUIT, new ActionMenu(this, 5));
+
+
+        // la gestion des touches directionnelles haut et bas
         addControl("DOWN", new DownAction(this));
         addControl("UP", new UpAction(this));
 
@@ -68,35 +65,39 @@ public class Menu extends Fenetre {
      * La loop du menu
      */
     public void loop() {
-    	long lastLoopTime,timeLoop;
+        long lastLoopTime,timeLoop;
 
-    	while (this.isDisplayable()) {
-    		long now = System.nanoTime();
-    		lastLoopTime = now;
-    		render();
-    		if (gameChoice==5)
-    			this.dispose();
-    		else if (gameChoice != 0) {
-				this.setVisible(false);
-				this.getSIVOX().stop();
-    			switch (gameChoice) {
-    			case 4:
-    				new dvt.score.Score().loop();
-    				break;
+        while (this.isDisplayable()) {
+            long now = System.nanoTime();
+            lastLoopTime = now;
+            render();
+            if (gameChoice==5)
+                this.dispose();
+            else if (gameChoice != 0) {
+                this.setVisible(false);
+                this.getSIVOX().stop();
+                switch (gameChoice) {
+                    case 1: // Un joueur
+                        new dvt.labyrinth.Labyrinth().loop();
+                        break;
 
-    			case 1:
-    				new dvt.labyrinth.menu.Menu().loop();
-    				break;
+                    case 2: // Deux joueurs
+                        JOptionPane.showMessageDialog(null, "2 joueurs", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        break;
 
-    			default:
-    				break;
-    			}
-				this.getSIVOX().stop();
-				this.setVisible(true);
-    		}
+                    case 3: // Aide
+                        JOptionPane.showMessageDialog(null, "Aide", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        break;
 
-    		gameChoice = 0;
-            
+                    default:
+                        break;
+                }
+                this.getSIVOX().stop();
+                this.setVisible(true);
+            }
+
+            gameChoice = 0;
+
             try {
                 timeLoop = (lastLoopTime - System.nanoTime() + 1000000000L/60) / 1000000;
                 if(timeLoop>0) {
@@ -190,8 +191,8 @@ public class Menu extends Fenetre {
         for (int i = 0; i < listeBoutton.size(); i++) {
             listeBoutton.get(i).setFocusable(false);
         }
-    }    
-    
+    }
+
     /**
      * Permet de gerer les action lie au choix dans le menu
      * @param choice Le choix que l'on a effectue dans le menu
@@ -204,28 +205,8 @@ public class Menu extends Fenetre {
     /**
      * ###################################################################################################"
      */
-    
+
     public GridBagConstraints getC() {
         return c;
-    }
-    
-    public JPanel getMenuPrincipal() {
-        return menuPrincipal;
-    }
-    
-    public int getCountMenu() {
-        return countMenu;
-    }
-    
-    public int getMenuSelected() {
-        return menuSelected;
-    }
-    
-    public List<JButton> getListeBoutton() {
-        return listeBoutton;
-    }
-    
-    public JLabel getTitleJeu() {
-        return titleJeu;
     }
 }

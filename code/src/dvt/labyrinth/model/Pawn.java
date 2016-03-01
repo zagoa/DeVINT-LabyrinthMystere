@@ -1,10 +1,15 @@
 package dvt.labyrinth.model;
 
+import javax.swing.*;
+import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
 
 public class Pawn extends Item {
+    String name;
+    int x;
+    int y;
     private String name;
     private String image;
     private Tile tile;
@@ -12,6 +17,9 @@ public class Pawn extends Item {
 
     public Pawn(String name, String image, Tile tile) {
         this.name = name;
+        item = new JLabel(new ImageIcon(IMAGEPATH + name + IMAGEEXT));
+        this.x = x;
+        this.y = y;
         this.image = image;
         this.tile=tile;
     }
