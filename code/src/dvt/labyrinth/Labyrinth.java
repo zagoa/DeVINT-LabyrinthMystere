@@ -22,7 +22,7 @@ public class Labyrinth extends Jeu{
         Tile tile[][] = tray.getPlateau();
 
         for(int i = 0;i<17; i++){
-            for(int j = 0;i<17; j++){
+            for(int j = 0;j<17; j++){
             world.add(tile[i][j].getTile());
             }
 
