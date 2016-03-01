@@ -23,14 +23,17 @@ public class Labyrinth extends Jeu{
                 JLabel graphic = new JLabel();
                 world.add(graphic);
                 graphic.setLocation(tile[i][j].getX(), tile[i][j].getY());
-                
-                if (i % 2 == 0 || j % 2 == 0) {
+
+                if (i % 2 == 0) {
+                    graphic.setPreferredSize(new Dimension(70, 70));
+                    graphic.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.green));
+
+                } else if (j % 2 == 0){
+                    graphic.setPreferredSize(new Dimension(70, 70));
+                    graphic.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.green));
+            }else {
                     graphic.setPreferredSize(new Dimension(70,70));
                     graphic.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.black));
-
-                } else {
-                    graphic.setPreferredSize(new Dimension(70,70));
-                    graphic.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.green));
 
                 }
 
