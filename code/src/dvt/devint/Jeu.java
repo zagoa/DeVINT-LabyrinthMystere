@@ -1,9 +1,8 @@
 package dvt.devint;
 
+
 public abstract class Jeu extends Fenetre {
     private static final long serialVersionUID = 1L;
-
-    private static final int OPTIMAL_TIME = 500;
 
     /**
      * Permet de creer et initialiser la fenetre de jeu
@@ -37,7 +36,7 @@ public abstract class Jeu extends Fenetre {
             render();
 
             try {
-                timeLoop = (lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000;
+                timeLoop = (lastLoopTime - System.nanoTime() + 1000000000L/60) / 1000000;
                 if(timeLoop>0) {
                     Thread.sleep(timeLoop);
                 }
