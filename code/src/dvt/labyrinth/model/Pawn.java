@@ -1,7 +1,5 @@
-package dvt.labyrinth;
+package dvt.labyrinth.model;
 
-
-import dvt.labyrinth.model.Item;
 
 public class Pawn extends Item {
     String name;
