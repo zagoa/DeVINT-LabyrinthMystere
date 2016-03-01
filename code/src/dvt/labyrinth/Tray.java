@@ -14,7 +14,7 @@ public class Tray {
         tray = new Tile[17][17];
         for (int i = 0; i < nbCase; i++) {
             for (int j = 0; j < nbCase; j++) {
-                tray[i][j] = new Tile(i, j,null);
+                tray[i][j] = new Tile(i, j,null,false);
 
             }
         }
