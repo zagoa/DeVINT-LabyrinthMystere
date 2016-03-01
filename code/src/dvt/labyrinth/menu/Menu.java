@@ -33,7 +33,7 @@ public class Menu extends Fenetre {
      * Permet de construire un Menu avec tout les composants
      */
     public Menu() {
-        listeBoutton = new ArrayList<>();
+        listeBoutton = new ArrayList<JButton>();
 
         GridBagLayout layoutMenu = new GridBagLayout();
         c.fill = GridBagConstraints.BOTH;
