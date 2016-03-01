@@ -78,7 +78,7 @@ public class Menu extends Fenetre {
                 this.getSIVOX().stop();
                 switch (gameChoice) {
                     case 1: // Un joueur
-                        JOptionPane.showMessageDialog(null, "1 joueur", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        new dvt.labyrinth.Labyrinth().loop();
                         break;
 
                     case 2: // Deux joueurs

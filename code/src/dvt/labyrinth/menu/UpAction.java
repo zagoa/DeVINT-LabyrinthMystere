@@ -13,7 +13,7 @@ public class UpAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
     private transient Menu fenetre;
 
-    /**
+    /*
      * Le constructeur appele lors de l'appuie sur la touche "HAUT"
      * @param fenetre La fenetre que l'on utilise
      * @author Justal Kevin

@@ -10,7 +10,6 @@ import java.awt.*;
  * Created by Arnaud on 26/02/2016.
  */
 public class Tile {
-    private JPanel tile;
     private int x;
     private int y;
     private Item item;
@@ -19,12 +18,28 @@ public class Tile {
         this.x = x;
         this.y = y;
         this.item = item;
-        this.tile = new JPanel();
-        tile.setSize(new Dimension(50, 50));
-        tile.setLocation(x,y);
+
+
 
     }
-    public JPanel getTile() {
-        return tile;
+
+
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
+
+
