@@ -4,10 +4,11 @@ import javax.swing.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 import dvt.labyrinth.Tile;
-import dvt.labyrinth.Tray;
+import dvt.labyrinth.model.Tray.Tray;
+
 
 public class Pawn extends Item {
-    String name;
+    private String name;
     private Tile tile;
 
 
@@ -52,5 +53,9 @@ public class Pawn extends Item {
     public void moveRight(Tray tray,Directions RIGHT){ if(this.canMove(tray,RIGHT)) this.tile.setX(this.tile.getX()+2); }
 
     public void moveLeft(Tray tray,Directions LEFT){ if(this.canMove(tray,LEFT)) this.tile.setX(this.tile.getX()-2); }
+
+    public void setTile(Tile tile){ this.tile=tile; }
+
+
 
 }

@@ -1,6 +1,7 @@
 package dvt.labyrinth;
 
 import dvt.devint.Jeu;
+import dvt.labyrinth.model.Tray.Tray;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

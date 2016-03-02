@@ -1,10 +1,6 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.model.Item;
-import dvt.labyrinth.model.Pawn;
-
-import javax.swing.*;
-import java.awt.*;
 
 
 /**
@@ -26,9 +22,7 @@ public class Tile {
         return this.i;
     }
 
-    public void setOccupied(){
-        this.i = true;
-    }
+    public void setOccupied(){ this.i = true; }
 
     public void unsetOccupied(){
         this.i = false;
