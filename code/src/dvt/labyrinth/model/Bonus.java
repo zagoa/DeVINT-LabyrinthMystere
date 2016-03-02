@@ -4,5 +4,5 @@ package dvt.labyrinth.model;
  * Created by etienne on 26/02/16.
  */
 public class Bonus extends Item{
-    //TODO
+    //TODO Not needed for MVC
 }
