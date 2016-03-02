@@ -21,49 +21,48 @@ public class Labyrinth extends Jeu{
 
         this.add(world);
 
-        GridLayout layout = new GridLayout(9,9);
-        world.setLayout(new GridLayout(9,9));
-
+        world.setLayout(new GridBagLayout());
 
         Tray tray = new Tray();
         Tile tile[][] = tray.getTray();
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
                 JPanel gui = new JPanel();
-                gui.setBackground(Color.green);
+                JLabel l = new JLabel(""+x);
+                gui.add(l);
+                if (x%2 == 1 || y%2 == 1)
+                    gui.setBackground(Color.black);
+                else
+                    gui.setBackground(Color.red);
                 gui.setPreferredSize(new Dimension(300,50));
-                gui.setBorder(new LineBorder(Color.blue, 10));
+                gui.setBorder(new LineBorder(Color.white, 1));
 
-                final int wJ = j;
-                final int hI = i;
+                GridBagConstraints c = new GridBagConstraints();
+                c.fill = GridBagConstraints.CENTER;
+                c.gridx = x;
+                c.gridy = y;
 
-                gui.addMouseListener( new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent me) {
-                        int w = gui.getWidth();
-                        int h = gui.getHeight();
-                        int x = me.getPoint().x-wJ*w;
-                        int y = me.getPoint().y-hI*h;
+                if (x == 8)
+                    c.gridwidth = GridBagConstraints.REMAINDER;
+                else
+                    c.gridwidth = (x%2 == 1) ? 1 : 2;
 
-                        boolean inBorder =
-                                (x < 10 || y < 10
-                                || x > w-10 || y > h-10);
+                if (y == 8)
+                    c.gridheight = GridBagConstraints.REMAINDER;
+                else
+                    c.gridheight = (y%2 == 1) ? 1 : 2;
 
-                        if (inBorder) {
-                            System.out.println(me.getPoint());
-                        } else {
-                            System.out.println("Ignore!");
-                        }
-                    }
-                });
+                c.weightx = 1.0;
+                c.weighty = 1.0;
+                c.fill = GridBagConstraints.BOTH;
 
-                world.add(gui);
+                world.add(gui, c);
             }
 
 
         }
-        this.add(world);
+//        this.add(world);
 
     }
 
