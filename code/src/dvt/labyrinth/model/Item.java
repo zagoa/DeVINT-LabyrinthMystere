@@ -8,4 +8,8 @@ import javax.swing.*;
 public class Item {
     public JLabel item;
 
+    public JLabel getItem() {
+        return item;
+    }
+
 }
