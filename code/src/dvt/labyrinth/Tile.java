@@ -1,5 +1,6 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class Tile {
     private boolean occupied;
     private Item item;
     private boolean highlighted;
+    private JButton component;
 
     public Tile() {
         this(null);
@@ -22,41 +24,68 @@ public class Tile {
         occupied = false;
         this.item = item;
         highlighted = false;
+
+        createComponent();
     }
 
     public boolean isOccupied(){
         return occupied;
     }
 
-    public JButton getItem() {
-        JButton button;
-
+    public void createComponent() {
         if (item == null || item.getRes().getPath() == null)
-            button = new JButton();
+            component = new JButton();
         else
-            button = new JButton(new ImageIcon(item.getRes().getPath()));
+            component = new JButton(new ImageIcon(item.getRes().getPath()));
 
-        button.setBackground((highlighted) ? Color.YELLOW : null);
-        button.setOpaque(true);
+        editComponent();
+    }
 
-        if (item.getY()%2 == 1 || item.getX()%2 == 1)
-            button.setBorder(null);
-        else
-            button.setBorder(new LineBorder(Color.black, 1));
-
-        return button;
+    public JButton getComponent() {
+        return component;
     }
 
     public void setItem(Item item) {
+        highlighted = false;
         this.item = item;
+
+        if (item != null || item.getRes().getPath() == null)
+            component.setIcon(new ImageIcon(item.getRes().getPath()));
+        else
+            component.setIcon(null);
+
+        editComponent();
     }
 
     public void setHighlighted() {
         highlighted = true;
+
+        editComponent();
+    }
+
+    public void unHighlight() {
+        highlighted = false;
+
+        editComponent();
+    }
+
+    public void editComponent() {
+        Color c = (highlighted) ? Color.YELLOW : null;
+        component.setBackground(c);
+        component.setOpaque(true);
+
+        if (item.getY()%2 == 1 || item.getX()%2 == 1)
+            component.setBorder(null);
+        else
+            component.setBorder(new LineBorder(Color.black, 1));
     }
 
     public boolean isHighlighted() {
         return highlighted;
+    }
+
+    public Item getItem() {
+        return item;
     }
 }
 

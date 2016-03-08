@@ -17,9 +17,7 @@ public class Tray {
         for (int y = 0; y < NBRE_CASES; y++) {
             for (int x = 0; x < NBRE_CASES; x++) {
                 // On a wall or not ?
-                RESSOURCES r = (x % 2 == 1 || y % 2 == 1) ? RESSOURCES.TRANSPARENT : RESSOURCES.TRANSPARENT;
-
-                tray[y][x] = new Tile(new DefaultItem(r, x, y));
+                tray[y][x] = new Tile(new DefaultItem(x, y));
             }
         }
     }
@@ -28,4 +26,12 @@ public class Tray {
         return tray;
     }
 
+    public Tile getTile(int x, int y) {
+        return tray[y][x];
+    }
+
+    public void movePlayer(int xBefore, int yBefore, int xAfter, int yAfter) {
+        tray[yAfter][xAfter].setItem(tray[yBefore][xBefore].getItem());
+        tray[yBefore][xBefore].setItem(new DefaultItem(xBefore, yBefore));
+    }
 }

@@ -3,6 +3,7 @@ package dvt.labyrinth.model;
 import javax.swing.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
+import dvt.labyrinth.ConstantesLabyrinth;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
 
@@ -13,6 +14,14 @@ public class Pawn extends Item {
         super(res, x, y);
 
         this.name = name;
+    }
+
+    public void move(DIRECTIONS d) {
+        switch (d) {
+            case FRONT:
+                y += CASE_LENGTH;
+                break;
+        }
     }
 
     /*public boolean canMove(Tray tray,Directions direction){

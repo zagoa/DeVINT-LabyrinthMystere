@@ -41,11 +41,8 @@ public abstract class Item {
         this.res = res;
     }
 
-    public void setX(int x) {
+    public void changePosition(int x, int y) {
         this.x = x;
-    }
-
-    public void setY(int y) {
         this.y = y;
     }
 }
