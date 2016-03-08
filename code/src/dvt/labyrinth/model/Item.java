@@ -15,10 +15,8 @@ public abstract class Item {
     protected int x;
     protected int y;
 
-    public Item(RESSOURCES res, int x, int y) {
+    public Item(RESSOURCES res) {
         this.res = res;
-        this.x = x;
-        this.y = y;
     }
 
     public RESSOURCES getRes() {
@@ -29,20 +27,7 @@ public abstract class Item {
         return res.getPath();
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public void setRes(RESSOURCES res) {
         this.res = res;
-    }
-
-    public void changePosition(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 }

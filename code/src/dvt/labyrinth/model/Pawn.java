@@ -13,8 +13,8 @@ public class Pawn extends Item {
     ArrayList<Tile> can = new ArrayList<Tile>();
 
 
-    public Pawn(String name, RESSOURCES res, int x, int y) {
-        super(res, x, y);
+    public Pawn(String name, RESSOURCES res) {
+        super(res);
 
         this.name = name;
     }

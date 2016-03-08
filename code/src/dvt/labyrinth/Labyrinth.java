@@ -10,7 +10,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
@@ -19,8 +22,8 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 public class Labyrinth extends Jeu{
     private JPanel world;
     private Tray tray;
-    private List<Item> items;
-    private Pawn player;
+    private Map<Item, Tile> items;
+    private Pawn currentPlayer;
 
     @Override
     public void init() {
@@ -33,9 +36,7 @@ public class Labyrinth extends Jeu{
 
         tray = new Tray();
 
-        items = new ArrayList<>();
-        player = new Pawn("Bernard", RESSOURCES.THEO, 8, 10);
-        items.add(player);
+        items = new HashMap<>();
 
         addPlayers();
 
@@ -48,8 +49,8 @@ public class Labyrinth extends Jeu{
     }
 
     public void checkMovePositions() {
-        int x = player.getX();
-        int y = player.getY();
+        int x = getTilePlayer().getX();
+        int y = getTilePlayer().getY();
 
         Tile tile[][] = tray.getTray();
         if (x-CASE_LENGTH >= 0)
@@ -70,7 +71,7 @@ public class Labyrinth extends Jeu{
     @Override
     public void render() {
         world.setBackground(getBackground());
-        showTray();
+//        showTray();
     }
 
     @Override
@@ -114,23 +115,34 @@ public class Labyrinth extends Jeu{
     }
 
     public void addPlayers() {
-        for (Item item : items) {
-            tray.getTray()[item.getY()][item.getX()].setItem(item);
-        }
+        Pawn player = new Pawn("Bernard", RESSOURCES.THEO);
+        Tile t = tray.getTile(8, 10);
+        t.setItem(player);
+
+        items.put(player, t);
+
+        currentPlayer = player;
     }
 
     public void unHighlightAll() {
-        int x = player.getX();
-        int y = player.getY();
+        int x = getTilePlayer().getX();
+        int y = getTilePlayer().getY();
 
         if (x-CASE_LENGTH >= 0)
             tray.getTile(x-CASE_LENGTH, y).unHighlight();
+        showTray();
+
         if (x+CASE_LENGTH < NBRE_CASES)
             tray.getTile(x+CASE_LENGTH, y).unHighlight();
+        showTray();
+
         if (y-CASE_LENGTH >= 0)
             tray.getTile(x, y-CASE_LENGTH).unHighlight();
+        showTray();
+
         if (y+CASE_LENGTH < NBRE_CASES)
             tray.getTile(x, y+CASE_LENGTH).unHighlight();
+        showTray();
     }
 
     public void movePlayer(DIRECTIONS d) {
@@ -138,23 +150,23 @@ public class Labyrinth extends Jeu{
 
         switch (d) {
             case FRONT:
-                xAfter = player.getX();
-                yAfter = player.getY()-CASE_LENGTH;
+                xAfter = getTilePlayer().getX();
+                yAfter = getTilePlayer().getY()-CASE_LENGTH;
                 break;
 
             case BACK:
-                xAfter = player.getX();
-                yAfter = player.getY()+CASE_LENGTH;
+                xAfter = getTilePlayer().getX();
+                yAfter = getTilePlayer().getY()+CASE_LENGTH;
                 break;
 
             case LEFT:
-                xAfter = player.getX()-CASE_LENGTH;
-                yAfter = player.getY();
+                xAfter = getTilePlayer().getX()-CASE_LENGTH;
+                yAfter = getTilePlayer().getY();
                 break;
 
             case RIGHT:
-                xAfter = player.getX()+CASE_LENGTH;
-                yAfter = player.getY();
+                xAfter = getTilePlayer().getX()+CASE_LENGTH;
+                yAfter = getTilePlayer().getY();
                 break;
 
             default:
@@ -167,9 +179,12 @@ public class Labyrinth extends Jeu{
 
         unHighlightAll();
 
-        showTray();
+        tray.movePlayer(getTilePlayer(), tray.getTile(xAfter, yAfter));
 
-        tray.movePlayer(player.getX(), player.getY(), xAfter, yAfter);
-        player.changePosition(xAfter, yAfter);
+        showTray();
+    }
+
+    public Tile getTilePlayer() {
+        return items.get(currentPlayer);
     }
 }
