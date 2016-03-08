@@ -17,9 +17,9 @@ public class Tray {
         for (int y = 0; y < NBRE_CASES; y++) {
             for (int x = 0; x < NBRE_CASES; x++) {
                 // On a wall or not ?
-                RESSOURCES r = (x % 2 == 1 || y % 2 == 1) ? RESSOURCES.WALL : RESSOURCES.TRANSPARENT;
+                RESSOURCES r = (x % 2 == 1 || y % 2 == 1) ? RESSOURCES.TRANSPARENT : RESSOURCES.TRANSPARENT;
 
-                tray[y][x] = new Tile(x, y, new DefaultItem(r, x, y));
+                tray[y][x] = new Tile(new DefaultItem(r, x, y));
             }
         }
     }

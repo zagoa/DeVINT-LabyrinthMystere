@@ -6,6 +6,10 @@ import dvt.labyrinth.model.Pawn;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
@@ -17,6 +21,7 @@ public class Labyrinth extends Jeu{
     private JPanel world;
     private Tray tray;
     private List<Item> items;
+    private Pawn player;
 
     @Override
     public void init() {
@@ -30,7 +35,8 @@ public class Labyrinth extends Jeu{
         tray = new Tray();
 
         items = new ArrayList<>();
-        items.add(new Pawn("Bernard", RESSOURCES.CLOUD, 8, 16));
+        player = new Pawn("Bernard", RESSOURCES.THEO, 8, 16);
+        items.add(player);
 
         addPlayers();
 
@@ -39,14 +45,14 @@ public class Labyrinth extends Jeu{
 
     @Override
     public void update() {
-
+        
     }
 
     @Override
     public void render() {
         world.setBackground(getBackground());
 
-        initTray();
+//        initTray();
     }
 
     @Override
@@ -62,6 +68,14 @@ public class Labyrinth extends Jeu{
                 GridBagConstraints c = getGridBagConstraints(x,y);
 
                 JButton button = tile[y][x].getItem();
+
+                button.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        System.out.println("lol");
+                    }
+                });
 
                 if (x % 2 == 1)
                     button.setPreferredSize(new Dimension(10, ((y % 2 == 1) ? 10 : 50)));

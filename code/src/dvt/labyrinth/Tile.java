@@ -10,52 +10,53 @@ import java.awt.*;
  * Created by Arnaud on 26/02/2016.
  */
 public class Tile {
-    private int x;
-    private int y;
     private boolean occupied;
     private Item item;
+    private boolean highlighted;
 
-    public Tile(int x, int y) {
-        this(x,y, null);
+    public Tile() {
+        this(null);
     }
 
-    public Tile(int x, int y, Item item){
-        this.x = x;
-        this.y = y;
+    public Tile(Item item){
         occupied = false;
         this.item = item;
+        highlighted = false;
     }
 
     public boolean isOccupied(){
         return occupied;
     }
 
-    public int getX(){
-        return this.x;
-    }
-
-    public int getY(){ return this.y; }
-
-    public void setX(int x){ this.x= x; }
-
-    public void setY(int y){ this.y= y; }
-
     public JButton getItem() {
-        JButton button = new JButton();
+        JButton button;
 
+        if (item == null || item.getRes().getPath() == null)
+            button = new JButton();
+        else
+            button = new JButton(new ImageIcon(item.getRes().getPath()));
+
+        button.setBackground((highlighted) ? Color.YELLOW : null);
         button.setOpaque(true);
-        button.setBorder(new LineBorder(Color.black, 1));
 
-        if (item == null || item.getRes().getPath() == null) // Transparent
-            button.setBackground(null);
-        else // Something
-            button.setIcon(new ImageIcon(item.getRes().getPath()));
+        if (item.getY()%2 == 1 || item.getX()%2 == 1)
+            button.setBorder(null);
+        else
+            button.setBorder(new LineBorder(Color.black, 1));
 
         return button;
     }
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public void setHighlighted() {
+        highlighted = true;
+    }
+
+    public boolean isHighlighted() {
+        return highlighted;
     }
 }
 
