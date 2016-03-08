@@ -6,10 +6,13 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.model.Tray.Tray;
 
+import java.util.ArrayList;
+
 
 public class Pawn extends Item {
     private Tile tile;
-    boolean block;
+    ArrayList<Tile> can = new ArrayList<Tile>();
+
 
     public Pawn(Tile tile) {
         item = new JLabel(new ImageIcon(IMAGEPATH + IMAGEEXT));
@@ -57,77 +60,32 @@ public class Pawn extends Item {
     public void moveLeft(Tray tray){ if(this.canMove(tray,Directions.LEFT)) this.tile.setX(this.tile.getX()-2); }
 
     public boolean isBlocked(Tray tray){
-        while(this.tile.getX()<tray.getNbCase() || this.tile.getY()<tray.getNbCase()
-                || this.tile.getX()>= 0 || this.tile.getY()>= 0 || !block) {
-            if(block) return block;
-
-            if (canMove(tray, Directions.FRONT)) {
-                moveFront(tray);
-                block = false;
-                return isBlocked(tray);
-            }
-
-            if (canMove(tray, Directions.RIGHT)) {
-                moveRight(tray);
-                block = false;
-                return isBlocked(tray);
-            }
-
-            if (canMove(tray, Directions.BACK)) {
-                moveBack(tray);
-                block = false;
-                return changeStrategy(tray);
-            }
-
-            if (canMove(tray, Directions.LEFT)) {
-                moveLeft(tray);
-                block = false;
-                return changeStrategy(tray);
-            }
-
-            else block = true;
-
-            return block;
+        hasAccessTo(tray);
+        //It represent if the pan is on the last line, so he can finish the game
+        for(int i=0;i<tray.getNbCase();i+=2) {
+            if (can.contains(tray.getXYTile(i, 0))) return true;
         }
         return false;
-
     }
 
-    public boolean changeStrategy(Tray tray){
-        while(this.tile.getX()<tray.getNbCase() || this.tile.getY()<tray.getNbCase()
-                || this.tile.getX()> 1 || this.tile.getY()> 1 || !block) {
-            if(block) return block;
 
-            if (canMove(tray, Directions.FRONT)) {
-                moveFront(tray);
-                block = false;
-                return changeStrategy(tray);
+    public void hasAccessTo(Tray tray) {
+        can.add(this.tile);
+        int i=0;
+        for(can.get(i); i == can.size(); i++){
+            if (canMove(tray, Directions.FRONT)&& this.tile.getX()<0) {
+                can.add(tray.getXYTile(this.tile.getX()+2,this.tile.getY()));
             }
-
-            if (canMove(tray, Directions.LEFT)) {
-                moveLeft(tray);
-                block = false;
-                return changeStrategy(tray);
+            if (canMove(tray, Directions.BACK) && this.tile.getX()<tray.getNbCase()) {
+                can.add(tray.getXYTile(this.tile.getX()-2,this.tile.getY()));
             }
-
-            if (canMove(tray, Directions.BACK)) {
-                moveBack(tray);
-                block = false;
-                return isBlocked(tray);
+            if (canMove(tray, Directions.RIGHT)&& this.tile.getX()<tray.getNbCase()) {
+                can.add(tray.getXYTile(this.tile.getX(),this.tile.getY()+2));
             }
-
-            if (canMove(tray, Directions.RIGHT)) {
-                isBlocked(tray);
-                block = false;
-                return changeStrategy(tray);
+            if (canMove(tray, Directions.LEFT)&& this.tile.getX()>0) {
+                can.add(tray.getXYTile(this.tile.getX(),this.tile.getY()-2));
             }
-
-            else block = true;
-
-            return block;
         }
-        return false;
-
     }
 
 }
