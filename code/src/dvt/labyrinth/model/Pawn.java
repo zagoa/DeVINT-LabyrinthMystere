@@ -8,17 +8,14 @@ import dvt.labyrinth.Tray;
 
 public class Pawn extends Item {
     String name;
-    private Tile tile;
 
+    public Pawn(String name, RESSOURCES res, int x, int y) {
+        super(res, x, y);
 
-    public Pawn(String name, Tile tile) {
         this.name = name;
-        item = new JLabel(new ImageIcon(IMAGEPATH + name + IMAGEEXT));
-        this.tile=tile;
     }
 
-
-    public boolean canMove(Tray tray,Directions direction){
+    /*public boolean canMove(Tray tray,Directions direction){
         switch (direction) {
             case FRONT:
                 if (tray.getXYTile(this.tile.getX(), this.tile.getY()+1).isOccupied()){ return false; }
@@ -51,6 +48,6 @@ public class Pawn extends Item {
 
     public void moveRight(Tray tray,Directions RIGHT){ if(this.canMove(tray,RIGHT)) this.tile.setX(this.tile.getX()+2); }
 
-    public void moveLeft(Tray tray,Directions LEFT){ if(this.canMove(tray,LEFT)) this.tile.setX(this.tile.getX()-2); }
+    public void moveLeft(Tray tray,Directions LEFT){ if(this.canMove(tray,LEFT)) this.tile.setX(this.tile.getX()-2); }*/
 
 }

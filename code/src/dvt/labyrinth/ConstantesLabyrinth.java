@@ -5,6 +5,7 @@ package dvt.labyrinth;
  */
 public class ConstantesLabyrinth {
     public static final String TITLE_GAME = "Labyrinthe Mystère";
+    public static final int NBRE_CASES = 17;
 
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
@@ -16,4 +17,22 @@ public class ConstantesLabyrinth {
 
     public static final int MARGE_LEFT_RIGHT = 80;
     public static final int MARGE_TOP_BOT = 3;
+
+    public enum RESSOURCES {
+        THEO(IMAGEPATH+"theo.jpg"),
+        LEA(IMAGEPATH+"lea.jpg"),
+        WALL(IMAGEPATH+"tower.jpg"),
+        CLOUD(IMAGEPATH+"cloud.jpg"),
+        TRANSPARENT(null);
+
+        private String path;
+
+        RESSOURCES(String path) {
+            this.path = path;
+        }
+
+        public String getPath() {
+            return path;
+        }
+    };
 }

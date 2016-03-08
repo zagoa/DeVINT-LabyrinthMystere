@@ -1,16 +1,51 @@
 package dvt.labyrinth.model;
 
+import dvt.labyrinth.ConstantesLabyrinth.RESSOURCES;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 /**
- * Created by etienne on 26/02/16.
+ * Created by Etienne on 26/02/16.
  */
-public class Item {
+public abstract class Item {
 
-    JLabel item;
+    protected RESSOURCES res;
+    protected int x;
+    protected int y;
 
-    public JLabel getItem() {
-        return item;
+    public Item(RESSOURCES res, int x, int y) {
+        this.res = res;
+        this.x = x;
+        this.y = y;
     }
 
+    public RESSOURCES getRes() {
+        return res;
+    }
+
+    public String getResPath() {
+        return res.getPath();
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setRes(RESSOURCES res) {
+        this.res = res;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

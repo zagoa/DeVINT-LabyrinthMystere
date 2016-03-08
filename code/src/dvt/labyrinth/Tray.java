@@ -1,35 +1,31 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.model.DefaultItem;
+import dvt.labyrinth.model.Item;
+
 import java.awt.*;
+import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
  * Created by Arnaud on 26/02/2016.
  */
 public class Tray {
-    private final int nbCase = 17;//nombre de cases par lignes, prenant en compte les Tile Pawn+les Tile wall
     private Tile tray[][];
-
 
     public Tray() {
         tray = new Tile[17][17];
-        for (int i = 0; i < nbCase; i++) {
-            for (int j = 0; j < nbCase; j++) {
-                tray[i][j] = new Tile(i, j,null,false);
+        for (int y = 0; y < NBRE_CASES; y++) {
+            for (int x = 0; x < NBRE_CASES; x++) {
+                // On a wall or not ?
+                RESSOURCES r = (x % 2 == 1 || y % 2 == 1) ? RESSOURCES.WALL : RESSOURCES.TRANSPARENT;
 
+                tray[y][x] = new Tile(x, y, new DefaultItem(r, x, y));
             }
         }
-
     }
-
 
     public Tile[][] getTray() {
         return tray;
     }
-
-    public Tile  getXYTile(int x, int y){
-        return tray[x][y];
-    }
-
-
 
 }
