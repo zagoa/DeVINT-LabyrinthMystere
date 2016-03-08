@@ -9,7 +9,7 @@ import java.awt.*;
 
 import static dvt.devint.ConstantesDevint.SYNTHESE_MAXIMALE;
 
-public class NewJeu extends Jeu {
+public class    NewJeu extends Jeu {
 
     private JPanel world;
     private int y = 0;
