@@ -1,4 +1,4 @@
-package dvt.labyrinth.model.Bonus;
+package dvt.labyrinth.model.bonus;
 
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.model.Pawn;

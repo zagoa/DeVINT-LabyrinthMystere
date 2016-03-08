@@ -21,7 +21,7 @@ public class ConstantesLabyrinth {
     public enum RESSOURCES {
         THEO(IMAGEPATH+"theo.jpg"),
         LEA(IMAGEPATH+"lea.jpg"),
-        WALL(IMAGEPATH+"tower.jpg"),
+        WALL(IMAGEPATH+"murHorizontal.png"),
         CLOUD(IMAGEPATH+"cloud.jpg"),
         TRANSPARENT(null);
 
