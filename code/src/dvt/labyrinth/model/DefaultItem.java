@@ -7,7 +7,7 @@ import dvt.labyrinth.ConstantesLabyrinth;
  */
 public class DefaultItem extends Item {
 
-    public DefaultItem(int x, int y) {
-        super(ConstantesLabyrinth.RESSOURCES.TRANSPARENT, x, y);
+    public DefaultItem() {
+        super(ConstantesLabyrinth.RESSOURCES.TRANSPARENT);
     }
 }

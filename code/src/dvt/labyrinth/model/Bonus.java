@@ -7,7 +7,7 @@ import dvt.labyrinth.ConstantesLabyrinth;
  */
 public class Bonus extends Item{
     //TODO Not needed for MVC
-    public Bonus(ConstantesLabyrinth.RESSOURCES res, int x, int y) {
-        super(res, x, y);
+    public Bonus(ConstantesLabyrinth.RESSOURCES res) {
+        super(res);
     }
 }

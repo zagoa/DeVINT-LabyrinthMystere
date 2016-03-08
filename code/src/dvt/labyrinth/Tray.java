@@ -2,6 +2,7 @@ package dvt.labyrinth;
 
 import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
+import dvt.labyrinth.model.Pawn;
 
 import java.awt.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
@@ -17,7 +18,7 @@ public class Tray {
         for (int y = 0; y < NBRE_CASES; y++) {
             for (int x = 0; x < NBRE_CASES; x++) {
                 // On a wall or not ?
-                tray[y][x] = new Tile(new DefaultItem(x, y));
+                tray[y][x] = new Tile(new DefaultItem(), x, y);
             }
         }
     }
@@ -30,8 +31,20 @@ public class Tray {
         return tray[y][x];
     }
 
-    public void movePlayer(int xBefore, int yBefore, int xAfter, int yAfter) {
-        tray[yAfter][xAfter].setItem(tray[yBefore][xBefore].getItem());
-        tray[yBefore][xBefore].setItem(new DefaultItem(xBefore, yBefore));
+    public void movePlayer(Tile before, Tile after) {
+        int newX = after.getX(); int newY = after.getY();
+        int oldX = before.getX(); int oldY = before.getY();
+
+        after.changePosition(oldX, oldY);
+        before.changePosition(newX, newY);
+
+        System.out.println("before (new) : "+before.getX()+" - "+before.getY());
+
+        tray[newY][newX] = before;
+        tray[oldY][oldX] = after;
+    }
+
+    public void placePlayer(int x, int y, Item player) {
+        tray[y][x].setItem(player);
     }
 }

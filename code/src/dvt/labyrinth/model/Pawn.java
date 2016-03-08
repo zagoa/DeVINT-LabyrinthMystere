@@ -10,8 +10,8 @@ import dvt.labyrinth.Tray;
 public class Pawn extends Item {
     String name;
 
-    public Pawn(String name, RESSOURCES res, int x, int y) {
-        super(res, x, y);
+    public Pawn(String name, RESSOURCES res) {
+        super(res);
 
         this.name = name;
     }

@@ -7,8 +7,8 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
  */
 public class Wall extends Item{
 
-    public Wall(int x, int y) {
-        super(RESSOURCES.WALL, x, y);
+    public Wall() {
+        super(RESSOURCES.WALL);
     }
 
     /*private Tile t1;
