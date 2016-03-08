@@ -17,6 +17,6 @@ public class LeftClickAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        tray.movePawn();
+        tray.moveWall();
     }
 }
