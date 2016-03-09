@@ -13,6 +13,7 @@ public class ConstantesLabyrinth {
     public static final String HELP = "Aide";
     public static final String QUIT = "Quitter";
     public static final String IMAGEPATH = "../ressources/images/";
+    public static final String ARROWPATH = IMAGEPATH+"arrows/";
     public static final String SOUNDPATH = "../ressources/sons/";
     public static final String IMAGEEXT = ".bmp";
 
@@ -23,7 +24,10 @@ public class ConstantesLabyrinth {
         THEO(IMAGEPATH+"theo.jpg"),
         LEA(IMAGEPATH+"lea.jpg"),
         WALL(IMAGEPATH+"murHorizontal.png"),
-        CLOUD(IMAGEPATH+"cloud.jpg"),
+        ARROW_LEFT(ARROWPATH+"arrow_left.png"),
+        ARROW_RIGHT(ARROWPATH+"arrow_right.png"),
+        ARROW_UP(ARROWPATH+"arrow_up.png"),
+        ARROW_DOWN(ARROWPATH+"arrow_down.png"),
         TRANSPARENT(null);
 
         private String path;
