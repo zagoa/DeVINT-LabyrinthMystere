@@ -2,6 +2,7 @@ package dvt.labyrinth;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.actions.MovePlayerAction;
+import dvt.labyrinth.model.Arrow;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Pawn;
 import javafx.geometry.Pos;
@@ -55,13 +56,13 @@ public class Labyrinth extends Jeu{
 
         Tile tile[][] = tray.getTray();
         if (x-CASE_LENGTH >= 0)
-            tile[y][x - CASE_LENGTH].setHighlighted();
+            tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT)); // Left
         if (x+CASE_LENGTH < NBRE_CASES)
-            tile[y][x+CASE_LENGTH].setHighlighted();
+            tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
         if (y-CASE_LENGTH >= 0)
-            tile[y-CASE_LENGTH][x].setHighlighted();
+            tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
         if (y+CASE_LENGTH < NBRE_CASES)
-            tile[y + CASE_LENGTH][x].setHighlighted();
+            tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
 
         addControl("DOWN", new MovePlayerAction(this, DIRECTIONS.BACK));
         addControl("UP", new MovePlayerAction(this, DIRECTIONS.FRONT));
@@ -72,7 +73,7 @@ public class Labyrinth extends Jeu{
     @Override
     public void render() {
         world.setBackground(getBackground());
-        showTray();
+//        showTray();
     }
 
     @Override
@@ -131,18 +132,24 @@ public class Labyrinth extends Jeu{
 
         if (x-CASE_LENGTH >= 0)
             tray.getTile(x-CASE_LENGTH, y).unHighlight();
-        showTray();
 
         if (x+CASE_LENGTH < NBRE_CASES)
             tray.getTile(x+CASE_LENGTH, y).unHighlight();
-        showTray();
 
         if (y-CASE_LENGTH >= 0)
             tray.getTile(x, y-CASE_LENGTH).unHighlight();
-        showTray();
 
         if (y+CASE_LENGTH < NBRE_CASES)
             tray.getTile(x, y+CASE_LENGTH).unHighlight();
+
+        Tile tile[][] = tray.getTray();
+
+        for (int y1 = 0; y1 < tile.length; y1++) {
+            for (int x1 = 0; x1 < tile[y1].length; x1++) {
+                tile[y1][x1].unHighlight();
+            }
+        }
+
         showTray();
     }
 
@@ -182,15 +189,15 @@ public class Labyrinth extends Jeu{
 
         unHighlightAll();
 
-        tray.movePlayer(getPositionPlayer(), tmp);
-
         updatePlayerPos(tmp);
 
         showTray();
     }
 
-    private void updatePlayerPos(Position p) {
-        items.put(currentPlayer, p);
+    private void updatePlayerPos(Position newP) {
+        tray.getTile(newP).setItem(currentPlayer);
+        tray.getTile(items.get(currentPlayer)).setItem(null);
+        items.put(currentPlayer, newP);
     }
 
     public Position getPositionPlayer() {

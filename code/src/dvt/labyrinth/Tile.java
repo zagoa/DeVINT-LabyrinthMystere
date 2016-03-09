@@ -1,5 +1,6 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
 import javafx.geometry.Pos;
 
@@ -54,10 +55,10 @@ public class Tile {
 
     public void setItem(Item item) {
         highlighted = false;
-        this.item = item;
+        this.item = (item != null) ? item : new DefaultItem();
 
-        if (item != null || item.getRes().getPath() == null)
-            component.setIcon(new ImageIcon(item.getRes().getPath()));
+        if (this.item != null || this.item.getRes().getPath() != null)
+            component.setIcon(new ImageIcon(this.item.getRes().getPath()));
         else
             component.setIcon(null);
 
@@ -65,6 +66,13 @@ public class Tile {
     }
 
     public void setHighlighted() {
+        setHighlighted(null);
+    }
+
+    public void setHighlighted(Item itm) {
+        if (itm != null)
+            setItem(itm);
+
         highlighted = true;
 
         editComponent();

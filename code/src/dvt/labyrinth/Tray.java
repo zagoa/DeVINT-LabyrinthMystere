@@ -38,13 +38,6 @@ public class Tray {
         return getTile(position.getX(), position.getY());
     }
 
-    public void movePlayer(Position before, Position after) {
-        Item i = getTile(after).getItem();
-
-        getTile(after).setItem(getTile(before).getItem());
-        getTile(before).setItem(i);
-    }
-
     public void placePlayer(int x, int y, Item player) {
         tray[y][x].setItem(player);
     }
