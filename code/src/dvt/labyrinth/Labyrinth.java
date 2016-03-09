@@ -130,18 +130,6 @@ public class Labyrinth extends Jeu{
         int x = getPositionPlayer().getX();
         int y = getPositionPlayer().getY();
 
-        if (x-CASE_LENGTH >= 0)
-            tray.getTile(x-CASE_LENGTH, y).unHighlight();
-
-        if (x+CASE_LENGTH < NBRE_CASES)
-            tray.getTile(x+CASE_LENGTH, y).unHighlight();
-
-        if (y-CASE_LENGTH >= 0)
-            tray.getTile(x, y-CASE_LENGTH).unHighlight();
-
-        if (y+CASE_LENGTH < NBRE_CASES)
-            tray.getTile(x, y+CASE_LENGTH).unHighlight();
-
         Tile tile[][] = tray.getTray();
 
         for (int y1 = 0; y1 < tile.length; y1++) {
@@ -149,8 +137,6 @@ public class Labyrinth extends Jeu{
                 tile[y1][x1].unHighlight();
             }
         }
-
-        showTray();
     }
 
     public void movePlayer(DIRECTIONS d) {

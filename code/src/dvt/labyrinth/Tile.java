@@ -75,6 +75,7 @@ public class Tile {
 
     public void unHighlight() {
         highlighted = false;
+        setItem(new DefaultItem());
 
         editComponent();
     }
