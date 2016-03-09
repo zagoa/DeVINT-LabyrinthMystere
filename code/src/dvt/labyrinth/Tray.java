@@ -14,7 +14,6 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
  */
 public class Tray {
     private Tile tray[][];
-    ArrayList<Tile> can = new ArrayList<Tile>();
 
     public Tray() {
         tray = new Tile[17][17];
