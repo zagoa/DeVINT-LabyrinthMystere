@@ -41,6 +41,7 @@ public class Labyrinth extends Jeu{
 
         items = new HashMap<>();
 
+        // Keep players
         addPlayers();
 
         showTray();
