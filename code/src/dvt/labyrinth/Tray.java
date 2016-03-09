@@ -18,7 +18,7 @@ public class Tray {
         for (int y = 0; y < NBRE_CASES; y++) {
             for (int x = 0; x < NBRE_CASES; x++) {
                 // On a wall or not ?
-                tray[y][x] = new Tile(new DefaultItem(), x, y);
+                tray[y][x] = new Tile(new DefaultItem(), new Position(x,y));
             }
         }
     }
@@ -31,17 +31,15 @@ public class Tray {
         return tray[y][x];
     }
 
-    public void movePlayer(Tile before, Tile after) {
-        int newX = after.getX(); int newY = after.getY();
-        int oldX = before.getX(); int oldY = before.getY();
+    public Tile getTile(Position position) {
+        return getTile(position.getX(), position.getY());
+    }
 
-        after.changePosition(oldX, oldY);
-        before.changePosition(newX, newY);
+    public void movePlayer(Position before, Position after) {
+        Item i = getTile(after).getItem();
 
-        System.out.println("before (new) : "+before.getX()+" - "+before.getY());
-
-        tray[newY][newX] = before;
-        tray[oldY][oldX] = after;
+        getTile(after).setItem(getTile(before).getItem());
+        getTile(before).setItem(i);
     }
 
     public void placePlayer(int x, int y, Item player) {

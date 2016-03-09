@@ -1,6 +1,7 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.model.Item;
+import javafx.geometry.Pos;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,33 +11,23 @@ import java.awt.*;
  * Created by Arnaud on 26/02/2016.
  */
 public class Tile {
-    private int x;
-    private int y;
+    private Position pos;
     private boolean occupied;
     private Item item;
     private boolean highlighted;
     private JButton component;
 
-    public Tile(int x, int y) {
-        this(null, x, y);
+    public Tile(Position pos) {
+        this(null, pos);
     }
 
-    public Tile(Item item, int x, int y){
+    public Tile(Item item, Position pos){
         this.item = item;
-        this.x = x;
-        this.y = y;
+        this.pos = pos;
 
         occupied = highlighted = false;
 
         createComponent();
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public boolean isOccupied(){
@@ -85,7 +76,7 @@ public class Tile {
         component.setOpaque(true);
         component.setFocusable(true);
 
-        if (y%2 == 1 || x%2 == 1)
+        if (pos.getY()%2 == 1 || pos.getX()%2 == 1)
             component.setBorder(null);
         else
             component.setBorder(new LineBorder(Color.black, 1));
@@ -99,9 +90,12 @@ public class Tile {
         return item;
     }
 
-    public void changePosition(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void changePosition(Position pos) {
+        this.pos = pos;
+    }
+
+    public Position getPosition() {
+        return pos;
     }
 }
 

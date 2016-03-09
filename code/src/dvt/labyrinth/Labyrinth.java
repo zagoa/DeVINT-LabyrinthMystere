@@ -4,6 +4,7 @@ import dvt.devint.Jeu;
 import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Pawn;
+import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 public class Labyrinth extends Jeu{
     private JPanel world;
     private Tray tray;
-    private Map<Item, Tile> items;
+    private Map<Item, Position> items;
     private Pawn currentPlayer;
 
     @Override
@@ -49,8 +50,8 @@ public class Labyrinth extends Jeu{
     }
 
     public void checkMovePositions() {
-        int x = getTilePlayer().getX();
-        int y = getTilePlayer().getY();
+        int x = getPositionPlayer().getX();
+        int y = getPositionPlayer().getY();
 
         Tile tile[][] = tray.getTray();
         if (x-CASE_LENGTH >= 0)
@@ -71,7 +72,7 @@ public class Labyrinth extends Jeu{
     @Override
     public void render() {
         world.setBackground(getBackground());
-//        showTray();
+        showTray();
     }
 
     @Override
@@ -116,17 +117,17 @@ public class Labyrinth extends Jeu{
 
     public void addPlayers() {
         Pawn player = new Pawn("Bernard", RESSOURCES.THEO);
-        Tile t = tray.getTile(8, 10);
-        t.setItem(player);
+        Position pos = new Position(8, 10);
+        tray.getTile(pos).setItem(player);
 
-        items.put(player, t);
+        items.put(player, pos);
 
         currentPlayer = player;
     }
 
     public void unHighlightAll() {
-        int x = getTilePlayer().getX();
-        int y = getTilePlayer().getY();
+        int x = getPositionPlayer().getX();
+        int y = getPositionPlayer().getY();
 
         if (x-CASE_LENGTH >= 0)
             tray.getTile(x-CASE_LENGTH, y).unHighlight();
@@ -150,23 +151,23 @@ public class Labyrinth extends Jeu{
 
         switch (d) {
             case FRONT:
-                xAfter = getTilePlayer().getX();
-                yAfter = getTilePlayer().getY()-CASE_LENGTH;
+                xAfter = getPositionPlayer().getX();
+                yAfter = getPositionPlayer().getY()-CASE_LENGTH;
                 break;
 
             case BACK:
-                xAfter = getTilePlayer().getX();
-                yAfter = getTilePlayer().getY()+CASE_LENGTH;
+                xAfter = getPositionPlayer().getX();
+                yAfter = getPositionPlayer().getY()+CASE_LENGTH;
                 break;
 
             case LEFT:
-                xAfter = getTilePlayer().getX()-CASE_LENGTH;
-                yAfter = getTilePlayer().getY();
+                xAfter = getPositionPlayer().getX()-CASE_LENGTH;
+                yAfter = getPositionPlayer().getY();
                 break;
 
             case RIGHT:
-                xAfter = getTilePlayer().getX()+CASE_LENGTH;
-                yAfter = getTilePlayer().getY();
+                xAfter = getPositionPlayer().getX()+CASE_LENGTH;
+                yAfter = getPositionPlayer().getY();
                 break;
 
             default:
@@ -177,14 +178,22 @@ public class Labyrinth extends Jeu{
                 || yAfter < 0 || yAfter >= NBRE_CASES)
             return;
 
+        Position tmp = new Position(xAfter, yAfter);
+
         unHighlightAll();
 
-        tray.movePlayer(getTilePlayer(), tray.getTile(xAfter, yAfter));
+        tray.movePlayer(getPositionPlayer(), tmp);
+
+        updatePlayerPos(tmp);
 
         showTray();
     }
 
-    public Tile getTilePlayer() {
+    private void updatePlayerPos(Position p) {
+        items.put(currentPlayer, p);
+    }
+
+    public Position getPositionPlayer() {
         return items.get(currentPlayer);
     }
 }
