@@ -72,7 +72,7 @@ public class Labyrinth extends Jeu{
     @Override
     public void render() {
         world.setBackground(getBackground());
-//        showTray();
+        showTray();
     }
 
     @Override

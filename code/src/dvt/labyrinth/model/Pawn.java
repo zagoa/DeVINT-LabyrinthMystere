@@ -16,13 +16,13 @@ public class Pawn extends Item {
         this.name = name;
     }
 
-    public void move(DIRECTIONS d) {
+    /*public void move(DIRECTIONS d) {
         switch (d) {
             case FRONT:
                 y += CASE_LENGTH;
                 break;
         }
-    }
+    }*/
 
     /*public boolean canMove(Tray tray,Directions direction){
         switch (direction) {
