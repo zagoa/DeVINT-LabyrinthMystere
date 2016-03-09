@@ -1,11 +1,22 @@
 package dvt.labyrinth.model;
 
+import dvt.labyrinth.ConstantesLabyrinth;
+import dvt.labyrinth.Tile;
+import dvt.labyrinth.Tray;
+
+import java.util.ArrayList;
+
+import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
+import static dvt.labyrinth.ConstantesLabyrinth.NBRE_CASES;
+
 /**
  * Created by user on 02/03/2016.
  */
+
 public class Player {
     private String name;
     private Pawn pawn;
+    private Tray tray;
     private int time;
     private boolean timeToPlay;
 
@@ -27,5 +38,7 @@ public class Player {
     }
 
     public void turnFinished(){ this.time+=1; }
+
+
 
 }

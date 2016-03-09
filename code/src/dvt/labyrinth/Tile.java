@@ -7,6 +7,10 @@ import javafx.geometry.Pos;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.ArrayList;
+
+import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
+import static dvt.labyrinth.ConstantesLabyrinth.NBRE_CASES;
 
 /**
  * Created by Arnaud on 26/02/2016.
@@ -17,6 +21,7 @@ public class Tile {
     private Item item;
     private boolean highlighted;
     private JButton component;
+
 
     public Tile(Position pos) {
         this(null, pos);
@@ -106,5 +111,8 @@ public class Tile {
     public Position getPosition() {
         return pos;
     }
+
+
+
 }
 

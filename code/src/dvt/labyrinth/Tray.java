@@ -5,6 +5,8 @@ import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Pawn;
 
 import java.awt.*;
+import java.util.ArrayList;
+
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
@@ -38,4 +40,5 @@ public class Tray {
     public void placePlayer(int x, int y, Item player) {
         tray[y][x].setItem(player);
     }
+
 }
