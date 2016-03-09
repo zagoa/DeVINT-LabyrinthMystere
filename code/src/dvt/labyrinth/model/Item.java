@@ -12,8 +12,6 @@ import java.awt.*;
 public abstract class Item {
 
     protected RESSOURCES res;
-    protected int x;
-    protected int y;
 
     public Item(RESSOURCES res) {
         this.res = res;
