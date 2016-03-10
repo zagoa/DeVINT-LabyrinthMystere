@@ -3,31 +3,27 @@ package dvt.labyrinth;
 import dvt.devint.Jeu;
 import dvt.labyrinth.actions.MovePlayerAction;
 
-import dvt.labyrinth.model.Arrow;
-import dvt.labyrinth.model.Item;
-import dvt.labyrinth.model.Pawn;
-import dvt.labyrinth.model.Wall;
-import javafx.geometry.Pos;
+import dvt.labyrinth.model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
- * Created by Arnaud on 26/02/2016.
+ * The Labyrinth class.
+ * It's the game itself.
+ *
+ * @author Arnaud, Thomas, Etienne & Adrian
  */
 public class Labyrinth extends Jeu {
+    // The 'world' : Labyrinth
     private JPanel world;
+    // The tray of the labyrinth
     private Tray tray;
-    private Map<Item, Position> items;
-    private Pawn currentPlayer;
-
+    // The player
+    private Player player;
 
     @Override
     public void init() {
@@ -40,8 +36,6 @@ public class Labyrinth extends Jeu {
 
         tray = new Tray();
 
-        items = new HashMap<>();
-
         // Keep players
         addPlayers();
 
@@ -53,34 +47,34 @@ public class Labyrinth extends Jeu {
         checkMovePositions();
     }
 
+    /**
+     * Check where we can move, and highlight all the tiles (if we can move)
+     */
     public void checkMovePositions() {
-        int x = getPositionPlayer().getX();
-        int y = getPositionPlayer().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
 
         Tile tile[][] = tray.getTray();
-        if (x-CASE_LENGTH >= 0)
+        if (player.canMove(tray, DIRECTIONS.LEFT))
             tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT)); // Left
-        if (x+CASE_LENGTH < NBRE_CASES)
+        if (player.canMove(tray, DIRECTIONS.RIGHT))
             tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
-        if (y-CASE_LENGTH >= 0)
+        if (player.canMove(tray, DIRECTIONS.FRONT))
             tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
-        if (y+CASE_LENGTH < NBRE_CASES)
+        if (player.canMove(tray, DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
 
-        addControl("DOWN", new MovePlayerAction(this, DIRECTIONS.BACK));
-        addControl("UP", new MovePlayerAction(this, DIRECTIONS.FRONT));
-        addControl("LEFT", new MovePlayerAction(this, DIRECTIONS.LEFT));
-        addControl("RIGHT", new MovePlayerAction(this, DIRECTIONS.RIGHT));
-
+        addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
+        addControlUp(KeyEvent.VK_UP, new MovePlayerAction(this, DIRECTIONS.FRONT));
+        addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
+        addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
 
 
     @Override
     public void render() {
-
         world.setBackground(getBackground());
-//        showTray();
     }
 
     @Override
@@ -88,15 +82,20 @@ public class Labyrinth extends Jeu {
 
     }
 
+    /**
+     * Display the grid/tray
+     */
     public void showTray() {
         Tile tile[][] = tray.getTray();
 
         for (int y = 0; y < tile.length; y++) {
             for (int x = 0; x < tile[y].length; x++) {
 
-                if (x % 2 == 1) //creation des murs
+                if (tile[y][x].isAWall()) { // Walls
                     tile[y][x].getComponent().setPreferredSize(new Dimension(10, ((y % 2 == 1) ? 10 : 50)));
-                else //creation des cases de déplacements
+                    tile[y][x].setListenerWall(this);
+                }
+                else // Move tiles
                     tile[y][x].getComponent().setPreferredSize(new Dimension(100, ((y % 2 == 1) ? 10 : 50)));
 
                 world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
@@ -104,14 +103,24 @@ public class Labyrinth extends Jeu {
         }
     }
 
+    /**
+     * Display process (GridBagLayout)
+     *
+     * @param x
+     *          The x coordinate (grid)
+     * @param y
+     *          The y coordinate (grid)
+     *
+     * @return the constraint (layout)
+     */
     public GridBagConstraints getGridBagConstraints(int x, int y) {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.CENTER;
         c.gridx = x;
         c.gridy = y;
 
-        if (y % 2 == 1) // Ligne de murs
-            c.gridwidth = (x % 2 == 0) ? 2 : 1; // Enlever la petite case
+        if (y % 2 == 1) // Wall
+            c.gridwidth = (x % 2 == 0) ? 2 : 1; // Remove the small square
         else
             c.gridwidth = 1;
 
@@ -124,78 +133,41 @@ public class Labyrinth extends Jeu {
         return c;
     }
 
+    /**
+     * Create players
+     */
     public void addPlayers() {
-        Pawn player = new Pawn("Bernard", RESSOURCES.THEO);
-        Position pos = new Position(8, 10);
-        tray.getTile(pos).setItem(player);
-
-        items.put(player, pos);
-
-        currentPlayer = player;
+        player = new Player("Bernard", new Pawn(RESSOURCES.THEO), 0, true);
+        player.setPos(new Position(8, 10), tray);
     }
 
+    /**
+     * Method to unlight all the tiles near the player
+     */
     public void unHighlightAll() {
-        int x = getPositionPlayer().getX();
-        int y = getPositionPlayer().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
 
-        Tile tile[][] = tray.getTray();
+        if (x-CASE_LENGTH >= 0 && tray.getTile(x-CASE_LENGTH, y).isHighlighted()) // Left is highlighted?
+            tray.getTile(x-CASE_LENGTH, y).unHighlight();
 
-        for (int y1 = 0; y1 < tile.length; y1++) {
-            for (int x1 = 0; x1 < tile[y1].length; x1++) {
-                tile[y1][x1].unHighlight();
-            }
-        }
+        if (x+CASE_LENGTH <= NBRE_CASES-1 && tray.getTile(x+CASE_LENGTH, y).isHighlighted()) // Right is highlighted?
+            tray.getTile(x+CASE_LENGTH, y).unHighlight();
+
+        if (y-CASE_LENGTH >= 0 && tray.getTile(x, y-CASE_LENGTH).isHighlighted()) // Up is highlighted?
+            tray.getTile(x, y-CASE_LENGTH).unHighlight();
+
+        if (y+CASE_LENGTH <= NBRE_CASES-1 && tray.getTile(x, y+CASE_LENGTH).isHighlighted()) // Back is highlighted?
+            tray.getTile(x, y+CASE_LENGTH).unHighlight();
     }
 
+    /**
+     * Move the player
+     *
+     * @param d a direction where to move
+     */
     public void movePlayer(DIRECTIONS d) {
-        int xAfter, yAfter;
-
-        switch (d) {
-            case FRONT:
-                xAfter = getPositionPlayer().getX();
-                yAfter = getPositionPlayer().getY()-CASE_LENGTH;
-                break;
-
-            case BACK:
-                xAfter = getPositionPlayer().getX();
-                yAfter = getPositionPlayer().getY()+CASE_LENGTH;
-                break;
-
-            case LEFT:
-                xAfter = getPositionPlayer().getX()-CASE_LENGTH;
-                yAfter = getPositionPlayer().getY();
-                break;
-
-            case RIGHT:
-                xAfter = getPositionPlayer().getX()+CASE_LENGTH;
-                yAfter = getPositionPlayer().getY();
-                break;
-
-            default:
-                return;
-        }
-
-        if (xAfter < 0 || xAfter >= NBRE_CASES
-                || yAfter < 0 || yAfter >= NBRE_CASES)
-            return;
-
-        Position tmp = new Position(xAfter, yAfter);
-
         unHighlightAll();
-
-        updatePlayerPos(tmp);
-
-        showTray();
+        player.move(tray, d);
     }
-
-    private void updatePlayerPos(Position newP) {
-        tray.getTile(newP).setItem(currentPlayer);
-        tray.getTile(items.get(currentPlayer)).setItem(null);
-        items.put(currentPlayer, newP);
-    }
-
-    public Position getPositionPlayer() {
-        return items.get(currentPlayer);
-    }
-
 }

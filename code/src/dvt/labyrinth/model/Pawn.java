@@ -10,9 +10,7 @@ import dvt.labyrinth.Tray;
 import java.util.ArrayList;
 
 public class Pawn extends Item {
-
     public Pawn(RESSOURCES res) {
         super(res);
     }
-
-   }
+}
