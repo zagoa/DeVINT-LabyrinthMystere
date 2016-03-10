@@ -6,10 +6,11 @@ Le jeu se termine quand un des deux joueurs est arrivé sur la ligne de départ 
 
 ### Public visé
   Le jeu vise un utilisateur :
-  * âgé de 14 à 24 ans (des **ados** donc)
-  * de niveau CE1 - CM2
-  * étant mal voyant ou avec un autre handicap (**MVBV** et **MVVR**)
-  * n’étant pas forcément habile devant un ordinateur
+
+  - âgé de 14 à 24 ans (des **ados** donc)
+  - de niveau CE1 - CM2
+  - étant mal voyant ou avec un autre handicap (**MVBV** et **MVVR**)
+  - n’étant pas forcément habile devant un ordinateur
 
 
 ### L'équipe
