@@ -1,12 +1,15 @@
 package dvt.labyrinth;
 
+import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
-import javafx.geometry.Pos;
+import dvt.labyrinth.model.Wall;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
@@ -27,7 +30,7 @@ public class Tile {
         this(null, pos);
     }
 
-    public Tile(Item item, Position pos){
+    public Tile(Item item, Position pos) {
         this.item = item;
         this.pos = pos;
 
@@ -36,16 +39,17 @@ public class Tile {
         createComponent();
     }
 
-    public boolean isOccupied(){
+    public boolean isOccupied() {
         return occupied;
     }
 
     public void createComponent() {
-        if (item == null || item.getRes().getPath() == null)
+        if (item == null || item.getRes().getPath() == null) {
             component = new JButton();
-        else
+            if (isAWall()) component.addActionListener(new PutWall(this));
+        } else {
             component = new JButton(new ImageIcon(item.getRes().getPath()));
-
+        }
         editComponent();
     }
 
@@ -80,6 +84,7 @@ public class Tile {
 
     public void unHighlight() {
         highlighted = false;
+        setItem(new DefaultItem());
 
         editComponent();
     }
@@ -89,7 +94,7 @@ public class Tile {
         component.setOpaque(true);
         component.setFocusable(true);
 
-        if (pos.getY()%2 == 1 || pos.getX()%2 == 1)
+        if (pos.getY() % 2 == 1 || pos.getX() % 2 == 1)
             component.setBorder(null);
         else
             component.setBorder(new LineBorder(Color.black, 1));
@@ -111,7 +116,12 @@ public class Tile {
         return pos;
     }
 
+    public boolean isAWall() {
+        return (pos.getX() % 2 == 1 || pos.getY() % 2 == 1);
+    }
 
-
+    public void putWall() {
+        setItem(new Wall());
+    }
 }
 

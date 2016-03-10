@@ -4,6 +4,7 @@ import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Pawn;
 
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -40,5 +41,4 @@ public class Tray {
     public void placePlayer(int x, int y, Item player) {
         tray[y][x].setItem(player);
     }
-
 }
