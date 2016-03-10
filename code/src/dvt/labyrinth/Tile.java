@@ -25,7 +25,6 @@ public class Tile {
     private boolean highlighted;
     private JButton component;
 
-
     public Tile(Position pos) {
         this(null, pos);
     }
@@ -49,9 +48,6 @@ public class Tile {
         else
             component = new JButton(new ImageIcon(item.getRes().getPath()));
 
-        if (isAWall())
-            component.addActionListener(new PutWall(this));
-
         editComponent();
     }
 
@@ -61,7 +57,12 @@ public class Tile {
 
     public void setItem(Item item) {
         highlighted = false;
-        this.item = (item != null) ? item : new DefaultItem();
+
+        if (item == null) {
+            this.item = new DefaultItem();
+            occupied = false;
+        } else
+            this.item = item;
 
         if (this.item != null || this.item.getRes().getPath() != null)
             component.setIcon(new ImageIcon(this.item.getRes().getPath()));
@@ -69,6 +70,11 @@ public class Tile {
             component.setIcon(null);
 
         editComponent();
+    }
+
+    public void setPawn(Item item) {
+        occupied = true;
+        setItem(item);
     }
 
     public void setHighlighted() {
@@ -85,7 +91,7 @@ public class Tile {
     }
 
     public void unHighlight() {
-        highlighted = false;
+        highlighted = occupied = false;
         setItem(new DefaultItem());
 
         editComponent();
@@ -96,9 +102,11 @@ public class Tile {
         component.setOpaque(true);
         component.setFocusable(false);
 
-        if ((pos.getY() % 2 == 1 || pos.getX() % 2 == 1) && this.item.getResPath() == null) // On a wall
+        if (isAWall() && this.item.getResPath() == null) // On a POSSIBLE wall
             component.setBorder(null);
-        else
+        else if (pos.getY() % 2 == 1) // On a line of walls
+            component.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
+        else // On a wall or on an other thing
             component.setBorder(new LineBorder(Color.black, 1));
     }
 
@@ -123,7 +131,17 @@ public class Tile {
     }
 
     public void putWall() {
+        occupied = true;
         setItem(new Wall());
+    }
+
+    public void setOccupied() {
+        this.occupied = true;
+    }
+
+    public void setListenerWall(Labyrinth lab) {
+        if (isAWall())
+            component.addActionListener(new PutWall(lab, this));
     }
 }
 

@@ -1,6 +1,5 @@
 package dvt.labyrinth.model;
 
-import dvt.labyrinth.ConstantesLabyrinth;
 import dvt.labyrinth.Position;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
@@ -9,84 +8,90 @@ import dvt.labyrinth.Tray;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
-import static dvt.labyrinth.ConstantesLabyrinth.NBRE_CASES;
+import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
  * Created by user on 02/03/2016.
  */
 
 public class Player {
+    // His name
     private String name;
+    // Item
     private Pawn pawn;
-    private Tray tray;
+
     private int time;
     private boolean timeToPlay;
-    ArrayList<Tile> can = new ArrayList<>();
-    private Map<Item, Position> items;
 
+    // Check if can set a wall
+    private ArrayList<Tile> can = new ArrayList<>();
 
-    public Player(String name, Pawn pawn,int time, boolean timeToPlay){
+    // His position
+    private Position pos;
+
+    public Player(String name, Pawn pawn, int time, boolean timeToPlay){
         this.name = name;
         this.pawn = pawn;
         this.time = time;
         this.timeToPlay = timeToPlay;
     }
 
-    public void move(ConstantesLabyrinth.DIRECTIONS d) {
-        int x = getPositionPlayer().getX();
-        int y = getPositionPlayer().getY();
+    public boolean move(Tray tray, DIRECTIONS d) {
+        int x = pos.getX();
+        int y = pos.getY();
+
         switch (d) {
             case FRONT:
-                if(canMove(ConstantesLabyrinth.DIRECTIONS.FRONT)) {
-                    updatePlayerPos(new Position(x,y -= CASE_LENGTH) );
-                    break;
-                }
+                if(canMove(tray, DIRECTIONS.FRONT))
+                    updatePlayerPos(tray, new Position(x, y - CASE_LENGTH));
+                break;
+
             case BACK:
-                if(canMove(ConstantesLabyrinth.DIRECTIONS.BACK)) {
-                    updatePlayerPos(new Position(x,y += CASE_LENGTH) );
-                    break;
-                }
+                if(canMove(tray, DIRECTIONS.BACK))
+                    updatePlayerPos(tray, new Position(x, y + CASE_LENGTH));
+                break;
+
             case RIGHT:
-                if(canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT)) {
-                    updatePlayerPos(new Position(x+CASE_LENGTH, y) );
-                    break;
-                }
+                if(canMove(tray, DIRECTIONS.RIGHT))
+                    updatePlayerPos(tray, new Position(x + CASE_LENGTH, y));
+                break;
+
             case LEFT:
-                if(canMove(ConstantesLabyrinth.DIRECTIONS.LEFT)) {
-                    updatePlayerPos(new Position(x-CASE_LENGTH, y) );
-                    break;
-                }
+                if(canMove(tray, DIRECTIONS.LEFT))
+                    updatePlayerPos(tray, new Position(x - CASE_LENGTH, y));
+                break;
+
+            default:
+                break;
         }
+
+        return true;
     }
 
-    public boolean canMove(ConstantesLabyrinth.DIRECTIONS direction){
-        int x = getPositionPlayer().getX();
-        int y = getPositionPlayer().getY();
+    public boolean canMove(Tray tray, DIRECTIONS direction){
+        int x = pos.getX();
+        int y = pos.getY();
+
         switch (direction) {
             case FRONT:
-                if (y == 0) return false;
-                if (tray.getTile(x,y-1).isOccupied()){ return false; }
-                if (tray.getTile(x,y-2).isOccupied()){ return false; }
-                return true;
+                return (y-CASE_LENGTH >= 0
+                        && !tray.getTile(x, y-WALL_LENGTH).isOccupied()
+                        && !tray.getTile(x, y-CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                if (y == NBRE_CASES-1) return false;
-                if (tray.getTile(x, y+1).isOccupied()){ return false; }
-                if (tray.getTile(x, y+2).isOccupied()){ return false; }
-                return true;
+                return (y+CASE_LENGTH <= NBRE_CASES-1
+                        && !tray.getTile(x, y+WALL_LENGTH).isOccupied()
+                        && !tray.getTile(x, y+CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                if (x ==NBRE_CASES-1) return false;
-                if (tray.getTile(x+1, y).isOccupied()){ return false; }
-                if (tray.getTile(x+2, y).isOccupied()){ return false; }
-                return true;
+                return (x+CASE_LENGTH <= NBRE_CASES-1
+                        && !tray.getTile(x+WALL_LENGTH, y).isOccupied()
+                        && !tray.getTile(x+CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
             case LEFT:
-                if (x ==0) return false;
-                if (tray.getTile(x-1, y).isOccupied()){ return false; }
-                if (tray.getTile(x-2, y).isOccupied()){ return false; }
-                return true;
+                return (x-CASE_LENGTH >= 0
+                        && !tray.getTile(x-WALL_LENGTH, y).isOccupied()
+                        && !tray.getTile(x-CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
             default:
                 return false;
@@ -104,34 +109,34 @@ public class Player {
 
 
     public void hasAccessTo(Tray tray) {
-        can.add(this.tray.getTile(getPositionPlayer().getX() , getPositionPlayer().getY()));
+        can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
         int i=0;
         for(can.get(i); i == can.size(); i++){
             int x = can.get(i).getPosition().getX();
             int y = can.get(i).getPosition().getY();
-            if (canMove(ConstantesLabyrinth.DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y))) {
+            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y))) {
                 can.add(tray.getTile(x+2,y));
             }
-            if (canMove(ConstantesLabyrinth.DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y))) {
+            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y))) {
                 can.add(tray.getTile(x-2,y));
             }
-            if (canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2))) {
+            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2))) {
                 can.add(tray.getTile(x,y+2));
             }
-            if (canMove(ConstantesLabyrinth.DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2))) {
+            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2))) {
                 can.add(tray.getTile(x,y-2));
             }
         }
     }
 
-    public Position getPositionPlayer() { return items.get(pawn); }
+    public Position getPosition() { return pos; }
 
-    private void updatePlayerPos(Position newP) {
-        tray.getTile(newP).setItem(pawn);
-        tray.getTile(items.get(pawn)).setItem(null);
-        items.put(pawn, newP);
+    private void updatePlayerPos(Tray tray, Position newP) {
+        tray.getTile(newP).setPawn(pawn);
+        tray.getTile(pos).setItem(null);
+
+        pos = newP;
     }
-
 
     public boolean isTimeToPlay(){
         return timeToPlay;
@@ -144,4 +149,9 @@ public class Player {
 
     public void turnFinished(){ this.time+=1; }
 
+    public void setPos(Position pos, Tray tray) {
+        this.pos = pos;
+
+        tray.getTile(pos).setPawn(pawn);
+    }
 }

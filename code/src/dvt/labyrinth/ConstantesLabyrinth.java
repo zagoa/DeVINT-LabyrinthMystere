@@ -7,6 +7,7 @@ public class ConstantesLabyrinth {
     public static final String TITLE_GAME = "Labyrinthe Mystère";
     public static final int NBRE_CASES = 17;
     public static final int CASE_LENGTH = 2;
+    public static final int WALL_LENGTH = 1;
 
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";

@@ -10,12 +10,7 @@ import dvt.labyrinth.Tray;
 import java.util.ArrayList;
 
 public class Pawn extends Item {
-    String name;
-
-    public Pawn(String name, RESSOURCES res) {
+    public Pawn(RESSOURCES res) {
         super(res);
-
-        this.name = name;
     }
-
-   }
+}

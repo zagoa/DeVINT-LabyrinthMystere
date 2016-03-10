@@ -16,15 +16,19 @@ import java.awt.event.ActionListener;
 public class PutWall implements ActionListener {
 
     private Tile tile;
+    private Labyrinth lab;
 
-    public PutWall(Tile tile){
+    public PutWall(Labyrinth lab, Tile tile){
         this.tile = tile;
+        this.lab = lab;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton b = (JButton)e.getSource();
-        tile.putWall();
+        if (tile.isAWall()) {
+            tile.putWall();
+            lab.unHighlightAll(); // If we've just blocked the player
+        }
     }
 }
 
