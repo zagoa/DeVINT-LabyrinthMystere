@@ -11,6 +11,7 @@ import java.awt.*;
  */
 public abstract class Item {
 
+
     protected RESSOURCES res;
 
     public Item(RESSOURCES res) {
@@ -28,4 +29,6 @@ public abstract class Item {
     public void setRes(RESSOURCES res) {
         this.res = res;
     }
+
+
 }

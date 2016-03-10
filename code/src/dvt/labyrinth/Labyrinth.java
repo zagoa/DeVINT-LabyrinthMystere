@@ -2,15 +2,16 @@ package dvt.labyrinth;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.actions.MovePlayerAction;
+
 import dvt.labyrinth.model.Arrow;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.model.Wall;
 import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 /**
  * Created by Arnaud on 26/02/2016.
  */
-public class Labyrinth extends Jeu{
+public class Labyrinth extends Jeu {
     private JPanel world;
     private Tray tray;
     private Map<Item, Position> items;
@@ -70,6 +71,7 @@ public class Labyrinth extends Jeu{
         addControl("UP", new MovePlayerAction(this, DIRECTIONS.FRONT));
         addControl("LEFT", new MovePlayerAction(this, DIRECTIONS.LEFT));
         addControl("RIGHT", new MovePlayerAction(this, DIRECTIONS.RIGHT));
+
     }
 
     public void move(ConstantesLabyrinth.DIRECTIONS d) {
@@ -165,6 +167,7 @@ public class Labyrinth extends Jeu{
 
     @Override
     public void render() {
+
         world.setBackground(getBackground());
 //        showTray();
     }
@@ -179,9 +182,10 @@ public class Labyrinth extends Jeu{
 
         for (int y = 0; y < tile.length; y++) {
             for (int x = 0; x < tile[y].length; x++) {
-                if (x % 2 == 1)
+
+                if (x % 2 == 1) //creation des murs
                     tile[y][x].getComponent().setPreferredSize(new Dimension(10, ((y % 2 == 1) ? 10 : 50)));
-                else
+                else //creation des cases de déplacements
                     tile[y][x].getComponent().setPreferredSize(new Dimension(100, ((y % 2 == 1) ? 10 : 50)));
 
                 world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
@@ -282,4 +286,5 @@ public class Labyrinth extends Jeu{
     public Position getPositionPlayer() {
         return items.get(currentPlayer);
     }
+
 }
