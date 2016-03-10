@@ -14,8 +14,11 @@ Le jeu se termine quand un des deux joueurs est arrivé sur la ligne de départ 
 
 #### L'équipe
 **Arnaud ZAGO** - SI3, Polytech Nice-Sophia
+
 **Thomas de la RED** - SI3, Polytech Nice-Sophia
+
 **Etienne LASKAR** - SI3, Polytech Nice-Sophia
+
 **Adrian PALUMBO** - SI3, Polytech Nice-Sophia
 
 
