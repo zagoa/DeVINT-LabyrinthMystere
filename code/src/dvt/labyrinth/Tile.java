@@ -44,12 +44,14 @@ public class Tile {
     }
 
     public void createComponent() {
-        if (item == null || item.getRes().getPath() == null) {
+        if (item == null || item.getRes().getPath() == null)
             component = new JButton();
-            if (isAWall()) component.addActionListener(new PutWall(this));
-        } else {
+        else
             component = new JButton(new ImageIcon(item.getRes().getPath()));
-        }
+
+        if (isAWall())
+            component.addActionListener(new PutWall(this));
+
         editComponent();
     }
 
@@ -92,9 +94,9 @@ public class Tile {
     public void editComponent() {
         component.setBackground((highlighted) ? Color.YELLOW : null);
         component.setOpaque(true);
-        component.setFocusable(true);
+        component.setFocusable(false);
 
-        if (pos.getY() % 2 == 1 || pos.getX() % 2 == 1)
+        if ((pos.getY() % 2 == 1 || pos.getX() % 2 == 1) && this.item.getResPath() == null) // On a wall
             component.setBorder(null);
         else
             component.setBorder(new LineBorder(Color.black, 1));

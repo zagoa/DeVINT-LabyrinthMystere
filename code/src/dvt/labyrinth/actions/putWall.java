@@ -19,14 +19,12 @@ public class PutWall implements ActionListener {
 
     public PutWall(Tile tile){
         this.tile = tile;
-
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        tile.setItem(new Wall());
-
-        }
+        JButton b = (JButton)e.getSource();
+        tile.putWall();
     }
+}
 
