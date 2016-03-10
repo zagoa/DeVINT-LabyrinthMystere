@@ -120,6 +120,8 @@ public class Tile {
         return (pos.getX() % 2 == 1 || pos.getY() % 2 == 1);
     }
 
-
+    public void putWall() {
+        setItem(new Wall());
+    }
 }
 
