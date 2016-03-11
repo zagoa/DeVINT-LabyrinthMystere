@@ -3,7 +3,9 @@ package dvt.labyrinth.model;
 import dvt.labyrinth.ConstantesLabyrinth;
 
 /**
- * Created by Adrian on 08/03/2016.
+ * A default item (blank)
+ *
+ * @author Adrian
  */
 public class DefaultItem extends Item {
 

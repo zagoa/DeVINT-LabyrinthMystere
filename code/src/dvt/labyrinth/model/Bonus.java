@@ -3,7 +3,9 @@ package dvt.labyrinth.model;
 import dvt.labyrinth.ConstantesLabyrinth;
 
 /**
- * Created by etienne on 26/02/16.
+ * A bonus item
+ *
+ * @author Etienne
  */
 public class Bonus extends Item{
     //TODO Not needed for MVC

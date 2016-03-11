@@ -1,40 +1,58 @@
 package dvt.labyrinth;
 
 /**
- * Created by Adrian on 09/03/2016.
+ * This class is used to keep x & y coordinates.
+ * We use them with Players
+ *
+ * @author Adrian & Thomas
  */
 public class Position {
     private int x;
     private int y;
 
+    /**
+     * Constructor
+     *
+     * @param x
+     *          The x coordinate
+     * @param y
+     *          The y coordinate
+     */
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Getter on x
+     * @return x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Getter on y
+     * @return y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Setter on x
+     * @param x
+     *          The new x value
+     */
     public void setX(int x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    /**
+     * Setter on y
+     * @param y
+     *          The new y value
+     */public void setY(int y) {
         this.y = y;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Position)) return false;
-
-        Position pos = (Position)obj;
-
-        return (pos.getX() == x && pos.getY() == y); // Same position
     }
 }
