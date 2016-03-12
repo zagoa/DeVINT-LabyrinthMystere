@@ -20,17 +20,23 @@ public class Player {
     // Item
     private Pawn pawn;
 
+    private int time;
     private boolean timeToPlay;
 
     // Check if can set a wall
     private ArrayList<Tile> can = new ArrayList<>();
 
+    // His original position
+    private Position originalPos;
     // His position
     private Position pos;
 
-    public Player(String name, Pawn pawn){
+    public Player(String name, Pawn pawn, Position pos, Tray tray){
         this.name = name;
         this.pawn = pawn;
+        this.originalPos = pos;
+
+        setPos(pos, tray);
     }
 
     public boolean move(Tray tray, DIRECTIONS d) {
@@ -39,30 +45,36 @@ public class Player {
 
         switch (d) {
             case FRONT:
-                if(canMove(tray, DIRECTIONS.FRONT))
+                if(canMove(tray, DIRECTIONS.FRONT)) {
                     updatePlayerPos(tray, new Position(x, y - CASE_LENGTH));
-                break;
+                    return true;
+                }
+                return false;
 
             case BACK:
-                if(canMove(tray, DIRECTIONS.BACK))
+                if(canMove(tray, DIRECTIONS.BACK)) {
                     updatePlayerPos(tray, new Position(x, y + CASE_LENGTH));
-                break;
+                    return true;
+                }
+                return false;
 
             case RIGHT:
-                if(canMove(tray, DIRECTIONS.RIGHT))
+                if(canMove(tray, DIRECTIONS.RIGHT)) {
                     updatePlayerPos(tray, new Position(x + CASE_LENGTH, y));
-                break;
+                    return true;
+                }
+                return false;
 
             case LEFT:
-                if(canMove(tray, DIRECTIONS.LEFT))
+                if(canMove(tray, DIRECTIONS.LEFT)) {
                     updatePlayerPos(tray, new Position(x - CASE_LENGTH, y));
-                break;
+                    return true;
+                }
+                return false;
 
             default:
-                break;
+                return false;
         }
-
-        return true;
     }
 
     public boolean canMove(Tray tray, DIRECTIONS direction){
@@ -97,7 +109,7 @@ public class Player {
 
     public boolean isBlocked(Tray tray){
         hasAccessTo(tray);
-        //It represent if the pawn is on the last line, so he can finish the game
+        //It represent if the pan is on the last line, so he can finish the game
         for(int i=0;i<NBRE_CASES;i+=2) {
             if (can.contains(tray.getTile(i, 0))) return true;
         }
@@ -147,5 +159,22 @@ public class Player {
 
     public void setTimeToPlay(boolean bool){
         this.timeToPlay = bool;
+    }
+
+    public boolean hasWon() {
+        switch (originalPos.getY()) {
+            case 0: // Top of the tray
+                return (pos.getY() == NBRE_CASES-1);
+
+            case NBRE_CASES-1:
+                return (pos.getY() == 0);
+
+            default:
+                return false;
+        }
+    }
+
+    public String getName() {
+        return name;
     }
 }

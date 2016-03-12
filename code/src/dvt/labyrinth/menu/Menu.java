@@ -12,6 +12,7 @@ import javax.swing.*;
 import static dvt.devint.ConstantesDevint.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.devint.Fenetre;
+import dvt.labyrinth.game.TwoPlayers;
 
 /**
  * Menu inspiré du menu principal.
@@ -47,7 +48,8 @@ public class Menu extends Fenetre {
         addLabel(TITLE_GAME);
 
         // les options possibles
-        addMenu(ONEPLAYER,new ActionMenu(this,1));
+        // TODO : Faire One Player
+//        addMenu(ONEPLAYER,new ActionMenu(this,1));
         addMenu(TWOPLAYERS, new ActionMenu(this,2));
         addMenu(HELP, new ActionMenu(this, 3));
         addMenu(QUIT, new ActionMenu(this, 5));
@@ -78,15 +80,15 @@ public class Menu extends Fenetre {
                 this.getSIVOX().stop();
                 switch (gameChoice) {
                     case 1: // Un joueur
-                        new dvt.labyrinth.Labyrinth().loop();
+                        JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
                         break;
 
                     case 2: // Deux joueurs
-                        JOptionPane.showMessageDialog(null, "2 joueurs", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        new TwoPlayers().loop();
                         break;
 
                     case 3: // Aide
-                        JOptionPane.showMessageDialog(null, "Aide", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
                         break;
 
                     default:

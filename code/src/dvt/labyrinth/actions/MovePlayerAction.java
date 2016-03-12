@@ -1,38 +1,38 @@
 package dvt.labyrinth.actions;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
-import dvt.labyrinth.Labyrinth;
-import dvt.labyrinth.model.Game1vs1;
+import dvt.labyrinth.game.TwoPlayers;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created by Adrian on 08/03/2016.
+ * An action : move the player (keyboard arrows)
  */
 public class MovePlayerAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
-    private transient Labyrinth fenetre;
-    private transient Game1vs1 window;
+
+    // The game
+    private transient TwoPlayers fenetre;
+    // The direction of the movement
     private DIRECTIONS directions;
 
     /**
-     * Le constructeur appele lors de l'appuie sur la touche "BAS"
-     * @param fenetre La fenetre que l'on utilise
-     * @author Justal Kevin
+     * Constructor
+     *
+     * @param fenetre
+     *          The game
+     * @param d
+     *          The direction of the movement we need to catch
      */
-    public MovePlayerAction(Labyrinth fenetre, DIRECTIONS d) {
+    public MovePlayerAction(TwoPlayers fenetre, DIRECTIONS d) {
         this.fenetre = fenetre;
-        this.directions = d;
-    }
-
-    public MovePlayerAction(Game1vs1 window, DIRECTIONS d) {
-        this.window = window;
         this.directions = d;
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        // Move the player
         fenetre.movePlayer(directions);
     }
 }

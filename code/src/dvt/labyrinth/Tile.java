@@ -1,6 +1,7 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.actions.PutWall;
+import dvt.labyrinth.game.TwoPlayers;
 import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Game1vs1;
 import dvt.labyrinth.model.Item;
@@ -9,27 +10,43 @@ import dvt.labyrinth.model.Wall;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-
-import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
-import static dvt.labyrinth.ConstantesLabyrinth.NBRE_CASES;
 
 /**
- * Created by Arnaud on 26/02/2016.
+ * A tile.
+ *
+ * @author Arnaud
  */
 public class Tile {
+    // The position
     private Position pos;
+    // Is the tile occupied ?
     private boolean occupied;
+    // The item on the tile
     private Item item;
+    // Is the tile highlighted ?
     private boolean highlighted;
+    // The component related to the tile
     private JButton component;
 
+    /**
+     * A constructor where we don't
+     * need to set an item on the tile
+     *
+     * @param pos
+     *          The position of the tile
+     */
     public Tile(Position pos) {
         this(null, pos);
     }
 
+    /**
+     * The constructor
+     *
+     * @param item
+     *          The item on the tile
+     * @param pos
+     *          The position of the tile
+     */
     public Tile(Item item, Position pos) {
         this.item = item;
         this.pos = pos;
@@ -39,10 +56,18 @@ public class Tile {
         createComponent();
     }
 
+    /**
+     * Is the tile occupied ?
+     * @return true / false
+     */
     public boolean isOccupied() {
         return occupied;
     }
 
+    /**
+     * Create the component (JButton)
+     * of the tile.
+     */
     public void createComponent() {
         if (item == null || item.getRes().getPath() == null)
             component = new JButton();
@@ -52,10 +77,19 @@ public class Tile {
         editComponent();
     }
 
+    /**
+     * Get the component
+     * @return The component - JButton
+     */
     public JButton getComponent() {
         return component;
     }
 
+    /**
+     * Set a new item on the tile
+     * @param item
+     *          The new item to set
+     */
     public void setItem(Item item) {
         highlighted = false;
 
@@ -73,15 +107,34 @@ public class Tile {
         editComponent();
     }
 
+    /**
+     * Set a particular item (a pawn)
+     * on the tile. We need to say that
+     * the tile is occupied.
+     *
+     * @param item
+     *          The pawn item
+     */
     public void setPawn(Item item) {
         occupied = true;
         setItem(item);
     }
 
+    /**
+     * Highlight the tile without
+     * setting an item
+     */
     public void setHighlighted() {
         setHighlighted(null);
     }
 
+    /**
+     * Hightlight the tile and set an
+     * item (maybe an arrow ?)
+     *
+     * @param itm
+     *          The item to set
+     */
     public void setHighlighted(Item itm) {
         if (itm != null)
             setItem(itm);
@@ -91,6 +144,11 @@ public class Tile {
         editComponent();
     }
 
+    /**
+     * "Un-highlight" the tile
+     * and replace the item with
+     * a Default Item.
+     */
     public void unHighlight() {
         highlighted = occupied = false;
         setItem(new DefaultItem());
@@ -98,6 +156,9 @@ public class Tile {
         editComponent();
     }
 
+    /**
+     * Refresh the component
+     */
     public void editComponent() {
         component.setBackground((highlighted) ? Color.YELLOW : null);
         component.setOpaque(true);
@@ -111,36 +172,64 @@ public class Tile {
             component.setBorder(new LineBorder(Color.black, 1));
     }
 
+    /**
+     * Is the tile highlighted ?
+     * @return true / false
+     */
     public boolean isHighlighted() {
         return highlighted;
     }
 
+    /**
+     * Getter on the item
+     * @return The item
+     */
     public Item getItem() {
         return item;
     }
 
-    public void changePosition(Position pos) {
-        this.pos = pos;
-    }
-
+    /**
+     * Getter on the position
+     * @return The position
+     */
     public Position getPosition() {
         return pos;
     }
 
+    /**
+     * Check if the tile is a wall
+     * based on its Position
+     *
+     * @return true / false
+     */
     public boolean isAWall() {
         return (pos.getX() % 2 == 1 || pos.getY() % 2 == 1);
     }
 
+    /**
+     * Set a wall on the tile.
+     * A wall is a particular item.
+     */
     public void putWall() {
         occupied = true;
         setItem(new Wall());
     }
 
+    /**
+     * Set occupied
+     */
     public void setOccupied() {
         this.occupied = true;
     }
 
-    public void setListenerWall(Labyrinth lab) {
+    /**
+     * Set a listener (click) on the wall.
+     * We need to keep in memory the Labyrinth.
+     *
+     * @param lab
+     *          The labyrinth
+     */
+    public void setListenerWall(TwoPlayers lab) {
         if (isAWall())
             component.addActionListener(new PutWall(lab, this));
     }

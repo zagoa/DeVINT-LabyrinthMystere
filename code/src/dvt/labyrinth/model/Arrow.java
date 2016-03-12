@@ -3,7 +3,9 @@ package dvt.labyrinth.model;
 import dvt.labyrinth.ConstantesLabyrinth;
 
 /**
- * Created by Adrian on 09/03/2016.
+ * An arrow item
+ *
+ * @author Adrian
  */
 public class Arrow extends Item {
     public Arrow(ConstantesLabyrinth.RESSOURCES res) {

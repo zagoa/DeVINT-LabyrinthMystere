@@ -1,6 +1,9 @@
-package dvt.labyrinth;
+package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
+import dvt.labyrinth.Position;
+import dvt.labyrinth.Tile;
+import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 
 import dvt.labyrinth.model.*;
@@ -17,13 +20,15 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
  *
  * @author Arnaud, Thomas, Etienne & Adrian
  */
-public class Labyrinth extends Jeu {
+public class TwoPlayers extends Jeu {
     // The 'world' : Labyrinth
     private JPanel world;
     // The tray of the labyrinth
     private Tray tray;
-    // The player
-    private Player player;
+    // The players
+    private Player[] players;
+    // The current player
+    private Player currentPlayer;
 
     @Override
     public void init() {
@@ -51,17 +56,17 @@ public class Labyrinth extends Jeu {
      * Check where we can move, and highlight all the tiles (if we can move)
      */
     public void checkMovePositions() {
-        int x = player.getPosition().getX();
-        int y = player.getPosition().getY();
+        int x = currentPlayer.getPosition().getX();
+        int y = currentPlayer.getPosition().getY();
 
         Tile tile[][] = tray.getTray();
-        if (player.canMove(tray, DIRECTIONS.LEFT))
+        if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
             tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT)); // Left
-        if (player.canMove(tray, DIRECTIONS.RIGHT))
+        if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
             tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
-        if (player.canMove(tray, DIRECTIONS.FRONT))
+        if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
             tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
-        if (player.canMove(tray, DIRECTIONS.BACK))
+        if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
 
         addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
@@ -137,16 +142,20 @@ public class Labyrinth extends Jeu {
      * Create players
      */
     public void addPlayers() {
-        player = new Player("Bernard", new Pawn(RESSOURCES.THEO));
-        player.setPos(new Position(8, 10), tray);
+        players = new Player[2];
+
+        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO), new Position(8,0), tray);
+        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.LEA), new Position(8, NBRE_CASES-1), tray);
+
+        currentPlayer = players[0];
     }
 
     /**
      * Method to unlight all the tiles near the player
      */
     public void unHighlightAll() {
-        int x = player.getPosition().getX();
-        int y = player.getPosition().getY();
+        int x = currentPlayer.getPosition().getX();
+        int y = currentPlayer.getPosition().getY();
 
         if (x-CASE_LENGTH >= 0 && tray.getTile(x-CASE_LENGTH, y).isHighlighted()) // Left is highlighted?
             tray.getTile(x-CASE_LENGTH, y).unHighlight();
@@ -168,6 +177,11 @@ public class Labyrinth extends Jeu {
      */
     public void movePlayer(DIRECTIONS d) {
         unHighlightAll();
-        player.move(tray, d);
+        if (currentPlayer.move(tray, d)) { // has moved
+            if (currentPlayer.hasWon())
+                JOptionPane.showMessageDialog(null, currentPlayer.getName()+" a gagné !");
+
+            currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
+        }
     }
 }
