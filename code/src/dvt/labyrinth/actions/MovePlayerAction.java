@@ -2,6 +2,7 @@ package dvt.labyrinth.actions;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.labyrinth.Labyrinth;
+import dvt.labyrinth.model.Game1vs1;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class MovePlayerAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
     private transient Labyrinth fenetre;
+    private transient Game1vs1 window;
     private DIRECTIONS directions;
 
     /**
@@ -21,6 +23,11 @@ public class MovePlayerAction extends AbstractAction {
      */
     public MovePlayerAction(Labyrinth fenetre, DIRECTIONS d) {
         this.fenetre = fenetre;
+        this.directions = d;
+    }
+
+    public MovePlayerAction(Game1vs1 window, DIRECTIONS d) {
+        this.window = window;
         this.directions = d;
     }
 

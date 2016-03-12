@@ -20,7 +20,6 @@ public class Player {
     // Item
     private Pawn pawn;
 
-    private int time;
     private boolean timeToPlay;
 
     // Check if can set a wall
@@ -29,11 +28,9 @@ public class Player {
     // His position
     private Position pos;
 
-    public Player(String name, Pawn pawn, int time, boolean timeToPlay){
+    public Player(String name, Pawn pawn){
         this.name = name;
         this.pawn = pawn;
-        this.time = time;
-        this.timeToPlay = timeToPlay;
     }
 
     public boolean move(Tray tray, DIRECTIONS d) {
@@ -100,7 +97,7 @@ public class Player {
 
     public boolean isBlocked(Tray tray){
         hasAccessTo(tray);
-        //It represent if the pan is on the last line, so he can finish the game
+        //It represent if the pawn is on the last line, so he can finish the game
         for(int i=0;i<NBRE_CASES;i+=2) {
             if (can.contains(tray.getTile(i, 0))) return true;
         }
@@ -138,20 +135,17 @@ public class Player {
         pos = newP;
     }
 
-    public boolean isTimeToPlay(){
-        return timeToPlay;
-    }
-
-    public void setTimeToPlay(){
-        if(this.time%2==0) { this.timeToPlay = true; }
-        else {  this.timeToPlay = false; }
-    }
-
-    public void turnFinished(){ this.time+=1; }
-
     public void setPos(Position pos, Tray tray) {
         this.pos = pos;
 
         tray.getTile(pos).setPawn(pawn);
+    }
+
+    public boolean getTimeToPlay(){
+        return timeToPlay;
+    }
+
+    public void setTimeToPlay(boolean bool){
+        this.timeToPlay = bool;
     }
 }

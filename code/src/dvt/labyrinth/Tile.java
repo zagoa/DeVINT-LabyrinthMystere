@@ -2,6 +2,7 @@ package dvt.labyrinth;
 
 import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.model.DefaultItem;
+import dvt.labyrinth.model.Game1vs1;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Wall;
 
@@ -142,6 +143,11 @@ public class Tile {
     public void setListenerWall(Labyrinth lab) {
         if (isAWall())
             component.addActionListener(new PutWall(lab, this));
+    }
+
+    public void setListenerWall(Game1vs1 game) {
+        if (isAWall())
+            component.addActionListener(new PutWall(game, this));
     }
 }
 

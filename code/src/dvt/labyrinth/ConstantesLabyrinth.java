@@ -24,6 +24,8 @@ public class ConstantesLabyrinth {
     public enum RESSOURCES {
         THEO(IMAGEPATH+"theo.jpg"),
         LEA(IMAGEPATH+"lea.jpg"),
+        ZAGO(IMAGEPATH+"zago.bmp"),
+        GERARD(IMAGEPATH+"gerard.bmp"),
         WALL(IMAGEPATH+"murHorizontal.png"),
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
         ARROW_RIGHT(ARROWPATH+"arrow_right.png"),

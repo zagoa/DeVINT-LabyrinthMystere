@@ -137,7 +137,7 @@ public class Labyrinth extends Jeu {
      * Create players
      */
     public void addPlayers() {
-        player = new Player("Bernard", new Pawn(RESSOURCES.THEO), 0, true);
+        player = new Player("Bernard", new Pawn(RESSOURCES.THEO));
         player.setPos(new Position(8, 10), tray);
     }
 
