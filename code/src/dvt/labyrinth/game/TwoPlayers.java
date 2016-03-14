@@ -45,10 +45,15 @@ public class TwoPlayers extends Jeu {
         addPlayers();
 
         showTray();
+
+//        win();
     }
 
     @Override
     public void update() {
+        if (currentPlayer.hasWon())
+            win();
+
         checkMovePositions();
     }
 
@@ -69,22 +74,31 @@ public class TwoPlayers extends Jeu {
         if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
 
+        setTarget();
+
         addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
         addControlUp(KeyEvent.VK_UP, new MovePlayerAction(this, DIRECTIONS.FRONT));
         addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
         addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
+    public void setTarget() {
+        Tile tile[] = tray.getTray()[currentPlayer.getWonY()];
 
+        for (int x = 0; x < tile.length; x+=2) {
+            if (!tile[x].isOccupied())
+                tile[x].setHighlighted(new Target(), Color.WHITE);
+        }
+    }
 
     @Override
     public void render() {
         world.setBackground(getBackground());
+        // TODO : changer la valeur de la couleur des borders quand fond noir
     }
 
     @Override
     public void reset() {
-
     }
 
     /**
@@ -97,11 +111,11 @@ public class TwoPlayers extends Jeu {
             for (int x = 0; x < tile[y].length; x++) {
 
                 if (tile[y][x].isAWall()) { // Walls
-                    tile[y][x].getComponent().setPreferredSize(new Dimension(10, ((y % 2 == 1) ? 10 : 50)));
+                    tile[y][x].getComponent().setSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
                     tile[y][x].setListenerWall(this);
                 }
-                else // Move tiles
-                    tile[y][x].getComponent().setPreferredSize(new Dimension(100, ((y % 2 == 1) ? 10 : 50)));
+                else // 'Moves' tiles
+                    tile[y][x].getComponent().setPreferredSize(new Dimension(105, 50));
 
                 world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
             }
@@ -133,6 +147,7 @@ public class TwoPlayers extends Jeu {
 
         c.weightx = 1.0;
         c.weighty = 1.0;
+
         c.fill = GridBagConstraints.BOTH;
 
         return c;
@@ -145,7 +160,7 @@ public class TwoPlayers extends Jeu {
         players = new Player[2];
 
         players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO), new Position(8,0), tray);
-        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.LEA), new Position(8, NBRE_CASES-1), tray);
+        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD), new Position(8, NBRE_CASES-1), tray);
 
         currentPlayer = players[0];
     }
@@ -154,20 +169,12 @@ public class TwoPlayers extends Jeu {
      * Method to unlight all the tiles near the player
      */
     public void unHighlightAll() {
-        int x = currentPlayer.getPosition().getX();
-        int y = currentPlayer.getPosition().getY();
-
-        if (x-CASE_LENGTH >= 0 && tray.getTile(x-CASE_LENGTH, y).isHighlighted()) // Left is highlighted?
-            tray.getTile(x-CASE_LENGTH, y).unHighlight();
-
-        if (x+CASE_LENGTH <= NBRE_CASES-1 && tray.getTile(x+CASE_LENGTH, y).isHighlighted()) // Right is highlighted?
-            tray.getTile(x+CASE_LENGTH, y).unHighlight();
-
-        if (y-CASE_LENGTH >= 0 && tray.getTile(x, y-CASE_LENGTH).isHighlighted()) // Up is highlighted?
-            tray.getTile(x, y-CASE_LENGTH).unHighlight();
-
-        if (y+CASE_LENGTH <= NBRE_CASES-1 && tray.getTile(x, y+CASE_LENGTH).isHighlighted()) // Back is highlighted?
-            tray.getTile(x, y+CASE_LENGTH).unHighlight();
+        for (int y = 0; y < tray.getTray().length; y++) {
+            for (int x = 0; x < tray.getTray()[y].length; x++) {
+                if (tray.getTray()[y][x].isHighlighted())
+                    tray.getTray()[y][x].unHighlight();
+            }
+        }
     }
 
     /**
@@ -179,9 +186,14 @@ public class TwoPlayers extends Jeu {
         unHighlightAll();
         if (currentPlayer.move(tray, d)) { // has moved
             if (currentPlayer.hasWon())
-                JOptionPane.showMessageDialog(null, currentPlayer.getName()+" a gagné !");
+                return;
 
             currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
         }
+    }
+
+    public void win() {
+        this.dispose(); // Delete this view
+        new WinGame(currentPlayer).loop(); // Add win view
     }
 }

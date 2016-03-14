@@ -24,6 +24,7 @@ public class ConstantesLabyrinth {
     public static final String IMAGEPATH = "../ressources/images/";
     public static final String ARROWPATH = IMAGEPATH+"arrows/";
     public static final String PAWNPATH = IMAGEPATH+"pawns/";
+    public static final String WALLPATH = IMAGEPATH+"walls/";
     /* **************** */
 
     /* **** SOUND **** */
@@ -37,10 +38,10 @@ public class ConstantesLabyrinth {
     public enum RESSOURCES {
         // PAWNS
         THEO(PAWNPATH+"theo.jpg"),
-        LEA(PAWNPATH+"zago.jpg"),
+        GERARD(PAWNPATH+"gerard.jpg"),
 
         // WALL
-        WALL(IMAGEPATH+"murHorizontal.png"),
+        WALL(WALLPATH+"murHorizontal.png"),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -49,7 +50,10 @@ public class ConstantesLabyrinth {
         ARROW_DOWN(ARROWPATH+"arrow_down.png"),
 
         // TRANSPARENT
-        TRANSPARENT(null);
+        TRANSPARENT(null),
+
+        // OTHERS
+        TARGET(IMAGEPATH+"target.png");
 
         private String path;
 

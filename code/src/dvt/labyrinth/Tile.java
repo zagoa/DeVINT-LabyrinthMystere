@@ -16,6 +16,8 @@ import java.awt.*;
  * @author Arnaud
  */
 public class Tile {
+    public Color borderColor;
+
     // The position
     private Position pos;
     // Is the tile occupied ?
@@ -23,7 +25,7 @@ public class Tile {
     // The item on the tile
     private Item item;
     // Is the tile highlighted ?
-    private boolean highlighted;
+    private Color highlightedColor;
     // The component related to the tile
     private JButton component;
 
@@ -50,7 +52,10 @@ public class Tile {
         this.item = item;
         this.pos = pos;
 
-        occupied = highlighted = false;
+        occupied = false;
+        highlightedColor = null;
+
+        borderColor = Color.BLACK;
 
         createComponent();
     }
@@ -90,7 +95,7 @@ public class Tile {
      *          The new item to set
      */
     public void setItem(Item item) {
-        highlighted = false;
+        highlightedColor = null;
 
         if (item == null) {
             this.item = new DefaultItem();
@@ -121,10 +126,10 @@ public class Tile {
 
     /**
      * Highlight the tile without
-     * setting an item
+     * setting a particular color
      */
-    public void setHighlighted() {
-        setHighlighted(null);
+    public void setHighlighted(Item item) {
+        setHighlighted(item, null);
     }
 
     /**
@@ -133,12 +138,14 @@ public class Tile {
      *
      * @param itm
      *          The item to set
+     * @param c
+     *          The color
      */
-    public void setHighlighted(Item itm) {
+    public void setHighlighted(Item itm, Color c) {
         if (itm != null)
             setItem(itm);
 
-        highlighted = true;
+        highlightedColor = (c == null) ? Color.YELLOW : c;
 
         editComponent();
     }
@@ -149,7 +156,8 @@ public class Tile {
      * a Default Item.
      */
     public void unHighlight() {
-        highlighted = occupied = false;
+        highlightedColor = null;
+        occupied = false;
         setItem(new DefaultItem());
 
         editComponent();
@@ -159,16 +167,16 @@ public class Tile {
      * Refresh the component
      */
     public void editComponent() {
-        component.setBackground((highlighted) ? Color.YELLOW : null);
+        component.setBackground(highlightedColor);
         component.setOpaque(true);
         component.setFocusable(false);
 
         if (isAWall() && this.item.getResPath() == null) // On a POSSIBLE wall
             component.setBorder(null);
         else if (pos.getY() % 2 == 1) // On a line of walls
-            component.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
+            component.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.BLACK));
         else // On a wall or on an other thing
-            component.setBorder(new LineBorder(Color.black, 1));
+            component.setBorder(new LineBorder(Color.BLACK, 1));
     }
 
     /**
@@ -176,7 +184,7 @@ public class Tile {
      * @return true / false
      */
     public boolean isHighlighted() {
-        return highlighted;
+        return (highlightedColor != null);
     }
 
     /**

@@ -177,7 +177,24 @@ public class Player {
         }
     }
 
+    public int getWonY() {
+        switch (originalPos.getY()) {
+            case 0: // Top of the tray
+                return NBRE_CASES-1;
+
+            case NBRE_CASES-1:
+                return 0;
+
+            default:
+                return 0;
+        }
+    }
+
     public String getName() {
         return name;
+    }
+
+    public Pawn getPawn() {
+        return pawn;
     }
 }
