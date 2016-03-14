@@ -147,21 +147,18 @@ public class Player {
         pos = newP;
     }
 
-    public boolean isTimeToPlay(){
-        return timeToPlay;
-    }
-
-    public void setTimeToPlay(){
-        if(this.time%2==0) { this.timeToPlay = true; }
-        else {  this.timeToPlay = false; }
-    }
-
-    public void turnFinished(){ this.time+=1; }
-
     public void setPos(Position pos, Tray tray) {
         this.pos = pos;
 
         tray.getTile(pos).setPawn(pawn);
+    }
+
+    public boolean getTimeToPlay(){
+        return timeToPlay;
+    }
+
+    public void setTimeToPlay(boolean bool){
+        this.timeToPlay = bool;
     }
 
     public boolean hasWon() {
