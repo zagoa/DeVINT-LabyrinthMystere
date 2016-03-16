@@ -2,10 +2,6 @@ package dvt.labyrinth.actions;
 
 import dvt.labyrinth.game.TwoPlayers;
 import dvt.labyrinth.Tile;
-import dvt.labyrinth.model.Game1vs1;
-import dvt.labyrinth.model.Item;
-import dvt.labyrinth.model.Wall;
-import javafx.geometry.Pos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
