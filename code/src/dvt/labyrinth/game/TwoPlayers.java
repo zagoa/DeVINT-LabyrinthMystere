@@ -133,6 +133,14 @@ public class TwoPlayers extends Jeu {
         }
     }
 
+    /**
+     * swip the turn of the currentPlayer
+     */
+    public void nextTurn(){
+        currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
+
+    }
+
     @Override
     public void render() {
         world.setBackground(getBackground());

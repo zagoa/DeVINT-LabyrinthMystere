@@ -28,6 +28,7 @@ public class MoveWall extends AbstractAction {
         tile.putWall();
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
+        fenetre.nextTurn();
     }
 }
 
