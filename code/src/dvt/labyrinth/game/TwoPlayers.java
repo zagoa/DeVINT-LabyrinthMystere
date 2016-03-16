@@ -87,8 +87,10 @@ public class TwoPlayers extends Jeu {
     }
 
     /**
-     * check where we can put an other wall
+     * Check where we can put an other wall
+     *
      * @param position
+     *          The position of the wall
      */
     public void checkWall(Position position) {
         settingWall = true;
