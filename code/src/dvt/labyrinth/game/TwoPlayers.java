@@ -7,7 +7,6 @@ import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 
 import dvt.labyrinth.actions.MoveWall;
-import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.model.*;
 
 import javax.swing.*;
@@ -51,17 +50,15 @@ public class TwoPlayers extends Jeu {
         addPlayers();
 
         showTray();
-
-//        win();
     }
 
     @Override
     public void update() {
         if (currentPlayer.hasWon())
             win();
+
         if(!settingWall)
             checkMovePositions();
-
     }
 
     /**
@@ -83,35 +80,33 @@ public class TwoPlayers extends Jeu {
 
         setTarget();
 
-        addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
-        addControlUp(KeyEvent.VK_UP, new MovePlayerAction(this, DIRECTIONS.FRONT));
-        addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
-        addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
+        addControlUp(KeyEvent.VK_DOWN   , new MovePlayerAction(this, DIRECTIONS.BACK));
+        addControlUp(KeyEvent.VK_UP     , new MovePlayerAction(this, DIRECTIONS.FRONT));
+        addControlUp(KeyEvent.VK_LEFT   , new MovePlayerAction(this, DIRECTIONS.LEFT));
+        addControlUp(KeyEvent.VK_RIGHT  , new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
     public void checkWall(Position position) {
         settingWall = true;
+
         int x = position.getX();
         int y = position.getY();
+
         unHighlightAll();
 
-        if (tray.canSetAWall(DIRECTIONS.RIGHT,position) && y%2 == 1) { //check right
+        if (tray.canSetAWall(DIRECTIONS.RIGHT,position) && y%2 == 1) // Check Right
             tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_RIGHT));
-        }
-        if (tray.canSetAWall(DIRECTIONS.LEFT,position) && y%2 == 1) { //check left
+        if (tray.canSetAWall(DIRECTIONS.LEFT,position) && y%2 == 1) // Check Left
             tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_LEFT));
-        }
-
-        if (tray.canSetAWall(DIRECTIONS.FRONT,position) && y%2 != 1) { //check up
+        if (tray.canSetAWall(DIRECTIONS.FRONT,position) && y%2 != 1) // Check Up
             tray.getTile(x , y-2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_UP));
-        }
-        if (tray.canSetAWall(DIRECTIONS.BACK,position) && y%2 != 1) { //check down
+        if (tray.canSetAWall(DIRECTIONS.BACK,position) && y%2 != 1) //Check Down
             tray.getTile(x , y +2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_DOWN));
-        }
-        addControlUp(KeyEvent.VK_DOWN,  new MoveWall(this, tray.getTile(x, y+2)));
-        addControlUp(KeyEvent.VK_UP,  new MoveWall(this, tray.getTile(x,y-2)));
-        addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x-2,y)));
-        addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x+2,y)));
+
+        addControlUp(KeyEvent.VK_DOWN   , new MoveWall(this, tray.getTile(x, y+2)));
+        addControlUp(KeyEvent.VK_UP     , new MoveWall(this, tray.getTile(x,y-2)));
+        addControlUp(KeyEvent.VK_LEFT   , new MoveWall(this, tray.getTile(x-2,y)));
+        addControlUp(KeyEvent.VK_RIGHT  , new MoveWall(this, tray.getTile(x+2,y)));
     }
 
 
@@ -188,8 +183,8 @@ public class TwoPlayers extends Jeu {
     public void addPlayers() {
         players = new Player[2];
 
-        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO), new Position(8,0), tray);
-        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD), new Position(8, NBRE_CASES-1), tray);
+        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO)   , new Position(8,0)             , tray);
+        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD) , new Position(8, NBRE_CASES-1) , tray);
 
         currentPlayer = players[0];
     }
