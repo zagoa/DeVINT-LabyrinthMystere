@@ -5,6 +5,8 @@ import dvt.labyrinth.model.Player;
 
 import javax.swing.*;
 
+import static dvt.devint.ConstantesDevint.SYNTHESE_MAXIMALE;
+
 /**
  * The Win view for the game
  *
@@ -21,7 +23,7 @@ public class WinGame extends Jeu {
         super();
 
         winner = player;
-        setWinnerText();
+        setWinner();
     }
 
     @Override
@@ -37,7 +39,7 @@ public class WinGame extends Jeu {
         this.add(world);
     }
 
-    public void setWinnerText() {
+    public void setWinner() {
         score = "<html><center>PARTIE TERMIN&Eacute;E";
 
         score += "<br />____________________<br /><br />";
@@ -46,6 +48,12 @@ public class WinGame extends Jeu {
 
         info.setIcon(new ImageIcon(winner.getPawn().getResPath()));
         info.setText(score);
+
+        String s = "Félicitations "+winner.getName()+" !"
+                + "Tu as remporté la partie."
+                + "Appuie sur échap pour revenir au menu.";
+
+        this.getSIVOX().playText(s, SYNTHESE_MAXIMALE);
     }
 
     @Override

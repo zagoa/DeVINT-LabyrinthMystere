@@ -5,17 +5,16 @@ import dvt.labyrinth.Position;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
+
 import dvt.labyrinth.actions.MoveWall;
-import dvt.labyrinth.model.Arrow;
-import dvt.labyrinth.model.Pawn;
-import dvt.labyrinth.model.Player;
-import dvt.labyrinth.model.Target;
+import dvt.labyrinth.model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.devint.ConstantesDevint.*;
 
 /**
  * The Labyrinth class.
@@ -59,7 +58,7 @@ public class TwoPlayers extends Jeu {
         if (currentPlayer.hasWon())
             win();
 
-        if (!settingWall)
+        if(!settingWall)
             checkMovePositions();
     }
 
@@ -74,24 +73,25 @@ public class TwoPlayers extends Jeu {
         if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
             tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT)); // Left
         if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
-            tile[y][x + CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
+            tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
         if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
-            tile[y - CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
+            tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
         if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
 
         setTarget();
 
-        addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
-        addControlUp(KeyEvent.VK_UP, new MovePlayerAction(this, DIRECTIONS.FRONT));
-        addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
-        addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
+        addControlUp(KeyEvent.VK_DOWN   , new MovePlayerAction(this, DIRECTIONS.BACK));
+        addControlUp(KeyEvent.VK_UP     , new MovePlayerAction(this, DIRECTIONS.FRONT));
+        addControlUp(KeyEvent.VK_LEFT   , new MovePlayerAction(this, DIRECTIONS.LEFT));
+        addControlUp(KeyEvent.VK_RIGHT  , new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
     /**
-     * check where we can put an other wall
+     * Check where we can put an other wall
      *
      * @param position
+     *          The position of the wall
      */
     public void checkWall(Position position) {
         settingWall = true;
@@ -127,7 +127,7 @@ public class TwoPlayers extends Jeu {
     public void setTarget() {
         Tile tile[] = tray.getTray()[currentPlayer.getWonY()];
 
-        for (int x = 0; x < tile.length; x += 2) {
+        for (int x = 0; x < tile.length; x+=2) {
             if (!tile[x].isOccupied())
                 tile[x].setHighlighted(new Target(), Color.WHITE);
         }
@@ -161,12 +161,13 @@ public class TwoPlayers extends Jeu {
             for (int x = 0; x < tile[y].length; x++) {
 
                 if (tile[y][x].isAWall()) { // Walls
-                    tile[y][x].getComponent().setPreferredSize(new Dimension(10, (y % 2 == 1) ? 10 : 50));
+                    tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
                     tile[y][x].setListenerWall(this);
-                } else // 'Moves' tiles
+                }
+                else // 'Moves' tiles
                     tile[y][x].getComponent().setPreferredSize(new Dimension(100, 50));
 
-                world.add(tile[y][x].getComponent(), getGridBagConstraints(x, y));
+                world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
             }
         }
     }
@@ -174,8 +175,11 @@ public class TwoPlayers extends Jeu {
     /**
      * Display process (GridBagLayout)
      *
-     * @param x The x coordinate (grid)
-     * @param y The y coordinate (grid)
+     * @param x
+     *          The x coordinate (grid)
+     * @param y
+     *          The y coordinate (grid)
+     *
      * @return the constraint (layout)
      */
     public GridBagConstraints getGridBagConstraints(int x, int y) {
@@ -201,8 +205,8 @@ public class TwoPlayers extends Jeu {
     public void addPlayers() {
         players = new Player[2];
 
-        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO), new Position(8, 0), tray);
-        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD), new Position(8, NBRE_CASES - 1), tray);
+        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO)   , new Position(8,0)             , tray);
+        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD) , new Position(8, NBRE_CASES-1) , tray);
 
         currentPlayer = players[0];
     }
@@ -243,7 +247,6 @@ public class TwoPlayers extends Jeu {
     public void setSettingWall(boolean settingWall) {
         this.settingWall = settingWall;
     }
-
     public boolean isSettingWall() {
         return settingWall;
     }
