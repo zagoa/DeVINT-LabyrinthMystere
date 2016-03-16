@@ -124,6 +124,9 @@ public class TwoPlayers extends Jeu {
     }
 
 
+    /**
+     * Set a display target where to go
+     */
     public void setTarget() {
         Tile tile[] = tray.getTray()[currentPlayer.getWonY()];
 
@@ -240,15 +243,29 @@ public class TwoPlayers extends Jeu {
         }
     }
 
+    /**
+     * Set a winner, with the specific view
+     */
     public void win() {
         this.dispose(); // Delete this view
         new WinGame(currentPlayer).loop(); // Add win view
     }
 
 
+    /**
+     * We are (or not) setting wall
+     *
+     * @param settingWall
+     *          We are / we are not (true / false)
+     */
     public void setSettingWall(boolean settingWall) {
         this.settingWall = settingWall;
     }
+
+    /**
+     * Getter on 'are we setting walls?'
+     * @return true / false
+     */
     public boolean isSettingWall() {
         return settingWall;
     }
