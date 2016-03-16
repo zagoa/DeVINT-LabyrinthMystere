@@ -17,19 +17,25 @@ public class MoveWall extends AbstractAction {
     // The direction of the movement
     private Tile tile;
 
-    public MoveWall(TwoPlayers fenetre, Tile tile) {
+    private DIRECTIONS dir;
+    public MoveWall(TwoPlayers fenetre, Tile tile,DIRECTIONS dir) {
         this.fenetre = fenetre;
         this.tile = tile;
+        this.dir = dir;
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall
         tile.putWall();
+        fenetre.fillGap(dir,tile.getPosition());
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
         fenetre.nextTurn();
     }
+
+
 }
 
 
