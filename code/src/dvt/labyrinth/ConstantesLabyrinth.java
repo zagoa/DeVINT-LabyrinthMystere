@@ -48,6 +48,11 @@ public class ConstantesLabyrinth {
         ARROW_RIGHT(ARROWPATH+"arrow_right.png"),
         ARROW_UP(ARROWPATH+"arrow_up.png"),
         ARROW_DOWN(ARROWPATH+"arrow_down.png"),
+        // ARROWS SMALL
+        ARROW_SMALL_LEFT(ARROWPATH+"arrow_small_left.png"),
+        ARROW_SMALL_RIGHT(ARROWPATH+"arrow_small_right.png"),
+        ARROW_SMALL_UP(ARROWPATH+"arrow_small_up.png"),
+        ARROW_SMALL_DOWN(ARROWPATH+"arrow_small_down.png"),
 
         // TRANSPARENT
         TRANSPARENT(null),
