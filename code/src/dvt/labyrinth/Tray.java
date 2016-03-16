@@ -8,7 +8,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 /**
  * The tray of the game
  *
- * @author Thomas
+ * @author Thomas, Zago
  */
 public class Tray {
     // A tray is an array of tile
@@ -60,6 +60,16 @@ public class Tray {
         return getTile(position.getX(), position.getY());
     }
 
+    /**
+     * Check if we can set a wall on a tile
+     *
+     * @param d
+     *          The direction where to set
+     * @param position
+     *          The position of the tile
+     *
+     * @return true / false (we can / we can not)
+     */
     public boolean canSetAWall(DIRECTIONS d, Position position){
         int x = position.getX();
         int y = position.getY();
