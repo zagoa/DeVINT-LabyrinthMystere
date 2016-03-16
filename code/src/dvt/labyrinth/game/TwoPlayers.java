@@ -89,29 +89,33 @@ public class TwoPlayers extends Jeu {
         addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
+    /**
+     * check where we can put an other wall
+     * @param position
+     */
     public void checkWall(Position position) {
         settingWall = true;
         int x = position.getX();
         int y = position.getY();
         unHighlightAll();
 
-        if (tray.canSetAWall(DIRECTIONS.RIGHT,position) && y%2 == 1) { //check right
+        if (tray.canSetAWall(DIRECTIONS.RIGHT,position) && y%2 == 1) { //check right && on the horizontal line
+            addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x+2,y)));
             tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_RIGHT));
         }
-        if (tray.canSetAWall(DIRECTIONS.LEFT,position) && y%2 == 1) { //check left
+        if (tray.canSetAWall(DIRECTIONS.LEFT,position) && y%2 == 1) { //check left && on the horizontal line
+            addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x-2,y)));
             tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_LEFT));
         }
 
-        if (tray.canSetAWall(DIRECTIONS.FRONT,position) && y%2 != 1) { //check up
+        if (tray.canSetAWall(DIRECTIONS.FRONT,position) && y%2 != 1) { //check up && on the vertical line
+            addControlUp(KeyEvent.VK_UP,  new MoveWall(this, tray.getTile(x,y-2)));
             tray.getTile(x , y-2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_UP));
         }
-        if (tray.canSetAWall(DIRECTIONS.BACK,position) && y%2 != 1) { //check down
+        if (tray.canSetAWall(DIRECTIONS.BACK,position) && y%2 != 1) { //check down && on the vertical line
+            addControlUp(KeyEvent.VK_DOWN,  new MoveWall(this, tray.getTile(x, y+2)));
             tray.getTile(x , y +2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_DOWN));
         }
-        addControlUp(KeyEvent.VK_DOWN,  new MoveWall(this, tray.getTile(x, y+2)));
-        addControlUp(KeyEvent.VK_UP,  new MoveWall(this, tray.getTile(x,y-2)));
-        addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x-2,y)));
-        addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x+2,y)));
     }
 
 
