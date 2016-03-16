@@ -98,17 +98,14 @@ public class Tile {
     public void setItem(Item item) {
         highlightedColor = null;
 
-        component.setContentAreaFilled(true);
-
         if (item == null) {
             this.item = new DefaultItem();
             occupied = false;
         } else
             this.item = item;
 
-        if (this.item != null || this.item.getRes().getPath() != null) {
-            component.add(new JLabel(new ImageIcon(this.item.getRes().getPath())));
-        }
+        if (this.item != null || this.item.getRes().getPath() != null)
+            component.setIcon(new ImageIcon(this.item.getRes().getPath()));
         else
             component.setIcon(null);
 
@@ -178,7 +175,7 @@ public class Tile {
         if (isAWall() && this.item.getResPath() == null) // On a POSSIBLE wall
             component.setBorder(null);
         else if (pos.getY() % 2 == 1) // On a line of walls
-            component.setBorder(new LineBorder(Color.BLACK, 1));
+            component.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.BLACK));
         else // On a wall or on an other thing
             component.setBorder(new LineBorder(Color.BLACK, 1));
     }
@@ -223,7 +220,7 @@ public class Tile {
      */
     public void putWall() {
         occupied = true;
-        setHighlighted(new Wall());
+        setItem(new Wall());
     }
 
     /**
