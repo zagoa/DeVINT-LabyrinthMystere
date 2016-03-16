@@ -111,11 +111,11 @@ public class TwoPlayers extends Jeu {
             for (int x = 0; x < tile[y].length; x++) {
 
                 if (tile[y][x].isAWall()) { // Walls
-                    tile[y][x].getComponent().setSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
+                    tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
                     tile[y][x].setListenerWall(this);
                 }
                 else // 'Moves' tiles
-                    tile[y][x].getComponent().setPreferredSize(new Dimension(105, 50));
+                    tile[y][x].getComponent().setPreferredSize(new Dimension(100, 50));
 
                 world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
             }
