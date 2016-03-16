@@ -172,10 +172,8 @@ public class Tile {
         component.setOpaque(true);
         component.setFocusable(false);
 
-        if (isAWall() && this.item.getResPath() == null) // On a POSSIBLE wall
+        if (isAWall()) // On a POSSIBLE wall
             component.setBorder(null);
-        else if (pos.getY() % 2 == 1) // On a line of walls
-            component.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.BLACK));
         else // On a wall or on an other thing
             component.setBorder(new LineBorder(Color.BLACK, 1));
     }
@@ -220,7 +218,7 @@ public class Tile {
      */
     public void putWall() {
         occupied = true;
-        setItem(new Wall());
+        setItem(new Wall((pos.getX()%2!=1) ? false : true)); // Check if we need vertical wall or not
 
     }
 

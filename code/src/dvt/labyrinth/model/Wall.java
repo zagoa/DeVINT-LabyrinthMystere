@@ -8,7 +8,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
  * @author Arnaud
  */
 public class Wall extends Item{
-    public Wall() {
-        super(RESSOURCES.WALL);
+    public Wall(boolean vertical) {
+        super((vertical) ? RESSOURCES.WALL_VERTICAL : RESSOURCES.WALL);
     }
 }

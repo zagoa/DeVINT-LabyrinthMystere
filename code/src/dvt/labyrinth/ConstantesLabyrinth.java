@@ -42,6 +42,7 @@ public class ConstantesLabyrinth {
 
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
+        WALL_VERTICAL(WALLPATH+"murVertical.png"),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
