@@ -221,6 +221,7 @@ public class Tile {
     public void putWall() {
         occupied = true;
         setItem(new Wall());
+
     }
 
     /**
@@ -241,5 +242,7 @@ public class Tile {
         if (isAWall())
             component.addActionListener(new PutWall(lab, this));
     }
+
+
 }
 

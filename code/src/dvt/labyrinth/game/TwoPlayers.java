@@ -6,6 +6,8 @@ import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 
+import dvt.labyrinth.actions.MoveWall;
+import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.model.*;
 
 import javax.swing.*;
@@ -29,6 +31,8 @@ public class TwoPlayers extends Jeu {
     private Player[] players;
     // The current player
     private Player currentPlayer;
+    // State of the game
+    private boolean settingWall;
 
     @Override
     public void init() {
@@ -40,6 +44,8 @@ public class TwoPlayers extends Jeu {
         world.setLayout(new GridBagLayout());
 
         tray = new Tray();
+
+        settingWall = false;
 
         // Keep players
         addPlayers();
@@ -53,8 +59,9 @@ public class TwoPlayers extends Jeu {
     public void update() {
         if (currentPlayer.hasWon())
             win();
+        if(!settingWall)
+            checkMovePositions();
 
-        checkMovePositions();
     }
 
     /**
@@ -81,6 +88,33 @@ public class TwoPlayers extends Jeu {
         addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
         addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
+
+    public void checkWall(Position position) {
+        settingWall = true;
+        int x = position.getX();
+        int y = position.getY();
+        unHighlightAll();
+
+        if (tray.canSetAWall(DIRECTIONS.RIGHT,position)) { //check right
+            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT));
+        }
+        if (tray.canSetAWall(DIRECTIONS.LEFT,position)) { //check left
+            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT));
+        }
+
+        if (tray.canSetAWall(DIRECTIONS.FRONT,position)) { //check up
+            tray.getTile(x , y-2).setHighlighted(new Arrow(RESSOURCES.ARROW_UP));
+        }
+        if (tray.canSetAWall(DIRECTIONS.BACK,position)) { //check down
+            tray.getTile(x , y +2).setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN));
+
+        }
+        addControlUp(KeyEvent.VK_DOWN,  new MoveWall(this, tray.getTile(x, y+2)));
+        addControlUp(KeyEvent.VK_UP,  new MoveWall(this, tray.getTile(x,y-2)));
+        addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x-2,y)));
+        addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x+2,y)));
+    }
+
 
     public void setTarget() {
         Tile tile[] = tray.getTray()[currentPlayer.getWonY()];
@@ -137,11 +171,7 @@ public class TwoPlayers extends Jeu {
         c.fill = GridBagConstraints.CENTER;
         c.gridx = x;
         c.gridy = y;
-
-        if (y % 2 == 1) // Wall
-            c.gridwidth = (x % 2 == 0) ? 2 : 1; // Remove the small square
-        else
-            c.gridwidth = 1;
+        c.gridwidth = 1;
 
         c.gridheight = 1;
 
@@ -196,4 +226,14 @@ public class TwoPlayers extends Jeu {
         this.dispose(); // Delete this view
         new WinGame(currentPlayer).loop(); // Add win view
     }
+
+
+    public void setSettingWall(boolean settingWall) {
+        this.settingWall = settingWall;
+    }
+    public boolean isSettingWall() {
+        return settingWall;
+    }
+
+
 }

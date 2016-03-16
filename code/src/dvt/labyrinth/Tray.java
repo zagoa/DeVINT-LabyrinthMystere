@@ -1,6 +1,7 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.model.DefaultItem;
+import javafx.geometry.Pos;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
@@ -57,5 +58,32 @@ public class Tray {
      */
     public Tile getTile(Position position) {
         return getTile(position.getX(), position.getY());
+    }
+
+    public boolean canSetAWall(DIRECTIONS d, Position position){
+        int x = position.getX();
+        int y = position.getY();
+
+        switch (d) {
+            case FRONT:
+                return (y-WALL_LENGTH >= 0
+                        && !this.getTile(x, y-WALL_LENGTH).isAWall()); // In map && wall not present && tile not occupied
+
+            case BACK:
+                return (y+WALL_LENGTH <= NBRE_CASES-1
+                        && !this.getTile(x, y+WALL_LENGTH).isAWall()); // In map && wall not present && tile not occupied
+
+            case RIGHT:
+                return (x+WALL_LENGTH <= NBRE_CASES-1
+                        && !this.getTile(x+WALL_LENGTH, y).isAWall()); // In map && wall not present && tile not occupied
+
+            case LEFT:
+                return (x-WALL_LENGTH >= 0
+                        && !this.getTile(x-WALL_LENGTH, y).isAWall()); // In map && wall not present && tile not occupied
+
+            default:
+                return false;
+        }
+
     }
 }

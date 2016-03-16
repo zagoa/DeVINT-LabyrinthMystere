@@ -29,12 +29,14 @@ public class PutWall implements ActionListener {
         this.lab = lab;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall
-        if (tile.isAWall()) {
+        if (tile.isAWall() && !lab.isSettingWall()) {
+            lab.checkWall(tile.getPosition());
             tile.putWall();
-            lab.unHighlightAll(); // If we've just blocked the player
+            //lab.unHighlightAll(); // If we've just blocked the player
         }
     }
 }
