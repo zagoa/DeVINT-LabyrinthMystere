@@ -1,5 +1,6 @@
 package dvt.labyrinth.actions;
 
+import dvt.labyrinth.ConstantesLabyrinth;
 import dvt.labyrinth.game.TwoPlayers;
 import dvt.labyrinth.Tile;
 

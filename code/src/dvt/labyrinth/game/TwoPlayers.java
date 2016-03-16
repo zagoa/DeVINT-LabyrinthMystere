@@ -103,22 +103,22 @@ public class TwoPlayers extends Jeu {
 
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
-            addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y),DIRECTIONS.RIGHT));
+            addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
             tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_RIGHT));
         }
         // Check left && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1) {
-            addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y),DIRECTIONS.LEFT));
+            addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
             tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_LEFT));
         }
         // Check up && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1) {
-            addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2),DIRECTIONS.FRONT));
+            addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
             tray.getTile(x, y - 2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_UP));
         }
         // Check down && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1) {
-            addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2),DIRECTIONS.BACK));
+            addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
             tray.getTile(x, y + 2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_DOWN));
         }
     }
@@ -162,7 +162,9 @@ public class TwoPlayers extends Jeu {
 
                 if (tile[y][x].isAWall()) { // Walls
                     tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
-                    tile[y][x].setListenerWall(this);
+
+                    if (tile[y][x].getPosition().getX()%2 != 1 || tile[y][x].getPosition().getY()%2 != 1) // Don't click the small square
+                        tile[y][x].setListenerWall(this);
                 }
                 else // 'Moves' tiles
                     tile[y][x].getComponent().setPreferredSize(new Dimension(100, 50));
@@ -251,23 +253,35 @@ public class TwoPlayers extends Jeu {
         return settingWall;
     }
 
-    public void fillGap(DIRECTIONS gap,Position position){
+    /**
+     * Set the small square as a wall too
+     *
+     * @param gap
+     *          The direction where is the gap
+     * @param position
+     *          The original position
+     */
+    public void fillGap(DIRECTIONS gap, Position position){
         int x = position.getX();
         int y = position.getY();
 
         switch(gap){
             case RIGHT:
-                tray.getTile(x-1,y).putWall();
+                tray.getTile(x-1,y).putWall(gap);
                 break;
+
             case LEFT:
-                tray.getTile(x+1,y).putWall();
+                tray.getTile(x+1,y).putWall(gap);
                 break;
+
             case FRONT:
-                tray.getTile(x,y+1).putWall();
+                tray.getTile(x,y+1).putWall(gap);
                 break;
+
             case BACK:
-                tray.getTile(x,y-1).putWall();
+                tray.getTile(x,y-1).putWall(gap);
                 break;
+
             default:
                 break;
         }

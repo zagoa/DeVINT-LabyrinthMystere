@@ -212,14 +212,32 @@ public class Tile {
         return (pos.getX() % 2 == 1 || pos.getY() % 2 == 1);
     }
 
+    public void putWall() {
+        // (Are we on a line of walls) ? Horizontal : Vertical
+        putWall((pos.getY()%2 == 1) ? ConstantesLabyrinth.DIRECTIONS.LEFT : ConstantesLabyrinth.DIRECTIONS.BACK);
+    }
+
     /**
      * Set a wall on the tile.
      * A wall is a particular item.
      */
-    public void putWall() {
+    public void putWall(ConstantesLabyrinth.DIRECTIONS d) {
         occupied = true;
-        setItem(new Wall((pos.getX()%2!=1) ? false : true)); // Check if we need vertical wall or not
 
+        switch (d) {
+            case FRONT:
+            case BACK:
+                setItem(new Wall(true)); // Vertical
+                break;
+
+            case LEFT:
+            case RIGHT:
+                setItem(new Wall(false)); // Horizontal
+                break;
+
+            default:
+                break;
+        }
     }
 
     /**
