@@ -96,18 +96,17 @@ public class TwoPlayers extends Jeu {
         unHighlightAll();
 
         if (tray.canSetAWall(DIRECTIONS.RIGHT,position)) { //check right
-            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT));
+            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_RIGHT));
         }
         if (tray.canSetAWall(DIRECTIONS.LEFT,position)) { //check left
-            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT));
+            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_LEFT));
         }
 
         if (tray.canSetAWall(DIRECTIONS.FRONT,position)) { //check up
-            tray.getTile(x , y-2).setHighlighted(new Arrow(RESSOURCES.ARROW_UP));
+            tray.getTile(x , y-2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_UP));
         }
         if (tray.canSetAWall(DIRECTIONS.BACK,position)) { //check down
-            tray.getTile(x , y +2).setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN));
-
+            tray.getTile(x , y +2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_DOWN));
         }
         addControlUp(KeyEvent.VK_DOWN,  new MoveWall(this, tray.getTile(x, y+2)));
         addControlUp(KeyEvent.VK_UP,  new MoveWall(this, tray.getTile(x,y-2)));

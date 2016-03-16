@@ -27,6 +27,7 @@ public class MoveWall extends AbstractAction {
         // We need to check if tile is a wall
         tile.putWall();
         fenetre.setSettingWall(false);
+        fenetre.unHighlightAll();
     }
 }
 

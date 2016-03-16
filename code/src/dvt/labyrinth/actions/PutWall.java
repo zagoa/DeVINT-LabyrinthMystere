@@ -32,10 +32,10 @@ public class PutWall implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // We need to check if tile is a wall
+        // We need to check if tile is a wall && disable the clic
         if (tile.isAWall() && !lab.isSettingWall()) {
-            lab.checkWall(tile.getPosition());
             tile.putWall();
+            lab.checkWall(tile.getPosition());
             //lab.unHighlightAll(); // If we've just blocked the player
         }
     }
