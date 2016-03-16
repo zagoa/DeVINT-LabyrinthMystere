@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.devint.ConstantesDevint.*;
 
 /**
  * The Labyrinth class.
@@ -241,6 +242,4 @@ public class TwoPlayers extends Jeu {
     public boolean isSettingWall() {
         return settingWall;
     }
-
-
 }
