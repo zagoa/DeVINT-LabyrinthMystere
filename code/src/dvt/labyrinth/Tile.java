@@ -105,7 +105,7 @@ public class Tile {
             this.item = item;
 
         if (this.item != null || this.item.getRes().getPath() != null)
-            component.setIcon(new ImageIcon(this.item.getRes().getPath()));
+            component.setIcon(new StretchIcon(this.item.getRes().getPath()));
         else
             component.setIcon(null);
 
