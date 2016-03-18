@@ -104,8 +104,8 @@ public class Tile {
         } else
             this.item = item;
 
-        if (this.item != null || this.item.getRes().getPath() != null)
-            component.setIcon(new StretchIcon(this.item.getRes().getPath()));
+        if (this.item != null && this.item.getRes().getPath() != null)
+            component.setIcon(item.getIcon());
         else
             component.setIcon(null);
 
@@ -168,7 +168,7 @@ public class Tile {
      * Refresh the component
      */
     public void editComponent() {
-        component.setBackground(highlightedColor);
+        component.setBackground((item.getRes().isAPawn()) ? Color.WHITE : highlightedColor);
         component.setOpaque(true);
         component.setFocusable(false);
 
@@ -258,7 +258,5 @@ public class Tile {
         if (isAWall())
             component.addActionListener(new PutWall(lab, this));
     }
-
-
 }
 

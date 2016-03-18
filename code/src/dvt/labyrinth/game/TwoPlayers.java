@@ -210,7 +210,7 @@ public class TwoPlayers extends Jeu {
     public void addPlayers() {
         players = new Player[2];
 
-        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.THEO)   , new Position(8,0)             , tray);
+        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.PION)   , new Position(8,0)             , tray);
         players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD) , new Position(8, NBRE_CASES-1) , tray);
 
         currentPlayer = players[0];

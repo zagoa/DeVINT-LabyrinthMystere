@@ -44,6 +44,7 @@ public class ConstantesLabyrinth {
         THEO(PAWNPATH+"theo.jpg", true),
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
+        PION(PAWNPATH+"pion.png",true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
