@@ -36,13 +36,14 @@ public class ConstantesLabyrinth {
 
     /* **** RESSOURCES **** */
     public enum RESSOURCES {
-        // PAWNS
-        THEO(PAWNPATH+"theo.jpg"),
-        GERARD(PAWNPATH+"gerard.jpg"),
-
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
+
+        // PAWNS
+        THEO(PAWNPATH+"theo.jpg", true),
+        GERARD(PAWNPATH+"gerard.jpg", true),
+        ZAGO(PAWNPATH+"zago.jpg", true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -62,13 +63,24 @@ public class ConstantesLabyrinth {
         TARGET(IMAGEPATH+"target.png");
 
         private String path;
+        private boolean isAPawn;
 
         RESSOURCES(String path) {
             this.path = path;
+            this.isAPawn = false;
+        }
+
+        RESSOURCES(String path, boolean isAPawn) {
+            this.path = path;
+            this.isAPawn = isAPawn;
         }
 
         public String getPath() {
             return path;
+        }
+
+        public boolean isAPawn() {
+            return isAPawn;
         }
     };
     /* ******************** */
