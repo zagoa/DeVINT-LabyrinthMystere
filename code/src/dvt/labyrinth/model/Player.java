@@ -20,9 +20,6 @@ public class Player {
     // Item
     private Pawn pawn;
 
-    private int time;
-    private boolean timeToPlay;
-
     // Check if can set a wall
     private ArrayList<Tile> can = new ArrayList<>();
 
@@ -151,14 +148,6 @@ public class Player {
         this.pos = pos;
 
         tray.getTile(pos).setPawn(pawn);
-    }
-
-    public boolean getTimeToPlay(){
-        return timeToPlay;
-    }
-
-    public void setTimeToPlay(boolean bool){
-        this.timeToPlay = bool;
     }
 
     public boolean hasWon() {

@@ -12,6 +12,7 @@ import javax.swing.*;
 import static dvt.devint.ConstantesDevint.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.devint.Fenetre;
+import dvt.labyrinth.game.SelectPlayer;
 import dvt.labyrinth.game.TwoPlayers;
 
 /**
@@ -84,7 +85,12 @@ public class Menu extends Fenetre {
                         break;
 
                     case 2: // Deux joueurs
-                        new TwoPlayers().loop();
+                        // Initiate the game
+                        TwoPlayers tp = new TwoPlayers();
+                        // Get the players
+                        new SelectPlayer(tp, 2).loop();
+                        // Let's play!
+                        tp.loop();
                         break;
 
                     case 3: // Aide

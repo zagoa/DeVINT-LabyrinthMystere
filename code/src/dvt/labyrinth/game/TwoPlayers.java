@@ -1,5 +1,6 @@
 package dvt.labyrinth.game;
 
+import com.sun.org.apache.regexp.internal.RE;
 import dvt.devint.Jeu;
 import dvt.labyrinth.Position;
 import dvt.labyrinth.Tile;
@@ -12,6 +13,8 @@ import dvt.labyrinth.model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Map;
+import java.util.Random;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 import static dvt.devint.ConstantesDevint.*;
@@ -46,9 +49,6 @@ public class TwoPlayers extends Jeu {
         tray = new Tray();
 
         settingWall = false;
-
-        // Keep players
-        addPlayers();
 
         showTray();
     }
@@ -207,13 +207,14 @@ public class TwoPlayers extends Jeu {
     /**
      * Create players
      */
-    public void addPlayers() {
-        players = new Player[2];
+    public void addPlayers(Map<String, RESSOURCES> p) {
+        players = new Player[p.size()];
 
-        players[0] = new Player("Joueur 1", new Pawn(RESSOURCES.PION)   , new Position(8,0)             , tray);
-        players[1] = new Player("Joueur 2", new Pawn(RESSOURCES.GERARD) , new Position(8, NBRE_CASES-1) , tray);
+        int k = 0;
+        for (Map.Entry<String, RESSOURCES> e : p.entrySet())
+            players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
-        currentPlayer = players[0];
+        currentPlayer = players[new Random().nextInt(1)];
     }
 
     /**

@@ -45,6 +45,7 @@ public class ConstantesLabyrinth {
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
         PION(PAWNPATH+"pion.png",true),
+        TARGETT(IMAGEPATH+"target.png",true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -92,6 +93,23 @@ public class ConstantesLabyrinth {
         FRONT,
         RIGHT,
         LEFT;
+    };
+    /* ******************** */
+
+    /* **** POSITIONS **** */
+    public enum POSITIONS {
+        TOP(new Position(8, 0)),
+        BOTTOM(new Position(8, NBRE_CASES-1));
+
+        private Position pos;
+
+        POSITIONS(Position pos) {
+            this.pos = pos;
+        }
+
+        public Position getPos() {
+            return pos;
+        }
     };
     /* ******************** */
 }
