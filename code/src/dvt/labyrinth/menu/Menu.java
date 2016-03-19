@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
@@ -29,6 +30,8 @@ public class Menu extends Fenetre {
     private List<JButton> listeBoutton;
     private JLabel titleJeu;
     private int gameChoice;
+
+    private HashMap<String, RESSOURCES> players;
 
     /**
      * Le constructeur du menu
@@ -85,12 +88,14 @@ public class Menu extends Fenetre {
                         break;
 
                     case 2: // Deux joueurs
+                        // Wait for players
+                        players = new HashMap<>();
                         // Initiate the game
-                        TwoPlayers tp = new TwoPlayers();
-                        // Get the players
-                        new SelectPlayer(tp, 2).loop();
+                        new SelectPlayer(this, 2).loop();
                         // Let's play!
-                        tp.loop();
+                        // But maybe the player hit 'ECHAP' before the end, so we can't play
+                        if (players.size() == 2)
+                            new TwoPlayers(players).loop();
                         break;
 
                     case 3: // Aide
@@ -216,5 +221,9 @@ public class Menu extends Fenetre {
 
     public GridBagConstraints getC() {
         return c;
+    }
+
+    public void setPlayers(HashMap<String, RESSOURCES> players) {
+        this.players = players;
     }
 }

@@ -2,7 +2,8 @@ package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.StretchIcon;
-import dvt.labyrinth.model.Player;
+import dvt.labyrinth.menu.*;
+import dvt.labyrinth.menu.Menu;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -24,8 +26,8 @@ public class SelectPlayer extends Jeu {
     // Default border style
     private static final LineBorder DEFAULT_BORDER = new LineBorder(Color.black, 2, true);
 
-    // The game
-    private TwoPlayers game;
+    // The menu
+    private Menu menu;
     // n-players
     private int numberOfPlayers;
 
@@ -36,6 +38,7 @@ public class SelectPlayer extends Jeu {
     private JLabel infoPseudo;
     private JLabel infoIcon;
     private JTextField name;
+    private JButton valid;
 
     // Get more icons
     private JButton getMore;
@@ -52,15 +55,15 @@ public class SelectPlayer extends Jeu {
     /**
      * The default constructor
      *
-     * @param game
-     *          A game
+     * @param menu
+     *          The menu which gets the players
      * @param n
      *          The number of players
      */
-    public SelectPlayer(TwoPlayers game, int n) {
+    public SelectPlayer(Menu menu, int n) {
         super();
 
-        this.game = game;
+        this.menu = menu;
         this.numberOfPlayers = n;
 
         players = new HashMap<>();
@@ -98,18 +101,20 @@ public class SelectPlayer extends Jeu {
         JLabel sep = new JLabel(" ");
 
         /* ******** */
-        JButton valid = new JButton("VALIDER");
+        valid = new JButton("VALIDER");
         valid.setOpaque(true);
         valid.setBorder(new LineBorder(Color.black, 2, true));
         valid.setBackground(new Color(28,178,58));
         valid.setForeground(Color.WHITE);
         valid.setFont(getFont());
         valid.addActionListener(new ValidSelectPlayer());
+        valid.setFocusable(false);
 
         /* ******** */
         getMore = new JButton("Autres icones");
         getMore.setFont(new Font("Arial", Font.PLAIN, 30));
         getMore.addActionListener(new MorePawns());
+        getMore.setFocusable(false);
 
         /* ******** */
         int gridWidth = NUMBER_PAWNS;
@@ -153,6 +158,7 @@ public class SelectPlayer extends Jeu {
         j.setOpaque(true);
         j.setBackground(Color.WHITE);
         j.setBorder(DEFAULT_BORDER);
+        j.setFocusable(false);
 
         return j;
     }
@@ -189,15 +195,41 @@ public class SelectPlayer extends Jeu {
     @Override
     public void render() {
         world.setBackground(getBackground());
+        valid.setFont(getFont());
+        getMore.setFont(new Font(getFont().getFontName(), Font.PLAIN, getFont().getSize()));
+        infoIcon.setFont(getFont());
+        infoPseudo.setFont(getFont());
     }
 
     @Override
     public void reset() {
         infoIcon.setText(infoIcon.getText().replaceAll(""+players.size(), ""+(players.size()+1)));
         infoPseudo.setText(infoPseudo.getText().replaceAll(""+players.size(), ""+(players.size()+1)));
-        name.setText(null);
+        name.setText("");
 
         showItem = 0;
+
+        // Players can't have the same icon
+        if (selectedPawn != null) {
+            // So we need to remove it from our list
+            for(Iterator<Map.Entry<RESSOURCES,JButton>> it = allPawns.entrySet().iterator(); it.hasNext();){
+                Map.Entry<RESSOURCES, JButton> entry = it.next();
+
+                // If this is the selected icon
+                if (entry.getKey().equals(selectedPawn)) {
+                    // We forgot it
+                    it.remove();
+                    // We remove it
+                    world.remove(entry.getValue());
+                    // Job done
+                    break;
+                }
+            }
+
+            // No more selected pawn
+            selectedPawn = null;
+        }
+
         setNextIcons();
     }
 
@@ -271,9 +303,15 @@ public class SelectPlayer extends Jeu {
      */
     private void validSelection() {
         if (name.getText().length() >= 1
-                && selectedPawn != null) {
+                && selectedPawn != null
+                && players.get(name.getText()) == null) {
             getNextPlayer();
-        }
+        } else if (name.getText().length() < 1)
+            getSIVOX().playText("Veuillez entrer un pseudo pour le joueur "+(players.size()+1)+" !");
+        else if (selectedPawn == null)
+            getSIVOX().playText("Veuillez selectionner un icone pour le joueur "+(players.size()+1)+", en cliquant sur une des images !");
+        else
+            getSIVOX().playText("Vous ne pouvez pas avoir le même pseudo que le joueur "+players.size()+". Modifiez votre pseudo.");
     }
 
     /**
@@ -285,7 +323,7 @@ public class SelectPlayer extends Jeu {
         if (players.size() != numberOfPlayers)
             reset();
         else {
-            game.addPlayers(players);
+            menu.setPlayers(players);
             dispose();
         }
     }

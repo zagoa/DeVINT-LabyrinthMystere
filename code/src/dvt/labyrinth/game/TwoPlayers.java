@@ -13,6 +13,7 @@ import dvt.labyrinth.model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -30,12 +31,20 @@ public class TwoPlayers extends Jeu {
     private JPanel world;
     // The tray of the labyrinth
     private Tray tray;
+    // Old players
+    private HashMap<String, RESSOURCES> oldPlayers;
     // The players
     private Player[] players;
     // The current player
     private Player currentPlayer;
     // State of the game
     private boolean settingWall;
+
+    public TwoPlayers(HashMap<String, RESSOURCES> players) {
+        super();
+
+        addPlayers(players);
+    }
 
     @Override
     public void init() {
@@ -44,9 +53,9 @@ public class TwoPlayers extends Jeu {
 
         this.add(world);
 
-        world.setLayout(new GridBagLayout());
-
         tray = new Tray();
+
+        world.setLayout(new GridBagLayout());
 
         settingWall = false;
 
@@ -207,11 +216,11 @@ public class TwoPlayers extends Jeu {
     /**
      * Create players
      */
-    public void addPlayers(Map<String, RESSOURCES> p) {
+    public void addPlayers(HashMap<String, RESSOURCES> p) {
         players = new Player[p.size()];
 
         int k = 0;
-        for (Map.Entry<String, RESSOURCES> e : p.entrySet())
+        for (HashMap.Entry<String, RESSOURCES> e : p.entrySet())
             players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
