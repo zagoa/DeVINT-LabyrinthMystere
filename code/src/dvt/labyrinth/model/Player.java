@@ -28,10 +28,23 @@ public class Player {
     // His position
     private Position pos;
 
+    // Is a real player ?
+    private boolean isABot;
+
+    public Player(String name, Pawn pawn, Position pos, Tray tray, boolean isABot) {
+        this.name = name;
+        this.pawn = pawn;
+        this.originalPos = pos;
+        this.isABot = isABot;
+
+        setPos(pos, tray);
+    }
+
     public Player(String name, Pawn pawn, Position pos, Tray tray){
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
+        this.isABot = false;
 
         setPos(pos, tray);
     }
@@ -182,5 +195,9 @@ public class Player {
 
     public Pawn getPawn() {
         return pawn;
+    }
+
+    public boolean isABot() {
+        return isABot;
     }
 }
