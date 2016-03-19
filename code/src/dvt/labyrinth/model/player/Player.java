@@ -1,82 +1,49 @@
-package dvt.labyrinth.model;
+package dvt.labyrinth.model.player;
 
 import dvt.labyrinth.Position;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
+import dvt.labyrinth.model.Pawn;
 
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Queue;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
-/**
- * Created by user on 02/03/2016.
- */
+
 
 public class Player {
     // His name
-    private String name;
+    protected String name;
     // Item
-    private Pawn pawn;
-
-    private int time;
-    private boolean timeToPlay;
+    protected Pawn pawn;
 
     // Check if can set a wall
-    private ArrayList<Tile> can = new ArrayList<>();
+    protected ArrayList<Tile> can = new ArrayList<>();
 
     // His original position
-    private Position originalPos;
+    protected Position originalPos;
     // His position
-    private Position pos;
+    protected Position pos;
+
 
     public Player(String name, Pawn pawn, Position pos, Tray tray){
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
-
         setPos(pos, tray);
     }
 
-    public boolean move(Tray tray, DIRECTIONS d) {
-        int x = pos.getX();
-        int y = pos.getY();
 
-        switch (d) {
-            case FRONT:
-                if(canMove(tray, DIRECTIONS.FRONT)) {
-                    updatePlayerPos(tray, new Position(x, y - CASE_LENGTH));
-                    return true;
-                }
-                return false;
-
-            case BACK:
-                if(canMove(tray, DIRECTIONS.BACK)) {
-                    updatePlayerPos(tray, new Position(x, y + CASE_LENGTH));
-                    return true;
-                }
-                return false;
-
-            case RIGHT:
-                if(canMove(tray, DIRECTIONS.RIGHT)) {
-                    updatePlayerPos(tray, new Position(x + CASE_LENGTH, y));
-                    return true;
-                }
-                return false;
-
-            case LEFT:
-                if(canMove(tray, DIRECTIONS.LEFT)) {
-                    updatePlayerPos(tray, new Position(x - CASE_LENGTH, y));
-                    return true;
-                }
-                return false;
-
-            default:
-                return false;
-        }
-    }
-
+    /**
+     *We want to know if we can move towards a direction from our actual position
+     * @param tray the tray
+     * @param direction where we want to go
+     * @return whether or not we can move to the wanted position ( we can't go to a position
+     * if the tile(wanted position) is occupied (Wall,Player)
+     */
     public boolean canMove(Tray tray, DIRECTIONS direction){
         int x = pos.getX();
         int y = pos.getY();
@@ -107,6 +74,11 @@ public class Player {
         }
     }
 
+    /**
+     * Check if the player could end the game in the actual tray disposition
+     * @param tray
+     * @return if the player can access to the last tray's line which means he can win and he isn't blocked
+     */
     public boolean isBlocked(Tray tray){
         hasAccessTo(tray);
         //It represent if the pan is on the last line, so he can finish the game
@@ -117,6 +89,10 @@ public class Player {
     }
 
 
+    /**
+     * Add in a list all the tile where the pawn can move to
+     * @param tray
+     */
     public void hasAccessTo(Tray tray) {
         can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
         int i=0;
@@ -138,29 +114,24 @@ public class Player {
         }
     }
 
-    public Position getPosition() { return pos; }
 
-    private void updatePlayerPos(Tray tray, Position newP) {
+    /**
+     * Update the pawn position to the wanted one
+     * @param tray
+     * @param newP the position we want to go to
+     */
+    public void updatePlayerPos(Tray tray, Position newP) {
         tray.getTile(newP).setPawn(pawn);
         tray.getTile(pos).setItem(null);
 
         pos = newP;
     }
 
-    public void setPos(Position pos, Tray tray) {
-        this.pos = pos;
 
-        tray.getTile(pos).setPawn(pawn);
-    }
-
-    public boolean getTimeToPlay(){
-        return timeToPlay;
-    }
-
-    public void setTimeToPlay(boolean bool){
-        this.timeToPlay = bool;
-    }
-
+    /**
+     *
+     * @return whether or not the player has won
+     */
     public boolean hasWon() {
         switch (originalPos.getY()) {
             case 0: // Top of the tray
@@ -174,7 +145,16 @@ public class Player {
         }
     }
 
+    public void setPos(Position pos, Tray tray) {
+        this.pos = pos;
+
+        tray.getTile(pos).setPawn(pawn);
+    }
+
+    public Position getPosition() { return pos; }
+
     public String getName() {
         return name;
     }
+
 }

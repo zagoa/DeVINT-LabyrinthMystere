@@ -38,6 +38,7 @@ public class ConstantesLabyrinth {
         // PAWNS
         THEO(PAWNPATH+"theo.jpg"),
         LEA(PAWNPATH+"zago.jpg"),
+        COMPUTER(PAWNPATH+"computer"),
 
         // WALL
         WALL(IMAGEPATH+"murHorizontal.png"),

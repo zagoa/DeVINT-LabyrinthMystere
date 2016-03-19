@@ -7,6 +7,7 @@ import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 
 import dvt.labyrinth.model.*;
+import dvt.labyrinth.model.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
