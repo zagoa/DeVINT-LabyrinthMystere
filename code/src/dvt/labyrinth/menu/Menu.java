@@ -92,7 +92,7 @@ public class Menu extends Fenetre {
                         new SelectPlayer(this, 1).loop();
 
                         // ...and we add a bot
-                        players.put("Bot", RESSOURCES.BOT);
+                        players.put("Robot", RESSOURCES.BOT);
 
                         // We have now two players (player + bot)
                         if (players.size() == 2)

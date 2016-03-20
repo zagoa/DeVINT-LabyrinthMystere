@@ -188,7 +188,7 @@ public class Game extends Jeu {
                     tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
 
                     if ((tile[y][x].getPosition().getX()%2 != 1 || tile[y][x].getPosition().getY()%2 != 1)
-                            && !tile[y][x].isOccupied())// Don't click the small square
+                            && !tile[y][x].isOccupied())// Don't click the small square & occupied items
                         tile[y][x].setListenerWall(this);
                 }
                 else // 'Moves' tiles
@@ -234,7 +234,7 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESSOURCES> e : p.entrySet())
-            players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray, (e.getValue() == RESSOURCES.BOT));
+            players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
 

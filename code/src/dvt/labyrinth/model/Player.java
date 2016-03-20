@@ -31,20 +31,11 @@ public class Player {
     // Is a real player ?
     private boolean isABot;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray, boolean isABot) {
+    public Player(String name, Pawn pawn, Position pos, Tray tray) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
-        this.isABot = isABot;
-
-        setPos(pos, tray);
-    }
-
-    public Player(String name, Pawn pawn, Position pos, Tray tray){
-        this.name = name;
-        this.pawn = pawn;
-        this.originalPos = pos;
-        this.isABot = false;
+        this.isABot = pawn.getRes().isABot();
 
         setPos(pos, tray);
     }
@@ -129,22 +120,20 @@ public class Player {
 
     public void hasAccessTo(Tray tray) {
         can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
+
         int i=0;
+
         for(can.get(i); i == can.size(); i++){
             int x = can.get(i).getPosition().getX();
             int y = can.get(i).getPosition().getY();
-            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y))) {
+            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y)))
                 can.add(tray.getTile(x+2,y));
-            }
-            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y))) {
+            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y)))
                 can.add(tray.getTile(x-2,y));
-            }
-            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2))) {
+            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2)))
                 can.add(tray.getTile(x,y+2));
-            }
-            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2))) {
+            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2)))
                 can.add(tray.getTile(x,y-2));
-            }
         }
     }
 
