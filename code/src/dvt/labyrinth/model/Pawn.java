@@ -1,6 +1,8 @@
 package dvt.labyrinth.model;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import dvt.labyrinth.StretchIcon;
+
+import static dvt.labyrinth.ConstantesLabyrinth.RESSOURCES;
 
 /**
  * A pawn item
@@ -10,5 +12,10 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 public class Pawn extends Item {
     public Pawn(RESSOURCES res) {
         super(res);
+    }
+
+    @Override
+    public StretchIcon getIcon() {
+        return new StretchIcon(res.getPath());
     }
 }

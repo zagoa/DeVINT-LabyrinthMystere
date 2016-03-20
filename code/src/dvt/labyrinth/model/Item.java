@@ -49,4 +49,8 @@ public abstract class Item {
     public void setRes(RESSOURCES res) {
         this.res = res;
     }
+
+    public ImageIcon getIcon() {
+        return new ImageIcon(res.getPath());
+    }
 }

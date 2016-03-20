@@ -24,6 +24,7 @@ public class ConstantesLabyrinth {
     public static final String IMAGEPATH = "../ressources/images/";
     public static final String ARROWPATH = IMAGEPATH+"arrows/";
     public static final String PAWNPATH = IMAGEPATH+"pawns/";
+    public static final String WALLPATH = IMAGEPATH+"walls/";
     /* **************** */
 
     /* **** SOUND **** */
@@ -35,31 +36,61 @@ public class ConstantesLabyrinth {
 
     /* **** RESSOURCES **** */
     public enum RESSOURCES {
+<<<<<<< HEAD
         // PAWNS
         THEO(PAWNPATH+"theo.jpg"),
         LEA(PAWNPATH+"zago.jpg"),
         COMPUTER(PAWNPATH+"computer"),
 
+=======
+>>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614
         // WALL
-        WALL(IMAGEPATH+"murHorizontal.png"),
+        WALL(WALLPATH+"murHorizontal.png"),
+        WALL_VERTICAL(WALLPATH+"murVertical.png"),
+
+        // PAWNS
+        THEO(PAWNPATH+"theo.jpg", true),
+        GERARD(PAWNPATH+"gerard.jpg", true),
+        ZAGO(PAWNPATH+"zago.jpg", true),
+        PION(PAWNPATH+"pion.png",true),
+        TARGETT(IMAGEPATH+"target.png",true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
         ARROW_RIGHT(ARROWPATH+"arrow_right.png"),
         ARROW_UP(ARROWPATH+"arrow_up.png"),
         ARROW_DOWN(ARROWPATH+"arrow_down.png"),
+        // ARROWS SMALL
+        ARROW_SMALL_LEFT(ARROWPATH+"arrow_small_left.png"),
+        ARROW_SMALL_RIGHT(ARROWPATH+"arrow_small_right.png"),
+        ARROW_SMALL_UP(ARROWPATH+"arrow_small_up.png"),
+        ARROW_SMALL_DOWN(ARROWPATH+"arrow_small_down.png"),
 
         // TRANSPARENT
-        TRANSPARENT(null);
+        TRANSPARENT(null),
+
+        // OTHERS
+        TARGET(IMAGEPATH+"target.png");
 
         private String path;
+        private boolean isAPawn;
 
         RESSOURCES(String path) {
             this.path = path;
+            this.isAPawn = false;
+        }
+
+        RESSOURCES(String path, boolean isAPawn) {
+            this.path = path;
+            this.isAPawn = isAPawn;
         }
 
         public String getPath() {
             return path;
+        }
+
+        public boolean isAPawn() {
+            return isAPawn;
         }
     };
     /* ******************** */
@@ -70,6 +101,23 @@ public class ConstantesLabyrinth {
         FRONT,
         RIGHT,
         LEFT;
+    };
+    /* ******************** */
+
+    /* **** POSITIONS **** */
+    public enum POSITIONS {
+        TOP(new Position(8, 0)),
+        BOTTOM(new Position(8, NBRE_CASES-1));
+
+        private Position pos;
+
+        POSITIONS(Position pos) {
+            this.pos = pos;
+        }
+
+        public Position getPos() {
+            return pos;
+        }
     };
     /* ******************** */
 }

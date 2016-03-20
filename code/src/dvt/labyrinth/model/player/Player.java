@@ -18,7 +18,11 @@ public class Player {
     // His name
     protected String name;
     // Item
+<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
     protected Pawn pawn;
+=======
+    private Pawn pawn;
+>>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
 
     // Check if can set a wall
     protected ArrayList<Tile> can = new ArrayList<>();
@@ -127,11 +131,20 @@ public class Player {
         pos = newP;
     }
 
+<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
 
     /**
      *
      * @return whether or not the player has won
      */
+=======
+    public void setPos(Position pos, Tray tray) {
+        this.pos = pos;
+
+        tray.getTile(pos).setPawn(pawn);
+    }
+
+>>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
     public boolean hasWon() {
         switch (originalPos.getY()) {
             case 0: // Top of the tray
@@ -145,6 +158,7 @@ public class Player {
         }
     }
 
+<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
     public void setPos(Position pos, Tray tray) {
         this.pos = pos;
 
@@ -152,9 +166,29 @@ public class Player {
     }
 
     public Position getPosition() { return pos; }
+=======
+    public int getWonY() {
+        switch (originalPos.getY()) {
+            case 0: // Top of the tray
+                return NBRE_CASES-1;
+
+            case NBRE_CASES-1:
+                return 0;
+
+            default:
+                return 0;
+        }
+    }
+>>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
 
     public String getName() {
         return name;
     }
 
+<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
+=======
+    public Pawn getPawn() {
+        return pawn;
+    }
+>>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
 }

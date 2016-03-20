@@ -1,13 +1,14 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.model.DefaultItem;
+import javafx.geometry.Pos;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 /**
  * The tray of the game
  *
- * @author Thomas
+ * @author Thomas, Zago
  */
 public class Tray {
     // A tray is an array of tile
@@ -57,5 +58,46 @@ public class Tray {
      */
     public Tile getTile(Position position) {
         return getTile(position.getX(), position.getY());
+    }
+
+    /**
+     * Check if we can set a wall on a tile
+     *
+     * @param d
+     *          The direction where to set
+     * @param position
+     *          The position of the tile
+     *
+     * @return true / false (we can / we can not)
+     */
+    public boolean canSetAWall(DIRECTIONS d, Position position){
+        int x = position.getX();
+        int y = position.getY();
+
+        switch (d) {
+            case FRONT:
+                return (y-CASE_LENGTH >= 0
+                        && !this.getTile(x, y-CASE_LENGTH).isOccupied()
+                        && !this.getTile(x, y-1).isOccupied()); // In map && wall not present && tile not occupied
+
+            case BACK:
+                return (y+CASE_LENGTH <= NBRE_CASES-1
+                        && !this.getTile(x, y+CASE_LENGTH).isOccupied()
+                        && !this.getTile(x, y+1).isOccupied()); // In map && wall not present && tile not occupied
+
+            case RIGHT:
+                return (x+CASE_LENGTH <= NBRE_CASES-1
+                        && !this.getTile(x+CASE_LENGTH, y).isOccupied()
+                        && !this.getTile(x+1, y).isOccupied()); // In map && wall not present && tile not occupied
+
+            case LEFT:
+                return (x-CASE_LENGTH >= 0
+                        && !this.getTile(x-CASE_LENGTH, y).isOccupied()
+                        && !this.getTile(x-1, y).isOccupied()); // In map && wall not present && tile not occupied
+
+            default:
+                return false;
+        }
+
     }
 }
