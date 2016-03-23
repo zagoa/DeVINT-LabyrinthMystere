@@ -12,7 +12,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.WALL_NUMBER;
 public class HumanPlayer extends Player{
 
 
-    public HumanPlayer(String name, Pawn pawn, Position pos, Tray tray,int nbWall){
+    public HumanPlayer(String name, Pawn pawn, Position pos, Tray tray){
         super(name,pawn,pos,tray,WALL_NUMBER);
         setPos(pos,tray);
     }

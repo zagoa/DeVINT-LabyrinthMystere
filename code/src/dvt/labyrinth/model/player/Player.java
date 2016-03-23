@@ -33,7 +33,7 @@ public abstract class Player {
     private boolean isABot;
 
     //Number of wall
-    int nbWall;
+    protected int nbWall;
 
     public Player(String name, Pawn pawn, Position pos, Tray tray,int nbWall) {
         this.name = name;

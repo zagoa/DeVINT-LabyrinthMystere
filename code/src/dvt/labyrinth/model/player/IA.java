@@ -21,8 +21,8 @@ public abstract class IA extends Player{
      * @param pos the initial position of the IA
      * @param tray
      */
-    public IA(Pawn pawn, Position pos, Tray tray,int nbWall){
-        super("Computer",pawn,pos,tray,WALL_NUMBER);
+    public IA(Pawn pawn, Position pos, Tray tray, int nbWall){
+        super("Computer",pawn,pos,tray,nbWall);
         setPos(pos, tray);
     }
 
