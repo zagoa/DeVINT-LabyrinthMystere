@@ -30,8 +30,6 @@ public class Game extends Jeu {
     private JPanel world;
     // The tray of the labyrinth
     private Tray tray;
-    // Old players
-    private HashMap<String, RESSOURCES> oldPlayers;
     // The players
     private Player[] players;
     // The current player
