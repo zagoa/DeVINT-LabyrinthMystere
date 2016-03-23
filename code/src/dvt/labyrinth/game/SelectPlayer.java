@@ -307,11 +307,11 @@ public class SelectPlayer extends Jeu {
                 && players.get(name.getText()) == null)
             getNextPlayer();
         else if (name.getText().length() < 1)
-            getSIVOX().playText("Veuillez entrer un pseudo pour le joueur "+(players.size()+1)+" !");
+            getSIVOX().playText(parse(VOCAL.PSEUDO_LENGTH, (players.size()+1)));
         else if (selectedPawn == null)
-            getSIVOX().playText("Veuillez selectionner un icone pour le joueur "+(players.size()+1)+", en cliquant sur une des images !");
+            getSIVOX().playText(parse(VOCAL.SELECT_PAWN, (players.size()+1)));
         else
-            getSIVOX().playText("Vous ne pouvez pas avoir le même pseudo que le joueur "+players.size()+". Modifiez votre pseudo.");
+            getSIVOX().playText(parse(VOCAL.SAME_PSEUDO, players.size()));
     }
 
     /**

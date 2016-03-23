@@ -1,5 +1,6 @@
 package dvt.labyrinth;
 
+
 /**
  * Class used for some constants all over the game.
  *
@@ -124,5 +125,34 @@ public class ConstantesLabyrinth {
             return pos;
         }
     };
+    /* ******************** */
+
+    /* **** VOCAL **** */
+    public enum VOCAL {
+        START("%s commence à jouer !"),
+        PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
+        SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
+        SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
+        WIN("Félicitations %s ! Tu as remporté la partie. Appuie sur échap pour revenir au menu.");
+
+        private String str;
+
+        VOCAL(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+    }
+
+    public static String parse(VOCAL v, String s) {
+        return String.format(v.toString(), s);
+    }
+
+    public static String parse(VOCAL v, int i) {
+        return String.format(v.toString(), new Integer(i).toString());
+    }
     /* ******************** */
 }

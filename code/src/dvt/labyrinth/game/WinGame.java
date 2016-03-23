@@ -1,6 +1,7 @@
 package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
+import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.labyrinth.model.player.Player;
 
 import javax.swing.*;
@@ -49,11 +50,7 @@ public class WinGame extends Jeu {
         info.setIcon(new ImageIcon(winner.getPawn().getResPath()));
         info.setText(score);
 
-        String s = "Félicitations "+winner.getName()+" !"
-                + "Tu as remporté la partie."
-                + "Appuie sur échap pour revenir au menu.";
-
-        this.getSIVOX().playText(s, SYNTHESE_MAXIMALE);
+        this.getSIVOX().playText(parse(VOCAL.WIN, winner.getName()), SYNTHESE_MAXIMALE);
     }
 
     @Override

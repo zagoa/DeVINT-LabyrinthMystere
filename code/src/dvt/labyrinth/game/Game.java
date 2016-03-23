@@ -238,7 +238,9 @@ public class Game extends Jeu {
 
         currentPlayer = players[new Random().nextInt(1)];
 
-        getSIVOX().playText(currentPlayer.getName()+" commence à jouer !");
+        System.out.println(String.format(VOCAL.START.toString(), currentPlayer.getName()));
+
+        getSIVOX().playText(parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
     }
 
@@ -337,6 +339,4 @@ public class Game extends Jeu {
                 break;
         }
     }
-
-
 }
