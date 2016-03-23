@@ -32,11 +32,15 @@ public class Player {
     // Is a real player ?
     private boolean isABot;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray) {
+    //Number of wall
+    int nbWall;
+
+    public Player(String name, Pawn pawn, Position pos, Tray tray,int nbWall) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
         this.isABot = pawn.getRes().isABot();
+        this.nbWall = nbWall;
 
         setPos(pos, tray);
     }
@@ -182,4 +186,13 @@ public class Player {
     public boolean isABot() {
         return isABot;
     }
+
+    public int getNbWall() {
+        return nbWall;
+    }
+
+    public void setNbWall(int nbWall) {
+        this.nbWall = nbWall;
+    }
+
 }

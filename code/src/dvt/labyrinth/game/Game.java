@@ -234,7 +234,7 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray,WALL_NUMBER);
 
         currentPlayer = players[new Random().nextInt(1)];
 
@@ -336,6 +336,10 @@ public class Game extends Jeu {
             default:
                 break;
         }
+    }
+
+    public HumanPlayer getCurrentPlayer() {
+        return currentPlayer;
     }
 
 
