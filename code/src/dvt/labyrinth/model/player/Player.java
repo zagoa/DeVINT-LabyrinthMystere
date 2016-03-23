@@ -14,7 +14,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 
 
 
-public class Player {
+public abstract class Player {
     // His name
     protected String name;
     // Item
@@ -40,6 +40,8 @@ public class Player {
 
         setPos(pos, tray);
     }
+
+    public abstract boolean move(Tray tray, DIRECTIONS directions);
 
     /**
      *We want to know if we can move towards a direction from our actual position

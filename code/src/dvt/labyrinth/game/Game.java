@@ -10,6 +10,7 @@ import dvt.labyrinth.model.Arrow;
 import dvt.labyrinth.model.Pawn;
 import dvt.labyrinth.model.player.HumanPlayer;
 import dvt.labyrinth.model.Target;
+import dvt.labyrinth.model.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class Game extends Jeu {
     // The players
     private HumanPlayer[] players;
     // The current player
-    private HumanPlayer currentPlayer;
+    private Player currentPlayer;
     // State of the game
     private boolean settingWall;
 

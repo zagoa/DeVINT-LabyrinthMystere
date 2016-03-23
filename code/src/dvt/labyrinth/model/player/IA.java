@@ -8,7 +8,7 @@ import dvt.labyrinth.model.Pawn;
 import java.util.Queue;
 
 
-public class IA extends Player{
+public abstract class IA extends Player{
     //A queue for the next decisions taken by the computer
     Queue<ConstantesLabyrinth.DIRECTIONS> decision;
 
@@ -23,6 +23,9 @@ public class IA extends Player{
         super("Computer",pawn,pos,tray);
         setPos(pos, tray);
     }
+
+    @Override
+    public abstract boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions);
 
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
