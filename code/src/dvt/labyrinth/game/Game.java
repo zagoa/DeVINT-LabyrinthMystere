@@ -114,7 +114,7 @@ public class Game extends Jeu {
      * @param position
      *          The position of the wall
      */
-    public void checkWall(Position position) {
+    public void highlightWall(Position position) {
         settingWall = true;
 
         int x = position.getX();
@@ -142,6 +142,15 @@ public class Game extends Jeu {
             addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
             tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
         }
+    }
+
+    public boolean checkPutWall(Position position){
+        int y = position.getY();
+        return (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1
+                || tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1
+                || tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1
+                || tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1);
+
     }
 
 
