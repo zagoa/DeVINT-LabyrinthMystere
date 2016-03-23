@@ -10,6 +10,6 @@ import dvt.labyrinth.ConstantesLabyrinth;
 public class DefaultItem extends Item {
 
     public DefaultItem() {
-        super(ConstantesLabyrinth.RESSOURCES.TRANSPARENT);
+        super(ConstantesLabyrinth.RESOURCES.TRANSPARENT);
     }
 }

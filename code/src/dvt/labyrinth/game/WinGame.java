@@ -1,7 +1,7 @@
 package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
-import dvt.labyrinth.model.Player;
+import dvt.labyrinth.model.player.Player;
 
 import javax.swing.*;
 

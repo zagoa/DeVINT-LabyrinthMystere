@@ -9,6 +9,6 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
  */
 public class Wall extends Item{
     public Wall(boolean vertical) {
-        super((vertical) ? RESSOURCES.WALL_VERTICAL : RESSOURCES.WALL);
+        super((vertical) ? RESOURCES.WALL_VERTICAL : RESOURCES.WALL);
     }
 }

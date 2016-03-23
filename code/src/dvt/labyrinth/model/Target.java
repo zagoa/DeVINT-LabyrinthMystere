@@ -7,6 +7,6 @@ import dvt.labyrinth.ConstantesLabyrinth;
  */
 public class Target extends Item {
     public Target() {
-        super(ConstantesLabyrinth.RESSOURCES.TARGET);
+        super(ConstantesLabyrinth.RESOURCES.TARGET);
     }
 }

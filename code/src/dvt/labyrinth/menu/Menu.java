@@ -31,7 +31,7 @@ public class Menu extends Fenetre {
     private JLabel titleJeu;
     private int gameChoice;
 
-    private HashMap<String, RESSOURCES> players;
+    private HashMap<String, RESOURCES> players;
 
     /**
      * Le constructeur du menu
@@ -92,7 +92,7 @@ public class Menu extends Fenetre {
                         new SelectPlayer(this, 1).loop();
 
                         // ...and we add a bot
-                        players.put("Robot", RESSOURCES.BOT);
+                        players.put("Robot", RESOURCES.BOT);
 
                         // We have now two players (player + bot)
                         if (players.size() == 2)
@@ -233,7 +233,7 @@ public class Menu extends Fenetre {
         return c;
     }
 
-    public void setPlayers(HashMap<String, RESSOURCES> players) {
+    public void setPlayers(HashMap<String, RESOURCES> players) {
         this.players = players;
     }
 }

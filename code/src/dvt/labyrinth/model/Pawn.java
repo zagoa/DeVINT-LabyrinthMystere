@@ -2,7 +2,7 @@ package dvt.labyrinth.model;
 
 import dvt.labyrinth.StretchIcon;
 
-import static dvt.labyrinth.ConstantesLabyrinth.RESSOURCES;
+import static dvt.labyrinth.ConstantesLabyrinth.RESOURCES;
 
 /**
  * A pawn item
@@ -10,7 +10,7 @@ import static dvt.labyrinth.ConstantesLabyrinth.RESSOURCES;
  * @author Arnaud
  */
 public class Pawn extends Item {
-    public Pawn(RESSOURCES res) {
+    public Pawn(RESOURCES res) {
         super(res);
     }
 

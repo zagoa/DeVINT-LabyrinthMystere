@@ -11,10 +11,10 @@ import java.awt.event.ActionListener;
  * 'Select a pawn' ACTION
  */
 public class SelectPawnPlayer implements ActionListener {
-    private ConstantesLabyrinth.RESSOURCES r;
+    private ConstantesLabyrinth.RESOURCES r;
     private SelectPlayer sp;
 
-    public SelectPawnPlayer(SelectPlayer sp, ConstantesLabyrinth.RESSOURCES r) {
+    public SelectPawnPlayer(SelectPlayer sp, ConstantesLabyrinth.RESOURCES r) {
         this.r = r;
         this.sp = sp;
     }

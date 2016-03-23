@@ -9,7 +9,7 @@ import dvt.labyrinth.StretchIcon;
  * @author Adrian
  */
 public class Arrow extends Item {
-    public Arrow(ConstantesLabyrinth.RESSOURCES res) {
+    public Arrow(ConstantesLabyrinth.RESOURCES res) {
         super(res);
     }
 
