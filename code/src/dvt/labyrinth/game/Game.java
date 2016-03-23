@@ -234,11 +234,9 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray,WALL_NUMBER);
 
         currentPlayer = players[new Random().nextInt(1)];
-
-        System.out.println(String.format(VOCAL.START.toString(), currentPlayer.getName()));
 
         getSIVOX().playText(parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
@@ -338,5 +336,9 @@ public class Game extends Jeu {
             default:
                 break;
         }
+    }
+
+    public HumanPlayer getCurrentPlayer() {
+        return currentPlayer;
     }
 }
