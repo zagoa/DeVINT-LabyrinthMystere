@@ -1,7 +1,7 @@
 package dvt.labyrinth.actions;
 
-import dvt.labyrinth.ConstantesLabyrinth.DIRECTIONS;
-import dvt.labyrinth.Tile;
+import dvt.labyrinth.tools.ConstantesLabyrinth.DIRECTIONS;
+import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.game.Game;
 
 import javax.swing.*;

@@ -1,12 +1,12 @@
 package dvt.labyrinth.model.player;
 
-import dvt.labyrinth.ConstantesLabyrinth;
-import dvt.labyrinth.Position;
-import dvt.labyrinth.Tray;
-import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
+import dvt.labyrinth.tools.Position;
+import dvt.labyrinth.model.essential.Tray;
+import dvt.labyrinth.model.essential.Pawn;
 
-import static dvt.labyrinth.ConstantesLabyrinth.CASE_LENGTH;
-import static dvt.labyrinth.ConstantesLabyrinth.WALL_NUMBER;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.CASE_LENGTH;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.WALL_NUMBER;
 
 
 public class HumanPlayer extends Player{

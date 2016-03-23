@@ -1,7 +1,7 @@
 package dvt.labyrinth.model.bonus;
 
-import dvt.labyrinth.Tile;
-import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.model.essential.Tile;
+import dvt.labyrinth.model.essential.Pawn;
 
 /**
  * Created by user on 01/03/2016.

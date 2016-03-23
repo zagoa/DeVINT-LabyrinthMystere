@@ -1,8 +1,8 @@
-package dvt.labyrinth.model;
+package dvt.labyrinth.model.essential;
 
-import dvt.labyrinth.StretchIcon;
+import dvt.labyrinth.tools.StretchIcon;
 
-import static dvt.labyrinth.ConstantesLabyrinth.RESOURCES;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.RESOURCES;
 
 /**
  * A pawn item

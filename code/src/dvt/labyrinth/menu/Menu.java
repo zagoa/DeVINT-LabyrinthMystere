@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.*;
 
 import static dvt.devint.ConstantesDevint.*;
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 import dvt.devint.Fenetre;
 import dvt.labyrinth.game.Game;
 import dvt.labyrinth.game.SelectPlayer;

@@ -1,16 +1,17 @@
 package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
-import dvt.labyrinth.Position;
-import dvt.labyrinth.Tile;
-import dvt.labyrinth.Tray;
+import dvt.labyrinth.tools.Position;
+import dvt.labyrinth.model.essential.Tile;
+import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
-import dvt.labyrinth.model.Arrow;
-import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.model.essential.Arrow;
+import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.player.HumanPlayer;
-import dvt.labyrinth.model.Target;
+import dvt.labyrinth.model.essential.Target;
 import dvt.labyrinth.model.player.Player;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,8 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Random;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
+
 
 /**
  * The Labyrinth class.
@@ -71,6 +73,16 @@ public class Game extends Jeu {
             botPlay();
         else if (!settingWall) // Is not a bot and we're not setting walls
             checkMovePositions();
+    }
+
+    @Override
+    public void render() {
+        world.setBackground(getBackground());
+        // TODO : changer la valeur de la couleur des borders quand fond noir
+    }
+
+    @Override
+    public void reset() {
     }
 
     private void botPlay() {
@@ -154,7 +166,6 @@ public class Game extends Jeu {
 
     }
 
-
     /**
      * Set a display target where to go
      */
@@ -172,19 +183,8 @@ public class Game extends Jeu {
      */
     public void nextTurn() {
         currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
-
+        if(!currentPlayer.isABot()) playText(parse(VOCAL.TURN_2P,currentPlayer.getName()));
     }
-
-    @Override
-    public void render() {
-        world.setBackground(getBackground());
-        // TODO : changer la valeur de la couleur des borders quand fond noir
-    }
-
-    @Override
-    public void reset() {
-    }
-
     /**
      * Display the grid/tray
      */
@@ -244,11 +244,11 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray,WALL_NUMBER);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
 
-        getSIVOX().playText(parse(VOCAL.START, currentPlayer.getName()));
+        playText(parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
     }
 
@@ -282,8 +282,7 @@ public class Game extends Jeu {
         if (currentPlayer.move(tray, d)) { // has moved
             if (currentPlayer.hasWon())
                 return;
-
-            currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
+            nextTurn();
         }
     }
 
@@ -348,7 +347,15 @@ public class Game extends Jeu {
         }
     }
 
-    public HumanPlayer getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public void playText(String sentence){
+        getSIVOX().stop();
+        getSIVOX().playText(sentence);
+    }
+
+
+
 }

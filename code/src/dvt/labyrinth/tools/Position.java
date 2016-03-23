@@ -1,4 +1,4 @@
-package dvt.labyrinth;
+package dvt.labyrinth.tools;
 
 /**
  * This class is used to keep x & y coordinates.

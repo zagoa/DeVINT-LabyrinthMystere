@@ -1,10 +1,9 @@
-package dvt.labyrinth;
+package dvt.labyrinth.model.essential;
 
 import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.game.Game;
-import dvt.labyrinth.model.DefaultItem;
-import dvt.labyrinth.model.Item;
-import dvt.labyrinth.model.Wall;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
+import dvt.labyrinth.tools.Position;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

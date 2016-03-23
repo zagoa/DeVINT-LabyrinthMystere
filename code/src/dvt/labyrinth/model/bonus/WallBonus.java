@@ -1,8 +1,8 @@
 package dvt.labyrinth.model.bonus;
 
-import dvt.labyrinth.Tile;
-import dvt.labyrinth.model.Pawn;
-import dvt.labyrinth.model.Wall;
+import dvt.labyrinth.model.essential.Tile;
+import dvt.labyrinth.model.essential.Pawn;
+import dvt.labyrinth.model.essential.Wall;
 
 /**
  * Created by user on 02/03/2016.

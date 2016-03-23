@@ -1,6 +1,6 @@
 package dvt.labyrinth.actions;
 
-import dvt.labyrinth.ConstantesLabyrinth;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.game.SelectPlayer;
 
 import javax.swing.*;

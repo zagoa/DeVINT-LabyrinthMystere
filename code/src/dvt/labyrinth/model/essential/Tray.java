@@ -1,9 +1,8 @@
-package dvt.labyrinth;
+package dvt.labyrinth.model.essential;
 
-import dvt.labyrinth.model.DefaultItem;
-import javafx.geometry.Pos;
+import dvt.labyrinth.tools.Position;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 /**
  * The tray of the game

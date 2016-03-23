@@ -1,16 +1,14 @@
 package dvt.labyrinth.model.player;
 
-import dvt.labyrinth.Position;
-import dvt.labyrinth.Tile;
-import dvt.labyrinth.Tray;
-import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.tools.Position;
+import dvt.labyrinth.model.essential.Tile;
+import dvt.labyrinth.model.essential.Tray;
+import dvt.labyrinth.model.essential.Pawn;
 
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Queue;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 
 

@@ -1,13 +1,13 @@
 package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
-import dvt.labyrinth.StretchIcon;
+import dvt.labyrinth.tools.StretchIcon;
 import dvt.labyrinth.actions.MorePawns;
 import dvt.labyrinth.actions.SelectPawnPlayer;
 import dvt.labyrinth.actions.ValidSelectPlayer;
 import dvt.labyrinth.menu.Menu;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

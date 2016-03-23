@@ -1,4 +1,4 @@
-package dvt.labyrinth;
+package dvt.labyrinth.tools;
 
 
 /**
@@ -132,6 +132,8 @@ public class ConstantesLabyrinth {
     /* **** VOCAL **** */
     public enum VOCAL {
         START("%s commence à jouer !"),
+        TURN_1P("C'est à toi de jouer ! "),
+        TURN_2P("C'est à %s de jouer ! "),
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
         SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
@@ -151,6 +153,7 @@ public class ConstantesLabyrinth {
             return str;
         }
     }
+
 
     public static String parse(VOCAL v, String s) {
         return String.format(v.toString(), s);

@@ -1,7 +1,7 @@
 /**
  * @(#)StretchIcon.java	1.0 03/27/12
  */
-package dvt.labyrinth;
+package dvt.labyrinth.tools;
 
 import java.awt.Component;
 import java.awt.Container;

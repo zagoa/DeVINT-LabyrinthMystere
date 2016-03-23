@@ -1,13 +1,11 @@
 package dvt.labyrinth.model.player;
 
-import dvt.labyrinth.ConstantesLabyrinth;
-import dvt.labyrinth.Position;
-import dvt.labyrinth.Tray;
-import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
+import dvt.labyrinth.tools.Position;
+import dvt.labyrinth.model.essential.Tray;
+import dvt.labyrinth.model.essential.Pawn;
 
 import java.util.Queue;
-import static dvt.labyrinth.ConstantesLabyrinth.WALL_NUMBER;
-
 
 
 public abstract class IA extends Player{

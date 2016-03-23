@@ -1,7 +1,7 @@
-package dvt.labyrinth.model;
+package dvt.labyrinth.model.essential;
 
-import dvt.labyrinth.ConstantesLabyrinth;
-import dvt.labyrinth.StretchIcon;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
+import dvt.labyrinth.tools.StretchIcon;
 
 /**
  * An arrow item

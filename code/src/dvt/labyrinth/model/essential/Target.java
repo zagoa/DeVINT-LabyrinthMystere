@@ -1,6 +1,6 @@
-package dvt.labyrinth.model;
+package dvt.labyrinth.model.essential;
 
-import dvt.labyrinth.ConstantesLabyrinth;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
 
 /**
  * Created by Adrian on 14/03/2016.

@@ -1,6 +1,6 @@
-package dvt.labyrinth.model;
+package dvt.labyrinth.model.essential;
 
-import dvt.labyrinth.ConstantesLabyrinth.RESOURCES;
+import dvt.labyrinth.tools.ConstantesLabyrinth.RESOURCES;
 
 import javax.swing.*;
 

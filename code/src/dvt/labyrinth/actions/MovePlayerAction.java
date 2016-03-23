@@ -1,6 +1,6 @@
 package dvt.labyrinth.actions;
 
-import static dvt.labyrinth.ConstantesLabyrinth.*;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 import dvt.labyrinth.game.Game;
 
