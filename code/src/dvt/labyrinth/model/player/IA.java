@@ -6,6 +6,8 @@ import dvt.labyrinth.Tray;
 import dvt.labyrinth.model.Pawn;
 
 import java.util.Queue;
+import static dvt.labyrinth.ConstantesLabyrinth.WALL_NUMBER;
+
 
 
 public abstract class IA extends Player{
@@ -19,8 +21,8 @@ public abstract class IA extends Player{
      * @param pos the initial position of the IA
      * @param tray
      */
-    public IA(Pawn pawn, Position pos, Tray tray){
-        super("Computer",pawn,pos,tray);
+    public IA(Pawn pawn, Position pos, Tray tray,int nbWall){
+        super("Computer",pawn,pos,tray,WALL_NUMBER);
         setPos(pos, tray);
     }
 
