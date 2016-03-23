@@ -2,6 +2,9 @@ package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.StretchIcon;
+import dvt.labyrinth.actions.MorePawns;
+import dvt.labyrinth.actions.SelectPawnPlayer;
+import dvt.labyrinth.actions.ValidSelectPlayer;
 import dvt.labyrinth.menu.Menu;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
@@ -9,8 +12,6 @@ import static dvt.labyrinth.ConstantesLabyrinth.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -106,13 +107,13 @@ public class SelectPlayer extends Jeu {
         valid.setBackground(new Color(28,178,58));
         valid.setForeground(Color.WHITE);
         valid.setFont(getFont());
-        valid.addActionListener(new ValidSelectPlayer());
+        valid.addActionListener(new ValidSelectPlayer(this));
         valid.setFocusable(false);
 
         /* ******** */
         getMore = new JButton("Autres icones");
         getMore.setFont(new Font("Arial", Font.PLAIN, 30));
-        getMore.addActionListener(new MorePawns());
+        getMore.addActionListener(new MorePawns(this));
         getMore.setFocusable(false);
 
         /* ******** */
@@ -153,7 +154,7 @@ public class SelectPlayer extends Jeu {
     public JButton getButton(RESOURCES r) {
         JButton j = new JButton(new StretchIcon(r.getPath()));
         j.setPreferredSize(new Dimension(200,200));
-        j.addActionListener(new SelectPawnPlayer(r));
+        j.addActionListener(new SelectPawnPlayer(this, r));
         j.setOpaque(true);
         j.setBackground(Color.WHITE);
         j.setBorder(DEFAULT_BORDER);
@@ -300,7 +301,7 @@ public class SelectPlayer extends Jeu {
     /**
      * If we have filled all the field
      */
-    private void validSelection() {
+    public void validSelection() {
         if (name.getText().length() >= 1
                 && selectedPawn != null
                 && players.get(name.getText()) == null) {
@@ -324,44 +325,6 @@ public class SelectPlayer extends Jeu {
         else {
             menu.setPlayers(players);
             dispose();
-        }
-    }
-
-    /* ***** ACTIONS ***** */
-
-    /**
-     * 'Select a pawn' ACTION
-     */
-    private class SelectPawnPlayer implements ActionListener {
-        private RESOURCES r;
-
-        public SelectPawnPlayer(RESOURCES r) {
-            this.r = r;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            selectPawn(r, (JButton)e.getSource());
-        }
-    }
-
-    /**
-     * 'Show more pawns' ACTION
-     */
-    private class MorePawns implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            setNextIcons();
-        }
-    }
-
-    /**
-     * 'Valid the pawn and the name' ACTION
-     */
-    private class ValidSelectPlayer implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            validSelection();
         }
     }
 }
