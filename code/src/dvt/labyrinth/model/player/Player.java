@@ -41,10 +41,6 @@ public class Player {
         setPos(pos, tray);
     }
 
-    public boolean move(Tray tray, DIRECTIONS d) {
-        int x = pos.getX();
-        int y = pos.getY();
-
     /**
      *We want to know if we can move towards a direction from our actual position
      * @param tray the tray
@@ -105,7 +101,6 @@ public class Player {
         can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
 
         int i=0;
-
         for(can.get(i); i == can.size(); i++){
             int x = can.get(i).getPosition().getX();
             int y = can.get(i).getPosition().getY();
@@ -134,19 +129,17 @@ public class Player {
         pos = newP;
     }
 
-<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
 
-    /**
-     *
-     * @return whether or not the player has won
-     */
-=======
     public void setPos(Position pos, Tray tray) {
         this.pos = pos;
 
         tray.getTile(pos).setPawn(pawn);
     }
 
+    /**
+     *
+     * @return whether or not the player has won
+     */
     public boolean hasWon() {
         switch (originalPos.getY()) {
             case 0: // Top of the tray
@@ -160,15 +153,7 @@ public class Player {
         }
     }
 
-<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
-    public void setPos(Position pos, Tray tray) {
-        this.pos = pos;
 
-        tray.getTile(pos).setPawn(pawn);
-    }
-
-    public Position getPosition() { return pos; }
-=======
     public int getWonY() {
         switch (originalPos.getY()) {
             case 0: // Top of the tray

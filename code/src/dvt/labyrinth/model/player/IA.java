@@ -24,28 +24,6 @@ public class IA extends Player{
         setPos(pos, tray);
     }
 
-
-    /**
-     * Read the direction from the queue in order to move the IA pawn
-     * @param tray
-     */
-    public void moveIA(Tray tray){
-        if ((!decision.isEmpty())) {
-            if (canMove(tray,decision.peek())){
-                updatePlayerPos(tray,convertDirectionToPosition(decision.peek()));
-                decision.poll();
-            }
-
-            else {
-                //TODO : see where we should move when what we anticipated isn't possible anymore
-            }
-        }
-        else {
-            strategyIA(tray);
-            moveIA(tray);
-        }
-    }
-
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
      * and then depending of the possible movements we apply other strategies

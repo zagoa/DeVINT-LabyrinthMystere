@@ -8,7 +8,7 @@ import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
 import dvt.labyrinth.model.Arrow;
 import dvt.labyrinth.model.Pawn;
-import dvt.labyrinth.model.Player;
+import dvt.labyrinth.model.player.HumanPlayer;
 import dvt.labyrinth.model.Target;
 
 import javax.swing.*;
@@ -31,15 +31,15 @@ public class Game extends Jeu {
     // The tray of the labyrinth
     private Tray tray;
     // Old players
-    private HashMap<String, RESSOURCES> oldPlayers;
+    private HashMap<String, RESOURCES> oldPlayers;
     // The players
-    private Player[] players;
+    private HumanPlayer[] players;
     // The current player
-    private Player currentPlayer;
+    private HumanPlayer currentPlayer;
     // State of the game
     private boolean settingWall;
 
-    public Game(HashMap<String, RESSOURCES> players) {
+    public Game(HashMap<String, RESOURCES> players) {
         super();
 
         addPlayers(players);
@@ -92,13 +92,13 @@ public class Game extends Jeu {
 
         Tile tile[][] = tray.getTray();
         if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
-            tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_LEFT)); // Left
+            tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_LEFT)); // Left
         if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
-            tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESSOURCES.ARROW_RIGHT)); // Right
+            tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_RIGHT)); // Right
         if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
-            tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_UP)); // Down
+            tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_UP)); // Down
         if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
-            tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESSOURCES.ARROW_DOWN)); // Up
+            tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_DOWN)); // Up
 
         setTarget();
 
@@ -125,22 +125,22 @@ public class Game extends Jeu {
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
             addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
-            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_RIGHT));
+            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_RIGHT));
         }
         // Check left && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1) {
             addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
-            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_LEFT));
+            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_LEFT));
         }
         // Check up && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1) {
             addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
-            tray.getTile(x, y - 2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_UP));
+            tray.getTile(x, y - 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_UP));
         }
         // Check down && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1) {
             addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
-            tray.getTile(x, y + 2).setHighlighted(new Arrow(RESSOURCES.ARROW_SMALL_DOWN));
+            tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
         }
     }
 
@@ -229,12 +229,12 @@ public class Game extends Jeu {
     /**
      * Create players
      */
-    public void addPlayers(HashMap<String, RESSOURCES> p) {
-        players = new Player[p.size()];
+    public void addPlayers(HashMap<String, RESOURCES> p) {
+        players = new HumanPlayer[p.size()];
 
         int k = 0;
-        for (HashMap.Entry<String, RESSOURCES> e : p.entrySet())
-            players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+        for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
 
@@ -318,19 +318,19 @@ public class Game extends Jeu {
 
         switch(gap){
             case RIGHT:
-                tray.getTile(x-1,y).putWall(gap);
+                tray.getTile(x-1,y).positionWall(gap);
                 break;
 
             case LEFT:
-                tray.getTile(x+1,y).putWall(gap);
+                tray.getTile(x+1,y).positionWall(gap);
                 break;
 
             case FRONT:
-                tray.getTile(x,y+1).putWall(gap);
+                tray.getTile(x,y+1).positionWall(gap);
                 break;
 
             case BACK:
-                tray.getTile(x,y-1).putWall(gap);
+                tray.getTile(x,y-1).positionWall(gap);
                 break;
 
             default:

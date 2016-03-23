@@ -31,7 +31,7 @@ public class SelectPlayer extends Jeu {
     private int numberOfPlayers;
 
     // The list of players
-    private HashMap<String, RESSOURCES> players;
+    private HashMap<String, RESOURCES> players;
 
     private JPanel world;
     private JLabel infoPseudo;
@@ -46,10 +46,10 @@ public class SelectPlayer extends Jeu {
     private int showItem;
 
     // The pawns
-    private Map<RESSOURCES, JButton> allPawns;
+    private Map<RESOURCES, JButton> allPawns;
 
     // Select pawn
-    private RESSOURCES selectedPawn;
+    private RESOURCES selectedPawn;
 
     /**
      * The default constructor
@@ -138,7 +138,7 @@ public class SelectPlayer extends Jeu {
         showItem = 0;
         allPawns = new LinkedHashMap<>();
 
-        for (RESSOURCES r : RESSOURCES.values()) {
+        for (RESOURCES r : RESOURCES.values()) {
             if (r.isAPawn() && !r.isABot()) allPawns.put(r, getButton(r));
         }
     }
@@ -150,7 +150,7 @@ public class SelectPlayer extends Jeu {
      *          The RESSOURCES
      * @return the created button
      */
-    public JButton getButton(RESSOURCES r) {
+    public JButton getButton(RESOURCES r) {
         JButton j = new JButton(new StretchIcon(r.getPath()));
         j.setPreferredSize(new Dimension(200,200));
         j.addActionListener(new SelectPawnPlayer(r));
@@ -211,8 +211,8 @@ public class SelectPlayer extends Jeu {
         // Players can't have the same icon
         if (selectedPawn != null) {
             // So we need to remove it from our list
-            for(Iterator<Map.Entry<RESSOURCES,JButton>> it = allPawns.entrySet().iterator(); it.hasNext();){
-                Map.Entry<RESSOURCES, JButton> entry = it.next();
+            for(Iterator<Map.Entry<RESOURCES,JButton>> it = allPawns.entrySet().iterator(); it.hasNext();){
+                Map.Entry<RESOURCES, JButton> entry = it.next();
 
                 // If this is the selected icon
                 if (entry.getKey().equals(selectedPawn)) {
@@ -289,7 +289,7 @@ public class SelectPlayer extends Jeu {
      * @param b
      *          The button
      */
-    public void selectPawn(RESSOURCES r, JButton b) {
+    public void selectPawn(RESOURCES r, JButton b) {
         if (selectedPawn != null) // previously selected one
             allPawns.get(selectedPawn).setBorder(DEFAULT_BORDER);
 
@@ -333,9 +333,9 @@ public class SelectPlayer extends Jeu {
      * 'Select a pawn' ACTION
      */
     private class SelectPawnPlayer implements ActionListener {
-        private RESSOURCES r;
+        private RESOURCES r;
 
-        public SelectPawnPlayer(RESSOURCES r) {
+        public SelectPawnPlayer(RESOURCES r) {
             this.r = r;
         }
 

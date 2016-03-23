@@ -1,10 +1,8 @@
 package dvt.labyrinth.model;
 
-import dvt.labyrinth.ConstantesLabyrinth.RESSOURCES;
+import dvt.labyrinth.ConstantesLabyrinth.RESOURCES;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 
 /**
  * A default "template" for an item
@@ -13,7 +11,7 @@ import java.awt.*;
  */
 public abstract class Item {
     // An item has a ressource
-    protected RESSOURCES res;
+    protected RESOURCES res;
 
     /**
      * Constructor of the item
@@ -21,7 +19,7 @@ public abstract class Item {
      * @param res
      *          The ressource related to the item
      */
-    public Item(RESSOURCES res) {
+    public Item(RESOURCES res) {
         this.res = res;
     }
 
@@ -29,7 +27,7 @@ public abstract class Item {
      * Getter on the ressource
      * @return The ressource
      */
-    public RESSOURCES getRes() {
+    public RESOURCES getRes() {
         return res;
     }
 
@@ -46,7 +44,7 @@ public abstract class Item {
      * @param res
      *          The new ressource
      */
-    public void setRes(RESSOURCES res) {
+    public void setRes(RESOURCES res) {
         this.res = res;
     }
 

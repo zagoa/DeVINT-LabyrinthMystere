@@ -34,16 +34,9 @@ public class ConstantesLabyrinth {
     public static final int MARGE_LEFT_RIGHT = 80;
     public static final int MARGE_TOP_BOT = 3;
 
-    /* **** RESSOURCES **** */
-    public enum RESSOURCES {
-<<<<<<< HEAD
-        // PAWNS
-        THEO(PAWNPATH+"theo.jpg"),
-        LEA(PAWNPATH+"zago.jpg"),
-        COMPUTER(PAWNPATH+"computer"),
+    /* **** RESOURCES **** */
+    public enum RESOURCES {
 
-=======
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
@@ -77,17 +70,17 @@ public class ConstantesLabyrinth {
         private boolean isAPawn;
         private boolean isABot;
 
-        RESSOURCES(String path) {
+        RESOURCES(String path) {
             this.path = path;
             this.isAPawn = false;
         }
 
-        RESSOURCES(String path, boolean isAPawn) {
+        RESOURCES(String path, boolean isAPawn) {
             this.path = path;
             this.isAPawn = isAPawn;
         }
 
-        RESSOURCES(String path, boolean isAPawn, boolean isABot) {
+        RESOURCES(String path, boolean isAPawn, boolean isABot) {
             this.path = path;
             this.isAPawn = isAPawn;
             this.isABot = isABot;

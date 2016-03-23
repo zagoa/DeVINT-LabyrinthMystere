@@ -2,12 +2,7 @@ package dvt.labyrinth.actions;
 
 import dvt.labyrinth.game.Game;
 import dvt.labyrinth.Tile;
-<<<<<<< HEAD
-import dvt.labyrinth.model.Item;
-import dvt.labyrinth.model.Wall;
-import javafx.geometry.Pos;
-=======
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +35,7 @@ public class PutWall implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall && disable the clic && is not already occupied
         if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied()) {
-            tile.putWall();
+            tile.positionWall();
             lab.checkWall(tile.getPosition());
             //lab.unHighlightAll(); // If we've just blocked the player
         }
