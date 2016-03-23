@@ -135,8 +135,11 @@ public class ConstantesLabyrinth {
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
         SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
-        WIN("Félicitations %s ! Tu as remporté la partie. Appuie sur échap pour revenir au menu.");
-
+        WIN("Félicitations %s ! Tu as remporté la partie. Appuie sur échap pour revenir au menu."),
+        ERROR_WALL("Impossible de poser un mur ici ! "),
+        BOT_WALL("Le bot vient de poser un mur"),
+        HUMAN_WALL("Un mur a été posé, choisi là où le deuxième mur doit être, à l'aide des fléches directionnels"),
+        NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles");
         private String str;
 
         VOCAL(String str) {
