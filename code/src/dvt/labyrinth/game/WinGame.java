@@ -21,9 +21,11 @@ public class WinGame extends Jeu {
     private Player winner;
 
     private JPanel world;
+    private JPanel bottom;
+
     private JLabel info;
-    private String score;
     private JButton reset;
+    private String score;
 
     public WinGame(Player player) {
         super();
@@ -36,23 +38,33 @@ public class WinGame extends Jeu {
     public void init() {
         world = new JPanel();
         world.setBackground(getBackground());
-        world.setLayout(null);
+        world.setLayout(new GridLayout(2,1));
 
         info = new JLabel("", JLabel.CENTER);
+        info.setVerticalAlignment(JLabel.TOP);
         info.setFont(getFont());
         info.setVisible(true);
         world.add(info);
         //TODO afficher le bouton
-        reset = new JButton("Aller au Menu");
+
+        reset = new JButton("Revenir au Menu");
         reset.setBackground(Color.RED);
-        reset.setBorder(new LineBorder(Color.black,2,true));
+        reset.setForeground(Color.WHITE);
+        reset.setBorder(new LineBorder(Color.black, 2, true));
         reset.addActionListener(new EchapAction(this));
         reset.setFont(getFont());
         reset.setFocusable(false);
-        reset.setMaximumSize(new Dimension(100,100));
-        reset.setLocation(400,400);
-        reset.setVisible(true);
-        world.add(reset);
+        reset.setOpaque(true);
+
+        bottom = new JPanel();
+        bottom.setLayout(new GridBagLayout());
+        bottom.add(reset);
+        bottom.setBackground(getBackground());
+
+        world.add(bottom);
+
+
+//        world.add(new JButton("bite"));
 
         this.add(world);
 
@@ -83,6 +95,7 @@ public class WinGame extends Jeu {
         info.setForeground(getForeground());
         info.setFont(getFont());
         world.setBackground(getBackground());
+        bottom.setBackground(getBackground());
     }
 
     @Override
