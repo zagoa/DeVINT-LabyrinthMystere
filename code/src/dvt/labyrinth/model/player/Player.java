@@ -18,11 +18,7 @@ public class Player {
     // His name
     protected String name;
     // Item
-<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
-    protected Pawn pawn;
-=======
     private Pawn pawn;
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
 
     // Check if can set a wall
     protected ArrayList<Tile> can = new ArrayList<>();
@@ -33,13 +29,21 @@ public class Player {
     protected Position pos;
 
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray){
+    // Is a real player ?
+    private boolean isABot;
+
+    public Player(String name, Pawn pawn, Position pos, Tray tray) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
+        this.isABot = pawn.getRes().isABot();
+
         setPos(pos, tray);
     }
 
+    public boolean move(Tray tray, DIRECTIONS d) {
+        int x = pos.getX();
+        int y = pos.getY();
 
     /**
      *We want to know if we can move towards a direction from our actual position
@@ -99,25 +103,24 @@ public class Player {
      */
     public void hasAccessTo(Tray tray) {
         can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
+
         int i=0;
+
         for(can.get(i); i == can.size(); i++){
             int x = can.get(i).getPosition().getX();
             int y = can.get(i).getPosition().getY();
-            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y))) {
+            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y)))
                 can.add(tray.getTile(x+2,y));
-            }
-            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y))) {
+            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y)))
                 can.add(tray.getTile(x-2,y));
-            }
-            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2))) {
+            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2)))
                 can.add(tray.getTile(x,y+2));
-            }
-            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2))) {
+            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2)))
                 can.add(tray.getTile(x,y-2));
-            }
         }
     }
 
+    public Position getPosition() { return pos; }
 
     /**
      * Update the pawn position to the wanted one
@@ -144,7 +147,6 @@ public class Player {
         tray.getTile(pos).setPawn(pawn);
     }
 
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
     public boolean hasWon() {
         switch (originalPos.getY()) {
             case 0: // Top of the tray
@@ -179,16 +181,16 @@ public class Player {
                 return 0;
         }
     }
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
 
     public String getName() {
         return name;
     }
 
-<<<<<<< HEAD:code/src/dvt/labyrinth/model/player/Player.java
-=======
     public Pawn getPawn() {
         return pawn;
     }
->>>>>>> de46d472c8e4542e315bf76aa80dc77bd99a4614:code/src/dvt/labyrinth/model/Player.java
+
+    public boolean isABot() {
+        return isABot;
+    }
 }

@@ -1,25 +1,23 @@
 package dvt.labyrinth.game;
 
-import com.sun.org.apache.regexp.internal.RE;
 import dvt.devint.Jeu;
 import dvt.labyrinth.Position;
 import dvt.labyrinth.Tile;
 import dvt.labyrinth.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
-
 import dvt.labyrinth.actions.MoveWall;
-import dvt.labyrinth.model.*;
-import dvt.labyrinth.model.player.Player;
+import dvt.labyrinth.model.Arrow;
+import dvt.labyrinth.model.Pawn;
+import dvt.labyrinth.model.Player;
+import dvt.labyrinth.model.Target;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
-import static dvt.devint.ConstantesDevint.*;
 
 /**
  * The Labyrinth class.
@@ -27,7 +25,7 @@ import static dvt.devint.ConstantesDevint.*;
  *
  * @author Arnaud, Thomas, Etienne & Adrian
  */
-public class TwoPlayers extends Jeu {
+public class Game extends Jeu {
     // The 'world' : Labyrinth
     private JPanel world;
     // The tray of the labyrinth
@@ -41,7 +39,7 @@ public class TwoPlayers extends Jeu {
     // State of the game
     private boolean settingWall;
 
-    public TwoPlayers(HashMap<String, RESSOURCES> players) {
+    public Game(HashMap<String, RESSOURCES> players) {
         super();
 
         addPlayers(players);
@@ -68,8 +66,21 @@ public class TwoPlayers extends Jeu {
         if (currentPlayer.hasWon())
             win();
 
-        if(!settingWall)
+        if (currentPlayer.isABot()) // Is a bot ?
+            botPlay();
+        else if (!settingWall) // Is not a bot and we're not setting walls
             checkMovePositions();
+    }
+
+    private void botPlay() {
+        if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
+            movePlayer(DIRECTIONS.FRONT);
+        else if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
+            movePlayer(DIRECTIONS.LEFT);
+        else if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
+            movePlayer(DIRECTIONS.RIGHT);
+        else if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
+            movePlayer(DIRECTIONS.BACK);
     }
 
     /**
@@ -176,7 +187,8 @@ public class TwoPlayers extends Jeu {
                 if (tile[y][x].isAWall()) { // Walls
                     tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
 
-                    if (tile[y][x].getPosition().getX()%2 != 1 || tile[y][x].getPosition().getY()%2 != 1) // Don't click the small square
+                    if ((tile[y][x].getPosition().getX()%2 != 1 || tile[y][x].getPosition().getY()%2 != 1)
+                            && !tile[y][x].isOccupied())// Don't click the small square & occupied items
                         tile[y][x].setListenerWall(this);
                 }
                 else // 'Moves' tiles
@@ -225,6 +237,17 @@ public class TwoPlayers extends Jeu {
             players[k++] = new Player(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
+
+        getSIVOX().playText(currentPlayer.getName()+" commence à jouer !");
+        pause(1500);
+    }
+
+    public void pause(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            return;
+        }
     }
 
     /**

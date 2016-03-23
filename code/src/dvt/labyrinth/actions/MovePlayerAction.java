@@ -1,7 +1,8 @@
 package dvt.labyrinth.actions;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
-import dvt.labyrinth.game.TwoPlayers;
+
+import dvt.labyrinth.game.Game;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ public class MovePlayerAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
 
     // The game
-    private transient TwoPlayers fenetre;
+    private transient Game fenetre;
     // The direction of the movement
     private DIRECTIONS directions;
 
@@ -25,7 +26,7 @@ public class MovePlayerAction extends AbstractAction {
      * @param d
      *          The direction of the movement we need to catch
      */
-    public MovePlayerAction(TwoPlayers fenetre, DIRECTIONS d) {
+    public MovePlayerAction(Game fenetre, DIRECTIONS d) {
         this.fenetre = fenetre;
         this.directions = d;
     }

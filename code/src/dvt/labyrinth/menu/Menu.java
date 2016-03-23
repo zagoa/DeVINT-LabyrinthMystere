@@ -13,8 +13,8 @@ import javax.swing.*;
 import static dvt.devint.ConstantesDevint.*;
 import static dvt.labyrinth.ConstantesLabyrinth.*;
 import dvt.devint.Fenetre;
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.game.SelectPlayer;
-import dvt.labyrinth.game.TwoPlayers;
 
 /**
  * Menu inspiré du menu principal.
@@ -53,7 +53,7 @@ public class Menu extends Fenetre {
 
         // les options possibles
         // TODO : Faire One Player
-//        addMenu(ONEPLAYER,new ActionMenu(this,1));
+        addMenu(ONEPLAYER,new ActionMenu(this,1));
         addMenu(TWOPLAYERS, new ActionMenu(this,2));
         addMenu(HELP, new ActionMenu(this, 3));
         addMenu(QUIT, new ActionMenu(this, 5));
@@ -82,20 +82,30 @@ public class Menu extends Fenetre {
             else if (gameChoice != 0) {
                 this.setVisible(false);
                 this.getSIVOX().stop();
+
+                // Wait for player(s)
+                players = new HashMap<>();
+
                 switch (gameChoice) {
                     case 1: // Un joueur
-                        JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        // We need one player...
+                        new SelectPlayer(this, 1).loop();
+
+                        // ...and we add a bot
+                        players.put("Robot", RESSOURCES.BOT);
+
+                        // We have now two players (player + bot)
+                        if (players.size() == 2)
+                            new Game(players).loop();
                         break;
 
                     case 2: // Deux joueurs
-                        // Wait for players
-                        players = new HashMap<>();
                         // Initiate the game
                         new SelectPlayer(this, 2).loop();
                         // Let's play!
                         // But maybe the player hit 'ECHAP' before the end, so we can't play
                         if (players.size() == 2)
-                            new TwoPlayers(players).loop();
+                            new Game(players).loop();
                         break;
 
                     case 3: // Aide

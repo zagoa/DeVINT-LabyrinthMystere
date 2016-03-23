@@ -1,8 +1,7 @@
 package dvt.labyrinth;
 
 import dvt.labyrinth.actions.PutWall;
-import dvt.labyrinth.game.TwoPlayers;
-import dvt.labyrinth.model.Arrow;
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.DefaultItem;
 import dvt.labyrinth.model.Item;
 import dvt.labyrinth.model.Wall;
@@ -101,8 +100,9 @@ public class Tile {
         if (item == null) {
             this.item = new DefaultItem();
             occupied = false;
-        } else
+        } else {
             this.item = item;
+        }
 
         if (this.item != null && this.item.getRes().getPath() != null)
             component.setIcon(item.getIcon());
@@ -227,11 +227,13 @@ public class Tile {
         switch (d) {
             case FRONT:
             case BACK:
+                occupied = true;
                 setItem(new Wall(true)); // Vertical
                 break;
 
             case LEFT:
             case RIGHT:
+                occupied = true;
                 setItem(new Wall(false)); // Horizontal
                 break;
 
@@ -254,7 +256,7 @@ public class Tile {
      * @param lab
      *          The labyrinth
      */
-    public void setListenerWall(TwoPlayers lab) {
+    public void setListenerWall(Game lab) {
         if (isAWall())
             component.addActionListener(new PutWall(lab, this));
     }

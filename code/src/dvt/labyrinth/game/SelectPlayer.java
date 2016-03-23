@@ -2,7 +2,6 @@ package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.StretchIcon;
-import dvt.labyrinth.menu.*;
 import dvt.labyrinth.menu.Menu;
 
 import static dvt.labyrinth.ConstantesLabyrinth.*;
@@ -140,7 +139,7 @@ public class SelectPlayer extends Jeu {
         allPawns = new LinkedHashMap<>();
 
         for (RESSOURCES r : RESSOURCES.values()) {
-            if (r.isAPawn()) allPawns.put(r, getButton(r));
+            if (r.isAPawn() && !r.isABot()) allPawns.put(r, getButton(r));
         }
     }
 

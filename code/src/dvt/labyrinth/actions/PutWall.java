@@ -1,7 +1,6 @@
 package dvt.labyrinth.actions;
 
-import dvt.labyrinth.ConstantesLabyrinth;
-import dvt.labyrinth.game.TwoPlayers;
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.Tile;
 <<<<<<< HEAD
 import dvt.labyrinth.model.Item;
@@ -21,7 +20,7 @@ public class PutWall implements ActionListener {
     // The tile
     private Tile tile;
     // The game, where the tile is
-    private TwoPlayers lab;
+    private Game lab;
 
     /**
      * Constructor
@@ -31,7 +30,7 @@ public class PutWall implements ActionListener {
      * @param tile
      *          The tile
      */
-    public PutWall(TwoPlayers lab, Tile tile){
+    public PutWall(Game lab, Tile tile){
         this.tile = tile;
         this.lab = lab;
     }
@@ -39,8 +38,8 @@ public class PutWall implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // We need to check if tile is a wall && disable the clic
-        if (tile.isAWall() && !lab.isSettingWall()) {
+        // We need to check if tile is a wall && disable the clic && is not already occupied
+        if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied()) {
             tile.putWall();
             lab.checkWall(tile.getPosition());
             //lab.unHighlightAll(); // If we've just blocked the player

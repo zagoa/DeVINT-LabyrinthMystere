@@ -52,8 +52,9 @@ public class ConstantesLabyrinth {
         THEO(PAWNPATH+"theo.jpg", true),
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
-        PION(PAWNPATH+"pion.png",true),
-        TARGETT(IMAGEPATH+"target.png",true),
+        PION(PAWNPATH+"pion.png", true),
+        TARGETT(IMAGEPATH+"target.png", true),
+        BOT(PAWNPATH+"bot.png", true, true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -74,6 +75,7 @@ public class ConstantesLabyrinth {
 
         private String path;
         private boolean isAPawn;
+        private boolean isABot;
 
         RESSOURCES(String path) {
             this.path = path;
@@ -85,12 +87,22 @@ public class ConstantesLabyrinth {
             this.isAPawn = isAPawn;
         }
 
+        RESSOURCES(String path, boolean isAPawn, boolean isABot) {
+            this.path = path;
+            this.isAPawn = isAPawn;
+            this.isABot = isABot;
+        }
+
         public String getPath() {
             return path;
         }
 
         public boolean isAPawn() {
             return isAPawn;
+        }
+
+        public boolean isABot() {
+            return isABot;
         }
     };
     /* ******************** */
