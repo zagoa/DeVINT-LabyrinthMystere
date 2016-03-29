@@ -116,6 +116,11 @@ public class Game extends Jeu {
         addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
+    public boolean gameNotBlocked(Tray tray){
+        if(!otherPlayer().isBlocked(tray) && !currentPlayer.isBlocked(tray)) return true;
+        return false;
+    }
+
     /**
      * Check where we can put an other wall
      *
@@ -131,7 +136,7 @@ public class Game extends Jeu {
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
             tray.getTile(x+2,y).positionWall();
-            if(!otherPlayer().isBlocked(tray)) {
+            if(gameNotBlocked(tray)) {
                 tray.getTile(x+2,y).clearTile();
                 addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
                 tray.getTile(x + 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_RIGHT));
@@ -142,7 +147,7 @@ public class Game extends Jeu {
         // Check left && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1) {
             tray.getTile(x-2,y).positionWall();
-            if(!otherPlayer().isBlocked(tray)) {
+            if(gameNotBlocked(tray)) {
                 tray.getTile(x-2,y).clearTile();
                 addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
                 tray.getTile(x - 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_LEFT));
@@ -152,7 +157,7 @@ public class Game extends Jeu {
         // Check up && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1) {
             tray.getTile(x,y-2).positionWall();
-            if(!otherPlayer().isBlocked(tray)) {
+            if(gameNotBlocked(tray)) {
                 tray.getTile(x,y-2).clearTile();
                 addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
                 tray.getTile(x, y - 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_UP));
@@ -161,7 +166,7 @@ public class Game extends Jeu {
         // Check down && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1) {
             tray.getTile(x,y+2).positionWall();
-            if(!otherPlayer().isBlocked(tray)) {
+            if(gameNotBlocked(tray)) {
                 tray.getTile(x,y+2).clearTile();
                 addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
                 tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));

@@ -39,7 +39,7 @@ public class PutWall implements ActionListener {
         } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && lab.checkPutWall(tile.getPosition()) ) {
             tile.positionWall();
             //if the position is correct and if the position don't block a player
-            if(!lab.otherPlayer().isBlocked(lab.getTray())) {
+            if(lab.gameNotBlocked(lab.getTray())) {
                 lab.highlightWall(tile.getPosition());
                 //décompte un mur au joueur
                 lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);

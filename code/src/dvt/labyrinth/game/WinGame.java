@@ -46,7 +46,7 @@ public class WinGame extends Jeu {
         info.setVisible(true);
         world.add(info);
 
-        reset = new JButton("Revenir au Menu");
+        reset = new JButton("Retour au Menu");
         reset.setBackground(Color.RED);
         reset.setForeground(Color.WHITE);
         reset.setBorder(new LineBorder(Color.black, 2, true));
