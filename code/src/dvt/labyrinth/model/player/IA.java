@@ -46,7 +46,7 @@ public abstract class IA extends Player{
      */
     public void strategyIALeft(Tray tray){
         decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-        if(checkMoveFromPosition(tray,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.LEFT), ConstantesLabyrinth.DIRECTIONS.LEFT))
+        if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.LEFT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.LEFT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
     }
 
@@ -56,11 +56,11 @@ public abstract class IA extends Player{
      */
     public void strategyIABack(Tray tray){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if(checkMoveFromPosition(tray,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT), ConstantesLabyrinth.DIRECTIONS.RIGHT))
+        if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-        else if (checkMoveFromPosition(tray,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT), ConstantesLabyrinth.DIRECTIONS.RIGHT)){
+        else if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-            if (checkMoveFromPosition(tray,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT), ConstantesLabyrinth.DIRECTIONS.RIGHT))
+            if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
                 decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
         }
     }
@@ -89,20 +89,6 @@ public abstract class IA extends Player{
         return pos;
     }
 
-    /**
-     *
-     * @param tray
-     * @param position a position on the tray we want to "study"
-     * @param direction the direction we want to go to
-     * @return Check whether we can move a position towards a direction in advance. It will of use when we predict the IA
-     * movements in advance
-     */
-    public boolean checkMoveFromPosition(Tray tray, Position position, ConstantesLabyrinth.DIRECTIONS direction){
-        Position savePos = this.pos;
-        setPos(position,tray);
-        boolean i = canMove(tray,direction);
-        setPos(savePos,tray);
-        return i;
-    }
+
 
 }
