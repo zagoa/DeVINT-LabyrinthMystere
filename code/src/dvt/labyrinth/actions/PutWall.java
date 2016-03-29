@@ -33,10 +33,12 @@ public class PutWall implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall && disable the clic && is not already occupied
+        //If the tile is not for a Wall
         if (lab.getCurrentPlayer().getNbWall() <= 0 && !lab.getCurrentPlayer().isABot()) {
             lab.playText(VOCAL.NOT_ENOUGTH_WALL.toString());
         } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && lab.checkPutWall(tile.getPosition()) ) {
             tile.positionWall();
+            //if the position is correct and if the position don't block a player
             if(!lab.otherPlayer().isBlocked(lab.getTray())) {
                 lab.highlightWall(tile.getPosition());
                 //décompte un mur au joueur

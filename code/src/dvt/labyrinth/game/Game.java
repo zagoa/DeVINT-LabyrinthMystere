@@ -126,28 +126,46 @@ public class Game extends Jeu {
 
         int x = position.getX();
         int y = position.getY();
-
         unHighlightAll();
 
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
-            addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
-            tray.getTile(x + 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_RIGHT));
+            tray.getTile(x+2,y).positionWall();
+            if(!otherPlayer().isBlocked(tray)) {
+                tray.getTile(x+2,y).clearTile();
+                addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
+                tray.getTile(x + 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_RIGHT));
+            }else tray.getTile(x+2,y).clearTile();
+
+
         }
         // Check left && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1) {
-            addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
-            tray.getTile(x - 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_LEFT));
+            tray.getTile(x-2,y).positionWall();
+            if(!otherPlayer().isBlocked(tray)) {
+                tray.getTile(x-2,y).clearTile();
+                addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
+                tray.getTile(x - 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_LEFT));
+            }else tray.getTile(x-2,y).clearTile();
+
         }
         // Check up && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1) {
-            addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
-            tray.getTile(x, y - 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_UP));
+            tray.getTile(x,y-2).positionWall();
+            if(!otherPlayer().isBlocked(tray)) {
+                tray.getTile(x,y-2).clearTile();
+                addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
+                tray.getTile(x, y - 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_UP));
+            }else tray.getTile(x,y-2).clearTile();
         }
         // Check down && On the vertical line
         if (tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1) {
-            addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
-            tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
+            tray.getTile(x,y+2).positionWall();
+            if(!otherPlayer().isBlocked(tray)) {
+                tray.getTile(x,y+2).clearTile();
+                addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
+                tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
+            }else tray.getTile(x,y+2).clearTile();
         }
     }
 

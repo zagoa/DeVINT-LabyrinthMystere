@@ -30,10 +30,10 @@ public class MoveWall extends AbstractAction {
         // We need to check if tile is a wall
             fenetre.getSIVOX().stop();
             tile.positionWall();
-        if (!fenetre.otherPlayer().isBlocked(fenetre.getTray())) {
+       // if (!fenetre.otherPlayer().isBlocked(fenetre.getTray())) {
             fenetre.fillGap(dir, tile.getPosition());
             fenetre.nextTurn();
-        }else{
+        /*}else{
             int x =tile.getPosition().getX();
             int y= tile.getPosition().getY();
             tile.clearTile();
@@ -43,7 +43,7 @@ public class MoveWall extends AbstractAction {
             if(dir.equals(DIRECTIONS.BACK)) fenetre.getTray().getTile(x,y-2).clearTile();
             if(dir.equals(DIRECTIONS.RIGHT)) fenetre.getTray().getTile(x-2,y).clearTile();
             if(dir.equals(DIRECTIONS.LEFT)) fenetre.getTray().getTile(x+2,y).clearTile();
-        }
+        }*/
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
 
