@@ -89,16 +89,17 @@ public abstract class Player {
      * @return if the player can access to the last tray's line which means he can win and he isn't blocked
      */
     public boolean isBlocked(Tray tray) {
+        can.clear();
         hasAccessTo(tray);
         //It represent if the pan is on the last line, so he can finish the game
         for (int i = 0; i < NBRE_CASES; i += 2) {
             for (int j = 0; j < NBRE_CASES; j += 2) {
-                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES))) {
-                    return true;
+                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES-1))) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
 
@@ -116,14 +117,12 @@ public abstract class Player {
             int y = can.get(i).getPosition().getY();
             Position pos = new Position(x, y);
 
-
             if (checkMoveFromPosition(tray, DIRECTIONS.FRONT, pos) && !can.contains(tray.getTile(new Position(x, y - 2)))) {
                 can.add(tray.getTile(x, y - 2));
             }
             if (checkMoveFromPosition(tray, DIRECTIONS.BACK, pos) && !can.contains(tray.getTile(new Position(x, y + 2)))) {
                 can.add(tray.getTile(x, y + 2));
             }
-
             if (checkMoveFromPosition(tray, DIRECTIONS.RIGHT, pos) && !can.contains(tray.getTile(new Position(x + 2, y)))) {
                 can.add(tray.getTile(x + 2, y));
             }
