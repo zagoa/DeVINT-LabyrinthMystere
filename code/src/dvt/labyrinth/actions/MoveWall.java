@@ -32,10 +32,12 @@ public class MoveWall extends AbstractAction {
             tile.positionWall();
         if (!fenetre.otherPlayer().isBlocked(fenetre.getTray())) {
             fenetre.fillGap(dir, tile.getPosition());
+            fenetre.nextTurn();
         }else{
             int x =tile.getPosition().getX();
             int y= tile.getPosition().getY();
             tile.clearTile();
+            fenetre.getCurrentPlayer().setNbWall(fenetre.getCurrentPlayer().getNbWall()+1);
             fenetre.playText(VOCAL.BLOCK.toString());
             if(dir.equals(DIRECTIONS.FRONT)) fenetre.getTray().getTile(x,y+2).clearTile();
             if(dir.equals(DIRECTIONS.BACK)) fenetre.getTray().getTile(x,y-2).clearTile();
@@ -44,7 +46,7 @@ public class MoveWall extends AbstractAction {
         }
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
-        fenetre.nextTurn();
+
 
     }
 
