@@ -153,10 +153,10 @@ public class Game extends Jeu {
 
     public boolean checkPutWall(Position position) {
         int y = position.getY();
-        return (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1
+        return (!currentPlayer.isBlocked(tray) && (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1
                 || tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1
                 || tray.canSetAWall(DIRECTIONS.FRONT, position) && y % 2 != 1
-                || tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1);
+                || tray.canSetAWall(DIRECTIONS.BACK, position) && y % 2 != 1));
 
     }
 
@@ -343,6 +343,11 @@ public class Game extends Jeu {
     public void playText(String sentence) {
         getSIVOX().stop();
         getSIVOX().playText(sentence);
+    }
+
+
+    public Tray getTray() {
+        return tray;
     }
 
 

@@ -94,7 +94,7 @@ public abstract class Player {
         //It represent if the pan is on the last line, so he can finish the game
         for (int i = 0; i < NBRE_CASES; i += 2) {
             for (int j = 0; j < NBRE_CASES; j += 2) {
-                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES-1))) {
+                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES - 1))) {
                     return false;
                 }
             }
@@ -133,20 +133,42 @@ public abstract class Player {
 
         }
     }
+
     /**
-     *
      * @param tray
-     * @param position a position on the tray we want to "study"
+     * @param pos       a position on the tray we want to "study"
      * @param direction the direction we want to go to
      * @return Check whether we can move a position towards a direction in advance. It will of use when we predict the IA
      * movements in advance
      */
-    public boolean checkMoveFromPosition(Tray tray, ConstantesLabyrinth.DIRECTIONS direction,Position position){
-        Position savePos = this.pos;
-        setPos(position,tray);
-        boolean i = canMove(tray,direction);
-        setPos(savePos,tray);
-        return i;
+    public boolean checkMoveFromPosition(Tray tray, ConstantesLabyrinth.DIRECTIONS direction, Position pos) {
+        int x = pos.getX();
+        int y = pos.getY();
+
+        switch (direction) {
+            case FRONT:
+                return (y - CASE_LENGTH >= 0
+                        && !tray.getTile(x, y - WALL_LENGTH).isOccupied()
+                        && !tray.getTile(x, y - CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
+
+            case BACK:
+                return (y + CASE_LENGTH <= NBRE_CASES - 1
+                        && !tray.getTile(x, y + WALL_LENGTH).isOccupied()
+                        && !tray.getTile(x, y + CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
+
+            case RIGHT:
+                return (x + CASE_LENGTH <= NBRE_CASES - 1
+                        && !tray.getTile(x + WALL_LENGTH, y).isOccupied()
+                        && !tray.getTile(x + CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
+
+            case LEFT:
+                return (x - CASE_LENGTH >= 0
+                        && !tray.getTile(x - WALL_LENGTH, y).isOccupied()
+                        && !tray.getTile(x - CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
+
+            default:
+                return false;
+        }
     }
 
 
@@ -227,8 +249,6 @@ public abstract class Player {
     public ArrayList<Tile> getCan() {
         return can;
     }
-
-
 
 
 }

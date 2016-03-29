@@ -193,6 +193,9 @@ public class Tile {
         return item;
     }
 
+    public void clearTile(){
+        this.setItem(null);
+    }
     /**
      * Getter on the position
      * @return The position

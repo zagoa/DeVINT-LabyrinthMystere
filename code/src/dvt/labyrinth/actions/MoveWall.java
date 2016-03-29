@@ -27,12 +27,24 @@ public class MoveWall extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall
-        fenetre.getSIVOX().stop();
-        tile.positionWall();
-        fenetre.fillGap(dir,tile.getPosition());
+            fenetre.getSIVOX().stop();
+            tile.positionWall();
+        if (!fenetre.getCurrentPlayer().isBlocked(fenetre.getTray())) {
+            fenetre.fillGap(dir, tile.getPosition());
+        }else{
+            int x =tile.getPosition().getX();
+            int y= tile.getPosition().getY();
+            tile.clearTile();
+            fenetre.playText("Tu n'a pas le droit de bloquer le jeu");
+            if(dir.equals(DIRECTIONS.FRONT)) fenetre.getTray().getTile(x,y+2).clearTile();
+            if(dir.equals(DIRECTIONS.BACK)) fenetre.getTray().getTile(x,y-2).clearTile();
+            if(dir.equals(DIRECTIONS.RIGHT)) fenetre.getTray().getTile(x-2,y).clearTile();
+            if(dir.equals(DIRECTIONS.LEFT)) fenetre.getTray().getTile(x+2,y).clearTile();
+        }
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
         fenetre.nextTurn();
+
     }
 
 

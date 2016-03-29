@@ -37,12 +37,17 @@ public class PutWall implements ActionListener {
             lab.playText(VOCAL.NOT_ENOUGTH_WALL.toString());
         } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && lab.checkPutWall(tile.getPosition()) ) {
             tile.positionWall();
-            lab.highlightWall(tile.getPosition());
-            //décompte un mur au joueur
-            lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);
-            if (!lab.getCurrentPlayer().isABot())
-                lab.playText(VOCAL.HUMAN_WALL.toString());
-            else lab.playText(VOCAL.BOT_WALL.toString());
+            if(!lab.getCurrentPlayer().isBlocked(lab.getTray())) {
+                lab.highlightWall(tile.getPosition());
+                //décompte un mur au joueur
+                lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);
+                if (!lab.getCurrentPlayer().isABot())
+                    lab.playText(VOCAL.HUMAN_WALL.toString());
+                else lab.playText(VOCAL.BOT_WALL.toString());
+            }else{
+                tile.clearTile();
+                lab.playText("Tu ne peux pas bloquer le jeu");
+            }
 
         } else if (!lab.checkPutWall(tile.getPosition()) || tile.isOccupied()) {
             lab.playText(VOCAL.ERROR_WALL.toString());
