@@ -1,9 +1,11 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.model.essential.DefaultItem;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
+import javafx.geometry.Pos;
 
 
 import java.util.ArrayList;
@@ -106,20 +108,28 @@ public abstract class Player {
      * @param tray
      */
     public void hasAccessTo(Tray tray) {
-        can.add(tray.getTile(getPosition().getX() , getPosition().getY()));
+        can.add(tray.getTile(getPosition().getX(), getPosition().getY()));
 
-        int i=0;
-        for(can.get(i); i == can.size(); i++){
-            int x = can.get(i).getPosition().getX();
-            int y = can.get(i).getPosition().getY();
-            if (canMove(tray, DIRECTIONS.FRONT)&& !can.contains(tray.getTile(x-2,y)))
-                can.add(tray.getTile(x+2,y));
-            if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(x+2,y)))
-                can.add(tray.getTile(x-2,y));
-            if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(x,y+2)))
-                can.add(tray.getTile(x,y+2));
-            if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(x,y-2)))
-                can.add(tray.getTile(x,y-2));
+        int i;
+        for (i = 1 ; can.size() == i; i++) {
+            int x = can.get(i - 1).getPosition().getX();
+            int y = can.get(i - 1).getPosition().getY();
+            Position pos  = new Position(x,y);
+            if (canMove(tray, DIRECTIONS.FRONT) && !can.contains(new Tile(new DefaultItem(),new Position(x,y-2)))) {
+                System.out.println("1");
+                can.add(tray.getTile(x, y - 2));
+            } else if (canMove(tray, DIRECTIONS.BACK) && !can.contains(new Tile(new DefaultItem(),new Position(x,y+2)))) {
+                System.out.println("2");
+                can.add(tray.getTile(x, y + 2));
+            } else if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(new Tile(new DefaultItem(),new Position(x+2,y)))) {
+                System.out.println("3");
+                can.add(tray.getTile(x + 2, y));
+            } else if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(new Tile(new DefaultItem(),new Position(x-2,y)))) {
+                System.out.println("4");
+                can.add(tray.getTile(x - 2, y));
+
+
+            }
         }
     }
 
@@ -194,5 +204,10 @@ public abstract class Player {
     public void setNbWall(int nbWall) {
         this.nbWall = nbWall;
     }
+
+    public ArrayList<Tile> getCan() {
+        return can;
+    }
+
 
 }

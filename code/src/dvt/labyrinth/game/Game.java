@@ -1,17 +1,12 @@
 package dvt.labyrinth.game;
 
 import dvt.devint.Jeu;
-import dvt.labyrinth.tools.Position;
-import dvt.labyrinth.model.essential.Tile;
-import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
-import dvt.labyrinth.model.essential.Arrow;
-import dvt.labyrinth.model.essential.Pawn;
+import dvt.labyrinth.model.essential.*;
 import dvt.labyrinth.model.player.HumanPlayer;
-import dvt.labyrinth.model.essential.Target;
 import dvt.labyrinth.model.player.Player;
-
+import dvt.labyrinth.tools.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -107,25 +102,24 @@ public class Game extends Jeu {
         if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
             tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_LEFT)); // Left
         if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
-            tile[y][x+CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_RIGHT)); // Right
+            tile[y][x + CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_RIGHT)); // Right
         if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
-            tile[y-CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_UP)); // Down
+            tile[y - CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_UP)); // Down
         if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_DOWN)); // Up
 
         setTarget();
 
-        addControlUp(KeyEvent.VK_DOWN   , new MovePlayerAction(this, DIRECTIONS.BACK));
-        addControlUp(KeyEvent.VK_UP     , new MovePlayerAction(this, DIRECTIONS.FRONT));
-        addControlUp(KeyEvent.VK_LEFT   , new MovePlayerAction(this, DIRECTIONS.LEFT));
-        addControlUp(KeyEvent.VK_RIGHT  , new MovePlayerAction(this, DIRECTIONS.RIGHT));
+        addControlUp(KeyEvent.VK_DOWN, new MovePlayerAction(this, DIRECTIONS.BACK));
+        addControlUp(KeyEvent.VK_UP, new MovePlayerAction(this, DIRECTIONS.FRONT));
+        addControlUp(KeyEvent.VK_LEFT, new MovePlayerAction(this, DIRECTIONS.LEFT));
+        addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
     /**
      * Check where we can put an other wall
      *
-     * @param position
-     *          The position of the wall
+     * @param position The position of the wall
      */
     public void highlightWall(Position position) {
         settingWall = true;
@@ -157,7 +151,7 @@ public class Game extends Jeu {
         }
     }
 
-    public boolean checkPutWall(Position position){
+    public boolean checkPutWall(Position position) {
         int y = position.getY();
         return (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1
                 || tray.canSetAWall(DIRECTIONS.LEFT, position) && y % 2 == 1
@@ -172,7 +166,7 @@ public class Game extends Jeu {
     public void setTarget() {
         Tile tile[] = tray.getTray()[currentPlayer.getWonY()];
 
-        for (int x = 0; x < tile.length; x+=2) {
+        for (int x = 0; x < tile.length; x += 2) {
             if (!tile[x].isOccupied())
                 tile[x].setHighlighted(new Target(), Color.WHITE);
         }
@@ -183,8 +177,9 @@ public class Game extends Jeu {
      */
     public void nextTurn() {
         currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
-        if(!currentPlayer.isABot()) playText(parse(VOCAL.TURN_2P,currentPlayer.getName()));
+        if (!currentPlayer.isABot()) playText(parse(VOCAL.TURN_2P, currentPlayer.getName()));
     }
+
     /**
      * Display the grid/tray
      */
@@ -195,16 +190,15 @@ public class Game extends Jeu {
             for (int x = 0; x < tile[y].length; x++) {
 
                 if (tile[y][x].isAWall()) { // Walls
-                    tile[y][x].getComponent().setPreferredSize(new Dimension(10,(y%2 == 1) ? 10 : 50));
+                    tile[y][x].getComponent().setPreferredSize(new Dimension(10, (y % 2 == 1) ? 10 : 50));
 
-                    if ((tile[y][x].getPosition().getX()%2 != 1 || tile[y][x].getPosition().getY()%2 != 1)
+                    if ((tile[y][x].getPosition().getX() % 2 != 1 || tile[y][x].getPosition().getY() % 2 != 1)
                             && !tile[y][x].isOccupied())// Don't click the small square & occupied items
                         tile[y][x].setListenerWall(this);
-                }
-                else // 'Moves' tiles
+                } else // 'Moves' tiles
                     tile[y][x].getComponent().setPreferredSize(new Dimension(100, 50));
 
-                world.add(tile[y][x].getComponent(), getGridBagConstraints(x,y));
+                world.add(tile[y][x].getComponent(), getGridBagConstraints(x, y));
             }
         }
     }
@@ -212,11 +206,8 @@ public class Game extends Jeu {
     /**
      * Display process (GridBagLayout)
      *
-     * @param x
-     *          The x coordinate (grid)
-     * @param y
-     *          The y coordinate (grid)
-     *
+     * @param x The x coordinate (grid)
+     * @param y The y coordinate (grid)
      * @return the constraint (layout)
      */
     public GridBagConstraints getGridBagConstraints(int x, int y) {
@@ -244,7 +235,7 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k%2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
 
         currentPlayer = players[new Random().nextInt(1)];
 
@@ -298,8 +289,7 @@ public class Game extends Jeu {
     /**
      * We are (or not) setting wall
      *
-     * @param settingWall
-     *          We are / we are not (true / false)
+     * @param settingWall We are / we are not (true / false)
      */
     public void setSettingWall(boolean settingWall) {
         this.settingWall = settingWall;
@@ -307,6 +297,7 @@ public class Game extends Jeu {
 
     /**
      * Getter on 'are we setting walls?'
+     *
      * @return true / false
      */
     public boolean isSettingWall() {
@@ -316,30 +307,28 @@ public class Game extends Jeu {
     /**
      * Set the small square as a wall too
      *
-     * @param gap
-     *          The direction where is the gap
-     * @param position
-     *          The original position
+     * @param gap      The direction where is the gap
+     * @param position The original position
      */
-    public void fillGap(DIRECTIONS gap, Position position){
+    public void fillGap(DIRECTIONS gap, Position position) {
         int x = position.getX();
         int y = position.getY();
 
-        switch(gap){
+        switch (gap) {
             case RIGHT:
-                tray.getTile(x-1,y).positionWall(gap);
+                tray.getTile(x - 1, y).positionWall(gap);
                 break;
 
             case LEFT:
-                tray.getTile(x+1,y).positionWall(gap);
+                tray.getTile(x + 1, y).positionWall(gap);
                 break;
 
             case FRONT:
-                tray.getTile(x,y+1).positionWall(gap);
+                tray.getTile(x, y + 1).positionWall(gap);
                 break;
 
             case BACK:
-                tray.getTile(x,y-1).positionWall(gap);
+                tray.getTile(x, y - 1).positionWall(gap);
                 break;
 
             default:
@@ -351,11 +340,10 @@ public class Game extends Jeu {
         return currentPlayer;
     }
 
-    public void playText(String sentence){
+    public void playText(String sentence) {
         getSIVOX().stop();
         getSIVOX().playText(sentence);
     }
-
 
 
 }

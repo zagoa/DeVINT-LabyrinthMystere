@@ -45,7 +45,6 @@ public class WinGame extends Jeu {
         info.setFont(getFont());
         info.setVisible(true);
         world.add(info);
-        //TODO afficher le bouton
 
         reset = new JButton("Revenir au Menu");
         reset.setBackground(Color.RED);
