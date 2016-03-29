@@ -115,16 +115,16 @@ public abstract class Player {
             int x = can.get(i - 1).getPosition().getX();
             int y = can.get(i - 1).getPosition().getY();
             Position pos  = new Position(x,y);
-            if (canMove(tray, DIRECTIONS.FRONT) && !can.contains(new Tile(new DefaultItem(),new Position(x,y-2)))) {
+            if (canMove(tray, DIRECTIONS.FRONT) && !can.contains(tray.getTile(new Position(x,y-2)))) {
                 System.out.println("1");
                 can.add(tray.getTile(x, y - 2));
-            } else if (canMove(tray, DIRECTIONS.BACK) && !can.contains(new Tile(new DefaultItem(),new Position(x,y+2)))) {
+            } else if (canMove(tray, DIRECTIONS.BACK) && !can.contains(tray.getTile(new Position(x,y+2)))) {
                 System.out.println("2");
                 can.add(tray.getTile(x, y + 2));
-            } else if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(new Tile(new DefaultItem(),new Position(x+2,y)))) {
+            } else if (canMove(tray, DIRECTIONS.RIGHT) && !can.contains(tray.getTile(new Position(x+2,y)))) {
                 System.out.println("3");
                 can.add(tray.getTile(x + 2, y));
-            } else if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(new Tile(new DefaultItem(),new Position(x-2,y)))) {
+            } else if (canMove(tray, DIRECTIONS.LEFT) && !can.contains(tray.getTile(new Position(x-2,y)))) {
                 System.out.println("4");
                 can.add(tray.getTile(x - 2, y));
 
