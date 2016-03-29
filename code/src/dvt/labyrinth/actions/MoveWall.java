@@ -3,6 +3,7 @@ package dvt.labyrinth.actions;
 import dvt.labyrinth.tools.ConstantesLabyrinth.DIRECTIONS;
 import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.game.Game;
+import dvt.labyrinth.tools.ConstantesLabyrinth.VOCAL;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,7 @@ public class MoveWall extends AbstractAction {
             int x =tile.getPosition().getX();
             int y= tile.getPosition().getY();
             tile.clearTile();
-            fenetre.playText("Tu n'a pas le droit de bloquer le jeu");
+            fenetre.playText(VOCAL.BLOCK.toString());
             if(dir.equals(DIRECTIONS.FRONT)) fenetre.getTray().getTile(x,y+2).clearTile();
             if(dir.equals(DIRECTIONS.BACK)) fenetre.getTray().getTile(x,y-2).clearTile();
             if(dir.equals(DIRECTIONS.RIGHT)) fenetre.getTray().getTile(x-2,y).clearTile();

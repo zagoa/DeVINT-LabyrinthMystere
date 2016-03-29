@@ -141,7 +141,8 @@ public class ConstantesLabyrinth {
         ERROR_WALL("Impossible de poser un mur ici ! "),
         BOT_WALL("Le bot vient de poser un mur"),
         HUMAN_WALL("Un mur a été posé, choisi là où le deuxième mur doit être, à l'aide des fléches directionnels"),
-        NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles");
+        NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
+        BLOCK("Tu n'a pas le droit de bloquer le jeu");
         private String str;
 
         VOCAL(String str) {
