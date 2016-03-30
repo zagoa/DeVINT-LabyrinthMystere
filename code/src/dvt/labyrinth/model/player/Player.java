@@ -27,7 +27,7 @@ public abstract class Player {
 
 
     // Is a real player ?
-    private boolean isABot;
+    protected boolean isABot;
 
     //Number of wall
     protected int nbWall;

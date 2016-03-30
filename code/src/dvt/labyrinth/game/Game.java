@@ -5,6 +5,8 @@ import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
 import dvt.labyrinth.model.essential.*;
 import dvt.labyrinth.model.player.HumanPlayer;
+import dvt.labyrinth.model.player.IAEasy;
+import dvt.labyrinth.model.player.IAMedium;
 import dvt.labyrinth.model.player.Player;
 import dvt.labyrinth.tools.Position;
 
@@ -31,7 +33,7 @@ public class Game extends Jeu {
     // Old players
     private HashMap<String, RESOURCES> oldPlayers;
     // The players
-    private HumanPlayer[] players;
+    private Player[] players;
     // The current player
     private Player currentPlayer;
     // State of the game
@@ -44,6 +46,14 @@ public class Game extends Jeu {
 
         addPlayers(players);
     }
+
+    public Game(HashMap<String, RESOURCES> players, DIFFICULTY botDifficulty){
+        super();
+        this.botDifficulty = botDifficulty;
+        addPlayerAndBot(players);
+    }
+
+
 
     @Override
     public void init() {
@@ -271,6 +281,36 @@ public class Game extends Jeu {
 
         playText(parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
+    }
+
+    public void addPlayerAndBot(HashMap<String, RESOURCES> p) {
+        players = new Player[p.size()];
+        int k = 0;
+        for (HashMap.Entry<String, RESOURCES> e : p.entrySet()) {
+            if(e.getKey().equals("Robot")){
+                switch (botDifficulty){
+                    case EASY:
+                        players[k++] = new IAEasy(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        break;
+                    case MEDIUM:
+                        players[k++] = new IAMedium(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        break;
+                   /** case HARD:
+                        players[k++] = new IAHard(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        break;**/
+                }
+
+            }
+            else {
+                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+            }
+        }
+
+        currentPlayer = players[new Random().nextInt(1)];
+
+        playText(parse(VOCAL.START, currentPlayer.getName()));
+        pause(1500);
+
     }
 
     public void pause(int time) {

@@ -67,7 +67,7 @@ public class Menu extends MenuGeneric {
 
                         // We have now two players (player + bot)
                         if (players.size() == 2)
-                            new Game(players).loop();
+                            new Game(players, botDifficulty).loop();
                         break;
 
                     case 2: // Deux joueurs
