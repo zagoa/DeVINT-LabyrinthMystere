@@ -41,7 +41,7 @@ public class WinGame extends Jeu {
         world.setLayout(new GridLayout(2,1));
 
         info = new JLabel("", JLabel.CENTER);
-        info.setVerticalAlignment(JLabel.TOP);
+        info.setVerticalAlignment(JLabel.CENTER);
         info.setFont(getFont());
         info.setVisible(true);
         world.add(info);

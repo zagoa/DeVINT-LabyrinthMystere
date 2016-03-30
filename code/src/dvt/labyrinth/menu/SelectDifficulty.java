@@ -18,7 +18,7 @@ public class SelectDifficulty extends MenuGeneric {
     public SelectDifficulty(Menu menu) {
         super();
 
-        addLabel(TITLE_GAME);
+        addLabel(TITLE_GAME_DIFFICULTY);
 
         this.menu = menu;
 
