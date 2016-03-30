@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
  */
 public class ActionMenu extends AbstractAction {
     private static final long serialVersionUID = 1L;
-    private transient Menu menu;
+    private transient MenuGeneric menu;
     private int choice;
 
     /**
@@ -19,7 +19,7 @@ public class ActionMenu extends AbstractAction {
      * @param menu La fenetre ou se trouve le lien entre la touche et l'action
      * @param choice La valeur que l'on souhaite modifie
      */
-    public ActionMenu(Menu menu, int choice) {
+    public ActionMenu(MenuGeneric menu, int choice) {
         this.menu = menu;
         this.choice = choice;
     }

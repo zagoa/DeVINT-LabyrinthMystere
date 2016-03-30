@@ -11,14 +11,14 @@ import java.awt.event.ActionEvent;
  */
 public class UpAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
-    private transient Menu fenetre;
+    private transient MenuGeneric fenetre;
 
     /*
      * Le constructeur appele lors de l'appuie sur la touche "HAUT"
      * @param fenetre La fenetre que l'on utilise
      * @author Justal Kevin
      */
-    public UpAction(Menu fenetre) {
+    public UpAction(MenuGeneric fenetre) {
         this.fenetre = fenetre;
     }
 

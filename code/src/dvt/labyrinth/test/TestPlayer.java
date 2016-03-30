@@ -32,8 +32,6 @@ public class TestPlayer {
         ArrayList<Tile> can = player.getCan();
 
         assertEquals(81,can.size());
-
-
     }
 
     @Test
@@ -41,21 +39,17 @@ public class TestPlayer {
 
         assertFalse(player.isBlocked(tray));
 
-        for(int i =0; i<17;i++) {
+        for(int i =0; i<17;i++)
             tray.getTile(i, 1).positionWall();
-        }
 
         assertTrue(player.isBlocked(tray));
-
-
     }
 
     @Test
     public void TestCheckMoveFromPosition(){
-
-        for(int i =0; i<17;i++) {
+        for(int i =0; i<17;i++)
             tray.getTile(i, 1).positionWall();
-        }
+
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(0,0)));
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(2,0)));
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(4,0)));
@@ -65,9 +59,6 @@ public class TestPlayer {
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(12,0)));
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(14,0)));
         assertFalse(player.checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.BACK,new Position(16,0)));
-
-
-
     }
 
 }

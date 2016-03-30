@@ -11,14 +11,14 @@ import java.awt.event.ActionEvent;
  */
 public class DownAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
-    private transient Menu fenetre;
+    private transient MenuGeneric fenetre;
 
     /**
      * Le constructeur appele lors de l'appuie sur la touche "BAS"
      * @param fenetre La fenetre que l'on utilise
      * @author Justal Kevin
      */
-    public DownAction(Menu fenetre) {
+    public DownAction(MenuGeneric fenetre) {
         this.fenetre = fenetre;
     }
 
