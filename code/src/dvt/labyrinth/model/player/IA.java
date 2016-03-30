@@ -5,12 +5,13 @@ import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 
 public abstract class IA extends Player{
     //A queue for the next decisions taken by the computer
-    Queue<ConstantesLabyrinth.DIRECTIONS> decision;
+    Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();;
 
 
     /**
@@ -33,8 +34,8 @@ public abstract class IA extends Player{
      * @param tray
      */
     public void strategyIA(Tray tray){
-        if (canMove(tray, ConstantesLabyrinth.DIRECTIONS.FRONT)) {
-            decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
+        if (canMove(tray, ConstantesLabyrinth.DIRECTIONS.BACK)) {
+            decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         }
         else if (!canMove(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT) && !canMove(tray, ConstantesLabyrinth.DIRECTIONS.LEFT)) {
             strategyIABack(tray);
@@ -63,7 +64,7 @@ public abstract class IA extends Player{
      * @param tray
      */
     public void strategyIABack(Tray tray){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
+        decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
         else if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
@@ -80,16 +81,16 @@ public abstract class IA extends Player{
     public Position convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS direction){
         switch (direction) {
             case FRONT:
-                this.pos.setX(this.pos.getX()-1);
+                this.pos.setX(this.pos.getY()-1);
                 break;
             case BACK:
-                this.pos.setX(this.pos.getX()+1);
+                this.pos.setX(this.pos.getY()+1);
                 break;
             case RIGHT:
-                this.pos.setY(this.pos.getY()+1);
+                this.pos.setY(this.pos.getX()+1);
                 break;
             case LEFT:
-                this.pos.setY(this.pos.getY()-1);
+                this.pos.setY(this.pos.getX()-1);
                 break;
             default:
                 break;

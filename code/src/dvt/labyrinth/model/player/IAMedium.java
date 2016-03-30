@@ -5,6 +5,8 @@ import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
 
+import java.util.Queue;
+
 /**
  * Created by user on 21/03/2016.
  */
@@ -22,7 +24,8 @@ public class IAMedium extends IA{
     @Override
     public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
         counter++;
-        if(counter%4==0) tray.getTile(new Position(getPosition().getX(),getPosition().getY()-1)).positionWall();
+        if(counter%4==0) tray.getTile(new Position(getPosition().getX(),getPosition().getY()+1)).positionWall();
+        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         if ((!decision.isEmpty())) {
             if (canMove(tray,decision.peek())){
                 updatePlayerPos(tray,convertDirectionToPosition(decision.peek()));
