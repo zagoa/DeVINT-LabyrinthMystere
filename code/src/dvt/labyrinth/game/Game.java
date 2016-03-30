@@ -36,6 +36,8 @@ public class Game extends Jeu {
     private Player currentPlayer;
     // State of the game
     private boolean settingWall;
+    // Difficulty of the bot
+    private DIFFICULTY botDifficulty;
 
     public Game(HashMap<String, RESOURCES> players) {
         super();
@@ -81,14 +83,14 @@ public class Game extends Jeu {
     }
 
     private void botPlay() {
-        if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
-            movePlayer(DIRECTIONS.FRONT);
+        if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
+            movePlayer(DIRECTIONS.BACK);
         else if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
             movePlayer(DIRECTIONS.LEFT);
         else if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
             movePlayer(DIRECTIONS.RIGHT);
-        else if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
-            movePlayer(DIRECTIONS.BACK);
+        else if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
+            movePlayer(DIRECTIONS.FRONT);
     }
 
     /**

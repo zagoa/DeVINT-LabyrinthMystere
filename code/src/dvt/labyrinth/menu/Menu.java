@@ -1,20 +1,19 @@
 package dvt.labyrinth.menu;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import dvt.devint.Fenetre;
+import dvt.labyrinth.difficulty.SelectDifficulty;
+import dvt.labyrinth.game.Game;
+import dvt.labyrinth.game.SelectPlayer;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.*;
-
 import static dvt.devint.ConstantesDevint.*;
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
-import dvt.devint.Fenetre;
-import dvt.labyrinth.game.Game;
-import dvt.labyrinth.game.SelectPlayer;
 
 /**
  * Menu inspiré du menu principal.
@@ -30,7 +29,7 @@ public class Menu extends Fenetre {
     private List<JButton> listeBoutton;
     private JLabel titleJeu;
     private int gameChoice;
-
+    private DIFFICULTY botDifficulty;
     private HashMap<String, RESOURCES> players;
 
     /**
@@ -90,8 +89,13 @@ public class Menu extends Fenetre {
                     case 1: // Un joueur
                         // We need one player...
                         new SelectPlayer(this, 1).loop();
-
+                        new SelectDifficulty(this).loop();
                         // ...and we add a bot
+                        switch(botDifficulty){
+                            case EASY:
+
+
+                        }
                         players.put("Robot", RESOURCES.BOT);
 
                         // We have now two players (player + bot)
@@ -235,5 +239,9 @@ public class Menu extends Fenetre {
 
     public void setPlayers(HashMap<String, RESOURCES> players) {
         this.players = players;
+    }
+
+    public void setBotDifficulty(DIFFICULTY d){
+        botDifficulty = d;
     }
 }

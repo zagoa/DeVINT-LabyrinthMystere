@@ -19,6 +19,7 @@ public class ConstantesLabyrinth {
     public static final String TITLE_GAME = "Labyrinthe Mystère";
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
+    public static final String SELECTDIFFICULTY = "Choisir la difficulté";
     public static final String HELP = "Aide";
     public static final String QUIT = "Quitter";
     /* ************** */
@@ -164,4 +165,10 @@ public class ConstantesLabyrinth {
         return String.format(v.toString(), new Integer(i).toString());
     }
     /* ******************** */
+
+    public enum DIFFICULTY{
+        EASY,
+        MEDIUM,
+        HARD;
+    }
 }
