@@ -287,7 +287,7 @@ public class Game extends Jeu {
         players = new Player[p.size()];
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet()) {
-            if(e.getKey().equals("Robot")){
+            if(e.getValue().isABot()){
                 switch (botDifficulty){
                     case EASY:
                         players[k++] = new IAEasy(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);

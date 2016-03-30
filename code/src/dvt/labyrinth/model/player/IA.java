@@ -22,7 +22,6 @@ public abstract class IA extends Player{
     public IA(Pawn pawn, Position pos, Tray tray, int nbWall){
         super("Computer",pawn,pos,tray,nbWall);
         setPos(pos, tray);
-        isABot = true;
     }
 
     @Override

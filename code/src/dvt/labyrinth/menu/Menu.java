@@ -64,7 +64,6 @@ public class Menu extends MenuGeneric {
                         new SelectPlayer(this, 1).loop();
                         new SelectDifficulty(this).loop();
                         players.put("Robot", RESOURCES.BOT);
-
                         // We have now two players (player + bot)
                         if (players.size() == 2)
                             new Game(players, botDifficulty).loop();
