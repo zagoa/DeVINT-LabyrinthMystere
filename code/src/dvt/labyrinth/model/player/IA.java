@@ -1,5 +1,7 @@
 package dvt.labyrinth.model.player;
 
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
+
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
@@ -21,7 +23,7 @@ public abstract class IA extends Player{
      * @param tray
      */
     public IA(Pawn pawn, Position pos, Tray tray, int nbWall){
-        super("Computer",pawn,pos,tray,nbWall);
+        super("Computer",pawn,pos,tray,nbWall,true);
         setPos(pos, tray);
     }
 
@@ -65,6 +67,7 @@ public abstract class IA extends Player{
      */
     public void strategyIABack(Tray tray){
         decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
+        decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
         else if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
@@ -81,21 +84,16 @@ public abstract class IA extends Player{
     public Position convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS direction){
         switch (direction) {
             case FRONT:
-                this.pos.setX(this.pos.getY()-1);
-                break;
+                return new Position(pos.getX(), pos.getY()-CASE_LENGTH);
             case BACK:
-                this.pos.setX(this.pos.getY()+1);
-                break;
+                return new Position(pos.getX(), pos.getY()+CASE_LENGTH);
             case RIGHT:
-                this.pos.setY(this.pos.getX()+1);
-                break;
+                return new Position(pos.getX()+CASE_LENGTH, pos.getY());
             case LEFT:
-                this.pos.setY(this.pos.getX()-1);
-                break;
+                return new Position(this.pos.getX()-CASE_LENGTH, pos.getY());
             default:
-                break;
+                return null;
         }
-        return pos;
     }
 
 

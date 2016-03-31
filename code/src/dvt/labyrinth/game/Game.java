@@ -4,10 +4,7 @@ import dvt.devint.Jeu;
 import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
 import dvt.labyrinth.model.essential.*;
-import dvt.labyrinth.model.player.HumanPlayer;
-import dvt.labyrinth.model.player.IAEasy;
-import dvt.labyrinth.model.player.IAMedium;
-import dvt.labyrinth.model.player.Player;
+import dvt.labyrinth.model.player.*;
 import dvt.labyrinth.tools.Position;
 
 import javax.swing.*;
@@ -77,7 +74,7 @@ public class Game extends Jeu {
             win();
 
         if (currentPlayer.isABot()) // Is a bot ?
-            botPlay();
+            movePlayer(null);
         else if (!settingWall) // Is not a bot and we're not setting walls
             checkMovePositions();
     }
@@ -92,16 +89,6 @@ public class Game extends Jeu {
     public void reset() {
     }
 
-    private void botPlay() {
-        if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
-            movePlayer(DIRECTIONS.BACK);
-        else if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
-            movePlayer(DIRECTIONS.LEFT);
-        else if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
-            movePlayer(DIRECTIONS.RIGHT);
-        else if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
-            movePlayer(DIRECTIONS.FRONT);
-    }
 
     /**
      * Check where we can move, and highlight all the tiles (if we can move)
@@ -295,9 +282,9 @@ public class Game extends Jeu {
                     case MEDIUM:
                         players[k++] = new IAMedium(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
                         break;
-                   /** case HARD:
+                    case HARD:
                         players[k++] = new IAHard(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
-                        break;**/
+                        break;
                 }
 
             }
@@ -343,6 +330,7 @@ public class Game extends Jeu {
         if (currentPlayer.move(tray, d)) { // has moved
             if (currentPlayer.hasWon())
                 return;
+
             nextTurn();
         }
     }

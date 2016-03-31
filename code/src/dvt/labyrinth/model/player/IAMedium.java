@@ -4,6 +4,7 @@ import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
+import javafx.geometry.Pos;
 
 import java.util.Queue;
 
@@ -46,5 +47,6 @@ public class IAMedium extends IA{
             return true;
         }
     }
+
 
 }

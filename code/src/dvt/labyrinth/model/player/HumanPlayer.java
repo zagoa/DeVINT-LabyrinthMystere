@@ -13,7 +13,7 @@ public class HumanPlayer extends Player{
 
 
     public HumanPlayer(String name, Pawn pawn, Position pos, Tray tray){
-        super(name,pawn,pos,tray,WALL_NUMBER);
+        super(name,pawn,pos,tray,WALL_NUMBER,false);
         setPos(pos,tray);
     }
 

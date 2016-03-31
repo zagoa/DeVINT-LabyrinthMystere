@@ -32,12 +32,12 @@ public abstract class Player {
     //Number of wall
     protected int nbWall;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall) {
+    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
-        this.isABot = pawn.getRes().isABot();
         this.nbWall = nbWall;
+        this.isABot = bot;
 
         setPos(pos, tray);
     }
