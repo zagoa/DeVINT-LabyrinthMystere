@@ -25,8 +25,6 @@ public class IAEasy extends IA {
     @Override
     public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        //Position temp = convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.BACK);
-        //updatePlayerPos(tray,temp);
         if ((!decision.isEmpty())) {
             if (canMove(tray,decision.peek())){
                 updatePlayerPos(tray,convertDirectionToPosition(decision.poll()));

@@ -73,8 +73,12 @@ public class Game extends Jeu {
         if (currentPlayer.hasWon())
             win();
 
-        if (currentPlayer.isABot()) // Is a bot ?
-            movePlayer(null);
+        if (currentPlayer.isABot()) { // Is a bot ?
+            if (currentPlayer instanceof IAMedium || currentPlayer instanceof IAHard)
+                moveIAPlayer(null, otherPlayer().getPosition());
+
+            else movePlayer(null);
+        }
         else if (!settingWall) // Is not a bot and we're not setting walls
             checkMovePositions();
     }
@@ -334,6 +338,22 @@ public class Game extends Jeu {
             nextTurn();
         }
     }
+
+    /**
+     * Move the player
+     *
+     * @param d a direction where to move
+     */
+    public void moveIAPlayer(DIRECTIONS d,Position position) {
+        unHighlightAll();
+        if (currentPlayer instanceof AdvancedIAs &&  ((AdvancedIAs) currentPlayer).moveAndWall(tray, d, position)) { // has moved
+            if (currentPlayer.hasWon())
+                return;
+
+            nextTurn();
+        }
+    }
+
 
     /**
      * Set a winner, with the specific view
