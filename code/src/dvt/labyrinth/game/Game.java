@@ -119,6 +119,10 @@ public class Game extends Jeu {
         addControlUp(KeyEvent.VK_RIGHT, new MovePlayerAction(this, DIRECTIONS.RIGHT));
     }
 
+    /**
+     * @param tray
+     * @return if the the game is blocked or not
+     */
     public boolean gameNotBlocked(Tray tray){
         if(!otherPlayer().isBlocked(tray) && !currentPlayer.isBlocked(tray)) return true;
         return false;
@@ -135,6 +139,7 @@ public class Game extends Jeu {
         int x = position.getX();
         int y = position.getY();
         unHighlightAll();
+        setTarget();
 
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
