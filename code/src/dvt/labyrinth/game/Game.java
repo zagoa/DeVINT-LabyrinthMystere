@@ -38,6 +38,8 @@ public class Game extends Jeu {
     // Difficulty of the bot
     private DIFFICULTY botDifficulty;
 
+    // TODO : (IA Medium) UN ROBOT NE DOIT PAS POUVOIR BLOQUER LE JEU
+
     public Game(HashMap<String, RESOURCES> players) {
         super();
 

@@ -61,9 +61,9 @@ public class Menu extends MenuGeneric {
                 switch (gameChoice) {
                     case 1: // Un joueur
                         // We need one player...
-                        //new SelectPlayer(this, 1).loop();
+                        new SelectPlayer(this, 1).loop();
                         new SelectDifficulty(this).loop();
-                        players.put("Bernard", RESOURCES.THEO);
+//                        players.put("Bernard", RESOURCES.THEO);
                         players.put("Robot", RESOURCES.BOT);
                         // We have now two players (player + bot)
                         if (players.size() == 2)
