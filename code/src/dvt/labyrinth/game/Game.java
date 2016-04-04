@@ -39,6 +39,7 @@ public class Game extends Jeu {
     private DIFFICULTY botDifficulty;
 
     // TODO : (IA Medium) UN ROBOT NE DOIT PAS POUVOIR BLOQUER LE JEU
+    // TODO : UN MUR NE PEUT PAS COUPER UN AUTRE MUR (gap)
 
     public Game(HashMap<String, RESOURCES> players) {
         super();
