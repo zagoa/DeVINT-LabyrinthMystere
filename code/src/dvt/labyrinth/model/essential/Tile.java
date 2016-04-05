@@ -16,6 +16,7 @@ import java.awt.*;
  */
 public class Tile {
     public Color borderColor;
+    public int borderSize;
 
     // The position
     private Position pos;
@@ -55,6 +56,7 @@ public class Tile {
         highlightedColor = null;
 
         borderColor = Color.BLACK;
+        borderSize = 2;
 
         createComponent();
     }
@@ -174,7 +176,7 @@ public class Tile {
         if (isAWall()) // On a POSSIBLE wall
             component.setBorder(null);
         else // On a wall or on an other thing
-            component.setBorder(new LineBorder(borderColor, 2));
+            component.setBorder(new LineBorder(borderColor, borderSize));
     }
 
     /**
@@ -265,6 +267,11 @@ public class Tile {
 
     public void setBorderColor(Color color) {
         borderColor = color;
+        editComponent();
+    }
+
+    public void setBorderSize(int size) {
+        borderSize = size;
         editComponent();
     }
 }

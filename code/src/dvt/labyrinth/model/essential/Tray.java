@@ -15,11 +15,15 @@ public class Tray {
     // A tray is an array of tile
     private Tile tray[][];
     private Color trayColor;
+    private int borderSizeLevel;
 
     /**
      * Default constructor
      */
     public Tray() {
+        trayColor = DEFAULT_TRAY_COLOR;
+        borderSizeLevel = DEFAULT_SIZE_LEVEL;
+
         // Set the tray
         tray = new Tile[NBRE_CASES][NBRE_CASES];
 
@@ -112,7 +116,39 @@ public class Tray {
         }
     }
 
+    public void changeBorderSize(int level) {
+        int size;
+
+        switch (level) {
+            case 50:
+                size = 2;
+                break;
+            case 60:
+                size = 3;
+                break;
+            case 70:
+                size = 4;
+                break;
+            case 90:
+                size = 5;
+                break;
+
+            default:
+                size = 1;
+                break;
+        }
+
+        for (int y = 0; y < NBRE_CASES; y++) {
+            for (int x = 0; x < NBRE_CASES; x++)
+                tray[y][x].setBorderSize(size);
+        }
+    }
+
     public Color getTrayColor() {
         return trayColor;
+    }
+
+    public int getBorderSizeLevel() {
+        return borderSizeLevel;
     }
 }

@@ -3,6 +3,8 @@ package dvt.labyrinth.tools;
 
 import t2s.SIVOXDevint;
 
+import java.awt.*;
+
 /**
  * Class used for some constants all over the game.
  *
@@ -15,6 +17,8 @@ public class ConstantesLabyrinth {
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
 
+    public static final Color DEFAULT_TRAY_COLOR = Color.BLACK;
+    public static final int DEFAULT_SIZE_LEVEL = 50;
     /* ************** */
 
     /* **** TEXT **** */

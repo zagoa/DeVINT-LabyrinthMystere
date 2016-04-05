@@ -90,11 +90,19 @@ public class Game extends Jeu {
     public void render() {
         world.setBackground(getBackground());
 
-        if (getBackground() == Color.BLACK && tray.getTrayColor() != Color.WHITE) {
+        if (getBackground() == Color.BLACK && tray.getTrayColor() != Color.WHITE)
             tray.changeColor(Color.WHITE);
-        }
         else if (getBackground() != Color.BLACK && tray.getTrayColor() != Color.BLACK)
             tray.changeColor(Color.BLACK);
+
+        /**
+         * SIZE: 40, 50, 60, 70, 90
+         */
+
+        int s = getFont().getSize();
+
+        if (s != tray.getBorderSizeLevel())
+            tray.changeBorderSize(s);
 
         // TODO : changer la valeur de la couleur des borders quand fond noir
     }
