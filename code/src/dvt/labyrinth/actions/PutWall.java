@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.VOCAL;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.playText;
 
 /**
  * An action : put a wall on a tile
@@ -35,7 +36,7 @@ public class PutWall implements ActionListener {
         // We need to check if tile is a wall && disable the clic && is not already occupied
         //If the tile is not for a Wall
         if (lab.getCurrentPlayer().getNbWall() <= 0 && !lab.getCurrentPlayer().isABot()) {
-            lab.playText(VOCAL.NOT_ENOUGTH_WALL.toString());
+            playText(lab.getSIVOX(), VOCAL.NOT_ENOUGTH_WALL.toString());
         } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && lab.checkPutWall(tile.getPosition()) ) {
             tile.positionWall();
             //if the position is correct and if the position don't block a player
@@ -43,16 +44,18 @@ public class PutWall implements ActionListener {
                 lab.highlightWall(tile.getPosition());
                 //décompte un mur au joueur
                 lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);
+
                 if (!lab.getCurrentPlayer().isABot())
-                    lab.playText(VOCAL.HUMAN_WALL.toString());
-                else lab.playText(VOCAL.BOT_WALL.toString());
+                    playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
+                else
+                    playText(lab.getSIVOX(), VOCAL.BOT_WALL.toString());
             }else{
                 tile.clearTile();
-                lab.playText(VOCAL.BLOCK.toString());
+                playText(lab.getSIVOX(), VOCAL.BLOCK.toString());
             }
 
         } else if (!lab.checkPutWall(tile.getPosition()) || tile.isOccupied()) {
-            lab.playText(VOCAL.ERROR_WALL.toString());
+            playText(lab.getSIVOX(), VOCAL.ERROR_WALL.toString());
         }
 
     }
