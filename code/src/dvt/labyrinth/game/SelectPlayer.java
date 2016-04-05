@@ -12,6 +12,10 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -96,6 +100,7 @@ public class SelectPlayer extends Jeu {
         /* ******** */
         name = new JTextField("", 5);
         name.setFont(getFont());
+        name.requestFocus(true);
 
         /* ******** */
         JLabel sep = new JLabel(" ");
@@ -130,6 +135,9 @@ public class SelectPlayer extends Jeu {
         world.add(sep           , getConstraint(1, 5, gridWidth));
         world.add(valid         , getConstraint(1, 6, gridWidth));
         world.add(getMore       , getConstraint(1, 4, gridWidth));
+
+
+        addControl("pressed ENTER", new EnterPressed());
     }
 
     /**
@@ -307,9 +315,9 @@ public class SelectPlayer extends Jeu {
                 && players.get(name.getText()) == null)
             getNextPlayer();
         else if (name.getText().length() < 1)
-            getSIVOX().playText(parse(VOCAL.PSEUDO_LENGTH, (players.size()+1)));
+            getSIVOX().playText(parse(VOCAL.PSEUDO_LENGTH, (players.size() + 1)));
         else if (selectedPawn == null)
-            getSIVOX().playText(parse(VOCAL.SELECT_PAWN, (players.size()+1)));
+            getSIVOX().playText(parse(VOCAL.SELECT_PAWN, (players.size() + 1)));
         else
             getSIVOX().playText(parse(VOCAL.SAME_PSEUDO, players.size()));
     }
@@ -325,6 +333,13 @@ public class SelectPlayer extends Jeu {
         else {
             menu.setPlayers(players);
             dispose();
+        }
+    }
+
+    private class EnterPressed extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            validSelection();
         }
     }
 }

@@ -54,8 +54,6 @@ public class Menu extends Fenetre {
         addMenu("Score", new Action(this,4));
         addMenu("Quitter", new Action(this, 5));
 
-        
-        
         // la gestion des touches directionnelles haut et bas 
         addControl("DOWN", new DownAction(this));
         addControl("UP", new UpAction(this));

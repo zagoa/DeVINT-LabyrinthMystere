@@ -174,7 +174,7 @@ public class Tile {
         if (isAWall()) // On a POSSIBLE wall
             component.setBorder(null);
         else // On a wall or on an other thing
-            component.setBorder(new LineBorder(borderColor, 1));
+            component.setBorder(new LineBorder(borderColor, 2));
     }
 
     /**
