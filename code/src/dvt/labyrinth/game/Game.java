@@ -89,6 +89,13 @@ public class Game extends Jeu {
     @Override
     public void render() {
         world.setBackground(getBackground());
+
+        if (getBackground() == Color.BLACK && tray.getTrayColor() != Color.WHITE) {
+            tray.changeColor(Color.WHITE);
+        }
+        else if (getBackground() != Color.BLACK && tray.getTrayColor() != Color.BLACK)
+            tray.changeColor(Color.BLACK);
+
         // TODO : changer la valeur de la couleur des borders quand fond noir
     }
 

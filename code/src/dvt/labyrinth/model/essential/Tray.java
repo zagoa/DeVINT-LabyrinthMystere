@@ -2,6 +2,8 @@ package dvt.labyrinth.model.essential;
 
 import dvt.labyrinth.tools.Position;
 
+import java.awt.*;
+
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 /**
@@ -12,6 +14,7 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 public class Tray {
     // A tray is an array of tile
     private Tile tray[][];
+    private Color trayColor;
 
     /**
      * Default constructor
@@ -98,5 +101,18 @@ public class Tray {
                 return false;
         }
 
+    }
+
+    public void changeColor(Color color) {
+        trayColor = color;
+
+        for (int y = 0; y < NBRE_CASES; y++) {
+            for (int x = 0; x < NBRE_CASES; x++)
+                tray[y][x].setBorderColor(trayColor);
+        }
+    }
+
+    public Color getTrayColor() {
+        return trayColor;
     }
 }
