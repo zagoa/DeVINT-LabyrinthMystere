@@ -315,11 +315,11 @@ public class SelectPlayer extends Jeu {
                 && players.get(name.getText()) == null)
             getNextPlayer();
         else if (name.getText().length() < 1)
-            getSIVOX().playText(parse(VOCAL.PSEUDO_LENGTH, (players.size() + 1)));
+            playText(getSIVOX(), parse(VOCAL.PSEUDO_LENGTH, (players.size() + 1)));
         else if (selectedPawn == null)
-            getSIVOX().playText(parse(VOCAL.SELECT_PAWN, (players.size() + 1)));
+            playText(getSIVOX(), parse(VOCAL.SELECT_PAWN, (players.size() + 1)));
         else
-            getSIVOX().playText(parse(VOCAL.SAME_PSEUDO, players.size()));
+            playText(getSIVOX(), parse(VOCAL.SAME_PSEUDO, players.size()));
     }
 
     /**

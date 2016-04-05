@@ -218,7 +218,7 @@ public class Game extends Jeu {
      */
     public void nextTurn() {
         currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
-        if (!currentPlayer.isABot()) playText(parse(VOCAL.TURN_2P, currentPlayer.getName()));
+        if (!currentPlayer.isABot()) playText(getSIVOX(), parse(VOCAL.TURN_2P, currentPlayer.getName()));
     }
 
     public Player otherPlayer(){
@@ -285,7 +285,7 @@ public class Game extends Jeu {
 
         currentPlayer = players[new Random().nextInt(1)];
 
-        playText(parse(VOCAL.START, currentPlayer.getName()));
+        playText(getSIVOX(), parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
     }
 
@@ -314,7 +314,7 @@ public class Game extends Jeu {
 
         currentPlayer = players[new Random().nextInt(1)];
 
-        playText(parse(VOCAL.START, currentPlayer.getName()));
+        playText(getSIVOX(), parse(VOCAL.START, currentPlayer.getName()));
         pause(1500);
 
     }
@@ -432,12 +432,6 @@ public class Game extends Jeu {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
-    public void playText(String sentence) {
-        getSIVOX().stop();
-        getSIVOX().playText(sentence);
-    }
-
 
     public Tray getTray() {
         return tray;

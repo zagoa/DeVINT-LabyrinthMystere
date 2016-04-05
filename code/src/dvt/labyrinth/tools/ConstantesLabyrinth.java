@@ -1,6 +1,8 @@
 package dvt.labyrinth.tools;
 
 
+import t2s.SIVOXDevint;
+
 /**
  * Class used for some constants all over the game.
  *
@@ -163,6 +165,11 @@ public class ConstantesLabyrinth {
 
     public static String parse(VOCAL v, int i) {
         return String.format(v.toString(), new Integer(i).toString());
+    }
+
+    public static void playText(SIVOXDevint sivox, String sentence) {
+        sivox.stop();
+        sivox.playText(sentence);
     }
     /* ******************** */
 
