@@ -2,6 +2,7 @@ package dvt.labyrinth.menu;
 
 import dvt.labyrinth.game.Game;
 import dvt.labyrinth.game.SelectPlayer;
+import dvt.labyrinth.game.Training;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -29,10 +30,11 @@ public class Menu extends MenuGeneric {
 
         // les options possibles
         // TODO : Faire One Player
-        addMenu(ONEPLAYER,new ActionMenu(this,1));
-        addMenu(TWOPLAYERS, new ActionMenu(this,2));
-        addMenu(HELP, new ActionMenu(this, 3));
-        addMenu(QUIT, new ActionMenu(this, 5));
+        addMenu(ONEPLAYER   ,new ActionMenu(this,1));
+        addMenu(TWOPLAYERS  , new ActionMenu(this,2));
+        addMenu(TRAINING    , new ActionMenu(this,3));
+        addMenu(HELP        , new ActionMenu(this, 4));
+        addMenu(QUIT        , new ActionMenu(this, 5));
 
         // la gestion des touches directionnelles haut et bas
         addControl("DOWN", new DownAction(this));
@@ -62,12 +64,14 @@ public class Menu extends MenuGeneric {
                     case 1: // Un joueur
                         // We need one player...
                         new SelectPlayer(this, 1).loop();
-                        new SelectDifficulty(this).loop();
-//                        players.put("Bernard", RESOURCES.THEO);
-                        players.put("Robot", RESOURCES.BOT);
-                        // We have now two players (player + bot)
-                        if (players.size() == 2)
-                            new Game(players, botDifficulty).loop();
+                        if (players.size() == 1) {
+                            new SelectDifficulty(this).loop();
+                            players.put("Robot", RESOURCES.BOT);
+
+                            // We have now two players (player + bot)
+                            if (botDifficulty != null)
+                                new Game(players, botDifficulty).loop();
+                        }
                         break;
 
                     case 2: // Deux joueurs
@@ -79,7 +83,12 @@ public class Menu extends MenuGeneric {
                             new Game(players).loop();
                         break;
 
-                    case 3: // Aide
+                    case 3:
+                        players.put("Joueur 1", RESOURCES.GERARD);
+                        new Training(players).loop();
+                        break;
+
+                    case 4: // Aide
                         JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
                         break;
 

@@ -24,17 +24,17 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
  */
 public class Game extends Jeu {
     // The 'world' : Labyrinth
-    private JPanel world;
+    protected JPanel world;
     // The tray of the labyrinth
-    private Tray tray;
+    protected Tray tray;
     // Old players
-    private HashMap<String, RESOURCES> oldPlayers;
+    protected HashMap<String, RESOURCES> oldPlayers;
     // The players
-    private Player[] players;
+    protected Player[] players;
     // The current player
-    private Player currentPlayer;
+    protected Player currentPlayer;
     // State of the game
-    private boolean settingWall;
+    protected boolean settingWall;
     // Difficulty of the bot
     private DIFFICULTY botDifficulty;
 

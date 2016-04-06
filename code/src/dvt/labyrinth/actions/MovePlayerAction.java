@@ -35,6 +35,6 @@ public class MovePlayerAction extends AbstractAction {
     public void actionPerformed(ActionEvent arg0) {
         // Move the player
         if(!fenetre.isSettingWall())
-        fenetre.movePlayer(directions);
+            fenetre.movePlayer(directions);
     }
 }

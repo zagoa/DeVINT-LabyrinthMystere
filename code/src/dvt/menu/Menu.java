@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import static dvt.devint.ConstantesDevint.*;
 import static dvt.menu.ConstantesMenu.*;
 import dvt.devint.Fenetre;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
 
 /**
  * Permet de gerer le menu et la fenetre qui contient le menu
@@ -50,7 +51,7 @@ public class Menu extends Fenetre {
         addLabel(TITLE_GAME);
         
         // les options possibles
-        addMenu("Labyrinth Mystère",new Action(this,1));
+        addMenu(ConstantesLabyrinth.TITLE_GAME,new Action(this,1));
         addMenu("Score", new Action(this,4));
         addMenu("Quitter", new Action(this, 5));
 

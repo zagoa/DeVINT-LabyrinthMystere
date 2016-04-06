@@ -26,6 +26,7 @@ public class ConstantesLabyrinth {
     public static final String TITLE_GAME_DIFFICULTY = "Selectionnez la difficulté";
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
+    public static final String TRAINING = "Entrainement";
     public static final String HELP = "Aide";
     public static final String QUIT = "Quitter";
     /* ************** */
