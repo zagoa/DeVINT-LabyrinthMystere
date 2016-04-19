@@ -1,9 +1,12 @@
 package dvt.labyrinth.game;
 
+import dvt.labyrinth.actions.MovePlayerAction;
+import dvt.labyrinth.actions.PutWall;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.model.player.HumanPlayer;
 import dvt.labyrinth.model.player.Player;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
@@ -24,7 +27,34 @@ public class Training extends Game {
         super(players);
         time = 0;
 
-        // TODO : SIVOX pour l'entrainement
+        playText(VOCAL.T_START.toString(), 17500);
+    }
+
+    public void update() {
+        super.update();
+
+        if (time-EACH_x_SET_WALL == 0) { // First time we set a wall
+            playText(VOCAL.T_FIRST_WALL.toString(), 22000);
+            ++time;
+        } else if (time-EACH_x_SET_WALL < 0) {
+            PutWall.setActive(false);
+        }
+    }
+
+    public void playText(String sentence, int waitTime) {
+        // Remove control on putting walls
+        PutWall.setActive(false);
+        MovePlayerAction.setActive(false);
+        // Play start text
+        ConstantesLabyrinth.playText(getSIVOX(), sentence);
+        // Show targets
+        unHighlightAll();
+        setTarget();
+        // Wait while talking
+        pause(waitTime);
+        // Set active control on putting walls
+        PutWall.setActive(true);
+        MovePlayerAction.setActive(true);
     }
 
     @Override
@@ -48,6 +78,7 @@ public class Training extends Game {
         time++;
 
         Tile tile = tray.getTile(currentPlayer.getPosition().getX(), currentPlayer.getPosition().getY()-1);
+        Tile nTile = null;
 
         if (time%EACH_x_SET_WALL == 0
                 && !isSettingWall()
@@ -56,7 +87,6 @@ public class Training extends Game {
             tile.positionWall();
 
             if(gameNotBlocked(tray)) {
-                Tile nTile = null;
                 DIRECTIONS dir = null;
 
                 if ((new Random().nextInt(2)) == 1) { // First right, then left
@@ -106,10 +136,19 @@ public class Training extends Game {
                     }
                 }
 
-                if (nTile != null)
+                if (nTile != null) { // Set a wall
                     fillGap(dir, nTile.getPosition());
+                }
             } else
                 tile.clearTile();
         }
+    }
+
+    /**
+     * Set a winner, with the specific view
+     */
+    public void win() {
+        this.dispose(); // Delete this view
+        new WinGame(currentPlayer, VOCAL.T_WIN.toString()).loop(); // Add win view
     }
 }

@@ -31,7 +31,14 @@ public class WinGame extends Jeu {
         super();
 
         winner = player;
-        setWinner();
+        setWinner(parse(VOCAL.WIN, winner.getName()));
+    }
+
+    public WinGame(Player player, String setenceToSay) {
+        super();
+
+        winner = player;
+        setWinner(setenceToSay);
     }
 
     @Override
@@ -69,7 +76,7 @@ public class WinGame extends Jeu {
 
     }
 
-    public void setWinner() {
+    public void setWinner(String sentence) {
         score = "<html><center>PARTIE TERMIN&Eacute;E";
 
         score += "<br />____________________<br /><br />";
@@ -79,7 +86,7 @@ public class WinGame extends Jeu {
         info.setIcon(new ImageIcon(winner.getPawn().getResPath()));
         info.setText(score);
 
-        this.getSIVOX().playText(parse(VOCAL.WIN, winner.getName()), SYNTHESE_MAXIMALE);
+        this.getSIVOX().playText(sentence, SYNTHESE_MAXIMALE);
     }
 
     @Override

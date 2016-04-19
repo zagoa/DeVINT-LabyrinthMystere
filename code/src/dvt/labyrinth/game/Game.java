@@ -53,8 +53,6 @@ public class Game extends Jeu {
         addPlayerAndBot(players);
     }
 
-
-
     @Override
     public void init() {
         world = new JPanel();

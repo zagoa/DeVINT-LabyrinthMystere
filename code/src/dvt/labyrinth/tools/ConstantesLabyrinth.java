@@ -145,12 +145,22 @@ public class ConstantesLabyrinth {
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
         SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
-        WIN("Félicitations %s ! Tu as remporté la partie. Appuie sur échap pour revenir au menu ou en cliquant sur le bouton Retour."),
+        ECHAP("Appuie sur échap pour revenir au menu ou clique sur le bouton Retour."),
+        WIN("Félicitations %s ! Tu as remporté la partie. "+ECHAP),
         ERROR_WALL("Impossible de poser un mur ici ! "),
         BOT_WALL("Le bot vient de poser un mur"),
         HUMAN_WALL("Un mur a été posé, choisi là où le deuxième mur doit être, à l'aide des fléches directionnels"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
-        BLOCK("Tu n'a pas le droit de bloquer le jeu");
+        BLOCK("Tu n'a pas le droit de bloquer le jeu"),
+
+        // TRAINING
+        T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
+                "Pour se faire, utilise les flèches directionnelles pour déplacer ton joueur. Vas-y, entraine toi un peu ; rejoins les cibles !"),
+        T_FIRST_WALL("Oh ! Un mur a été posé devant toi. Dans l'entrainement, des murs vont régulièrement apparaitre. Tu peux toi aussi en poser, où tu le souhaites. Pour se faire, il te suffit d'utiliser ta sourie et de cliquer entre les cases, et choisir la direction" +
+                " exacte du mur ! Mais attention, rappelles toi que chaque mur fait deux cases, et que tu ne peux pas bloquer le jeu ! Allez, vas-y, prends ta sourie et essaie, pose un mur !"),
+        T_WIN("Bravo, tu as terminé l'entrainement. Maintenant, commence une vraie partie tout seul contre un robot, ou bien joue contre un ami !! "
+                + ECHAP);
+
         private String str;
 
         VOCAL(String str) {
@@ -175,6 +185,10 @@ public class ConstantesLabyrinth {
     public static void playText(SIVOXDevint sivox, String sentence) {
         sivox.stop();
         sivox.playText(sentence);
+    }
+
+    public static void playText(SIVOXDevint sivox, VOCAL vocal) {
+        playText(sivox, vocal.toString());
     }
     /* ******************** */
 
