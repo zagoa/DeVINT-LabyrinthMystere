@@ -63,12 +63,12 @@ public abstract class Player {
                         && !tray.getTile(x, y - CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                return (y + CASE_LENGTH <= NBRE_CASES - 1
+                return (y + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x, y + WALL_LENGTH).isOccupied()
                         && !tray.getTile(x, y + CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                return (x + CASE_LENGTH <= NBRE_CASES - 1
+                return (x + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x + WALL_LENGTH, y).isOccupied()
                         && !tray.getTile(x + CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
@@ -152,12 +152,12 @@ public abstract class Player {
                         && !tray.getTile(x, y - CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                return (y + CASE_LENGTH <= NBRE_CASES - 1
+                return (y + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x, y + WALL_LENGTH).isOccupied()
                         && !tray.getTile(x, y + CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                return (x + CASE_LENGTH <= NBRE_CASES - 1
+                return (x + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x + WALL_LENGTH, y).isOccupied()
                         && !tray.getTile(x + CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
@@ -200,30 +200,19 @@ public abstract class Player {
      * @return whether or not the player has won
      */
     public boolean hasWon() {
-        switch (originalPos.getY()) {
-            case 0: // Top of the tray
-                return (pos.getY() == NBRE_CASES - 1);
-
-            case NBRE_CASES - 1:
-                return (pos.getY() == 0);
-
-            default:
-                return false;
-        }
+        if (originalPos.getY() == 0)
+            return (pos.getY() == config.get(CONFIG.LENGTH) - 1);
+        else if (originalPos.getY() == (config.get(CONFIG.LENGTH) - 1))
+            return (pos.getY() == 0);
+        return false;
     }
 
 
     public int getWonY() {
-        switch (originalPos.getY()) {
-            case 0: // Top of the tray
-                return NBRE_CASES - 1;
+        if (originalPos.getY() == 0)
+            return config.get(CONFIG.LENGTH) - 1;
 
-            case NBRE_CASES - 1:
-                return 0;
-
-            default:
-                return 0;
-        }
+        return 0;
     }
 
     public String getName() {

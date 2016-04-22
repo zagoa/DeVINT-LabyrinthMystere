@@ -25,13 +25,16 @@ public class Menu extends MenuGeneric {
     public Menu() {
         super();
 
+        if (config.isEmpty())
+            setConfig(SIZE.NORMAL);
+
         addLabel(TITLE_GAME);
 
         // les options possibles
         // TODO : Faire One Player
-        addMenu(ONEPLAYER   ,new ActionMenu(this,1));
-        addMenu(TWOPLAYERS  , new ActionMenu(this,2));
-        addMenu(TRAINING    , new ActionMenu(this,3));
+        addMenu(ONEPLAYER   , new ActionMenu(this, 1));
+        addMenu(TWOPLAYERS  , new ActionMenu(this, 2));
+        addMenu(TRAINING    , new ActionMenu(this, 3));
         addMenu(HELP        , new ActionMenu(this, 4));
         addMenu(QUIT        , new ActionMenu(this, 5));
 

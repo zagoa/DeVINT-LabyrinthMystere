@@ -4,6 +4,7 @@ package dvt.labyrinth.tools;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * Class used for some constants all over the game.
@@ -16,6 +17,35 @@ public class ConstantesLabyrinth {
     public static final int CASE_LENGTH = 2;
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
+
+    /* **** CONFIGURATION **** */
+    public enum CONFIG {
+        LENGTH,
+        WALL
+    }
+
+    public enum SIZE{
+        NORMAL,
+        GRAND,
+        TRES_GRAND;
+
+        @Override
+        public String toString() {
+            return this.toString().replace("_", " ");
+        }
+    }
+
+    public static HashMap<CONFIG, Integer> config = new HashMap<>();
+
+    public static void setConfig(SIZE c) {
+        switch (c) {
+            default:
+                config.put(CONFIG.LENGTH, NBRE_CASES);
+                config.put(CONFIG.WALL  , WALL_LENGTH);
+                break;
+        }
+    }
+    /* ************** */
 
     public static final Color DEFAULT_TRAY_COLOR = Color.BLACK;
     public static final int DEFAULT_SIZE_LEVEL = 50;
@@ -123,7 +153,7 @@ public class ConstantesLabyrinth {
     /* **** POSITIONS **** */
     public enum POSITIONS {
         TOP(new Position(8, 0)),
-        BOTTOM(new Position(8, NBRE_CASES-1));
+        BOTTOM(new Position(8, config.get(CONFIG.LENGTH)-1));
 
         private Position pos;
 
@@ -196,16 +226,5 @@ public class ConstantesLabyrinth {
         FACILE,
         MOYEN,
         DIFFICILE;
-    }
-
-    public enum SIZE{
-        NORMAL,
-        GRAND,
-        TRES_GRAND;
-
-        @Override
-        public String toString() {
-            return this.toString().replace("_", " ");
-        }
     }
 }
