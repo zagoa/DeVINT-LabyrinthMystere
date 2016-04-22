@@ -19,6 +19,8 @@ public class ConstantesLabyrinth {
     public static final int WALL_NUMBER = 9;
 
     /* **** CONFIGURATION **** */
+    public static final String CONFIG_FILE = "../ressources/configuration.xml";
+
     public enum CONFIG {
         LENGTH,
         WALL
@@ -41,6 +43,14 @@ public class ConstantesLabyrinth {
                 default:
                     return "NORMAL";
             }
+        }
+
+        public static SIZE find(String s){
+            for(SIZE v : values())
+                if( SIZE.valueOf(s) == v)
+                    return v;
+
+            return null;
         }
     }
 

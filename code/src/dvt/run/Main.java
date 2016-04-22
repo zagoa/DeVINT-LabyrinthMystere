@@ -2,7 +2,7 @@ package dvt.run;
 
 import java.net.MalformedURLException;
 
-import dvt.menu.Menu;
+import dvt.labyrinth.menu.Menu;
 
 /**
  * Permet de lancer le jeu
