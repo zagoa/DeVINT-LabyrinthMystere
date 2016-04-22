@@ -1,9 +1,8 @@
 package dvt.labyrinth.actions;
 
-import dvt.labyrinth.tools.ConstantesLabyrinth.DIRECTIONS;
-import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.game.Game;
-import dvt.labyrinth.tools.ConstantesLabyrinth.VOCAL;
+import dvt.labyrinth.model.essential.Tile;
+import dvt.labyrinth.tools.ConstantesLabyrinth.DIRECTIONS;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +17,7 @@ public class MoveWall extends AbstractAction {
     private Tile tile;
 
     private DIRECTIONS dir;
+
     public MoveWall(Game fenetre, Tile tile, DIRECTIONS dir) {
         this.fenetre = fenetre;
         this.tile = tile;
@@ -28,22 +28,11 @@ public class MoveWall extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We need to check if tile is a wall
-            fenetre.getSIVOX().stop();
-            tile.positionWall();
-       // if (!fenetre.otherPlayer().isBlocked(fenetre.getTray())) {
-            fenetre.fillGap(dir, tile.getPosition());
-            fenetre.nextTurn();
-        /*}else{
-            int x =tile.getPosition().getX();
-            int y= tile.getPosition().getY();
-            tile.clearTile();
-            fenetre.getCurrentPlayer().setNbWall(fenetre.getCurrentPlayer().getNbWall()+1);
-            fenetre.playText(VOCAL.BLOCK.toString());
-            if(dir.equals(DIRECTIONS.FRONT)) fenetre.getTray().getTile(x,y+2).clearTile();
-            if(dir.equals(DIRECTIONS.BACK)) fenetre.getTray().getTile(x,y-2).clearTile();
-            if(dir.equals(DIRECTIONS.RIGHT)) fenetre.getTray().getTile(x-2,y).clearTile();
-            if(dir.equals(DIRECTIONS.LEFT)) fenetre.getTray().getTile(x+2,y).clearTile();
-        }*/
+        fenetre.getSIVOX().stop();
+        tile.positionWall();
+        //if (!fenetre.otherPlayer().isBlocked(fenetre.getTray()) || !fenetre.getCurrentPlayer().isBlocked(fenetre.getTray())) {
+        fenetre.fillGap(dir, tile.getPosition());
+        fenetre.nextTurn();
         fenetre.setSettingWall(false);
         fenetre.unHighlightAll();
 
