@@ -30,13 +30,13 @@ public class IAMedium extends AdvancedIAs{
     @Override
     public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position){
         counter++;
-        if(position.getX()<NBRE_CASES-CASE_LENGTH && counter%6==0) {
+        if(position.getX()<NBRE_CASES-CASE_LENGTH && counter%3==0) {
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 1, position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
             return true;
         }
-        else if (counter%6==0) {
+        else if (counter%3==0) {
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 1, position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
