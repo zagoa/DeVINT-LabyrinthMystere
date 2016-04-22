@@ -53,8 +53,6 @@ public class Game extends Jeu {
         addPlayerAndBot(players);
     }
 
-
-
     @Override
     public void init() {
         world = new JPanel();
@@ -303,13 +301,13 @@ public class Game extends Jeu {
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet()) {
             if(e.getValue().isABot()){
                 switch (botDifficulty){
-                    case EASY:
+                    case FACILE:
                         players[k++] = new IAEasy(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
                         break;
-                    case MEDIUM:
+                    case MOYEN:
                         players[k++] = new IAMedium(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
                         break;
-                    case HARD:
+                    case DIFFICILE:
                         players[k++] = new IAHard(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
                         break;
                 }

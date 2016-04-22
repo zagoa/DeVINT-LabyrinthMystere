@@ -19,6 +19,15 @@ public class MovePlayerAction extends AbstractAction {
     private DIRECTIONS directions;
 
     /**
+     * Method from http://stackoverflow.com/questions/4722835/how-to-temporarily-disable-event-listeners-in-swing
+     * @author Sean Patrick Floyd
+     */
+    private static boolean active = true;
+    public static void setActive(boolean active){
+        MovePlayerAction.active = active;
+    }
+
+    /**
      * Constructor
      *
      * @param fenetre
@@ -34,7 +43,7 @@ public class MovePlayerAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         // Move the player
-        if(!fenetre.isSettingWall())
+        if(!fenetre.isSettingWall() && active)
             fenetre.movePlayer(directions);
     }
 }

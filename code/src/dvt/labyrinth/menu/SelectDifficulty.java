@@ -22,9 +22,9 @@ public class SelectDifficulty extends MenuGeneric {
 
         this.menu = menu;
 
-        addMenu(DIFFICULTY.EASY.toString(),new ActionMenu(this,1));
-        addMenu(DIFFICULTY.MEDIUM.toString(), new ActionMenu(this,2));
-        addMenu(DIFFICULTY.HARD.toString(), new ActionMenu(this, 3));
+        addMenu(DIFFICULTY.FACILE.toString(),new ActionMenu(this,1));
+        addMenu(DIFFICULTY.MOYEN.toString(), new ActionMenu(this,2));
+        addMenu(DIFFICULTY.DIFFICILE.toString(), new ActionMenu(this, 3));
 
         addControl("DOWN", new DownAction(this));
         addControl("UP", new UpAction(this));
@@ -48,15 +48,15 @@ public class SelectDifficulty extends MenuGeneric {
 
                 switch (gameChoice) {
                     case 1: // Easy
-                        selectedDifficulty(DIFFICULTY.EASY);
+                        selectedDifficulty(DIFFICULTY.FACILE);
                         return;
 
                     case 2: // Medium
-                        selectedDifficulty(DIFFICULTY.MEDIUM);
+                        selectedDifficulty(DIFFICULTY.MOYEN);
                         return;
 
                     case 3: // Hard
-                        selectedDifficulty(DIFFICULTY.HARD);
+                        selectedDifficulty(DIFFICULTY.DIFFICILE);
                         return;
 
                     default:

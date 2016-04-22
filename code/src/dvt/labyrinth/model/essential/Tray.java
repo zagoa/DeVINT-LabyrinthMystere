@@ -121,20 +121,20 @@ public class Tray {
 
         switch (level) {
             case 50:
-                size = 2;
-                break;
-            case 60:
-                size = 3;
-                break;
-            case 70:
                 size = 4;
                 break;
-            case 90:
+            case 60:
                 size = 5;
+                break;
+            case 70:
+                size = 6;
+                break;
+            case 90:
+                size = 8;
                 break;
 
             default:
-                size = 1;
+                size = 2;
                 break;
         }
 

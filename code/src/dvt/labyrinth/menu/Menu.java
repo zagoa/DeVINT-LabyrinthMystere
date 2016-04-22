@@ -1,7 +1,6 @@
 package dvt.labyrinth.menu;
 
 import dvt.labyrinth.game.Game;
-import dvt.labyrinth.game.SelectPlayer;
 import dvt.labyrinth.game.Training;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 public class Menu extends MenuGeneric {
     private static final long serialVersionUID = 1L;
 
-    private DIFFICULTY botDifficulty;
+    private DIFFICULTY botDifficulty = null;
     private HashMap<String, RESOURCES> players;
 
     /**
