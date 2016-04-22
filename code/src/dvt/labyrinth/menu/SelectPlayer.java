@@ -1,4 +1,4 @@
-package dvt.labyrinth.game;
+package dvt.labyrinth.menu;
 
 import dvt.devint.Jeu;
 import dvt.labyrinth.tools.StretchIcon;

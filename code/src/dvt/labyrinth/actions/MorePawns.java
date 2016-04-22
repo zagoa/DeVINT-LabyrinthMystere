@@ -1,6 +1,6 @@
 package dvt.labyrinth.actions;
 
-import dvt.labyrinth.game.SelectPlayer;
+import dvt.labyrinth.menu.SelectPlayer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

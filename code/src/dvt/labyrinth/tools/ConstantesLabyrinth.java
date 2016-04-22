@@ -24,6 +24,7 @@ public class ConstantesLabyrinth {
     /* **** TEXT **** */
     public static final String TITLE_GAME = "Labyrinthe Mystère";
     public static final String TITLE_GAME_DIFFICULTY = "Selectionnez la difficulté";
+    public static final String TITLE_GAME_SIZE = "Quelle taille de jeu préfères-tu ?";
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
     public static final String TRAINING = "Entrainement";
@@ -57,7 +58,6 @@ public class ConstantesLabyrinth {
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
         PION(PAWNPATH+"pion.png", true),
-        TARGETT(IMAGEPATH+"target.png", true),
         BOT(PAWNPATH+"bot.png", true, true),
 
         // ARROWS
@@ -193,8 +193,19 @@ public class ConstantesLabyrinth {
     /* ******************** */
 
     public enum DIFFICULTY{
-        EASY,
-        MEDIUM,
-        HARD;
+        FACILE,
+        MOYEN,
+        DIFFICILE;
+    }
+
+    public enum SIZE{
+        NORMAL,
+        GRAND,
+        TRES_GRAND;
+
+        @Override
+        public String toString() {
+            return this.toString().replace("_", " ");
+        }
     }
 }
