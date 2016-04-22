@@ -79,6 +79,7 @@ public class Menu extends MenuGeneric {
                 return false;
             else {
                 setConfig(s);
+
                 return true;
             }
         } catch (Exception e) {

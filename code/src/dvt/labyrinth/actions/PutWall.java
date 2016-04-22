@@ -2,12 +2,10 @@ package dvt.labyrinth.actions;
 
 import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.game.Game;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static dvt.labyrinth.tools.ConstantesLabyrinth.VOCAL;
-import static dvt.labyrinth.tools.ConstantesLabyrinth.playText;
 
 /**
  * An action : put a wall on a tile
@@ -47,23 +45,30 @@ public class PutWall implements ActionListener {
             //If the tile is not for a Wall
             if (lab.getCurrentPlayer().getNbWall() <= 0 && !lab.getCurrentPlayer().isABot()) {
                 playText(lab.getSIVOX(), VOCAL.NOT_ENOUGTH_WALL.toString());
-            } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && lab.checkPutWall(tile.getPosition())) {
+            } else if (tile.isAWall() && !lab.isSettingWall() && !tile.isOccupied() && ((lab.checkPutWall(tile.getPosition()) && config.get(CONFIG.WALL) > 0) || true)) {
                 tile.positionWall();
                 //if the position is correct and if the position don't block a player
-                if (lab.gameNotBlocked(lab.getTray())) {
-                    lab.highlightWall(tile.getPosition());
+                boolean gameNotBlocked = lab.gameNotBlocked(lab.getTray());
+
+                if (gameNotBlocked) { // Game not blocked
                     //décompte un mur au joueur
                     lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);
 
-                    if (!lab.getCurrentPlayer().isABot() && lab.isSettingWall())
-                        playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
-                    else if(lab.getCurrentPlayer().isABot() && lab.isSettingWall())
-                        playText(lab.getSIVOX(), VOCAL.BOT_WALL.toString());
-                } else {
+                    if (config.get(CONFIG.WALL) == 0) { // Walls are only one cell
+                        lab.nextTurn();
+                        lab.setSettingWall(false);
+                    } else { // Walls are more than one cell
+                        lab.highlightWall(tile.getPosition());
+
+                        if (!lab.getCurrentPlayer().isABot() && lab.isSettingWall())
+                            playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
+                        else if (lab.getCurrentPlayer().isABot() && lab.isSettingWall())
+                            playText(lab.getSIVOX(), VOCAL.BOT_WALL.toString());
+                    }
+                } else { // Game blocked
                     tile.clearTile();
                     playText(lab.getSIVOX(), VOCAL.BLOCK.toString());
                 }
-
             } else if (!lab.checkPutWall(tile.getPosition()) || tile.isOccupied()) {
                 playText(lab.getSIVOX(), VOCAL.ERROR_WALL.toString());
             }

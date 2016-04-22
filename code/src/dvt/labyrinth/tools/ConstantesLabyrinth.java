@@ -17,6 +17,7 @@ public class ConstantesLabyrinth {
     public static final int CASE_LENGTH = 2;
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
+    public static final SIZE DEFAULT_SIZE = SIZE.NORMAL;
 
     /* **** CONFIGURATION **** */
     public static final String CONFIG_FILE = "../ressources/configuration.xml";
@@ -55,6 +56,9 @@ public class ConstantesLabyrinth {
     }
 
     public static HashMap<CONFIG, Integer> config = new HashMap<>();
+    static {
+        setConfig(DEFAULT_SIZE);
+    }
 
     public static void setConfig(SIZE c) {
         switch (c) {
@@ -63,11 +67,18 @@ public class ConstantesLabyrinth {
                 config.put(CONFIG.WALL  , WALL_LENGTH);
                 break;
 
+            case TRES_GRAND:
+                config.put(CONFIG.LENGTH, NBRE_CASES-4);
+                config.put(CONFIG.WALL  , WALL_LENGTH-1);
+                break;
+
             default:
                 config.put(CONFIG.LENGTH, NBRE_CASES);
                 config.put(CONFIG.WALL  , WALL_LENGTH);
                 break;
         }
+
+        POSITIONS.updatePositions();
     }
     /* ************** */
 
@@ -177,8 +188,8 @@ public class ConstantesLabyrinth {
 
     /* **** POSITIONS **** */
     public enum POSITIONS {
-        TOP(new Position(8, 0)),
-        BOTTOM(new Position(8, config.get(CONFIG.LENGTH)-1));
+        TOP(null),
+        BOTTOM(null);
 
         private Position pos;
 
@@ -188,6 +199,26 @@ public class ConstantesLabyrinth {
 
         public Position getPos() {
             return pos;
+        }
+
+        public static void updatePositions() {
+            for (POSITIONS p : values())
+                p.updatePos();
+        }
+
+        public void updatePos() {
+            switch (this) {
+                case TOP:
+                    pos = new Position(config.get(CONFIG.LENGTH)/2, 0);
+                    break;
+
+                case BOTTOM:
+                    pos = new Position(config.get(CONFIG.LENGTH)/2, config.get(CONFIG.LENGTH)-1);
+                    break;
+
+                default:
+                    break;
+            }
         }
     };
     /* ******************** */
