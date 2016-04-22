@@ -37,7 +37,7 @@ public class Game extends Jeu {
     // State of the game
     protected boolean settingWall;
     // Difficulty of the bot
-    private DIFFICULTY botDifficulty;
+    private DIFFICULTY botDifficulty = null;
 
     // TODO : (IA Medium) UN ROBOT NE DOIT PAS POUVOIR BLOQUER LE JEU
     // TODO : UN MUR NE PEUT PAS COUPER UN AUTRE MUR (gap)
@@ -240,7 +240,12 @@ public class Game extends Jeu {
      */
     public void nextTurn() {
         currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
-        if (!currentPlayer.isABot()) playText(getSIVOX(), parse(VOCAL.TURN_2P, currentPlayer.getName()));
+
+        if (botDifficulty != null) // 1 players
+            if (!currentPlayer.isABot())
+                playText(getSIVOX(), parse(getRandomVocalTurn(1), currentPlayer.getName()));
+        else // 2 players
+            playText(getSIVOX(), parse(getRandomVocalTurn(2), currentPlayer.getName()));
     }
 
     public Player otherPlayer(){

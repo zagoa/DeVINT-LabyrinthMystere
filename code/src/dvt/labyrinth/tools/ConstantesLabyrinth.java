@@ -4,7 +4,9 @@ package dvt.labyrinth.tools;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Class used for some constants all over the game.
@@ -223,11 +225,16 @@ public class ConstantesLabyrinth {
     };
     /* ******************** */
 
+    private static final ArrayList<VOCAL> list1P = new ArrayList<>();
+    private static final ArrayList<VOCAL> list2P = new ArrayList<>();
+
+    public static VOCAL getRandomVocalTurn(int nPlayers) {
+        return (nPlayers == 1) ? list1P.get((new Random()).nextInt(list1P.size())) : list2P.get((new Random()).nextInt(list2P.size()));
+    }
+
     /* **** VOCAL **** */
     public enum VOCAL {
         START("%s commence à jouer !"),
-        TURN_1P("C'est à toi de jouer ! "),
-        TURN_2P("C'est à %s de jouer ! "),
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
         SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
@@ -238,6 +245,19 @@ public class ConstantesLabyrinth {
         HUMAN_WALL("Un mur a été posé, click sur une case jaune pour poser le deuxième"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
         BLOCK("Tu n'a pas le droit de bloquer le jeu"),
+
+        // TURN 1P
+        TURN_1("C'est à %s de jouer ! ", 1),
+        TURN_2("A toi de jouer ! ", 1),
+        TURN_4("C'est ton tour ! ", 1),
+        TURN_5("Vas-y, joues !", 1),
+
+        // TURN 2P
+        TURN_2P_1("C'est à %s de jouer ! ", 2),
+        TURN_2P_2("%s, à toi de jouer ! ", 2),
+        TURN_2P_3("%s, à toi ! ", 2),
+        TURN_2P_4("%s, c'est ton tour ! ", 2),
+        TURN_2P_5("Vas-y %s, joues !", 2),
 
         // TRAINING
         T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
@@ -251,6 +271,25 @@ public class ConstantesLabyrinth {
 
         VOCAL(String str) {
             this.str = str;
+        }
+
+        VOCAL(String str, int i) {
+            this.str = str;
+            addList(this, i);
+        }
+
+        private void addList(VOCAL v, int i) {
+            if (i == 1)
+                list1P.add(v);
+            else
+                list2P.add(v);
+        }
+
+        public static VOCAL getRandom(int i) {
+            /*if (i == 1)
+                return list1P.get((new Random()).nextInt(list1P.size()));
+            return list2P.get((new Random()).nextInt(list2P.size()));*/
+            return null;
         }
 
         @Override

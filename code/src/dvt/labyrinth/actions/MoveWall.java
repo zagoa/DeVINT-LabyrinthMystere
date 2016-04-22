@@ -58,8 +58,6 @@ public class MoveWall implements ActionListener {
         if (tile.getPosition().getX() < origin.getPosition().getX()) {
             action = fenetre.getTray().getTile(origin.getPosition().getX() + 2, origin.getPosition().getY()).getComponent().getActionListeners();
             fenetre.getTray().getTile(origin.getPosition().getX() + 2, origin.getPosition().getY()).getComponent().removeActionListener(action[0]);
-
-
         }
 
 
