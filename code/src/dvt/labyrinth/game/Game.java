@@ -5,6 +5,7 @@ import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.actions.MoveWall;
 import dvt.labyrinth.model.essential.*;
 import dvt.labyrinth.model.player.*;
+import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 
 import javax.swing.*;
@@ -195,6 +196,14 @@ public class Game extends Jeu {
                 addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
                 tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
             }else tray.getTile(x,y+2).clearTile();
+        }
+
+        //Gestion d'un bug
+        if(!tray.getTile(x+2,y).isHighlighted() && !tray.getTile(x-2,y).isHighlighted() && !tray.getTile(x,y+2).isHighlighted() && !tray.getTile(x,y-2).isHighlighted()){
+            tray.getTile(x,y).clearTile();
+            currentPlayer.setNbWall(currentPlayer.getNbWall()+1);
+            settingWall = false;
+            ConstantesLabyrinth.playText(getSIVOX(),VOCAL.BLOCK);
         }
     }
 
