@@ -55,9 +55,9 @@ public class PutWall implements ActionListener {
                     //décompte un mur au joueur
                     lab.getCurrentPlayer().setNbWall(lab.getCurrentPlayer().getNbWall() - 1);
 
-                    if (!lab.getCurrentPlayer().isABot())
+                    if (!lab.getCurrentPlayer().isABot() && lab.isSettingWall())
                         playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
-                    else
+                    else if(lab.getCurrentPlayer().isABot() && lab.isSettingWall())
                         playText(lab.getSIVOX(), VOCAL.BOT_WALL.toString());
                 } else {
                     tile.clearTile();
