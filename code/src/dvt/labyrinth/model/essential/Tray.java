@@ -25,11 +25,11 @@ public class Tray {
         borderSizeLevel = DEFAULT_SIZE_LEVEL;
 
         // Set the tray
-        tray = new Tile[NBRE_CASES][NBRE_CASES];
+        tray = new Tile[config.get(CONFIG.LENGTH)][config.get(CONFIG.LENGTH)];
 
         // Fill the tray
-        for (int y = 0; y < NBRE_CASES; y++) {
-            for (int x = 0; x < NBRE_CASES; x++)
+        for (int y = 0; y < config.get(CONFIG.LENGTH); y++) {
+            for (int x = 0; x < config.get(CONFIG.LENGTH); x++)
                 tray[y][x] = new Tile(new DefaultItem(), new Position(x,y));
         }
     }
@@ -87,7 +87,7 @@ public class Tray {
                         && !this.getTile(x, y-1).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                return (y+CASE_LENGTH <= NBRE_CASES-1
+                return (y+CASE_LENGTH <= config.get(CONFIG.LENGTH)-1
                         && !this.getTile(x, y+CASE_LENGTH).isOccupied()
                         && !this.getTile(x, y+1).isOccupied()); // In map && wall not present && tile not occupied
 
@@ -110,8 +110,8 @@ public class Tray {
     public void changeColor(Color color) {
         trayColor = color;
 
-        for (int y = 0; y < NBRE_CASES; y++) {
-            for (int x = 0; x < NBRE_CASES; x++)
+        for (int y = 0; y < config.get(CONFIG.LENGTH); y++) {
+            for (int x = 0; x < config.get(CONFIG.LENGTH); x++)
                 tray[y][x].setBorderColor(trayColor);
         }
     }
@@ -138,8 +138,8 @@ public class Tray {
                 break;
         }
 
-        for (int y = 0; y < NBRE_CASES; y++) {
-            for (int x = 0; x < NBRE_CASES; x++)
+        for (int y = 0; y < config.get(CONFIG.LENGTH); y++) {
+            for (int x = 0; x < config.get(CONFIG.LENGTH); x++)
                 tray[y][x].setBorderSize(size);
         }
     }

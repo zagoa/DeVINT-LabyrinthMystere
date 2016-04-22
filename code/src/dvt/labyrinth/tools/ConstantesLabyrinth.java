@@ -4,6 +4,7 @@ package dvt.labyrinth.tools;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * Class used for some constants all over the game.
@@ -17,6 +18,49 @@ public class ConstantesLabyrinth {
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
 
+    /* **** CONFIGURATION **** */
+    public enum CONFIG {
+        LENGTH,
+        WALL
+    }
+
+    public enum SIZE{
+        NORMAL,
+        GRAND,
+        TRES_GRAND;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case GRAND:
+                    return "GRAND";
+
+                case TRES_GRAND:
+                    return "TRES GRAND";
+
+                default:
+                    return "NORMAL";
+            }
+        }
+    }
+
+    public static HashMap<CONFIG, Integer> config = new HashMap<>();
+
+    public static void setConfig(SIZE c) {
+        switch (c) {
+            case GRAND:
+                config.put(CONFIG.LENGTH, NBRE_CASES-2);
+                config.put(CONFIG.WALL  , WALL_LENGTH);
+                break;
+
+            default:
+                config.put(CONFIG.LENGTH, NBRE_CASES);
+                config.put(CONFIG.WALL  , WALL_LENGTH);
+                break;
+        }
+    }
+    /* ************** */
+
     public static final Color DEFAULT_TRAY_COLOR = Color.BLACK;
     public static final int DEFAULT_SIZE_LEVEL = 50;
     /* ************** */
@@ -28,6 +72,7 @@ public class ConstantesLabyrinth {
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
     public static final String TRAINING = "Entrainement";
+    public static final String SETTINGS = "Réglages";
     public static final String HELP = "Aide";
     public static final String QUIT = "Quitter";
     /* ************** */
@@ -123,7 +168,7 @@ public class ConstantesLabyrinth {
     /* **** POSITIONS **** */
     public enum POSITIONS {
         TOP(new Position(8, 0)),
-        BOTTOM(new Position(8, NBRE_CASES-1));
+        BOTTOM(new Position(8, config.get(CONFIG.LENGTH)-1));
 
         private Position pos;
 
@@ -196,16 +241,5 @@ public class ConstantesLabyrinth {
         FACILE,
         MOYEN,
         DIFFICILE;
-    }
-
-    public enum SIZE{
-        NORMAL,
-        GRAND,
-        TRES_GRAND;
-
-        @Override
-        public String toString() {
-            return this.toString().replace("_", " ");
-        }
     }
 }

@@ -63,12 +63,12 @@ public abstract class Player {
                         && !tray.getTile(x, y - CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                return (y + CASE_LENGTH <= NBRE_CASES - 1
+                return (y + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x, y + WALL_LENGTH).isOccupied()
                         && !tray.getTile(x, y + CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                return (x + CASE_LENGTH <= NBRE_CASES - 1
+                return (x + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x + WALL_LENGTH, y).isOccupied()
                         && !tray.getTile(x + CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
@@ -92,9 +92,9 @@ public abstract class Player {
         can.clear();
         hasAccessTo(tray);
         //It represent if the pan is on the last line, so he can finish the game
-        for (int i = 0; i < NBRE_CASES; i += 2) {
-            for (int j = 0; j < NBRE_CASES; j += 2) {
-                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES - 1))) {
+        for (int i = 0; i < config.get(CONFIG.LENGTH); i += 2) {
+            for (int j = 0; j < config.get(CONFIG.LENGTH); j += 2) {
+                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, config.get(CONFIG.LENGTH) - 1))) {
                     return false;
                 }
             }
@@ -152,12 +152,12 @@ public abstract class Player {
                         && !tray.getTile(x, y - CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case BACK:
-                return (y + CASE_LENGTH <= NBRE_CASES - 1
+                return (y + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x, y + WALL_LENGTH).isOccupied()
                         && !tray.getTile(x, y + CASE_LENGTH).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                return (x + CASE_LENGTH <= NBRE_CASES - 1
+                return (x + CASE_LENGTH <= config.get(CONFIG.LENGTH) - 1
                         && !tray.getTile(x + WALL_LENGTH, y).isOccupied()
                         && !tray.getTile(x + CASE_LENGTH, y).isOccupied()); // In map && wall not present && tile not occupied
 
@@ -200,30 +200,19 @@ public abstract class Player {
      * @return whether or not the player has won
      */
     public boolean hasWon() {
-        switch (originalPos.getY()) {
-            case 0: // Top of the tray
-                return (pos.getY() == NBRE_CASES - 1);
-
-            case NBRE_CASES - 1:
-                return (pos.getY() == 0);
-
-            default:
-                return false;
-        }
+        if (originalPos.getY() == 0)
+            return (pos.getY() == config.get(CONFIG.LENGTH) - 1);
+        else if (originalPos.getY() == (config.get(CONFIG.LENGTH) - 1))
+            return (pos.getY() == 0);
+        return false;
     }
 
 
     public int getWonY() {
-        switch (originalPos.getY()) {
-            case 0: // Top of the tray
-                return NBRE_CASES - 1;
+        if (originalPos.getY() == 0)
+            return config.get(CONFIG.LENGTH) - 1;
 
-            case NBRE_CASES - 1:
-                return 0;
-
-            default:
-                return 0;
-        }
+        return 0;
     }
 
     public String getName() {

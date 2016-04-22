@@ -5,8 +5,7 @@ import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
 
-import static dvt.labyrinth.tools.ConstantesLabyrinth.CASE_LENGTH;
-import static dvt.labyrinth.tools.ConstantesLabyrinth.NBRE_CASES;
+import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 
 public class IAHard extends AdvancedIAs{
@@ -27,7 +26,7 @@ public class IAHard extends AdvancedIAs{
     @Override
     public boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position){
         counter++;
-        if(position.getX()<NBRE_CASES-CASE_LENGTH && counter%3==0) {
+        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%6==0) {
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 1, position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
@@ -50,7 +49,7 @@ public class IAHard extends AdvancedIAs{
     @Override
     public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
         counter++;
-        if(pos.getX()<NBRE_CASES-CASE_LENGTH && counter%6==0) {
+        if(pos.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%6==0) {
             tray.getTile(new Position(getPosition().getX(), getPosition().getY() - 1)).positionWall();
             tray.getTile(new Position(getPosition().getX()-2, getPosition().getY() - 1)).positionWall();
             return true;
