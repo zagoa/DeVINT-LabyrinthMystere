@@ -31,7 +31,16 @@ public class ConstantesLabyrinth {
 
         @Override
         public String toString() {
-            return this.toString().replace("_", " ");
+            switch (this) {
+                case GRAND:
+                    return "GRAND";
+
+                case TRES_GRAND:
+                    return "TRES GRAND";
+
+                default:
+                    return "NORMAL";
+            }
         }
     }
 
@@ -39,6 +48,11 @@ public class ConstantesLabyrinth {
 
     public static void setConfig(SIZE c) {
         switch (c) {
+            case GRAND:
+                config.put(CONFIG.LENGTH, NBRE_CASES-2);
+                config.put(CONFIG.WALL  , WALL_LENGTH);
+                break;
+
             default:
                 config.put(CONFIG.LENGTH, NBRE_CASES);
                 config.put(CONFIG.WALL  , WALL_LENGTH);
@@ -58,6 +72,7 @@ public class ConstantesLabyrinth {
     public static final String ONEPLAYER = "1 joueur";
     public static final String TWOPLAYERS = "2 joueurs";
     public static final String TRAINING = "Entrainement";
+    public static final String SETTINGS = "Réglages";
     public static final String HELP = "Aide";
     public static final String QUIT = "Quitter";
     /* ************** */

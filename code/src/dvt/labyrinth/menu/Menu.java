@@ -26,7 +26,7 @@ public class Menu extends MenuGeneric {
         super();
 
         if (config.isEmpty())
-            setConfig(SIZE.NORMAL);
+            new SelectSize().loop();
 
         addLabel(TITLE_GAME);
 
@@ -35,6 +35,7 @@ public class Menu extends MenuGeneric {
         addMenu(ONEPLAYER   , new ActionMenu(this, 1));
         addMenu(TWOPLAYERS  , new ActionMenu(this, 2));
         addMenu(TRAINING    , new ActionMenu(this, 3));
+        addMenu(SETTINGS    , new ActionMenu(this, 6));
         addMenu(HELP        , new ActionMenu(this, 4));
         addMenu(QUIT        , new ActionMenu(this, 5));
 
@@ -88,6 +89,10 @@ public class Menu extends MenuGeneric {
                     case 3:
                         players.put("Joueur 1", RESOURCES.GERARD);
                         new Training(players).loop();
+                        break;
+
+                    case 6:
+                        new SelectSize().loop();
                         break;
 
                     case 4: // Aide

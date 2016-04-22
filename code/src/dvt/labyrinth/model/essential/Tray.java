@@ -92,13 +92,13 @@ public class Tray {
                         && !this.getTile(x, y+1).isOccupied()); // In map && wall not present && tile not occupied
 
             case RIGHT:
-                return (x+CASE_LENGTH <= config.get(CONFIG.LENGTH)-1
+                return (x+CASE_LENGTH <= NBRE_CASES-1
                         && !this.getTile(x+CASE_LENGTH, y).isOccupied()
                         && !this.getTile(x+1, y).isOccupied()); // In map && wall not present && tile not occupied
 
             case LEFT:
                 return (x-CASE_LENGTH >= 0
-                        && !this.getTile(x-config.get(CONFIG.LENGTH), y).isOccupied()
+                        && !this.getTile(x-CASE_LENGTH, y).isOccupied()
                         && !this.getTile(x-1, y).isOccupied()); // In map && wall not present && tile not occupied
 
             default:

@@ -302,20 +302,19 @@ public class Game extends Jeu {
             if(e.getValue().isABot()){
                 switch (botDifficulty){
                     case FACILE:
-                        players[k++] = new IAEasy(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        players[k++] = new IAEasy(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray);
                         break;
                     case MOYEN:
-                        players[k++] = new IAMedium(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        players[k++] = new IAMedium(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray);
                         break;
                     case DIFFICILE:
-                        players[k++] = new IAHard(new Pawn(e.getValue()),((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+                        players[k++] = new IAHard(new Pawn(e.getValue()),POSITIONS.TOP.getPos(), tray);
                         break;
                 }
 
             }
-            else {
-                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
-            }
+            else
+                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), POSITIONS.BOTTOM.getPos(), tray);
         }
 
         currentPlayer = players[new Random().nextInt(1)];

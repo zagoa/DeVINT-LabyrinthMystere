@@ -13,18 +13,14 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 public class SelectSize extends MenuGeneric {
     private static final long serialVersionUID = 1L;
 
-    private Menu menu;
-
     /**
      * Le constructeur du menu
      * Permet de construire un Menu avec tout les composants
      */
-    public SelectSize(Menu menu) {
+    public SelectSize() {
         super();
 
-        addLabel(TITLE_GAME_DIFFICULTY);
-
-        this.menu = menu;
+        addLabel(TITLE_GAME_SIZE);
 
         addMenu(SIZE.NORMAL.toString(),new ActionMenu(this,1));
         addMenu(SIZE.GRAND.toString(), new ActionMenu(this,2));

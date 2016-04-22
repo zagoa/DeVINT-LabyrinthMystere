@@ -92,9 +92,9 @@ public abstract class Player {
         can.clear();
         hasAccessTo(tray);
         //It represent if the pan is on the last line, so he can finish the game
-        for (int i = 0; i < NBRE_CASES; i += 2) {
-            for (int j = 0; j < NBRE_CASES; j += 2) {
-                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, NBRE_CASES - 1))) {
+        for (int i = 0; i < config.get(CONFIG.LENGTH); i += 2) {
+            for (int j = 0; j < config.get(CONFIG.LENGTH); j += 2) {
+                if (can.contains(tray.getTile(i, 0)) && can.contains(tray.getTile(j, config.get(CONFIG.LENGTH) - 1))) {
                     return false;
                 }
             }
