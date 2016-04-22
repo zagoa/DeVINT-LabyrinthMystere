@@ -26,7 +26,7 @@ public class IAHard extends AdvancedIAs{
     @Override
     public boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position){
         counter++;
-        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%6==0) {
+        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0) {
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 1, position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
