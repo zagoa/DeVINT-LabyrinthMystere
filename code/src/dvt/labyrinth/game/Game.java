@@ -155,16 +155,19 @@ public class Game extends Jeu {
 
         int x = position.getX();
         int y = position.getY();
+        int i =0;
         unHighlightAll();
         setTarget();
+
 
         // Check right && On the horizontal line
         if (tray.canSetAWall(DIRECTIONS.RIGHT, position) && y % 2 == 1) {
             tray.getTile(x+2,y).positionWall();
             if(gameNotBlocked(tray)) {
                 tray.getTile(x+2,y).clearTile();
-                addControlUp(KeyEvent.VK_RIGHT, new MoveWall(this, tray.getTile(x + 2, y), DIRECTIONS.RIGHT));
+                tray.getTile(x+2,y).getComponent().addActionListener(new MoveWall(this, tray.getTile(x+2, y ),tray.getTile(x,y), DIRECTIONS.RIGHT));
                 tray.getTile(x + 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_RIGHT));
+                i++;
             }else tray.getTile(x+2,y).clearTile();
 
 
@@ -174,8 +177,9 @@ public class Game extends Jeu {
             tray.getTile(x-2,y).positionWall();
             if(gameNotBlocked(tray)) {
                 tray.getTile(x-2,y).clearTile();
-                addControlUp(KeyEvent.VK_LEFT, new MoveWall(this, tray.getTile(x - 2, y), DIRECTIONS.LEFT));
+                tray.getTile(x-2,y).getComponent().addActionListener(new MoveWall(this, tray.getTile(x-2, y),tray.getTile(x,y), DIRECTIONS.LEFT));
                 tray.getTile(x - 2, y).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_LEFT));
+                i++;
             }else tray.getTile(x-2,y).clearTile();
 
         }
@@ -184,8 +188,9 @@ public class Game extends Jeu {
             tray.getTile(x,y-2).positionWall();
             if(gameNotBlocked(tray)) {
                 tray.getTile(x,y-2).clearTile();
-                addControlUp(KeyEvent.VK_UP, new MoveWall(this, tray.getTile(x, y - 2), DIRECTIONS.FRONT));
+                tray.getTile(x,y-2).getComponent().addActionListener(new MoveWall(this, tray.getTile(x, y - 2),tray.getTile(x,y), DIRECTIONS.FRONT));
                 tray.getTile(x, y - 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_UP));
+                i++;
             }else tray.getTile(x,y-2).clearTile();
         }
         // Check down && On the vertical line
@@ -193,18 +198,20 @@ public class Game extends Jeu {
             tray.getTile(x,y+2).positionWall();
             if(gameNotBlocked(tray)) {
                 tray.getTile(x,y+2).clearTile();
-                addControlUp(KeyEvent.VK_DOWN, new MoveWall(this, tray.getTile(x, y + 2), DIRECTIONS.BACK));
+                tray.getTile(x,y+2).getComponent().addActionListener(new MoveWall(this, tray.getTile(x, y + 2),tray.getTile(x,y), DIRECTIONS.BACK));
                 tray.getTile(x, y + 2).setHighlighted(new Arrow(RESOURCES.ARROW_SMALL_DOWN));
+                i++;
             }else tray.getTile(x,y+2).clearTile();
         }
+        //Gestion d'un cas d'erreur
+        if(i==0){
+                tray.getTile(x,y).clearTile();
+                currentPlayer.setNbWall(currentPlayer.getNbWall()+1);
+                setSettingWall(false);
+                ConstantesLabyrinth.playText(getSIVOX(),VOCAL.BLOCK);
+            }
 
-        //Gestion d'un bug
-        if(!tray.getTile(x+2,y).isHighlighted() && !tray.getTile(x-2,y).isHighlighted() && !tray.getTile(x,y+2).isHighlighted() && !tray.getTile(x,y-2).isHighlighted()){
-            tray.getTile(x,y).clearTile();
-            currentPlayer.setNbWall(currentPlayer.getNbWall()+1);
-            settingWall = false;
-            ConstantesLabyrinth.playText(getSIVOX(),VOCAL.BLOCK);
-        }
+
     }
 
     public boolean checkPutWall(Position position) {

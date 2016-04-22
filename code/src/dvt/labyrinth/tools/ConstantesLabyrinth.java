@@ -19,6 +19,8 @@ public class ConstantesLabyrinth {
     public static final int WALL_NUMBER = 9;
 
     /* **** CONFIGURATION **** */
+    public static final String CONFIG_FILE = "../ressources/configuration.xml";
+
     public enum CONFIG {
         LENGTH,
         WALL
@@ -41,6 +43,14 @@ public class ConstantesLabyrinth {
                 default:
                     return "NORMAL";
             }
+        }
+
+        public static SIZE find(String s){
+            for(SIZE v : values())
+                if( SIZE.valueOf(s) == v)
+                    return v;
+
+            return null;
         }
     }
 
@@ -208,7 +218,7 @@ public class ConstantesLabyrinth {
         WIN("Félicitations %s ! Tu as remporté la partie. "+ECHAP),
         ERROR_WALL("Impossible de poser un mur ici ! "),
         BOT_WALL("Le bot vient de poser un mur"),
-        HUMAN_WALL("Un mur a été posé, choisi là où le deuxième mur doit être, à l'aide des fléches directionnels"),
+        HUMAN_WALL("Un mur a été posé, click sur une case jaune pour poser le deuxième"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
         BLOCK("Tu n'a pas le droit de bloquer le jeu"),
 
