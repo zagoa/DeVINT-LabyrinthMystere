@@ -194,7 +194,7 @@ public class ConstantesLabyrinth {
         WIN("Félicitations %s ! Tu as remporté la partie. "+ECHAP),
         ERROR_WALL("Impossible de poser un mur ici ! "),
         BOT_WALL("Le bot vient de poser un mur"),
-        HUMAN_WALL("Un mur a été posé, choisi là où le deuxième mur doit être, à l'aide des fléches directionnels"),
+        HUMAN_WALL("Un mur a été posé, click sur une case jaune pour poser le deuxième"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
         BLOCK("Tu n'a pas le droit de bloquer le jeu"),
 
