@@ -44,26 +44,20 @@ public class MoveWall implements ActionListener {
 
         if (tile.getPosition().getY() > origin.getPosition().getY()) {
             action = fenetre.getTray().getTile(origin.getPosition().getX(), origin.getPosition().getY() - 2).getComponent().getActionListeners();
-            System.out.println(action[0]+" "+action[1]);
             fenetre.getTray().getTile(origin.getPosition().getX(), origin.getPosition().getY() - 2).getComponent().removeActionListener(action[0]);
         }
 
         if (tile.getPosition().getY() < origin.getPosition().getY()) {
             action = fenetre.getTray().getTile(origin.getPosition().getX(), origin.getPosition().getY() + 2).getComponent().getActionListeners();
-            System.out.println(action[0]+" "+action[1]);
             fenetre.getTray().getTile(origin.getPosition().getX(), origin.getPosition().getY() + 2).getComponent().removeActionListener(action[0]);
         }
         if (tile.getPosition().getX() > origin.getPosition().getX()) {
             action = fenetre.getTray().getTile(origin.getPosition().getX() - 2, origin.getPosition().getY()).getComponent().getActionListeners();
-            System.out.println(action[0]+" "+action[1]);
             fenetre.getTray().getTile(origin.getPosition().getX() - 2, origin.getPosition().getY()).getComponent().removeActionListener(action[0]);
         }
         if (tile.getPosition().getX() < origin.getPosition().getX()) {
             action = fenetre.getTray().getTile(origin.getPosition().getX() + 2, origin.getPosition().getY()).getComponent().getActionListeners();
-            System.out.println(action[0]+" "+action[1]);
             fenetre.getTray().getTile(origin.getPosition().getX() + 2, origin.getPosition().getY()).getComponent().removeActionListener(action[0]);
-
-
         }
 
 
