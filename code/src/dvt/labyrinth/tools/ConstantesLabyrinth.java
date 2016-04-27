@@ -131,15 +131,10 @@ public class ConstantesLabyrinth {
         TOUR(PAWNPATH+"tower.jpg",true),
         DRAGON(PAWNPATH+"dragon.jpg",true),
         SINGE(PAWNPATH+"singe.jpg",true),
-        SINGE2(PAWNPATH+"singe2.jpg",true),
-        VOITURE(PAWNPATH+"voiture.jpg",true),
         DUMBO(PAWNPATH+"dumbo.jpg",true),
         FOOT(PAWNPATH+"FOOT.jpg",true),
-        NOEL(PAWNPATH+"noel.jpg",true),
-        OISEAU(PAWNPATH+"oiseau.jpg",true),
         PICKA(PAWNPATH+"picka.png",true),
         HAND(PAWNPATH+"handball.jpg",true),
-        PICKACHU(PAWNPATH+"pickachu.jpg",true),
         RUGBY(PAWNPATH+"rugby.jpg",true),
 
         // ARROWS

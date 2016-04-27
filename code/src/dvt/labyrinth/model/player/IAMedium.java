@@ -29,11 +29,11 @@ public class IAMedium extends AdvancedIAs{
      * @return if the IA has performed the action successfully or not
      */
     @Override
-    public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
+        public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
         counter++;
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX()+1,position.getY())).isAWall()
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()
                 && game.gameNotBlocked(tray)){
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 1, position.getY() - 1)).positionWall();
@@ -42,7 +42,7 @@ public class IAMedium extends AdvancedIAs{
         }
         else if (counter%3==0
                 && tray.canSetAWall(DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX()+1,position.getY())).isAWall()
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isAWall()
                 && game.gameNotBlocked(tray)){
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 1, position.getY() - 1)).positionWall();
