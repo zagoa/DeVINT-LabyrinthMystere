@@ -31,7 +31,7 @@ public class WinGame extends Jeu {
         super();
 
         winner = player;
-        setWinner(parse(VOCAL.WIN, winner.getName()));
+        setWinner(parse((!winner.isABot()) ? VOCAL.WIN : VOCAL.LOOSE, winner.getName()));
     }
 
     public WinGame(Player player, String setenceToSay) {
@@ -80,7 +80,10 @@ public class WinGame extends Jeu {
         score = "<html><center>PARTIE TERMIN&Eacute;E";
 
         score += "<br />____________________<br /><br />";
-        score += winner.getName()+" a gagn&eacute; !<br />";
+        if (!winner.isABot())
+            score += winner.getName()+" a gagn&eacute; !<br />";
+        else
+            score += "Tu as perdu... "+winner.getName()+" a gagn&eacute; !<br />";
         score +="</center></html>";
 
         info.setIcon(new ImageIcon(winner.getPawn().getResPath()));

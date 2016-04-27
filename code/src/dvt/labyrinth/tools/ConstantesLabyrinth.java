@@ -23,6 +23,7 @@ public class ConstantesLabyrinth {
 
     /* **** CONFIGURATION **** */
     public static final String CONFIG_FILE = "../ressources/configuration.xml";
+    public static final boolean SAVE_CONFIG = true;
 
     public enum CONFIG {
         LENGTH,
@@ -259,6 +260,7 @@ public class ConstantesLabyrinth {
         SAME_PSEUDO("Vous ne pouvez pas avoir le même pseudo que le joueur %s. Modifiez votre pseudo."),
         ECHAP("Appuie sur échap pour revenir au menu ou clique sur le bouton Retour."),
         WIN("Félicitations %s ! Tu as remporté la partie. "+ECHAP),
+        LOOSE("Malheureusement, c'est %s qui a remporté la partie... "+ECHAP),
         ERROR_WALL("Impossible de poser un mur ici ! "),
         BOT_WALL("L'ordinateur vient de poser un mur"),
         BOT_MOVE("L'ordinateur est en train de bouger"),
