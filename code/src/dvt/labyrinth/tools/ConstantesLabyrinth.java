@@ -132,7 +132,6 @@ public class ConstantesLabyrinth {
         DRAGON(PAWNPATH+"dragon.jpg",true),
         SINGE(PAWNPATH+"singe.jpg",true),
         DUMBO(PAWNPATH+"dumbo.jpg",true),
-        FOOT(PAWNPATH+"FOOT.jpg",true),
         PICKA(PAWNPATH+"picka.png",true),
         HAND(PAWNPATH+"handball.jpg",true),
         RUGBY(PAWNPATH+"rugby.jpg",true),
