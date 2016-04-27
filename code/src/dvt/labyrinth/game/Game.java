@@ -387,7 +387,7 @@ public class Game extends Jeu {
      */
     public void moveIAPlayer(DIRECTIONS d,Position position) {
         unHighlightAll();
-        if (currentPlayer instanceof AdvancedIAs &&  ((AdvancedIAs) currentPlayer).moveAndWall(tray, d, position)) { // has moved
+        if (currentPlayer instanceof AdvancedIAs &&  ((AdvancedIAs) currentPlayer).moveAndWall(tray, d, position,this)) { // has moved
             if (currentPlayer.hasWon())
                 return;
 

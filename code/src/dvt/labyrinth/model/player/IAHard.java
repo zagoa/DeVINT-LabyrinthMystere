@@ -1,5 +1,6 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
@@ -24,7 +25,7 @@ public class IAHard extends AdvancedIAs{
      * @return if the IA has performed the action successfully or not
      */
     @Override
-    public boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position){
+    public boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position, Game game){
         counter++;
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0) {
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();

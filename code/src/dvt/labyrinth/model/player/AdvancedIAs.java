@@ -1,5 +1,6 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
@@ -25,7 +26,7 @@ public abstract class AdvancedIAs extends IA {
     @Override
     public abstract boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions);
 
-    public abstract boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position);
+    public abstract boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position,Game game);
 
 
 }
