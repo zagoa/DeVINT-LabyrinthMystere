@@ -82,4 +82,9 @@ public class IAHard extends AdvancedIAs{
             return true;
         }
     }
+
+    @Override
+    public DIFFICULTY getType() {
+        return DIFFICULTY.DIFFICILE;
+    }
 }

@@ -45,4 +45,9 @@ public class IAEasy extends IA {
         }
     }
 
+    @Override
+    public ConstantesLabyrinth.DIFFICULTY getType() {
+        return ConstantesLabyrinth.DIFFICULTY.FACILE;
+    }
+
 }

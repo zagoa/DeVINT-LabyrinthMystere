@@ -96,6 +96,5 @@ public abstract class IA extends Player{
         }
     }
 
-
-
+    public abstract DIFFICULTY getType();
 }

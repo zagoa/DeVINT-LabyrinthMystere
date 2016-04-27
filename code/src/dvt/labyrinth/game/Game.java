@@ -76,7 +76,8 @@ public class Game extends Jeu {
             win();
 
         if (currentPlayer.isABot()) { // Is a bot ?
-            if (currentPlayer instanceof IAMedium || currentPlayer instanceof IAHard)
+            if (((IA)currentPlayer).getType() == DIFFICULTY.MOYEN
+                    || ((IA)currentPlayer).getType() == DIFFICULTY.DIFFICILE)
                 moveIAPlayer(null, otherPlayer().getPosition());
 
             else movePlayer(null);

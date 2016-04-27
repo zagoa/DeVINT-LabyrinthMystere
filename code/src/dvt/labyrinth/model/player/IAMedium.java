@@ -86,7 +86,10 @@ public class IAMedium extends AdvancedIAs{
         }
     }
 
-
+    @Override
+    public DIFFICULTY getType() {
+        return DIFFICULTY.MOYEN;
+    }
 
 
 }
