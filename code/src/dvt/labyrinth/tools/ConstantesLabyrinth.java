@@ -274,6 +274,12 @@ public class ConstantesLabyrinth {
         TURN_2P_4("%s, c'est ton tour ! ", 2),
         TURN_2P_5("Vas-y %s, joues !", 2),
 
+        //BOT MOVEMENTS
+        FRONT("L'ordinateur à avancer"),
+        BACK("L'ordinateur à reculer"),
+        RIGHT("L'ordinateur à bouger à droite"),
+        LEFT("L'ordinateur à bouger à gauche"),
+
         // TRAINING
         T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
                 "Pour se faire, utilise les flèches directionnelles pour déplacer ton joueur. Vas-y, entraine toi un peu ; rejoins les cibles !"),

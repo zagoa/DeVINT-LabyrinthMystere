@@ -28,5 +28,14 @@ public abstract class AdvancedIAs extends IA {
 
     public abstract boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position,Game game);
 
+    /**
+     * The full move method
+     * @param tray the actual tray with both of the players
+     * @param game the  game
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    @Override
+    public abstract boolean completeMove(Tray tray, Game game, ConstantesLabyrinth.DIRECTIONS directions);
 
 }

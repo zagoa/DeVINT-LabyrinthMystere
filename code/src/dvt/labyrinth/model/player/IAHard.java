@@ -27,45 +27,39 @@ public class IAHard extends AdvancedIAs{
     @Override
     public boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position, Game game){
         counter++;
-        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0) {
+        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
+                && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()) {
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 1, position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
+            game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
+            putWall(game);
             return true;
         }
-        else if (counter%3==0) {
+        else if (counter%3==0
+                && tray.canSetAWall(DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()) {
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() - 1, position.getY() - 1)).positionWall();
+            game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
+            putWall(game);
             return true;
         }
-        return move(tray, directions);
+
+        return completeMove(tray, game, directions);
     }
 
     /**
      * Read the direction from the queue in order to move the IA pawn
      * @param tray
-     * @param directions the direction we want to move to
      */
     @Override
-    public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
-        counter++;
-        if(pos.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%6==0) {
-            tray.getTile(new Position(getPosition().getX(), getPosition().getY() - 1)).positionWall();
-            tray.getTile(new Position(getPosition().getX()-2, getPosition().getY() - 1)).positionWall();
-            return true;
-        }
-        else if (counter%6==0) {
-            tray.getTile(new Position(getPosition().getX(),getPosition().getY()-1)).positionWall();
-            tray.getTile(new Position(getPosition().getX()-2,getPosition().getY()-1)).positionWall();
-            return true;
-        }
-
+    public boolean move(Tray tray, DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         if ((!decision.isEmpty())) {
-            if (canMove(tray,decision.peek())){
-                updatePlayerPos(tray,convertDirectionToPosition(decision.peek()));
-                decision.poll();
+            if (canMove(tray,previous = decision.poll())){
+                updatePlayerPos(tray,convertDirectionToPosition(previous));
                 return true;
             }
 
@@ -81,5 +75,19 @@ public class IAHard extends AdvancedIAs{
             move(tray,null);
             return true;
         }
+    }
+
+
+    /**
+     * The full move method
+     * @param tray the actual tray with both of the players
+     * @param game the  game
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    public boolean completeMove(Tray tray, Game game, DIRECTIONS directions){
+        boolean  i = move(tray,null);
+        hasMoved(game,previous);
+        return i;
     }
 }
