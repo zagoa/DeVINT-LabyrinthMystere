@@ -59,11 +59,8 @@ public class PutWall implements ActionListener {
                         lab.setSettingWall(false);
                     } else { // Walls are more than one cell
                         lab.highlightWall(tile.getPosition());
+                        playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
 
-                        if (!lab.getCurrentPlayer().isABot() && lab.isSettingWall())
-                            playText(lab.getSIVOX(), VOCAL.HUMAN_WALL.toString());
-                        else if (lab.getCurrentPlayer().isABot() && lab.isSettingWall())
-                            playText(lab.getSIVOX(), VOCAL.BOT_WALL.toString());
                     }
                 } else { // Game blocked
                     tile.clearTile();

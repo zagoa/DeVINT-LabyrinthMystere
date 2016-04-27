@@ -37,7 +37,8 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
-
+            playText(game.getSIVOX(),VOCAL.BOT_WALL);
+            game.pause(2000);
             return true;
         }
         else if (counter%3==0
@@ -46,8 +47,12 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
+            playText(game.getSIVOX(),VOCAL.BOT_WALL);
+            game.pause(2000);
             return true;
         }
+        playText(game.getSIVOX(),VOCAL.BOT_MOVE);
+        game.pause(2000);
         return move(tray, directions);
     }
 
@@ -80,6 +85,8 @@ public class IAMedium extends AdvancedIAs{
             return true;
         }
     }
+
+
 
 
 }

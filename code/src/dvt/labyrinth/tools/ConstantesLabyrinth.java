@@ -135,6 +135,9 @@ public class ConstantesLabyrinth {
         PICKA(PAWNPATH+"picka.png",true),
         HAND(PAWNPATH+"handball.jpg",true),
         RUGBY(PAWNPATH+"rugby.jpg",true),
+        MAGICIEN(PAWNPATH+"magicien.png",true),
+        NICE(PAWNPATH+"maillot_nice.jpg",true),
+        TOULON(PAWNPATH+"toulon.jpg",true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -249,7 +252,8 @@ public class ConstantesLabyrinth {
         ECHAP("Appuie sur échap pour revenir au menu ou clique sur le bouton Retour."),
         WIN("Félicitations %s ! Tu as remporté la partie. "+ECHAP),
         ERROR_WALL("Impossible de poser un mur ici ! "),
-        BOT_WALL("Le bot vient de poser un mur"),
+        BOT_WALL("L'ordinateur vient de poser un mur"),
+        BOT_MOVE("L'ordinateur est en train de bouger"),
         HUMAN_WALL("Un mur a été posé, click sur une case jaune pour poser le deuxième"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
         BLOCK("Tu n'a pas le droit de bloquer le jeu"),
