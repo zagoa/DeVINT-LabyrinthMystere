@@ -38,7 +38,7 @@ public class Menu extends MenuGeneric {
     public Menu() {
         super();
 
-        if (!loadConfiguration())
+        if (!SAVE_CONFIG || !loadConfiguration())
             new SelectSize().loop();
 
         addLabel(TITLE_GAME);
