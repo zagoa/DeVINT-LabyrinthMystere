@@ -150,6 +150,9 @@ public class ConstantesLabyrinth {
         ARROW_SMALL_UP(ARROWPATH+"arrow_small_up.png"),
         ARROW_SMALL_DOWN(ARROWPATH+"arrow_small_down.png"),
 
+        // ARROWS CARDINAL
+        ARROW_CARDINAL(ARROWPATH+"cardinal.png"),
+
         // TRANSPARENT
         TRANSPARENT(null),
 

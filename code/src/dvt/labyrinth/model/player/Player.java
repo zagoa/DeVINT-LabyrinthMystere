@@ -1,11 +1,13 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tile;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
@@ -185,6 +187,8 @@ public abstract class Player {
     public void updatePlayerPos(Tray tray, Position newP) {
         tray.getTile(newP).setPawn(pawn);
         tray.getTile(pos).setItem(null);
+        if(this.isABot()) //old position of the bot
+            tray.getTile(pos).setHighlighted(new Arrow(RESOURCES.ARROW_CARDINAL));
 
         pos = newP;
     }
