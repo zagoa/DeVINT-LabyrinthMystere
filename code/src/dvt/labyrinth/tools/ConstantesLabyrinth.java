@@ -1,6 +1,7 @@
 package dvt.labyrinth.tools;
 
 
+import dvt.labyrinth.model.essential.Arrow;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
@@ -196,6 +197,26 @@ public class ConstantesLabyrinth {
         public boolean isABot() {
             return isABot;
         }
+
+        public static RESOURCES getArrow(DIRECTIONS d) {
+            switch (d) {
+                case FRONT:
+                    return RESOURCES.ARROW_UP;
+
+                case BACK:
+                    return RESOURCES.ARROW_DOWN;
+
+                case LEFT:
+                    return RESOURCES.ARROW_LEFT;
+
+                case RIGHT:
+                    return RESOURCES.ARROW_RIGHT;
+
+                default:
+                    return null;
+            }
+        }
+
     };
     /* ******************** */
 
@@ -282,9 +303,9 @@ public class ConstantesLabyrinth {
         TURN_2P_5("Vas-y %s, joues !", 2),
 
         //BOT MOVEMENTS
-        FRONT("L'ordinateur à avancer"),
-        BACK("L'ordinateur à reculer"),
-        RIGHT("L'ordinateur à bouger à droite"),
+        FRONT("L'ordinateur à avancé"),
+        BACK("L'ordinateur à reculé"),
+        RIGHT("L'ordinateur a bouger à droite"),
         LEFT("L'ordinateur à bouger à gauche"),
 
         // TRAINING
@@ -323,6 +344,25 @@ public class ConstantesLabyrinth {
         @Override
         public String toString() {
             return str;
+        }
+
+        public static VOCAL getVocalComputer(DIRECTIONS d) {
+            switch (d) {
+                case FRONT:
+                    return BACK;
+
+                case BACK:
+                    return FRONT;
+
+                case LEFT:
+                    return LEFT;
+
+                case RIGHT:
+                    return RIGHT;
+
+                default:
+                    return null;
+            }
         }
     }
 

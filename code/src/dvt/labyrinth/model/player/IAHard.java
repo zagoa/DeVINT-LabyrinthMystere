@@ -87,7 +87,7 @@ public class IAHard extends AdvancedIAs{
      */
     public boolean completeMove(Tray tray, Game game, DIRECTIONS directions){
         boolean  i = move(tray,null);
-        hasMoved(game,previous);
+        hasMoved(tray,game,previous);
         return i;
     }
 

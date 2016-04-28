@@ -76,10 +76,11 @@ public class Game extends Jeu {
             win();
 
         if (currentPlayer.isABot()) { // Is a bot ?
-            if (((IA)currentPlayer).getType().ordinal() >= DIFFICULTY.MOYEN.ordinal())
+            if (((IA)currentPlayer).getType() == DIFFICULTY.FACILE)
+                moveIAEasyPlayer();
+            else
                 moveIAPlayer(null, otherPlayer().getPosition());
 
-            else movePlayer(null);
         }
         else if (!settingWall) // Is not a bot and we're not setting walls
             checkMovePositions();
@@ -398,6 +399,15 @@ public class Game extends Jeu {
             nextTurn();
         }
     }
+    /**
+     * Move the IAEasy player
+     */
+    public void moveIAEasyPlayer() {
+        ((IAEasy) currentPlayer).completeMove(tray,this,null);
+        if (currentPlayer.hasWon()) return;
+
+            nextTurn();
+        }
 
 
     /**

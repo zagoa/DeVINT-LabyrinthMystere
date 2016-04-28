@@ -3,6 +3,7 @@ package dvt.labyrinth.model.player;
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 import dvt.labyrinth.game.Game;
+import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
@@ -113,27 +114,26 @@ public abstract class IA extends Player{
         }
     }
 
-    public void hasMoved(Game game, DIRECTIONS directions){
-        switch (directions){
-            case FRONT:
-                playText(game.getSIVOX(),VOCAL.BACK);
-                break;
-
-            case BACK:
-                playText(game.getSIVOX(),VOCAL.FRONT);
-                break;
-
-            case RIGHT:
-                playText(game.getSIVOX(),VOCAL.RIGHT);
-                break;
-
-            case LEFT:
-                playText(game.getSIVOX(),VOCAL.LEFT);
-                break;
-            default:
-                playText(game.getSIVOX(),VOCAL.BOT_WALL);
-                break;
+    public void hasMoved(Tray tray, Game game, DIRECTIONS directions){
+        if(pos.getY()>=2){
+            switch (directions){
+                case FRONT:
+                    tray.getTile(new Position(pos.getX(),pos.getY()+2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
+                    break;
+                case BACK:
+                    tray.getTile(new Position(pos.getX(),pos.getY()-2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
+                    break;
+                case RIGHT:
+                    tray.getTile(new Position(pos.getX()-2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
+                    break;
+                case LEFT:
+                    tray.getTile(new Position(pos.getX()+2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
+                    break;
+                default:
+                    break;
+            }
         }
+        playText(game.getSIVOX(), VOCAL.getVocalComputer(directions));
         game.pause(2000);
     }
 
