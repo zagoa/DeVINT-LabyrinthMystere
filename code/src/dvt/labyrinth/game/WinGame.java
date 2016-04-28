@@ -83,7 +83,7 @@ public class WinGame extends Jeu {
         if (!winner.isABot())
             score += winner.getName()+" a gagn&eacute; !<br />";
         else
-            score += "Tu as perdu... "+winner.getName()+" a gagn&eacute; !<br />";
+            score += "Tu as perdu...<br>"+winner.getName()+" a gagn&eacute; !<br />";
         score +="</center></html>";
 
         info.setIcon(new ImageIcon(winner.getPawn().getResPath()));
