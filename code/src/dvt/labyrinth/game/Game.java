@@ -76,8 +76,7 @@ public class Game extends Jeu {
             win();
 
         if (currentPlayer.isABot()) { // Is a bot ?
-            if (((IA)currentPlayer).getType() == DIFFICULTY.MOYEN
-                    || ((IA)currentPlayer).getType() == DIFFICULTY.DIFFICILE)
+            if (((IA)currentPlayer).getType().ordinal() >= DIFFICULTY.MOYEN.ordinal())
                 moveIAPlayer(null, otherPlayer().getPosition());
 
             else movePlayer(null);
@@ -391,7 +390,8 @@ public class Game extends Jeu {
      */
     public void moveIAPlayer(DIRECTIONS d,Position position) {
         unHighlightAll();
-        if (currentPlayer instanceof AdvancedIAs &&  ((AdvancedIAs) currentPlayer).moveAndWall(tray, d, position,this)) { // has moved
+
+        if (((IA)currentPlayer).getType().ordinal() >= DIFFICULTY.MOYEN.ordinal() && ((AdvancedIAs)currentPlayer).moveAndWall(tray, d, position,this)) { // has moved
             if (currentPlayer.hasWon())
                 return;
 

@@ -337,6 +337,6 @@ public class ConstantesLabyrinth {
     public enum DIFFICULTY{
         FACILE,
         MOYEN,
-        DIFFICILE;
+        DIFFICILE
     }
 }
