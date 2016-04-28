@@ -31,21 +31,23 @@ public class IAMedium extends AdvancedIAs{
     @Override
     public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
         counter++;
+        System.out.println(counter);
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()
+                && game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1))){
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
             putWall(game);
             return true;
         }
         else if (counter%3==0
                 && tray.canSetAWall(DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()
+                && game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1))){
+
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
             putWall(game);
             return true;
         }
