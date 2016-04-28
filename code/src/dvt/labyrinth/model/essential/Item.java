@@ -17,22 +17,22 @@ public abstract class Item {
      * Constructor of the item
      *
      * @param res
-     *          The ressource related to the item
+     *          The resource related to the item
      */
     public Item(RESOURCES res) {
         this.res = res;
     }
 
     /**
-     * Getter on the ressource
-     * @return The ressource
+     * Getter on the resource
+     * @return The resource
      */
     public RESOURCES getRes() {
         return res;
     }
 
     /**
-     * Get the path of its ressource
+     * Get the path of its resource
      * @return The path
      */
     public String getResPath() {
@@ -40,9 +40,9 @@ public abstract class Item {
     }
 
     /**
-     * Set a ressource to the item
+     * Set a resource to the item
      * @param res
-     *          The new ressource
+     *          The new resource
      */
     public void setRes(RESOURCES res) {
         this.res = res;

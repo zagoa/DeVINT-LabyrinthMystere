@@ -2,10 +2,12 @@ package dvt.labyrinth.model.player;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
+import t2s.SIVOXDevint;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,7 +16,7 @@ import java.util.Queue;
 public abstract class IA extends Player{
     //A queue for the next decisions taken by the computer
     Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();;
-
+    DIRECTIONS previous;
 
     /**
      * We create an IA with a predefined name (and soon enough a predefined pawn)
@@ -27,8 +29,23 @@ public abstract class IA extends Player{
         setPos(pos, tray);
     }
 
+    /**
+     * The method to move the IA
+     * @param tray the actual tray with both of the players
+     * @param directions here will be null
+     * @return if we moved or not
+     */
     @Override
-    public abstract boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions);
+    public abstract boolean move(Tray tray,DIRECTIONS directions);
+
+    /**
+     * The full move method
+     * @param tray the actual tray with both of the players
+     * @param game the  game
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    public abstract boolean completeMove(Tray tray, Game game, DIRECTIONS directions);
 
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
@@ -94,6 +111,35 @@ public abstract class IA extends Player{
             default:
                 return null;
         }
+    }
+
+    public void hasMoved(Game game, DIRECTIONS directions){
+        switch (directions){
+            case FRONT:
+                playText(game.getSIVOX(),VOCAL.BACK);
+                break;
+
+            case BACK:
+                playText(game.getSIVOX(),VOCAL.FRONT);
+                break;
+
+            case RIGHT:
+                playText(game.getSIVOX(),VOCAL.RIGHT);
+                break;
+
+            case LEFT:
+                playText(game.getSIVOX(),VOCAL.LEFT);
+                break;
+            default:
+                playText(game.getSIVOX(),VOCAL.BOT_WALL);
+                break;
+        }
+        game.pause(2000);
+    }
+
+    public void putWall(Game game){
+        playText(game.getSIVOX(),VOCAL.BOT_WALL);
+        game.pause(2000);
     }
 
     public abstract DIFFICULTY getType();

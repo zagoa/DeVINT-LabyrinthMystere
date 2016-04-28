@@ -37,8 +37,7 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
-            playText(game.getSIVOX(),VOCAL.BOT_WALL);
-            game.pause(2000);
+            putWall(game);
             return true;
         }
         else if (counter%3==0
@@ -47,28 +46,23 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
-            playText(game.getSIVOX(),VOCAL.BOT_WALL);
-            game.pause(2000);
+            putWall(game);
             return true;
         }
-        playText(game.getSIVOX(),VOCAL.BOT_MOVE);
-        game.pause(2000);
-        return move(tray, directions);
+        return completeMove(tray, game, directions);
     }
 
     /**
      * The IA moves
      * @param tray
-     * @param directions the direction we want to move to
      * @return
      */
     @Override
-    public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
+    public boolean move(Tray tray, DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         if ((!decision.isEmpty())) {
-            if (canMove(tray,decision.peek())){
-                updatePlayerPos(tray,convertDirectionToPosition(decision.peek()));
-                decision.poll();
+            if (canMove(tray,previous = decision.poll())){
+                updatePlayerPos(tray,convertDirectionToPosition(previous));
                 return true;
             }
 
@@ -86,6 +80,18 @@ public class IAMedium extends AdvancedIAs{
         }
     }
 
+    /**
+     * The full move method
+     * @param tray the actual tray with both of the players
+     * @param game the  game
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    public boolean completeMove(Tray tray, Game game, DIRECTIONS directions){
+        boolean  i = move(tray,null);
+        hasMoved(game,previous);
+        return i;
+    }
     @Override
     public DIFFICULTY getType() {
         return DIFFICULTY.MOYEN;

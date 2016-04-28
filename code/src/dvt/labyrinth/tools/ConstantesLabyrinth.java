@@ -123,22 +123,27 @@ public class ConstantesLabyrinth {
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
 
         // PAWNS
-        THEO(PAWNPATH+"theo.jpg", true),
+        BEBE(PAWNPATH+"bebe.jpg", true),
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
         PION(PAWNPATH+"pion.png", true),
         BOT(PAWNPATH+"bot.png", true, true),
-        BASKET(PAWNPATH+"BASKET.jpg",true),
+        CROCODILE(PAWNPATH+"crocodile.jpg",true),
         TOUR(PAWNPATH+"tower.jpg",true),
         DRAGON(PAWNPATH+"dragon.jpg",true),
         SINGE(PAWNPATH+"singe.jpg",true),
         DUMBO(PAWNPATH+"dumbo.jpg",true),
         PICKA(PAWNPATH+"picka.png",true),
-        HAND(PAWNPATH+"handball.jpg",true),
-        RUGBY(PAWNPATH+"rugby.jpg",true),
+        INDIEN(PAWNPATH+"indien.jpg",true),
+        PRINCESSE(PAWNPATH+"princesse.jpg",true),
         MAGICIEN(PAWNPATH+"magicien.png",true),
         NICE(PAWNPATH+"maillot_nice.jpg",true),
         TOULON(PAWNPATH+"toulon.jpg",true),
+        DAUPHIN(PAWNPATH+"dauphin.jpg",true),
+        VOITURE(PAWNPATH+"voiture.jpg",true),
+        OUIOUI(PAWNPATH+"ouioui.jpg",true),
+        NOUNOURS(PAWNPATH+"nounours.jpg",true),
+        OTARIE(PAWNPATH+"otarie.jpg",true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),
@@ -275,6 +280,12 @@ public class ConstantesLabyrinth {
         TURN_2P_3("%s, à toi ! ", 2),
         TURN_2P_4("%s, c'est ton tour ! ", 2),
         TURN_2P_5("Vas-y %s, joues !", 2),
+
+        //BOT MOVEMENTS
+        FRONT("L'ordinateur à avancer"),
+        BACK("L'ordinateur à reculer"),
+        RIGHT("L'ordinateur à bouger à droite"),
+        LEFT("L'ordinateur à bouger à gauche"),
 
         // TRAINING
         T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
