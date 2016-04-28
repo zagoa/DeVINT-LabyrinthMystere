@@ -1,6 +1,7 @@
 package dvt.labyrinth.tools;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import dvt.labyrinth.model.essential.Arrow;
 import t2s.SIVOXDevint;
 
@@ -21,6 +22,7 @@ public class ConstantesLabyrinth {
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
     public static final SIZE DEFAULT_SIZE = SIZE.NORMAL;
+    public static final RESOURCES DEFAULT_PAWN = RESOURCES.ST;
 
     /* **** CONFIGURATION **** */
     public static final String CONFIG_FILE = "../ressources/configuration.xml";

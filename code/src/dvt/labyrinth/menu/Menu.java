@@ -130,7 +130,7 @@ public class Menu extends MenuGeneric {
                         break;
 
                     case 3:
-                        players.put("Joueur 1", RESOURCES.GERARD);
+                        players.put("Joueur 1", DEFAULT_PAWN);
                         new Training(players).loop();
                         break;
 
