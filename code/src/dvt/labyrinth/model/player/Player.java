@@ -1,5 +1,6 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tile;
@@ -28,6 +29,7 @@ public abstract class Player {
     protected Position pos;
 
 
+
     // Is a real player ?
     private boolean isABot;
 
@@ -44,14 +46,7 @@ public abstract class Player {
         setPos(pos, tray);
     }
 
-    /**
-     * We move towards a direction
-     * @param tray the actual tray with the players
-     * @param directions the direction we want to move to
-     * @return if we moved or not
-     */
     public abstract boolean move(Tray tray, DIRECTIONS directions);
-
 
     /**
      * We want to know if we can move towards a direction from our actual position
@@ -194,6 +189,11 @@ public abstract class Player {
     public void updatePlayerPos(Tray tray, Position newP) {
         tray.getTile(newP).setPawn(pawn);
         tray.getTile(pos).setItem(null);
+        if(this.isABot()) { //old position of the bot
+            tray.getTile(pos).setHighlighted(new Arrow(RESOURCES.ARROW_CARDINAL));
+
+        }
+
         pos = newP;
     }
 
@@ -246,5 +246,6 @@ public abstract class Player {
     public ArrayList<Tile> getCan() {
         return can;
     }
+
 
 }
