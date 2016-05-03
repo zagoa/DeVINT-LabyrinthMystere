@@ -18,24 +18,23 @@ public abstract class AdvancedIAs extends IA {
      * @param pos  the initial position of the IA
      * @param tray
      */
-    public AdvancedIAs(Pawn pawn, Position pos, Tray tray) {
-        super(pawn, pos, tray, ConstantesLabyrinth.WALL_NUMBER);
-        setPos(pos, tray);
+    public AdvancedIAs(Pawn pawn, Position pos, Tray tray,Game  game) {
+        super(pawn, pos, tray, ConstantesLabyrinth.WALL_NUMBER,game);
+        setPos(pos);
     }
 
     @Override
-    public abstract boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions);
+    public abstract boolean move(ConstantesLabyrinth.DIRECTIONS directions);
 
-    public abstract boolean moveAndWall(Tray tray, ConstantesLabyrinth.DIRECTIONS directions, Position position,Game game);
+    public abstract boolean moveAndWall(ConstantesLabyrinth.DIRECTIONS directions, Position position);
 
     /**
      * The full move method
-     * @param tray the actual tray with both of the players
-     * @param game the  game
+     *
      * @param directions here will be null
      * @return if we moved or not
      */
     @Override
-    public abstract boolean completeMove(Tray tray, Game game, ConstantesLabyrinth.DIRECTIONS directions);
+    public abstract boolean completeMove(ConstantesLabyrinth.DIRECTIONS directions);
 
 }

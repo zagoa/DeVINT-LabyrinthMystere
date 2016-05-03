@@ -291,6 +291,7 @@ public class ConstantesLabyrinth {
         HUMAN_WALL("Un mur a été posé, click sur une case jaune pour poser le deuxième"),
         NOT_ENOUGTH_WALL("Tu n'as plus de murs disponibles"),
         BLOCK("Tu n'a pas le droit de bloquer le jeu"),
+        BLOCK_PLAYER("Tu n'as pas le drot d'empêcher l'autre joueur de bouger"),
 
         // TURN 1P
         TURN_1("C'est à %s de jouer ! ", 1),
