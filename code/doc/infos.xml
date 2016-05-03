@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<infos>
+  <year><![CDATA[2016]]></year>
+  <gamecategories>
+    <gamecategory><![CDATA[Stratégie]]></gamecategory>
+    <gamecategory><![CDATA[Réflexion]]></gamecategory>
+    <gamecategory><![CDATA[Mouvement]]></gamecategory>
+  </gamecategories>
+  <shortdescription><![CDATA[Le jeu est un labyrinthe sur plateau dans lequel le joueur essaie d'aller sur la ligne opposée afin de gagner. S'il le souhaite, le joueur peut poser des murs afin de bloquer son adversaire.]]></shortdescription>
+  <public><![CDATA[MV]]></public>
+  <gamestate><![CDATA[Valider pour le CD]]></gamestate>
+  <age><![CDATA[15 ans et plus]]></age>
+  <title><![CDATA[Labyrinthe Mystère]]></title>
+  <authors>
+    <author><![CDATA[Etienne LASKAR]]></author>
+    <author><![CDATA[Adrian PALUMBO]]></author>
+    <author><![CDATA[Thomas de la RED]]></author>
+    <author><![CDATA[Arnaud ZAGO]]></author>
+  </authors>
+  <notes>
+    <note><![CDATA[L'ordinateur n'est pas encore assez difficile à battre. Nécessité de la souris et du clavier (flèches directionnelles).]]></note>
+  </notes>
+  <gameplay><![CDATA[Le but du jeu est de partir d’un côté du plateau et d’arriver de l’autre côté. Deux joueurs s’affrontent sur un plateau découpé en différentes cases. Le jeu dispose de deux modes : un « Joueur VS Joueur », et un mode « Joueur VS Ordinateur ». Le joueur dispose alors de deux possibilités : avancer ou bien poser un obstacle. De plus, le nombre d’obstacle est limité pour chaque joueur. Le jeu se termine quand un des deux joueurs est arrivé sur la ligne de départ de son adversaire. Pour se faire, le joueur devra alterner entre se déplacer ou bloquer son adversaire afin de l’empêcher d’atteindre son objectif.]]></gameplay>
+  <gamerules><![CDATA[Chaque joueur commence à l'opposé de son adversaire, tout en haut ou tout en bas du plateau. On joue en mode "tour par tour", alternant ainsi entre les deux joueurs. Chaque joueur, à son tour, a deux possibilités : soit avancer sur les cases disponibles, dans les quatre directions des flèches directionnelles, soit poser un mur entre deux cases, n'importe où sur le plateau, verticalement ou horizontalement. En posant ce mur, on ne peut pas bloquer le jeu : tout joueur doit pouvoir finir sa partie. De plus, on ne peut en aucun cas traverser les murs. Chaque joueur dispose, au départ, d'un total de neuf murs. Dès lors qu'un des deux joueurs aura atteint la ligne opposée à sa ligne de départ (cette ligne sera représentée par des cibles), la partie sera terminée et le joueur en question sera déclaré vainqueur. Cette règle de jeu décrit le mode "Joueur VS Joueur". Le mode "Joueur VS Ordinateur" suit le même mode de fonctionnement, à la différence près qu'au lieu d'alterner les tours entre les deux joueurs, l'alternance se fera entre le joueur et l'ordinateur.]]></gamerules>
+</infos>
+
