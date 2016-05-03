@@ -14,10 +14,10 @@ import javax.swing.border.LineBorder;
 
 import t2s.SIVOXDevint;
 import static dvt.devint.ConstantesDevint.*;
-import static dvt.menu.ConstantesMenu.BORDURE_SELECTED_DEFAULT;
-import static dvt.menu.ConstantesMenu.BORDURE_SIZE_SELECTED_DEFAULT;
-import static dvt.menu.ConstantesMenu.BORDURE_SIZE_UNSELECTED_DEFAULT;
-import static dvt.menu.ConstantesMenu.BORDURE_UNSELECTED_DEFAULT;
+import static dvt.devint.ConstantesMenu.BORDURE_SELECTED_DEFAULT;
+import static dvt.devint.ConstantesMenu.BORDURE_SIZE_SELECTED_DEFAULT;
+import static dvt.devint.ConstantesMenu.BORDURE_SIZE_UNSELECTED_DEFAULT;
+import static dvt.devint.ConstantesMenu.BORDURE_UNSELECTED_DEFAULT;
 
 /**
  * Permet de fixer l'ensemble des des methodes pour toutes les fenetres cree.
