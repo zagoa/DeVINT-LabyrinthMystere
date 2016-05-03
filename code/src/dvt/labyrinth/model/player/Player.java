@@ -1,5 +1,6 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tile;
@@ -26,6 +27,7 @@ public abstract class Player {
     protected Position originalPos;
     // His position
     protected Position pos;
+
 
 
     // Is a real player ?
@@ -187,8 +189,10 @@ public abstract class Player {
     public void updatePlayerPos(Tray tray, Position newP) {
         tray.getTile(newP).setPawn(pawn);
         tray.getTile(pos).setItem(null);
-        if(this.isABot()) //old position of the bot
+        if(this.isABot()) { //old position of the bot
             tray.getTile(pos).setHighlighted(new Arrow(RESOURCES.ARROW_CARDINAL));
+
+        }
 
         pos = newP;
     }

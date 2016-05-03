@@ -28,7 +28,14 @@ public class IAMedium extends AdvancedIAs{
      * @param position the position of the other player
      * @return if the IA has performed the action successfully or not
      */
-    @Override
+    /**
+     * The IA moves or positions walls in front of the other player
+     * @param tray
+     * @param directions the direction we want to move to
+     * @param position the position of the other player
+     * @return if the IA has performed the action successfully or not
+     */
+   @Override
     public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
         counter++;
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
@@ -89,7 +96,7 @@ public class IAMedium extends AdvancedIAs{
      */
     public boolean completeMove(Tray tray, Game game, DIRECTIONS directions){
         boolean  i = move(tray,null);
-        hasMoved(game,previous);
+        hasMoved(tray,game,previous);
         return i;
     }
     @Override

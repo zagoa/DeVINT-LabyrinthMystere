@@ -2,6 +2,7 @@ package dvt.labyrinth.tools;
 
 
 import com.sun.org.apache.regexp.internal.RE;
+import dvt.labyrinth.model.essential.Arrow;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
@@ -125,7 +126,7 @@ public class ConstantesLabyrinth {
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
 
         // PAWNS
-        ST(PAWNPATH+"st.png", true),
+        ST(PAWNPATH+"ubb.jpg",true),
         BEBE(PAWNPATH+"bebe.jpg", true),
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
@@ -199,6 +200,26 @@ public class ConstantesLabyrinth {
         public boolean isABot() {
             return isABot;
         }
+
+        public static RESOURCES getArrow(DIRECTIONS d) {
+            switch (d) {
+                case FRONT:
+                    return RESOURCES.ARROW_UP;
+
+                case BACK:
+                    return RESOURCES.ARROW_DOWN;
+
+                case LEFT:
+                    return RESOURCES.ARROW_LEFT;
+
+                case RIGHT:
+                    return RESOURCES.ARROW_RIGHT;
+
+                default:
+                    return null;
+            }
+        }
+
     };
     /* ******************** */
 
@@ -285,10 +306,10 @@ public class ConstantesLabyrinth {
         TURN_2P_5("Vas-y %s, joues !", 2),
 
         //BOT MOVEMENTS
-        FRONT("L'ordinateur à avancer"),
-        BACK("L'ordinateur à reculer"),
-        RIGHT("L'ordinateur à bouger à droite"),
-        LEFT("L'ordinateur à bouger à gauche"),
+        FRONT("L'ordinateur a avancé"),
+        BACK("L'ordinateur a reculé"),
+        RIGHT("L'ordinateur a bougé à droite"),
+        LEFT("L'ordinateur a bougé à gauche"),
 
         // TRAINING
         T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
@@ -326,6 +347,25 @@ public class ConstantesLabyrinth {
         @Override
         public String toString() {
             return str;
+        }
+
+        public static VOCAL getVocalComputer(DIRECTIONS d) {
+            switch (d) {
+                case FRONT:
+                    return BACK;
+
+                case BACK:
+                    return FRONT;
+
+                case LEFT:
+                    return LEFT;
+
+                case RIGHT:
+                    return RIGHT;
+
+                default:
+                    return null;
+            }
         }
     }
 

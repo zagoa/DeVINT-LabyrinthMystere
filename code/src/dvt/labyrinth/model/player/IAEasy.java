@@ -28,7 +28,7 @@ public class IAEasy extends IA {
      */
     public boolean completeMove(Tray tray, Game game, ConstantesLabyrinth.DIRECTIONS directions){
         boolean i = move(tray,null);
-        hasMoved(game, previous);
+        hasMoved(tray,game, previous);
         return i;
     }
 
