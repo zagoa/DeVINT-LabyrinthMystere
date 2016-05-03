@@ -443,7 +443,7 @@ public class Game extends Jeu {
      * @param gap      The direction where is the gap
      * @param position The original position
      */
-    public boolean fillGap(DIRECTIONS gap, Position position) {
+    public void fillGap(DIRECTIONS gap, Position position) {
         int x = position.getX();
         int y = position.getY();
 
@@ -451,35 +451,30 @@ public class Game extends Jeu {
             case RIGHT:
                 if(!tray.getTile(x - 1, y).isOccupied()){
                     tray.getTile(x - 1, y).positionWall(gap);
-                    return true;
                 }
                 break;
 
             case LEFT:
                 if(!tray.getTile(x + 1, y).isOccupied()){
                     tray.getTile(x + 1, y).positionWall(gap);
-                    return true;
                 }
                 break;
 
             case FRONT:
                 if(!tray.getTile(x, y + 1).isOccupied()){
                     tray.getTile(x, y + 1).positionWall(gap);
-                    return true;
                 }
                 break;
 
             case BACK:
                 if(!tray.getTile(x, y - 1).isOccupied()){
                     tray.getTile(x, y - 1).positionWall(gap);
-                    return true;
                 }
                 break;
 
             default:
                 break;
         }
-        return false;
     }
 
     public Player getCurrentPlayer() {
