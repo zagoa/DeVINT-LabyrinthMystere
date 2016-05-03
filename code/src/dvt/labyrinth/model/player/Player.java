@@ -246,6 +246,4 @@ public abstract class Player {
     public ArrayList<Tile> getCan() {
         return can;
     }
-
-
 }

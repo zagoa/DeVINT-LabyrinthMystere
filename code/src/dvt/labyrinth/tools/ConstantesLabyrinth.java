@@ -126,7 +126,6 @@ public class ConstantesLabyrinth {
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
 
         // PAWNS
-        ST(PAWNPATH+"ubb.jpg",true),
         BEBE(PAWNPATH+"bebe.jpg", true),
         GERARD(PAWNPATH+"gerard.jpg", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
@@ -143,6 +142,7 @@ public class ConstantesLabyrinth {
         MAGICIEN(PAWNPATH+"magicien.png",true),
         NICE(PAWNPATH+"maillot_nice.jpg",true),
         TOULON(PAWNPATH+"toulon.jpg",true),
+        ST(PAWNPATH+"st.png",true),
         DAUPHIN(PAWNPATH+"dauphin.jpg",true),
         VOITURE(PAWNPATH+"voiture.jpg",true),
         OUIOUI(PAWNPATH+"ouioui.jpg",true),

@@ -28,34 +28,52 @@ public class IAMedium extends AdvancedIAs{
      * @param position the position of the other player
      * @return if the IA has performed the action successfully or not
      */
-    /**
-     * The IA moves or positions walls in front of the other player
-     * @param tray
-     * @param directions the direction we want to move to
-     * @param position the position of the other player
-     * @return if the IA has performed the action successfully or not
-     */
-   @Override
+    @Override
     public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
         counter++;
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()) {
+
+            // Get tile where to set a wall
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
+
+            // If we have walls more than 1 unit
+            if (config.get(CONFIG.WALL) > 0) {
+                // Get the next tile where to set the wall
+                tray.getTile(new Position(position.getX() + CASE_LENGTH, position.getY() - 1)).positionWall();
+
+                // Fill the gap
+                game.fillGap(DIRECTIONS.RIGHT, new Position(position.getX() + 2, position.getY() - 1));
+            }
+
+            // Speak & pause...
             putWall(game);
+
             return true;
         }
         else if (counter%3==0
                 && tray.canSetAWall(DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()) {
+
+            // Get tile where to set a wall
+
+            // If we have walls more than 1 unit
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
+            if (config.get(CONFIG.WALL) > 0) {
+                // Get the next tile where to set the wall
+                tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
+
+                // Fill the gap
+                game.fillGap(DIRECTIONS.LEFT, new Position(position.getX() - 2, position.getY() - 1));
+            }
+
+            // Speak & pause...
             putWall(game);
+
             return true;
         }
+
         return completeMove(tray, game, directions);
     }
 

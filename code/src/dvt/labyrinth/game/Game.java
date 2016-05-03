@@ -126,8 +126,9 @@ public class Game extends Jeu {
             tile[y][x + CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_RIGHT)); // Right
         if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
             tile[y - CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_UP)); // Down
-        if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
+        if (currentPlayer.canMove(tray, DIRECTIONS.BACK)) {
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_DOWN)); // Up
+        }
 
         setTarget();
 
@@ -351,7 +352,9 @@ public class Game extends Jeu {
 
     public void pause(int time) {
         try {
+            MovePlayerAction.setActive(false);
             Thread.sleep(time);
+            MovePlayerAction.setActive(true);
         } catch (InterruptedException e) {
             return;
         }
