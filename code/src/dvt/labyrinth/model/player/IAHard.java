@@ -51,33 +51,6 @@ public class IAHard extends AdvancedIAs{
         return completeMove(directions);
     }
 
-    /**
-     * Read the direction from the queue in order to move the IA pawn
-     * @return whether the bot moved or not
-     */
-    @Override
-    public boolean move(DIRECTIONS directions){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if ((!decision.isEmpty())) {
-            if (canMove(previous = decision.poll())){
-                updatePlayerPos(convertDirectionToPosition(previous));
-                return true;
-            }
-
-            else {
-                decision.clear();
-                strategyIA();
-                move(null);
-                return true;
-            }
-        }
-        else {
-            strategyIA();
-            move(null);
-            return true;
-        }
-    }
-
 
     /**
      * The full move method

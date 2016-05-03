@@ -23,8 +23,6 @@ public abstract class AdvancedIAs extends IA {
         setPos(pos);
     }
 
-    @Override
-    public abstract boolean move(ConstantesLabyrinth.DIRECTIONS directions);
 
     public abstract boolean moveAndWall(ConstantesLabyrinth.DIRECTIONS directions, Position position);
 

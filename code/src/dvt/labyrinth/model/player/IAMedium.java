@@ -58,33 +58,6 @@ public class IAMedium extends AdvancedIAs{
         return completeMove(directions);
     }
 
-    /**
-     * The IA moves
-     *
-     * @return whether he moved or not
-     */
-    @Override
-    public boolean move(DIRECTIONS directions){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if ((!decision.isEmpty())) {
-            if (canMove(previous = decision.poll())){
-                updatePlayerPos(convertDirectionToPosition(previous));
-                return true;
-            }
-
-            else {
-                decision.clear();
-                strategyIA();
-                move(null);
-                return true;
-            }
-        }
-        else {
-            strategyIA();
-            move(null);
-            return true;
-        }
-    }
 
     /**
      * The full move method

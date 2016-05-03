@@ -32,32 +32,6 @@ public class IAEasy extends IA {
     }
 
 
-    /**
-     * Read the direction from the queue in order to move the IA pawn
-     */
-    @Override
-    public boolean move(ConstantesLabyrinth.DIRECTIONS directions){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if ((!decision.isEmpty())) {
-            if (canMove(previous = decision.poll())){
-                updatePlayerPos(convertDirectionToPosition(previous));
-                return true;
-            }
-
-            else {
-                decision.clear();
-                strategyIA();
-                move(null);
-                return true;
-            }
-        }
-        else {
-            strategyIA();
-            move(null);
-            return true;
-        }
-    }
-
     @Override
     public ConstantesLabyrinth.DIFFICULTY getType() {
         return ConstantesLabyrinth.DIFFICULTY.FACILE;

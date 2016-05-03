@@ -36,8 +36,32 @@ public abstract class IA extends Player{
      * @param directions here will be null
      * @return if we moved or not
      */
+    /**
+     * Read the direction from the queue in order to move the IA pawn
+     * @return whether the bot moved or not
+     */
     @Override
-    public abstract boolean move(DIRECTIONS directions);
+    public boolean move(DIRECTIONS directions){
+        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
+        if ((!decision.isEmpty())) {
+            if (canMove(previous = decision.poll())){
+                updatePlayerPos(convertDirectionToPosition(previous));
+                return true;
+            }
+
+            else {
+                decision.clear();
+                strategyIA();
+                move(null);
+                return true;
+            }
+        }
+        else {
+            strategyIA();
+            move(null);
+            return true;
+        }
+    }
 
     /**
      * The full move method
