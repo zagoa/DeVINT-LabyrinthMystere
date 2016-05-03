@@ -16,7 +16,7 @@ import java.util.Queue;
 
 public abstract class IA extends Player{
     //A queue for the next decisions taken by the computer
-    Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();;
+    Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();
     DIRECTIONS previous;
 
     /**
@@ -63,13 +63,6 @@ public abstract class IA extends Player{
         }
     }
 
-    /**
-     * The full move method
-     *
-     * @param directions here will be null
-     * @return if we moved or not
-     */
-    public abstract boolean completeMove(DIRECTIONS directions);
 
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
@@ -116,6 +109,25 @@ public abstract class IA extends Player{
         }
     }
 
+
+    /**
+     * A strategy only used when moving back is the only possible option
+     */
+    public void strategyIACuvette(){
+        while(canMove(DIRECTIONS.RIGHT) && canMove(DIRECTIONS.LEFT)){
+            decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
+        }
+        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+            decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
+        else if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
+            decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+            if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+                decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+        }
+    }
+
+
+
     /**
      * @param direction the direction we want to go to
      * @return the position corresponding to the direction we want to go from the pawn position
@@ -161,6 +173,18 @@ public abstract class IA extends Player{
     public void putWall(){
         playText(game.getSIVOX(),VOCAL.BOT_WALL);
         game.pause(2000);
+    }
+
+    /**
+     * The full move method
+     *
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    public boolean completeMove(DIRECTIONS directions){
+        boolean  i = move(null);
+        hasMoved(previous);
+        return i;
     }
 
     public abstract DIFFICULTY getType();

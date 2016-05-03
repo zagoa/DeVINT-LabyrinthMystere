@@ -10,59 +10,12 @@ import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
 
 public class IAHard extends AdvancedIAs{
-    private static int counter =0;
 
     public IAHard(Pawn pawn, Position pos, Tray tray,Game game){
         super(pawn,pos,tray,game);
     }
 
 
-    /**
-     * The IA moves and positions walls in front of the other player
-     *
-     * @param directions the direction we want to move to
-     * @param position the position of the other player
-     * @return if the IA has performed the action successfully or not
-     */
-    @Override
-    public boolean moveAndWall(DIRECTIONS directions, Position position){
-        counter++;
-        if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
-                && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX()+2,position.getY()-1)).isOccupied()){
-
-            tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY()-1));
-
-            putWall();
-            return true;
-        }
-        else if (counter%3==0
-                && tray.canSetAWall(DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
-            tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
-            game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY()-1));
-
-            putWall();
-            return true;
-        }
-        return completeMove(directions);
-    }
-
-
-    /**
-     * The full move method
-     *
-     * @param directions here will be null
-     * @return if we moved or not
-     */
-    public boolean completeMove(DIRECTIONS directions){
-        boolean  i = move(null);
-        hasMoved(previous);
-        return i;
-    }
 
     @Override
     public DIFFICULTY getType() {

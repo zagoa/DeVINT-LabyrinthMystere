@@ -19,17 +19,6 @@ public class IAEasy extends IA {
     }
 
 
-    /**
-     * The full move method
-     *
-     * @param directions here will be null
-     * @return if we moved or not
-     */
-    public boolean completeMove(ConstantesLabyrinth.DIRECTIONS directions){
-        boolean i = move(null);
-        hasMoved(previous);
-        return i;
-    }
 
 
     @Override
