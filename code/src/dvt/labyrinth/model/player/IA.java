@@ -130,7 +130,7 @@ public abstract class IA extends Player{
             }
         }
 
-        putWall(game, VOCAL.getVocalComputer(directions));
+        putWall(VOCAL.getVocalComputer(directions));
     }
 
     public void putWall() {

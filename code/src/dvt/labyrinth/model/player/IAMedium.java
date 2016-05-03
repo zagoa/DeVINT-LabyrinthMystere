@@ -46,7 +46,7 @@ public class IAMedium extends AdvancedIAs{
             }
 
             // Speak & pause...
-            putWall(game);
+            putWall();
 
             return true;
         }
@@ -66,7 +66,7 @@ public class IAMedium extends AdvancedIAs{
             }
 
             // Speak & pause...
-            putWall(game);
+            putWall();
 
             return true;
         }

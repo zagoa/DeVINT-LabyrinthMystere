@@ -1,5 +1,6 @@
 package dvt.labyrinth.model.player;
 
+import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.model.essential.Pawn;
 import dvt.labyrinth.model.essential.Tile;
@@ -37,7 +38,7 @@ public abstract class Player {
     //Number of wall
     protected int nbWall;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot,Game game) {
+    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot, Game game) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;

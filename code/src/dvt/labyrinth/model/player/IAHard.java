@@ -44,7 +44,7 @@ public class IAHard extends AdvancedIAs{
             }
 
             // Speak & pause...
-            putWall(game);
+            putWall();
 
             return true;
         }
@@ -64,7 +64,7 @@ public class IAHard extends AdvancedIAs{
             }
 
             // Speak & pause...
-            putWall(game);
+            putWall();
 
             return true;
         }
