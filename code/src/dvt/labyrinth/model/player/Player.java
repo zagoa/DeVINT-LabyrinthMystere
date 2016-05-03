@@ -225,6 +225,8 @@ public abstract class Player {
         return 0;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -248,6 +250,16 @@ public abstract class Player {
     public ArrayList<Tile> getCan() {
         return can;
     }
+
+    public boolean checkCanMove(Player player) {
+        return (player.canMove(DIRECTIONS.RIGHT)
+                || player.canMove(DIRECTIONS.LEFT)
+                || player.canMove(DIRECTIONS.FRONT)
+                || player.canMove(DIRECTIONS.BACK));
+
+    }
+
+
 
 
 }
