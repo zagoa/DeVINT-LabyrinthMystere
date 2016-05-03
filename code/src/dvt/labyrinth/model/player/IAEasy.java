@@ -14,48 +14,46 @@ import java.util.Queue;
  */
 public class IAEasy extends IA {
 
-    public IAEasy(Pawn pawn, Position pos, Tray tray){
-        super(pawn,pos,tray,0);
+    public IAEasy(Pawn pawn, Position pos, Tray tray,Game game){
+        super(pawn,pos,tray,0,game);
     }
 
 
     /**
      * The full move method
-     * @param tray the actual tray with both of the players
-     * @param game the  game
+     *
      * @param directions here will be null
      * @return if we moved or not
      */
-    public boolean completeMove(Tray tray, Game game, ConstantesLabyrinth.DIRECTIONS directions){
-        boolean i = move(tray,null);
-        hasMoved(tray,game, previous);
+    public boolean completeMove(ConstantesLabyrinth.DIRECTIONS directions){
+        boolean i = move(null);
+        hasMoved(previous);
         return i;
     }
 
 
     /**
      * Read the direction from the queue in order to move the IA pawn
-     * @param tray
      */
     @Override
-    public boolean move(Tray tray, ConstantesLabyrinth.DIRECTIONS directions){
+    public boolean move(ConstantesLabyrinth.DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         if ((!decision.isEmpty())) {
-            if (canMove(tray,previous = decision.poll())){
-                updatePlayerPos(tray,convertDirectionToPosition(previous));
+            if (canMove(previous = decision.poll())){
+                updatePlayerPos(convertDirectionToPosition(previous));
                 return true;
             }
 
             else {
                 decision.clear();
-                strategyIA(tray);
-                move(tray,null);
+                strategyIA();
+                move(null);
                 return true;
             }
         }
         else {
-            strategyIA(tray);
-            move(tray,null);
+            strategyIA();
+            move(null);
             return true;
         }
     }

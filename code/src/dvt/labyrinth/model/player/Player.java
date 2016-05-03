@@ -27,7 +27,10 @@ public abstract class Player {
     protected Position originalPos;
     // His position
     protected Position pos;
-
+    // The tray
+    protected Tray tray;
+    // The game
+    protected Game game;
 
 
     // Is a real player ?
@@ -36,27 +39,28 @@ public abstract class Player {
     //Number of wall
     protected int nbWall;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot) {
+    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot,Game game) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
         this.nbWall = nbWall;
         this.isABot = bot;
+        this.tray = tray;
+        this.game = game;
 
-        setPos(pos, tray);
+        setPos(pos);
     }
 
-    public abstract boolean move(Tray tray, DIRECTIONS directions);
+    public abstract boolean move(DIRECTIONS directions);
 
     /**
      * We want to know if we can move towards a direction from our actual position
      *
-     * @param tray      the tray
      * @param direction where we want to go
      * @return whether or not we can move to the wanted position ( we can't go to a position
      * if the tile(wanted position) is occupied (Wall,Player)
      */
-    public boolean canMove(Tray tray, DIRECTIONS direction) {
+    public boolean canMove(DIRECTIONS direction) {
         int x = pos.getX();
         int y = pos.getY();
 
@@ -89,12 +93,11 @@ public abstract class Player {
     /**
      * Check if the player could end the game in the actual tray disposition
      *
-     * @param tray
      * @return if the player can access to the last tray's line which means he can win and he isn't blocked
      */
-    public boolean isBlocked(Tray tray) {
+    public boolean isBlocked() {
         can.clear();
-        hasAccessTo(tray);
+        hasAccessTo();
         //It represent if the pan is on the last line, so he can finish the game
         for (int i = 0; i < config.get(CONFIG.LENGTH); i += 2) {
             for (int j = 0; j < config.get(CONFIG.LENGTH); j += 2) {
@@ -110,9 +113,8 @@ public abstract class Player {
     /**
      * Add in a list all the tile where the pawn can move to
      *
-     * @param tray
      */
-    public void hasAccessTo(Tray tray) {
+    public void hasAccessTo() {
         can.add(tray.getTile(getPosition().getX(), getPosition().getY()));
 
         int i;
@@ -121,16 +123,16 @@ public abstract class Player {
             int y = can.get(i).getPosition().getY();
             Position pos = new Position(x, y);
 
-            if (checkMoveFromPosition(tray, DIRECTIONS.FRONT, pos) && !can.contains(tray.getTile(new Position(x, y - 2)))) {
+            if (checkMoveFromPosition(DIRECTIONS.FRONT, pos) && !can.contains(tray.getTile(new Position(x, y - 2)))) {
                 can.add(tray.getTile(x, y - 2));
             }
-            if (checkMoveFromPosition(tray, DIRECTIONS.BACK, pos) && !can.contains(tray.getTile(new Position(x, y + 2)))) {
+            if (checkMoveFromPosition(DIRECTIONS.BACK, pos) && !can.contains(tray.getTile(new Position(x, y + 2)))) {
                 can.add(tray.getTile(x, y + 2));
             }
-            if (checkMoveFromPosition(tray, DIRECTIONS.RIGHT, pos) && !can.contains(tray.getTile(new Position(x + 2, y)))) {
+            if (checkMoveFromPosition(DIRECTIONS.RIGHT, pos) && !can.contains(tray.getTile(new Position(x + 2, y)))) {
                 can.add(tray.getTile(x + 2, y));
             }
-            if (checkMoveFromPosition(tray, DIRECTIONS.LEFT, pos) && !can.contains(tray.getTile(new Position(x - 2, y)))) {
+            if (checkMoveFromPosition(DIRECTIONS.LEFT, pos) && !can.contains(tray.getTile(new Position(x - 2, y)))) {
                 can.add(tray.getTile(x - 2, y));
             }
 
@@ -139,13 +141,14 @@ public abstract class Player {
     }
 
     /**
-     * @param tray
+     * We check if from the wanted position we can move towards the wanted direction
+     *
      * @param pos       a position on the tray we want to "study"
      * @param direction the direction we want to go to
      * @return Check whether we can move a position towards a direction in advance. It will of use when we predict the IA
      * movements in advance
      */
-    public boolean checkMoveFromPosition(Tray tray, ConstantesLabyrinth.DIRECTIONS direction, Position pos) {
+    public boolean checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS direction, Position pos) {
         int x = pos.getX();
         int y = pos.getY();
 
@@ -183,10 +186,9 @@ public abstract class Player {
     /**
      * Update the pawn position to the wanted one
      *
-     * @param tray
      * @param newP the position we want to go to
      */
-    public void updatePlayerPos(Tray tray, Position newP) {
+    public void updatePlayerPos(Position newP) {
         tray.getTile(newP).setPawn(pawn);
         tray.getTile(pos).setItem(null);
         if(this.isABot()) { //old position of the bot
@@ -198,7 +200,7 @@ public abstract class Player {
     }
 
 
-    public void setPos(Position pos, Tray tray) {
+    public void setPos(Position pos) {
         this.pos = pos;
 
         tray.getTile(pos).setPawn(pawn);

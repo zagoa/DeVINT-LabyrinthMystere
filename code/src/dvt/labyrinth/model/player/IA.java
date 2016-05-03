@@ -25,43 +25,42 @@ public abstract class IA extends Player{
      * @param pos the initial position of the IA
      * @param tray
      */
-    public IA(Pawn pawn, Position pos, Tray tray, int nbWall){
-        super("Computer",pawn,pos,tray,nbWall,true);
-        setPos(pos, tray);
+    public IA(Pawn pawn, Position pos, Tray tray, int nbWall,Game game){
+        super("Computer",pawn,pos,tray,nbWall,true,game);
+        setPos(pos);
     }
 
     /**
      * The method to move the IA
-     * @param tray the actual tray with both of the players
+     *
      * @param directions here will be null
      * @return if we moved or not
      */
     @Override
-    public abstract boolean move(Tray tray,DIRECTIONS directions);
+    public abstract boolean move(DIRECTIONS directions);
 
     /**
      * The full move method
-     * @param tray the actual tray with both of the players
-     * @param game the  game
+     *
      * @param directions here will be null
      * @return if we moved or not
      */
-    public abstract boolean completeMove(Tray tray, Game game, DIRECTIONS directions);
+    public abstract boolean completeMove(DIRECTIONS directions);
 
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
      * and then depending of the possible movements we apply other strategies
-     * @param tray
+     *
      */
-    public void strategyIA(Tray tray){
-        if (canMove(tray, ConstantesLabyrinth.DIRECTIONS.BACK)) {
+    public void strategyIA(){
+        if (canMove(ConstantesLabyrinth.DIRECTIONS.BACK)) {
             decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         }
-        else if (!canMove(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT) && !canMove(tray, ConstantesLabyrinth.DIRECTIONS.LEFT)) {
-            strategyIABack(tray);
+        else if (!canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT) && !canMove(ConstantesLabyrinth.DIRECTIONS.LEFT)) {
+            strategyIABack();
         }
-        else if (!canMove(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT) && canMove(tray, ConstantesLabyrinth.DIRECTIONS.LEFT)){
-            strategyIALeft(tray);
+        else if (!canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT) && canMove(ConstantesLabyrinth.DIRECTIONS.LEFT)){
+            strategyIALeft();
         }
         else{
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
@@ -71,26 +70,24 @@ public abstract class IA extends Player{
     /**
      *  A strategy where we choose to move to the front if we can, if not to the left,
      *  and then depending of the possible movements we apply other strategies
-     * @param tray
      */
-    public void strategyIALeft(Tray tray){
+    public void strategyIALeft(){
         decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-        if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.LEFT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.LEFT)))
+        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.LEFT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.LEFT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
     }
 
     /**
      * A strategy only used when moving back is the only possible option
-     * @param tray
      */
-    public void strategyIABack(Tray tray){
+    public void strategyIABack(){
         decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
-        if(checkMoveFromPosition(tray, ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-        else if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
+        else if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-            if (checkMoveFromPosition(tray,ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+            if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
                 decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
         }
     }
@@ -114,7 +111,7 @@ public abstract class IA extends Player{
         }
     }
 
-    public void hasMoved(Tray tray, Game game, DIRECTIONS directions){
+    public void hasMoved(DIRECTIONS directions){
         if(pos.getY()>=2){
             switch (directions){
                 case FRONT:
@@ -137,7 +134,7 @@ public abstract class IA extends Player{
         game.pause(2000);
     }
 
-    public void putWall(Game game){
+    public void putWall(){
         playText(game.getSIVOX(),VOCAL.BOT_WALL);
         game.pause(2000);
     }

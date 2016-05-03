@@ -17,8 +17,8 @@ import java.util.Queue;
 public class IAMedium extends AdvancedIAs{
     private int counter =0;
 
-    public IAMedium(Pawn pawn, Position pos, Tray tray){
-        super(pawn,pos,tray);
+    public IAMedium(Pawn pawn, Position pos, Tray tray,Game game){
+        super(pawn,pos,tray,game);
     }
 
     /**
@@ -30,13 +30,12 @@ public class IAMedium extends AdvancedIAs{
      */
     /**
      * The IA moves or positions walls in front of the other player
-     * @param tray
      * @param directions the direction we want to move to
      * @param position the position of the other player
      * @return if the IA has performed the action successfully or not
      */
    @Override
-    public boolean moveAndWall(Tray tray, DIRECTIONS directions, Position position,Game game){
+    public boolean moveAndWall(DIRECTIONS directions, Position position){
         counter++;
         if(position.getX() < config.get(CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
@@ -44,7 +43,7 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY() - 1));
-            putWall(game);
+            putWall();
             return true;
         }
         else if (counter%3==0
@@ -53,50 +52,49 @@ public class IAMedium extends AdvancedIAs{
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
             tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
             game.fillGap(DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY() -1));
-            putWall(game);
+            putWall();
             return true;
         }
-        return completeMove(tray, game, directions);
+        return completeMove(directions);
     }
 
     /**
      * The IA moves
-     * @param tray
-     * @return
+     *
+     * @return whether he moved or not
      */
     @Override
-    public boolean move(Tray tray, DIRECTIONS directions){
+    public boolean move(DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
         if ((!decision.isEmpty())) {
-            if (canMove(tray,previous = decision.poll())){
-                updatePlayerPos(tray,convertDirectionToPosition(previous));
+            if (canMove(previous = decision.poll())){
+                updatePlayerPos(convertDirectionToPosition(previous));
                 return true;
             }
 
             else {
                 decision.clear();
-                strategyIA(tray);
-                move(tray,null);
+                strategyIA();
+                move(null);
                 return true;
             }
         }
         else {
-            strategyIA(tray);
-            move(tray,null);
+            strategyIA();
+            move(null);
             return true;
         }
     }
 
     /**
      * The full move method
-     * @param tray the actual tray with both of the players
-     * @param game the  game
+     *
      * @param directions here will be null
      * @return if we moved or not
      */
-    public boolean completeMove(Tray tray, Game game, DIRECTIONS directions){
-        boolean  i = move(tray,null);
-        hasMoved(tray,game,previous);
+    public boolean completeMove(DIRECTIONS directions){
+        boolean  i = move(null);
+        hasMoved(previous);
         return i;
     }
     @Override

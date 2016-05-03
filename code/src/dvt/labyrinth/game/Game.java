@@ -120,13 +120,13 @@ public class Game extends Jeu {
         int y = currentPlayer.getPosition().getY();
 
         Tile tile[][] = tray.getTray();
-        if (currentPlayer.canMove(tray, DIRECTIONS.LEFT))
+        if (currentPlayer.canMove(DIRECTIONS.LEFT))
             tile[y][x - CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_LEFT)); // Left
-        if (currentPlayer.canMove(tray, DIRECTIONS.RIGHT))
+        if (currentPlayer.canMove(DIRECTIONS.RIGHT))
             tile[y][x + CASE_LENGTH].setHighlighted(new Arrow(RESOURCES.ARROW_RIGHT)); // Right
-        if (currentPlayer.canMove(tray, DIRECTIONS.FRONT))
+        if (currentPlayer.canMove(DIRECTIONS.FRONT))
             tile[y - CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_UP)); // Down
-        if (currentPlayer.canMove(tray, DIRECTIONS.BACK))
+        if (currentPlayer.canMove(DIRECTIONS.BACK))
             tile[y + CASE_LENGTH][x].setHighlighted(new Arrow(RESOURCES.ARROW_DOWN)); // Up
 
         setTarget();
@@ -142,7 +142,7 @@ public class Game extends Jeu {
      * @return if the the game is blocked or not
      */
     public boolean gameNotBlocked(Tray tray){
-        if(!otherPlayer().isBlocked(tray) && !currentPlayer.isBlocked(tray)) return true;
+        if(!otherPlayer().isBlocked() && !currentPlayer.isBlocked()) return true;
         return false;
     }
 
@@ -310,7 +310,7 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray,this);
 
         currentPlayer = players[new Random().nextInt(1)];
 
@@ -325,19 +325,19 @@ public class Game extends Jeu {
             if(e.getValue().isABot()){
                 switch (botDifficulty){
                     case FACILE:
-                        players[k++] = new IAEasy(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray);
+                        players[k++] = new IAEasy(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray,this);
                         break;
                     case MOYEN:
-                        players[k++] = new IAMedium(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray);
+                        players[k++] = new IAMedium(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray,this);
                         break;
                     case DIFFICILE:
-                        players[k++] = new IAHard(new Pawn(e.getValue()),POSITIONS.TOP.getPos(), tray);
+                        players[k++] = new IAHard(new Pawn(e.getValue()),POSITIONS.TOP.getPos(), tray,this);
                         break;
                 }
 
             }
             else
-                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), POSITIONS.BOTTOM.getPos(), tray);
+                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), POSITIONS.BOTTOM.getPos(), tray,this);
         }
 
         currentPlayer = players[new Random().nextInt(1)];
@@ -376,7 +376,7 @@ public class Game extends Jeu {
      */
     public void movePlayer(DIRECTIONS d) {
         unHighlightAll();
-        if (currentPlayer.move(tray, d)) { // has moved
+        if (currentPlayer.move(d)) { // has moved
             if (currentPlayer.hasWon())
                 return;
 
@@ -392,7 +392,7 @@ public class Game extends Jeu {
     public void moveIAPlayer(DIRECTIONS d,Position position) {
         unHighlightAll();
 
-        if (((IA)currentPlayer).getType().ordinal() >= DIFFICULTY.MOYEN.ordinal() && ((AdvancedIAs)currentPlayer).moveAndWall(tray, d, position,this)) { // has moved
+        if (((IA)currentPlayer).getType().ordinal() >= DIFFICULTY.MOYEN.ordinal() && ((AdvancedIAs)currentPlayer).moveAndWall(d, position)) { // has moved
             if (currentPlayer.hasWon())
                 return;
 
@@ -403,7 +403,7 @@ public class Game extends Jeu {
      * Move the IAEasy player
      */
     public void moveIAEasyPlayer() {
-        ((IAEasy) currentPlayer).completeMove(tray,this,null);
+        ((IAEasy) currentPlayer).completeMove(null);
         if (currentPlayer.hasWon()) return;
 
             nextTurn();
