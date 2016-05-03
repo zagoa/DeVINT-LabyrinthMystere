@@ -22,7 +22,8 @@ public class ConstantesLabyrinth {
     public static final int WALL_LENGTH = 1;
     public static final int WALL_NUMBER = 9;
     public static final SIZE DEFAULT_SIZE = SIZE.NORMAL;
-    public static final RESOURCES DEFAULT_PAWN = RESOURCES.ST;
+    public static final RESOURCES DEFAULT_PAWN = RESOURCES.GERARD;
+    public static final boolean USE_PAUSE = false;
 
     /* **** CONFIGURATION **** */
     public static final String CONFIG_FILE = "../ressources/configuration.xml";
@@ -126,28 +127,18 @@ public class ConstantesLabyrinth {
         WALL_VERTICAL(WALLPATH+"murVertical.png"),
 
         // PAWNS
-        BEBE(PAWNPATH+"bebe.jpg", true),
-        GERARD(PAWNPATH+"gerard.jpg", true),
+        CANARD(PAWNPATH+"canard.png", true),
+        COQ(PAWNPATH+"coq.png", true),
         ZAGO(PAWNPATH+"zago.jpg", true),
-        PION(PAWNPATH+"pion.png", true),
+        ELEPHANT(PAWNPATH+"elephant.png", true),
         BOT(PAWNPATH+"bot.png", true, true),
-        CROCODILE(PAWNPATH+"crocodile.jpg",true),
-        TOUR(PAWNPATH+"tower.jpg",true),
-        DRAGON(PAWNPATH+"dragon.jpg",true),
-        SINGE(PAWNPATH+"singe.jpg",true),
-        DUMBO(PAWNPATH+"dumbo.jpg",true),
-        PICKA(PAWNPATH+"picka.png",true),
-        INDIEN(PAWNPATH+"indien.jpg",true),
-        PRINCESSE(PAWNPATH+"princesse.jpg",true),
-        MAGICIEN(PAWNPATH+"magicien.png",true),
-        NICE(PAWNPATH+"maillot_nice.jpg",true),
-        TOULON(PAWNPATH+"toulon.jpg",true),
-        ST(PAWNPATH+"st.png",true),
-        DAUPHIN(PAWNPATH+"dauphin.jpg",true),
-        VOITURE(PAWNPATH+"voiture.jpg",true),
-        OUIOUI(PAWNPATH+"ouioui.jpg",true),
-        NOUNOURS(PAWNPATH+"nounours.jpg",true),
-        OTARIE(PAWNPATH+"otarie.jpg",true),
+        GIRAFFE(PAWNPATH+"giraffe.png", true),
+        KOALA(PAWNPATH+"koala.png", true),
+        PINGUOIN(PAWNPATH+"pinguoin.png", true),
+        PINGUOIN2(PAWNPATH+"pinguoin2.png", true),
+        PANDA(PAWNPATH+"panda.png", true),
+        POUSSIN(PAWNPATH+"poussin.png", true),
+        GERARD(PAWNPATH+"gerard.png", true),
 
         // ARROWS
         ARROW_LEFT(ARROWPATH+"arrow_left.png"),

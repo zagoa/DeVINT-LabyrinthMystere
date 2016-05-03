@@ -37,6 +37,8 @@ public class WinGame extends Jeu {
     public WinGame(Player player, String setenceToSay) {
         super();
 
+        // TODO: changer taille image
+
         winner = player;
         setWinner(setenceToSay);
     }
