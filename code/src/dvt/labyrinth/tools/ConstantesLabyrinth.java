@@ -42,13 +42,13 @@ public class ConstantesLabyrinth {
         public String toString() {
             switch (this) {
                 case GRAND:
-                    return "GRAND";
+                    return "GRANDES CASES";
 
                 case TRES_GRAND:
-                    return "TRES GRAND";
+                    return "TRES GRANDES CASES";
 
                 default:
-                    return "NORMAL";
+                    return "CASES NORMAL";
             }
         }
 
