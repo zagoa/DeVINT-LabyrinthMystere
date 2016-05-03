@@ -31,37 +31,56 @@ public abstract class AdvancedIAs extends IA {
 
 
     /**
-     * The IA moves and positions walls in front of the other player
-     *
+     * The IA moves or positions walls in front of the other player
      * @param directions the direction we want to move to
      * @param position the position of the other player
      * @return if the IA has performed the action successfully or not
      */
     public boolean moveAndWall(ConstantesLabyrinth.DIRECTIONS directions, Position position){
-        counter++;
         if(position.getX() < config.get(ConstantesLabyrinth.CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(ConstantesLabyrinth.DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
-                && !tray.getTile(new Position(position.getX()+2,position.getY()-1)).isOccupied()){
-
+                && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+            // Get tile where to set a wall
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() + 2, position.getY() - 1)).positionWall();
-            game.fillGap(ConstantesLabyrinth.DIRECTIONS.RIGHT,new Position(position.getX()+2,position.getY()-1));
 
+            // If we have walls more than 1 unit
+            if (config.get(ConstantesLabyrinth.CONFIG.WALL) > 0) {
+                // Get the next tile where to set the wall
+                tray.getTile(new Position(position.getX() + CASE_LENGTH, position.getY() - 1)).positionWall();
+
+                // Fill the gap
+                game.fillGap(ConstantesLabyrinth.DIRECTIONS.RIGHT, new Position(position.getX() + 2, position.getY() - 1));
+            }
+
+            // Speak & pause...
             putWall();
+
             return true;
         }
         else if (counter%3==0
                 && tray.canSetAWall(ConstantesLabyrinth.DIRECTIONS.LEFT,new Position(position.getX(),position.getY()-1))
                 && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+            // Get tile where to set a wall
             tray.getTile(new Position(position.getX(),position.getY() - 1)).positionWall();
-            tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
-            game.fillGap(ConstantesLabyrinth.DIRECTIONS.LEFT,new Position(position.getX()-2,position.getY()-1));
 
+            // If we have walls more than 1 unit
+            if (config.get(ConstantesLabyrinth.CONFIG.WALL) > 0) {
+                // Get the next tile where to set the wall
+                tray.getTile(new Position(position.getX() - 2, position.getY() - 1)).positionWall();
+
+                // Fill the gap
+                game.fillGap(ConstantesLabyrinth.DIRECTIONS.LEFT, new Position(position.getX() - 2, position.getY() - 1));
+            }
+
+            // Speak & pause...
             putWall();
+
             return true;
         }
+
         return completeMove(directions);
     }
+
 
 
 }
