@@ -2,6 +2,7 @@ package dvt.labyrinth.model.player;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 
+import dvt.labyrinth.actions.MovePlayerAction;
 import dvt.labyrinth.game.Game;
 import dvt.labyrinth.model.essential.Arrow;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
@@ -32,13 +33,8 @@ public abstract class IA extends Player{
 
     /**
      * The method to move the IA
-     *
      * @param directions here will be null
      * @return if we moved or not
-     */
-    /**
-     * Read the direction from the queue in order to move the IA pawn
-     * @return whether the bot moved or not
      */
     @Override
     public boolean move(DIRECTIONS directions){
@@ -166,12 +162,16 @@ public abstract class IA extends Player{
                     break;
             }
         }
-        playText(game.getSIVOX(), VOCAL.getVocalComputer(directions));
-        game.pause(2000);
+
+        putWall(VOCAL.getVocalComputer(directions));
     }
 
-    public void putWall(){
-        playText(game.getSIVOX(),VOCAL.BOT_WALL);
+    public void putWall() {
+        putWall(VOCAL.BOT_WALL);
+    }
+
+    public void putWall(VOCAL v) {
+        playText(game.getSIVOX(), v);
         game.pause(2000);
     }
 

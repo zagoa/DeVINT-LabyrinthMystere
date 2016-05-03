@@ -8,7 +8,6 @@ import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
@@ -39,7 +38,7 @@ public abstract class Player {
     //Number of wall
     protected int nbWall;
 
-    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot,Game game) {
+    public Player(String name, Pawn pawn, Position pos, Tray tray, int nbWall, boolean bot, Game game) {
         this.name = name;
         this.pawn = pawn;
         this.originalPos = pos;
@@ -224,8 +223,6 @@ public abstract class Player {
 
         return 0;
     }
-
-
 
     public String getName() {
         return name;

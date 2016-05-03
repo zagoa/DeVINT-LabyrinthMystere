@@ -27,6 +27,10 @@ public class MovePlayerAction extends AbstractAction {
         MovePlayerAction.active = active;
     }
 
+    public static boolean isActive() {
+        return active;
+    }
+
     /**
      * Constructor
      *

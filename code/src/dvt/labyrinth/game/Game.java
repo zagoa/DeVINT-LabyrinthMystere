@@ -310,7 +310,7 @@ public class Game extends Jeu {
 
         int k = 0;
         for (HashMap.Entry<String, RESOURCES> e : p.entrySet())
-            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray,this);
+            players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), ((k % 2 == 0) ? POSITIONS.TOP : POSITIONS.BOTTOM).getPos(), tray, this);
 
         currentPlayer = players[new Random().nextInt(1)];
 
@@ -325,19 +325,19 @@ public class Game extends Jeu {
             if(e.getValue().isABot()){
                 switch (botDifficulty){
                     case FACILE:
-                        players[k++] = new IAEasy(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray,this);
+                        players[k++] = new IAEasy(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray, this);
                         break;
                     case MOYEN:
-                        players[k++] = new IAMedium(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray,this);
+                        players[k++] = new IAMedium(new Pawn(e.getValue()), POSITIONS.TOP.getPos(), tray, this);
                         break;
                     case DIFFICILE:
-                        players[k++] = new IAHard(new Pawn(e.getValue()),POSITIONS.TOP.getPos(), tray,this);
+                        players[k++] = new IAHard(new Pawn(e.getValue()),POSITIONS.TOP.getPos(), tray, this);
                         break;
                 }
 
             }
             else
-                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), POSITIONS.BOTTOM.getPos(), tray,this);
+                players[k++] = new HumanPlayer(e.getKey(), new Pawn(e.getValue()), POSITIONS.BOTTOM.getPos(), tray, this);
         }
 
         currentPlayer = players[new Random().nextInt(1)];
@@ -351,7 +351,9 @@ public class Game extends Jeu {
 
     public void pause(int time) {
         try {
+            MovePlayerAction.setActive(false);
             Thread.sleep(time);
+            MovePlayerAction.setActive(true);
         } catch (InterruptedException e) {
             return;
         }
