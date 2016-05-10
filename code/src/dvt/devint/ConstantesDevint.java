@@ -5,8 +5,8 @@ package dvt.devint;
  * @author Justal Kevin - SI5
  */
 public final class ConstantesDevint {
-    public static final String F1_SON = "../ressources/sons/aideF1.wav";
-    public static final String F2_SON = "../ressources/sons/aideF2.wav";
+    public static final String F1_SON = "Dirige toi vers les cibles !";
+    public static final String F2_SON = "Utilise les flèches directionnelles pour te déplacer, et utilise la souri pour poser des murs!";
     public static final String ACCUEIL_SON = "../ressources/sons/accueil.wav";
 
     public static final String FONT_TYPE_DEFAULT = "Arial";
