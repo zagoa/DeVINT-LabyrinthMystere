@@ -243,11 +243,13 @@ public class ConstantesLabyrinth {
         public void updatePos() {
             switch (this) {
                 case TOP:
-                    pos = new Position(config.get(CONFIG.LENGTH)/2, 0);
+                    int i = (config.get(CONFIG.LENGTH)/2%2 == 0) ? config.get(CONFIG.LENGTH)/2 : config.get(CONFIG.LENGTH)/2-1;
+                    pos = new Position(i, 0);
                     break;
 
                 case BOTTOM:
-                    pos = new Position(config.get(CONFIG.LENGTH)/2, config.get(CONFIG.LENGTH)-1);
+                    int k = (config.get(CONFIG.LENGTH)/2%2 == 0) ? config.get(CONFIG.LENGTH)/2 : config.get(CONFIG.LENGTH)/2-1;
+                    pos = new Position(k, config.get(CONFIG.LENGTH)-1);
                     break;
 
                 default:
