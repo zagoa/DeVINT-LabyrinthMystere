@@ -17,7 +17,7 @@ import java.util.Queue;
 
 public abstract class IA extends Player{
     //A queue for the next decisions taken by the computer
-    Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();;
+    Queue<ConstantesLabyrinth.DIRECTIONS> decision = new LinkedList<>();
     DIRECTIONS previous;
 
     /**
@@ -37,14 +37,28 @@ public abstract class IA extends Player{
      * @return if we moved or not
      */
     @Override
-    public abstract boolean move(DIRECTIONS directions);
+    public boolean move(DIRECTIONS directions){
+        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
+        if ((!decision.isEmpty())) {
+            if (canMove(previous = decision.poll())){
+                updatePlayerPos(convertDirectionToPosition(previous));
+                return true;
+            }
 
-    /**
-     * The full move method
-     * @param directions here will be null
-     * @return if we moved or not
-     */
-    public abstract boolean completeMove(DIRECTIONS directions);
+            else {
+                decision.clear();
+                strategyIA();
+                move(null);
+                return true;
+            }
+        }
+        else {
+            strategyIA();
+            move(null);
+            return true;
+        }
+    }
+
 
     /**
      * A strategy where we choose to move to the front if we can, if not to the right,
@@ -90,6 +104,25 @@ public abstract class IA extends Player{
                 decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
         }
     }
+
+
+    /**
+     * A strategy only used when moving back is the only possible option
+     */
+    public void strategyIACuvette(){
+        while(canMove(DIRECTIONS.RIGHT) && canMove(DIRECTIONS.LEFT)){
+            decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
+        }
+        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+            decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
+        else if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
+            decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+            if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+                decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+        }
+    }
+
+
 
     /**
      * @param direction the direction we want to go to
@@ -140,6 +173,18 @@ public abstract class IA extends Player{
     public void putWall(VOCAL v) {
         playText(game.getSIVOX(), v);
         game.pause(2000);
+    }
+
+    /**
+     * The full move method
+     *
+     * @param directions here will be null
+     * @return if we moved or not
+     */
+    public boolean completeMove(DIRECTIONS directions){
+        boolean  i = move(null);
+        hasMoved(previous);
+        return i;
     }
 
     public abstract DIFFICULTY getType();

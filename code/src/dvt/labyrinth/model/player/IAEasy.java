@@ -19,44 +19,6 @@ public class IAEasy extends IA {
     }
 
 
-    /**
-     * The full move method
-     *
-     * @param directions here will be null
-     * @return if we moved or not
-     */
-    public boolean completeMove(ConstantesLabyrinth.DIRECTIONS directions){
-        boolean i = move(null);
-        hasMoved(previous);
-        return i;
-    }
-
-
-    /**
-     * Read the direction from the queue in order to move the IA pawn
-     */
-    @Override
-    public boolean move(ConstantesLabyrinth.DIRECTIONS directions){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if ((!decision.isEmpty())) {
-            if (canMove(previous = decision.poll())){
-                updatePlayerPos(convertDirectionToPosition(previous));
-                return true;
-            }
-
-            else {
-                decision.clear();
-                strategyIA();
-                move(null);
-                return true;
-            }
-        }
-        else {
-            strategyIA();
-            move(null);
-            return true;
-        }
-    }
 
     @Override
     public ConstantesLabyrinth.DIFFICULTY getType() {

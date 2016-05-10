@@ -350,12 +350,14 @@ public class Game extends Jeu {
     }
 
     public void pause(int time) {
-        try {
-            MovePlayerAction.setActive(false);
-            Thread.sleep(time);
-            MovePlayerAction.setActive(true);
-        } catch (InterruptedException e) {
-            return;
+        if (USE_PAUSE) {
+            try {
+                MovePlayerAction.setActive(false);
+                Thread.sleep(time);
+                MovePlayerAction.setActive(true);
+            } catch (InterruptedException e) {
+                return;
+            }
         }
     }
 
