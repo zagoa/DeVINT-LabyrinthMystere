@@ -34,6 +34,8 @@ public class Menu extends MenuGeneric {
 
         addLabel(TITLE_GAME);
 
+        playText(getSIVOX(), VOCAL.ACCUEIL);
+
         // les options possibles
         // TODO : Faire One Player
         addMenu(ONEPLAYER   , new ActionMenu(this, 1));
