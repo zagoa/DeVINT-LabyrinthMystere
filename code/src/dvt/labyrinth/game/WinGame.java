@@ -4,6 +4,7 @@ import dvt.devint.EchapAction;
 import dvt.devint.Jeu;
 import static dvt.labyrinth.tools.ConstantesLabyrinth.*;
 import dvt.labyrinth.model.player.Player;
+import dvt.labyrinth.tools.StretchIcon;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -21,10 +22,11 @@ public class WinGame extends Jeu {
     private Player winner;
 
     private JPanel world;
-    private JPanel bottom;
+    /*private JPanel bottom;
+    private JButton reset;*/
 
+    private JLabel img;
     private JLabel info;
-    private JButton reset;
     private String score;
 
     public WinGame(Player player) {
@@ -44,16 +46,21 @@ public class WinGame extends Jeu {
     @Override
     public void init() {
         world = new JPanel();
-        world.setBackground(getBackground());
-        world.setLayout(new GridLayout(2,1));
 
-        info = new JLabel("", JLabel.CENTER);
-        info.setVerticalAlignment(JLabel.CENTER);
+        GridLayout layout = new GridLayout(1,2);
+
+        world.setBackground(getBackground());
+        world.setLayout(layout);
+
+        info = new JLabel("", JLabel.RIGHT);
         info.setFont(getFont());
         info.setVisible(true);
-        world.add(info);
 
-        reset = new JButton("Retour au Menu");
+        img = new JLabel("", JLabel.CENTER);
+        img.setVisible(true);
+        img.setVerticalAlignment(JLabel.CENTER);
+
+        /*reset = new JButton("Retour au Menu");
         reset.setBackground(Color.RED);
         reset.setForeground(Color.WHITE);
         reset.setBorder(new LineBorder(Color.black, 2, true));
@@ -65,12 +72,11 @@ public class WinGame extends Jeu {
         bottom = new JPanel();
         bottom.setLayout(new GridBagLayout());
         bottom.add(reset);
-        bottom.setBackground(getBackground());
+        bottom.setBackground(getBackground());*/
 
-        world.add(bottom);
-
-
-//        world.add(new JButton("bite"));
+        world.add(img);
+        world.add(info);
+        //world.add(bottom);
 
         this.add(world);
 
@@ -86,7 +92,7 @@ public class WinGame extends Jeu {
             score += "Tu as perdu...<br>"+winner.getName()+" a gagn&eacute; !<br />";
         score +="</center></html>";
 
-        info.setIcon(new ImageIcon(winner.getPawn().getResPath()));
+        img.setIcon(new StretchIcon(winner.getPawn().getResPath()));
         info.setText(score);
 
         this.getSIVOX().playText(sentence, SYNTHESE_MAXIMALE);
@@ -103,8 +109,8 @@ public class WinGame extends Jeu {
         info.setBackground(getBackground());
         info.setForeground(getForeground());
         info.setFont(getFont());
+        img.setBackground(getBackground());
         world.setBackground(getBackground());
-        bottom.setBackground(getBackground());
     }
 
     @Override
