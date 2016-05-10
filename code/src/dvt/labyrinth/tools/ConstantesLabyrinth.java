@@ -266,7 +266,7 @@ public class ConstantesLabyrinth {
 
     /* **** VOCAL **** */
     public enum VOCAL {
-        ACCUEIL("Si tu te sens prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux toujours t'entrainer avec le mode Entrainement."),
+        ACCUEIL("Si tu te sens prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux t'entrainer."),
         START("%s commence à jouer !"),
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
