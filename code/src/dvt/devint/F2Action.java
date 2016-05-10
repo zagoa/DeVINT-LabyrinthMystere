@@ -25,7 +25,7 @@ public class F2Action extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        fenetre.getSIVOX().playWav(F2_SON);
+        fenetre.getSIVOX().playText(F2_SON);
     }
 
 }

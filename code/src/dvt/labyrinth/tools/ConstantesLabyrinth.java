@@ -1,8 +1,5 @@
 package dvt.labyrinth.tools;
 
-
-import com.sun.org.apache.regexp.internal.RE;
-import dvt.labyrinth.model.essential.Arrow;
 import t2s.SIVOXDevint;
 
 import java.awt.*;
