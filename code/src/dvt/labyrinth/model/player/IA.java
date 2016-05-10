@@ -109,17 +109,15 @@ public abstract class IA extends Player{
     /**
      * A strategy only used when moving back is the only possible option
      */
-    public void strategyIACuvette(){
-        while(canMove(DIRECTIONS.RIGHT) && canMove(DIRECTIONS.LEFT)){
+    public void strategyIADE(){
+        int i=0;
+        while(checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY())) && canMove(DIRECTIONS.LEFT)){
+            i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         }
         if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-        else if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
-            decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-            if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
-                decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-        }
+
     }
 
 
