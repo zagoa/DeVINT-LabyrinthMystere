@@ -107,11 +107,11 @@ public abstract class IA extends Player{
 
 
     /**
-     * A strategy only used when moving back is the only possible option
+     * A strategy to escape from dead ends
      */
     public void strategyIADE(){
         int i=0;
-        while(checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY())) && canMove(DIRECTIONS.LEFT)){
+        while(checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY()-(2*i))) && canMove(DIRECTIONS.LEFT)){
             i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         }
