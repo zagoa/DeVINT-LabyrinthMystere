@@ -127,7 +127,6 @@ public class ConstantesLabyrinth {
         // PAWNS
         CANARD(PAWNPATH+"canard.png", true),
         COQ(PAWNPATH+"coq.png", true),
-        ZAGO(PAWNPATH+"zago.jpg", true),
         ELEPHANT(PAWNPATH+"elephant.png", true),
         BOT(PAWNPATH+"bot.png", true, true),
         GIRAFFE(PAWNPATH+"giraffe.png", true),
