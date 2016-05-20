@@ -11,7 +11,6 @@ import dvt.labyrinth.model.essential.Tray;
 import dvt.labyrinth.model.essential.Pawn;
 import t2s.SIVOXDevint;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -79,6 +78,7 @@ public abstract class IA extends Player{
         int i=0;
         while(checkMoveFromPosition(DIRECTIONS.LEFT, new Position(pos.getX()-(2*i), pos.getY()))
                 && !checkMoveFromPosition(DIRECTIONS.BACK, new Position(pos.getX()-(2*i),pos.getY()))){
+            System.out.println("i = " + i);
             i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
         }
@@ -161,16 +161,16 @@ public abstract class IA extends Player{
         if(pos.getY()>=2){
             switch (directions){
                 case FRONT:
-                    tray.getTile(new Position(pos.getX(),pos.getY()+2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)), Color.orange);
+                    tray.getTile(new Position(pos.getX(),pos.getY()+2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
                     break;
                 case BACK:
-                    tray.getTile(new Position(pos.getX(),pos.getY()-2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)), Color.orange);
+                    tray.getTile(new Position(pos.getX(),pos.getY()-2)).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
                     break;
                 case RIGHT:
-                    tray.getTile(new Position(pos.getX()-2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)), Color.orange);
+                    tray.getTile(new Position(pos.getX()-2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
                     break;
                 case LEFT:
-                    tray.getTile(new Position(pos.getX()+2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)), Color.orange);
+                    tray.getTile(new Position(pos.getX()+2,pos.getY())).setHighlighted(new Arrow(RESOURCES.getArrow(directions)));
                     break;
                 default:
                     break;
