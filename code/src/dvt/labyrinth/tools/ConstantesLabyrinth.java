@@ -157,6 +157,10 @@ public class ConstantesLabyrinth {
 
         // HELP
         HOME_HELP(HELPPATH+"home.png"),
+        PLAYER_HELP(HELPPATH+"player.png"),
+        TRAY_HELP(HELPPATH+"tray.png"),
+        CASES_HELP(HELPPATH+"cases.png"),
+        DIFFICULTY_HELP(HELPPATH+"difficulty.png"),
         SPEAKERON_HELP(HELPPATH+"speaker_on.gif"),
         SPEAKEROFF_HELP(HELPPATH+"speaker_off.png"),
 
@@ -393,7 +397,11 @@ public class ConstantesLabyrinth {
     }
 
     public enum HELP_STRINGS {
-        ONE("Zizi bleu", RESOURCES.HOME_HELP);
+        HOME("Vous êtes sur le menu principal du jeu. Vous pouvez choisir de jouer contre l'ordinateur en cliquant sur 1 Joueur OU de jouer contre un ami en cliquant sur 2 Joueurs. Si vous voulez apprendre comment jouer, cliquez sur Entrainement, si vous voulez changer la taille des cases du plateau cliquez sur Réglages !\n", RESOURCES.HOME_HELP),
+        CASES("vous êtes sur l'écran de sélection de la taille des cases du plateau, en cliquant sur cases normales le plateau sera dans la taille habituelle de jeu avec des cases de taille normale, en cliquant sur grandes cases le plateau sera réduit et les cases seront plus grandes, en cliquant sur cases très grandes le plateau sera réduit au maximum mais les cases seront a leur taille maximales\n", RESOURCES.CASES_HELP),
+        PLAYER("Après avoir lancé une partie, l'écran de sélection d'avatar et de nom de joueur apparait. Vous pouvez donc choisir un nom en tapant votre pseudo au clavier, puis selectionner un avatar parmis ceux disponibles.", RESOURCES.PLAYER_HELP),
+        DIFFICULTY("Après avoir lancé une partie en mode 1 joueur et choisi votre personnage, l'écran de sélection de difficulté de l'ordinateur apparait, vous pouvez donc choisir d'affronter un ordinateur de difficulté facile, de difficulté moyenne ou bien de difficulté difficile où vous devrez réfléchir pour le battre\n", RESOURCES.DIFFICULTY_HELP),
+        TRAY("Après avoir lancé une partie et choisi votre joueur ainsi que la difficulté, le plateau de jeu apparait. Vous pouvez avancer en appuyant sur les flèches directionnelles de votre clavier correspondant aux cases illuminées autour de votre personnage. Vous pouvez aussi poser des murs pour tenter de bloquer votre adversaire en cliquant entre deux cases puis en indiquant la direction dans laquelle vous voulez placer le mur", RESOURCES.TRAY_HELP);
 
         private String str;
         private RESOURCES res;
