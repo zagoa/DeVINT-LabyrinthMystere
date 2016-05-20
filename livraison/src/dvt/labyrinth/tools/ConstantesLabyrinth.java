@@ -393,7 +393,7 @@ public class ConstantesLabyrinth {
     }
 
     public enum HELP_STRINGS {
-        ONE("Zizi bleu", RESOURCES.HOME_HELP);
+        ONE("Aide", RESOURCES.HOME_HELP);
 
         private String str;
         private RESOURCES res;
