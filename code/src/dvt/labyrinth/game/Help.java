@@ -25,7 +25,7 @@ public class Help extends Jeu {
     private JLabel img;
     private JLabel imgSound;
 
-    private HELP_STRINGS help = HELP_STRINGS.ONE;
+    private HELP_STRINGS help = HELP_STRINGS.HOME;
 
     private int numberHelp = HELP_STRINGS.values().length;
     private int i = 0;
