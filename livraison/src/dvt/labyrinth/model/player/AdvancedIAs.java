@@ -37,9 +37,13 @@ public abstract class AdvancedIAs extends IA {
      * @return if the IA has performed the action successfully or not
      */
     public boolean moveAndWall(ConstantesLabyrinth.DIRECTIONS directions, Position position){
+
+        counter++;
+
         if(position.getX() < config.get(ConstantesLabyrinth.CONFIG.LENGTH)-CASE_LENGTH && counter%3==0
                 && tray.canSetAWall(ConstantesLabyrinth.DIRECTIONS.RIGHT,new Position(position.getX(),position.getY()-1))
                 && !tray.getTile(new Position(position.getX(),position.getY()-1)).isOccupied()){
+
             // Get tile where to set a wall
             tray.getTile(new Position(position.getX(), position.getY() - 1)).positionWall();
 
@@ -78,7 +82,7 @@ public abstract class AdvancedIAs extends IA {
             return true;
         }
 
-        return completeMove(directions);
+        return completeMove(    );
     }
 
 

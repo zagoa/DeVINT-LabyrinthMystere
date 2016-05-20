@@ -407,7 +407,7 @@ public class Game extends Jeu {
      * Move the IAEasy player
      */
     public void moveIAEasyPlayer() {
-        ((IAEasy) currentPlayer).completeMove(null);
+        ((IAEasy) currentPlayer).completeMove();
         if (currentPlayer.hasWon()) return;
 
             nextTurn();

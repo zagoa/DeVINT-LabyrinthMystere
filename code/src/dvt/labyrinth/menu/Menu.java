@@ -1,10 +1,10 @@
 package dvt.labyrinth.menu;
 
 import dvt.labyrinth.game.Game;
+import dvt.labyrinth.game.Help;
 import dvt.labyrinth.game.Training;
 import org.w3c.dom.Document;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -132,7 +132,8 @@ public class Menu extends MenuGeneric {
                         break;
 
                     case 4: // Aide
-                        JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+//                        JOptionPane.showMessageDialog(null, "Coming soon...", "Labyrinthe", JOptionPane.PLAIN_MESSAGE);
+                        new Help().loop();
                         break;
 
                     default:
