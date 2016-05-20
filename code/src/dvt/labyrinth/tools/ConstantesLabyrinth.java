@@ -46,7 +46,7 @@ public class ConstantesLabyrinth {
                     return "TRES GRANDES CASES";
 
                 default:
-                    return "CASES NORMAL";
+                    return "CASES NORMALES";
             }
         }
 
@@ -107,6 +107,7 @@ public class ConstantesLabyrinth {
     public static final String ARROWPATH = IMAGEPATH+"arrows/";
     public static final String PAWNPATH = IMAGEPATH+"pawns/";
     public static final String WALLPATH = IMAGEPATH+"walls/";
+    public static final String HELPPATH = IMAGEPATH+"help/";
     /* **************** */
 
     /* **** SOUND **** */
@@ -153,6 +154,11 @@ public class ConstantesLabyrinth {
 
         // TRANSPARENT
         TRANSPARENT(null),
+
+        // HELP
+        HOME_HELP(HELPPATH+"home.png"),
+        SPEAKERON_HELP(HELPPATH+"speaker_on.gif"),
+        SPEAKEROFF_HELP(HELPPATH+"speaker_off.png"),
 
         // OTHERS
         TARGET(IMAGEPATH+"target.png");
@@ -304,7 +310,7 @@ public class ConstantesLabyrinth {
         LEFT("L'ordinateur a bougé à gauche"),
 
         // TRAINING
-        T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
+        T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un homard, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
                 "Pour se faire, utilise les flèches directionnelles pour déplacer ton joueur. Vas-y, entraine toi un peu ; rejoins les cibles !"),
         T_FIRST_WALL("Oh ! Un mur a été posé devant toi. Dans l'entrainement, des murs vont régulièrement apparaitre. Tu peux toi aussi en poser, où tu le souhaites. Pour se faire, il te suffit d'utiliser ta sourie et de cliquer entre les cases, et choisir la direction" +
                 " exacte du mur ! Mais attention, rappelles toi que chaque mur fait deux cases, et que tu ne peux pas bloquer le jeu ! Allez, vas-y, prends ta sourie et essaie, pose un mur !"),
@@ -384,5 +390,32 @@ public class ConstantesLabyrinth {
         FACILE,
         MOYEN,
         DIFFICILE
+    }
+
+    public enum HELP_STRINGS {
+        ONE("Zizi bleu", RESOURCES.HOME_HELP);
+
+        private String str;
+        private RESOURCES res;
+
+        HELP_STRINGS(String str, RESOURCES r) {
+            this.str = str;
+            this.res = r;
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+
+        public RESOURCES getRes() {
+            return res;
+        }
+
+        private static HELP_STRINGS[] vals = values();
+
+        public HELP_STRINGS next() {
+            return vals[(this.ordinal()+1) % vals.length];
+        }
     }
 }
