@@ -46,7 +46,7 @@ public class ConstantesLabyrinth {
                     return "TRES GRANDES CASES";
 
                 default:
-                    return "CASES NORMAL";
+                    return "CASES NORMALES";
             }
         }
 
@@ -107,6 +107,7 @@ public class ConstantesLabyrinth {
     public static final String ARROWPATH = IMAGEPATH+"arrows/";
     public static final String PAWNPATH = IMAGEPATH+"pawns/";
     public static final String WALLPATH = IMAGEPATH+"walls/";
+    public static final String HELPPATH = IMAGEPATH+"help/";
     /* **************** */
 
     /* **** SOUND **** */
@@ -118,6 +119,7 @@ public class ConstantesLabyrinth {
 
     /* **** RESOURCES **** */
     public enum RESOURCES {
+        SOUND(SOUNDPATH+"devint3.wav", false, false),
 
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
@@ -126,7 +128,6 @@ public class ConstantesLabyrinth {
         // PAWNS
         CANARD(PAWNPATH+"canard.png", true),
         COQ(PAWNPATH+"coq.png", true),
-        ZAGO(PAWNPATH+"zago.jpg", true),
         ELEPHANT(PAWNPATH+"elephant.png", true),
         BOT(PAWNPATH+"bot.png", true, true),
         GIRAFFE(PAWNPATH+"giraffe.png", true),
@@ -153,6 +154,15 @@ public class ConstantesLabyrinth {
 
         // TRANSPARENT
         TRANSPARENT(null),
+
+        // HELP
+        HOME_HELP(HELPPATH+"home.png"),
+        PLAYER_HELP(HELPPATH+"player.png"),
+        TRAY_HELP(HELPPATH+"tray.png"),
+        CASES_HELP(HELPPATH+"cases.png"),
+        DIFFICULTY_HELP(HELPPATH+"difficulty.png"),
+        SPEAKERON_HELP(HELPPATH+"speaker_on.gif"),
+        SPEAKEROFF_HELP(HELPPATH+"speaker_off.png"),
 
         // OTHERS
         TARGET(IMAGEPATH+"target.png");
@@ -268,7 +278,7 @@ public class ConstantesLabyrinth {
 
     /* **** VOCAL **** */
     public enum VOCAL {
-        ACCUEIL("Si tu te sens prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux t'entrainer."),
+        ACCUEIL("Si tu te sen prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux t'entrainer."),
         START("%s commence à jouer !"),
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
@@ -304,7 +314,7 @@ public class ConstantesLabyrinth {
         LEFT("L'ordinateur a bougé à gauche"),
 
         // TRAINING
-        T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un crabe, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
+        T_START("Bienvenue dans l'entrainement. Ici, nous allons t'apprendre à jouer au "+TITLE_GAME+". Ton personnage, représenté par un homard, se trouve en bas du plateau. Ton but est de rejoindre l'endroit marqué par les cibles, en haut." +
                 "Pour se faire, utilise les flèches directionnelles pour déplacer ton joueur. Vas-y, entraine toi un peu ; rejoins les cibles !"),
         T_FIRST_WALL("Oh ! Un mur a été posé devant toi. Dans l'entrainement, des murs vont régulièrement apparaitre. Tu peux toi aussi en poser, où tu le souhaites. Pour se faire, il te suffit d'utiliser ta sourie et de cliquer entre les cases, et choisir la direction" +
                 " exacte du mur ! Mais attention, rappelles toi que chaque mur fait deux cases, et que tu ne peux pas bloquer le jeu ! Allez, vas-y, prends ta sourie et essaie, pose un mur !"),
@@ -384,5 +394,36 @@ public class ConstantesLabyrinth {
         FACILE,
         MOYEN,
         DIFFICILE
+    }
+
+    public enum HELP_STRINGS {
+        HOME("Vous êtes sur le menu principal du jeu. Vous pouvez choisir de jouer contre l'ordinateur en cliquant sur 1 Joueur OU de jouer contre un ami en cliquant sur 2 Joueurs. Si vous voulez apprendre comment jouer, cliquez sur Entrainement, si vous voulez changer la taille des cases du plateau cliquez sur Réglages !\n", RESOURCES.HOME_HELP),
+        CASES("vous êtes sur l'écran de sélection de la taille des cases du plateau, en cliquant sur cases normales le plateau sera dans la taille habituelle de jeu avec des cases de taille normale, en cliquant sur grandes cases le plateau sera réduit et les cases seront plus grandes, en cliquant sur cases très grandes le plateau sera réduit au maximum mais les cases seront a leur taille maximales\n", RESOURCES.CASES_HELP),
+        PLAYER("Après avoir lancé une partie, l'écran de sélection d'avatar et de nom de joueur apparait. Vous pouvez donc choisir un nom en tapant votre pseudo au clavier, puis selectionner un avatar parmis ceux disponibles. Pour afficher d'autres avatars, cliquez sur Autres icones.", RESOURCES.PLAYER_HELP),
+        DIFFICULTY("Après avoir lancé une partie en mode 1 joueur et choisi votre personnage, l'écran de sélection de difficulté de l'ordinateur apparait, vous pouvez donc choisir d'affronter un ordinateur de difficulté facile, de difficulté moyenne ou bien de difficulté difficile où vous devrez réfléchir pour le battre\n", RESOURCES.DIFFICULTY_HELP),
+        TRAY("Après avoir lancé une partie et choisi votre joueur ainsi que la difficulté, le plateau de jeu apparait. Vous pouvez avancer en appuyant sur les flèches directionnelles de votre clavier correspondant aux cases illuminées autour de votre personnage. Vous pouvez aussi poser des murs pour tenter de bloquer votre adversaire en cliquant entre deux cases puis en indiquant la direction dans laquelle vous voulez placer le mur", RESOURCES.TRAY_HELP);
+
+        private String str;
+        private RESOURCES res;
+
+        HELP_STRINGS(String str, RESOURCES r) {
+            this.str = str;
+            this.res = r;
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+
+        public RESOURCES getRes() {
+            return res;
+        }
+
+        private static HELP_STRINGS[] vals = values();
+
+        public HELP_STRINGS next() {
+            return vals[(this.ordinal()+1) % vals.length];
+        }
     }
 }

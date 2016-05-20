@@ -16,6 +16,7 @@
 ./dvt/labyrinth/actions/SelectPawnPlayer.java
 ./dvt/labyrinth/actions/ValidSelectPlayer.java
 ./dvt/labyrinth/game/Game.java
+./dvt/labyrinth/game/Help.java
 ./dvt/labyrinth/game/Training.java
 ./dvt/labyrinth/game/WinGame.java
 ./dvt/labyrinth/menu/ActionMenu.java

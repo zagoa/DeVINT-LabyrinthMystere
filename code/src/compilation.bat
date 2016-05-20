@@ -1,2 +1,2 @@
-javac -cp .;../../VocalyzeSIVOX/bin/SI_VOX.jar -d ../bin dvt/run/*.java
+javac -cp .;../../VocalyzeSIVOX/bin/SI_VOX.jar -encoding UTF-8 -d ../bin @files.txt
 pause

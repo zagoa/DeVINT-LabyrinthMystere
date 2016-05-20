@@ -7,10 +7,16 @@ import dvt.labyrinth.model.essential.*;
 import dvt.labyrinth.model.player.*;
 import dvt.labyrinth.tools.ConstantesLabyrinth;
 import dvt.labyrinth.tools.Position;
+import dvt.run.Main;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -39,19 +45,40 @@ public class Game extends Jeu {
     // Difficulty of the bot
     private DIFFICULTY botDifficulty = null;
 
+    public static Clip clip;
+
     // TODO : (IA Medium) UN ROBOT NE DOIT PAS POUVOIR BLOQUER LE JEU
 
+    public static synchronized void playSound() {
+        new Thread(new Runnable() {
+            // The wrapper thread is unnecessary, unless it blocks on the
+            // Clip finishing; see comments.
+            public void run() {
+                try {
+                    clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(RESOURCES.SOUND.getPath()).getAbsoluteFile());
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
+    }
 
     public Game(HashMap<String, RESOURCES> players) {
         super();
 
         addPlayers(players);
+        playSound();
     }
 
     public Game(HashMap<String, RESOURCES> players, DIFFICULTY botDifficulty){
         super();
         this.botDifficulty = botDifficulty;
         addPlayerAndBot(players);
+
+        playSound();
     }
 
     @Override
@@ -407,7 +434,7 @@ public class Game extends Jeu {
      * Move the IAEasy player
      */
     public void moveIAEasyPlayer() {
-        ((IAEasy) currentPlayer).completeMove(null);
+        ((IAEasy) currentPlayer).completeMove();
         if (currentPlayer.hasWon()) return;
 
             nextTurn();
@@ -489,5 +516,11 @@ public class Game extends Jeu {
         return tray;
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
 
+        Game.clip.close();
+        Game.clip = null;
+    }
 }

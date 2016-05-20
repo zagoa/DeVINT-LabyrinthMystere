@@ -25,7 +25,7 @@ public class Help extends Jeu {
     private JLabel img;
     private JLabel imgSound;
 
-    private HELP_STRINGS help = HELP_STRINGS.ONE;
+    private HELP_STRINGS help = HELP_STRINGS.HOME;
 
     private int numberHelp = HELP_STRINGS.values().length;
     private int i = 0;
@@ -56,11 +56,11 @@ public class Help extends Jeu {
 
         this.add(world);
 
-        setWinner("");
+        setHelp("");
 
     }
 
-    public void setWinner(String sentence) {
+    public void setHelp(String sentence) {
         img.setIcon(new StretchIcon(RESOURCES.HOME_HELP.getPath()));
 
         imgSound.setIcon(new StretchIcon(RESOURCES.SPEAKEROFF_HELP.getPath()));

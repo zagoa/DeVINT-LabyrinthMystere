@@ -27,7 +27,7 @@ public abstract class IA extends Player{
      * @param tray
      */
     public IA(Pawn pawn, Position pos, Tray tray, int nbWall,Game game){
-        super("Computer",pawn,pos,tray,nbWall,true,game);
+        super("Robot",pawn,pos,tray,nbWall,true,game);
         setPos(pos);
     }
 
@@ -39,24 +39,15 @@ public abstract class IA extends Player{
     @Override
     public boolean move(DIRECTIONS directions){
         decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        if ((!decision.isEmpty())) {
-            if (canMove(previous = decision.poll())){
+        if ((!decision.isEmpty()) && canMove(previous = decision.poll())) {
                 updatePlayerPos(convertDirectionToPosition(previous));
                 return true;
-            }
+        }
 
-            else {
-                decision.clear();
-                strategyIA();
-                move(null);
-                return true;
-            }
-        }
-        else {
-            strategyIA();
-            move(null);
-            return true;
-        }
+        decision.clear();
+        strategyIA();
+        move(null);
+        return true;
     }
 
 
@@ -66,58 +57,83 @@ public abstract class IA extends Player{
      *
      */
     public void strategyIA(){
-        if (canMove(ConstantesLabyrinth.DIRECTIONS.BACK)) {
-            decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
-        }
+        if (canMove(ConstantesLabyrinth.DIRECTIONS.BACK)) decision.add(ConstantesLabyrinth.DIRECTIONS.BACK);
+
         else if (!canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT) && !canMove(ConstantesLabyrinth.DIRECTIONS.LEFT)) {
-            strategyIABack();
+            strategyIAFront();
         }
         else if (!canMove(ConstantesLabyrinth.DIRECTIONS.RIGHT) && canMove(ConstantesLabyrinth.DIRECTIONS.LEFT)){
             strategyIALeft();
         }
-        else{
-            decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-        }
+        else strategyIARight();
+
     }
+
 
     /**
      *  A strategy where we choose to move to the front if we can, if not to the left,
      *  and then depending of the possible movements we apply other strategies
      */
     public void strategyIALeft(){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.LEFT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.LEFT)))
+        int i=0;
+        while(checkMoveFromPosition(DIRECTIONS.LEFT, new Position(pos.getX()-(2*i), pos.getY()))
+                && !checkMoveFromPosition(DIRECTIONS.BACK, new Position(pos.getX()-(2*i),pos.getY()))){
+            System.out.println("i = " + i);
+            i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+        }
+
     }
 
+
     /**
-     * A strategy only used when moving back is the only possible option
+     *  A strategy where we choose to move to the front if we can, if not to the left,
+     *  and then depending of the possible movements we apply other strategies
      */
-    public void strategyIABack(){
-        decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
-        decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
-        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
+    public void strategyIARight(){
+        int i=0;
+        while(checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX()+(2*i),pos.getY()))
+                && !(checkMoveFromPosition(DIRECTIONS.BACK,new Position(pos.getX()+(2*i),pos.getY())))){
+            i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-        else if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT))){
-            decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
-            if (checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
-                decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
         }
     }
 
 
+
     /**
-     * A strategy to escape from dead ends
+     * A strategy only used when being in death ends
      */
-    public void strategyIADE(){
-        int i=0;
-        while(checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY()-(2*i))) && canMove(DIRECTIONS.LEFT)){
+    /*public void strategyIADE(DIRECTIONS directions){
+        switch (directions){
+            case FRONT:
+                strategyIAF();
+                break;
+            case RIGHT:
+                strategyIAR();
+                break;
+            case LEFT:
+                strategyIAL();
+                break;
+            default:
+                return;
+        }
+    }*/
+
+
+    /**
+     * A strategy to escape from front dead ends
+     */
+    public void strategyIAFront(){
+        int i =0;
+        while(!checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY()-(2*i)))
+                && !checkMoveFromPosition(DIRECTIONS.LEFT,new Position(pos.getX(),pos.getY()-(2*i)))){
             i++;
             decision.add(ConstantesLabyrinth.DIRECTIONS.FRONT);
         }
-        if(checkMoveFromPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT,convertDirectionToPosition(ConstantesLabyrinth.DIRECTIONS.RIGHT)))
-            decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
-
+        if(!checkMoveFromPosition(DIRECTIONS.RIGHT,new Position(pos.getX(),pos.getY()-(2*i))))
+            decision.add(ConstantesLabyrinth.DIRECTIONS.LEFT);
+        decision.add(ConstantesLabyrinth.DIRECTIONS.RIGHT);
     }
 
 
@@ -176,10 +192,9 @@ public abstract class IA extends Player{
     /**
      * The full move method
      *
-     * @param directions here will be null
      * @return if we moved or not
      */
-    public boolean completeMove(DIRECTIONS directions){
+    public boolean completeMove(){
         boolean  i = move(null);
         hasMoved(previous);
         return i;
