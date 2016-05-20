@@ -516,5 +516,11 @@ public class Game extends Jeu {
         return tray;
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
 
+        Game.clip.close();
+        Game.clip = null;
+    }
 }

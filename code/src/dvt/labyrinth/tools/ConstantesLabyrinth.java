@@ -119,7 +119,7 @@ public class ConstantesLabyrinth {
 
     /* **** RESOURCES **** */
     public enum RESOURCES {
-        SOUND(SOUNDPATH+"devint.wav", false, false),
+        SOUND(SOUNDPATH+"devint3.wav", false, false),
 
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
@@ -278,7 +278,7 @@ public class ConstantesLabyrinth {
 
     /* **** VOCAL **** */
     public enum VOCAL {
-        ACCUEIL("Si tu te sens prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux t'entrainer."),
+        ACCUEIL("Si tu te sen prêt à affronter le labyrinthe, joues-y ! Sinon, tu peux t'entrainer."),
         START("%s commence à jouer !"),
         PSEUDO_LENGTH("Veuillez entrer un pseudo pour le joueur %s !"),
         SELECT_PAWN("Veuillez selectionner un icone pour le joueur %s, en cliquant sur une des images !"),
