@@ -119,6 +119,7 @@ public class ConstantesLabyrinth {
 
     /* **** RESOURCES **** */
     public enum RESOURCES {
+        SOUND(SOUNDPATH+"devint.wav", false, false),
 
         // WALL
         WALL(WALLPATH+"murHorizontal.png"),
